@@ -214,31 +214,48 @@
             padding: 0 2rem;
         }
 
-        /* Featured Section */
-        .featured-section {
+        /* Game Categories */
+        .game-category {
             margin: 4rem 0;
-            text-align: center;
         }
 
-        .section-title {
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .category-title {
             font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 1rem;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .category-count {
+            background: var(--accent-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        .featured-card {
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .game-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
@@ -247,15 +264,18 @@
             transition: all 0.4s ease;
             position: relative;
             cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        .featured-card:hover {
+        .game-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-card);
             border-color: var(--accent-color);
         }
 
-        .featured-card::before {
+        .game-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -266,13 +286,13 @@
             transition: left 0.5s ease;
         }
 
-        .featured-card:hover::before {
+        .game-card:hover::before {
             left: 100%;
         }
 
-        .card-image {
+        .game-image {
             width: 100%;
-            height: 200px;
+            height: 160px;
             background: var(--primary-gradient);
             display: flex;
             align-items: center;
@@ -282,29 +302,34 @@
             overflow: hidden;
         }
 
-        .card-content {
+        .game-content {
             padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card-title {
-            font-size: 1.3rem;
+        .game-title {
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
             color: var(--text-primary);
         }
 
-        .card-description {
+        .game-description {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 1rem;
+            flex: 1;
         }
 
-        .card-stats {
+        .game-stats {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 0.8rem;
             color: var(--text-secondary);
+            margin-top: auto;
         }
 
         .play-count {
@@ -319,51 +344,22 @@
             gap: 0.3rem;
         }
 
-        /* Categories Grid */
-        .categories-section {
-            margin: 4rem 0;
-        }
-
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .category-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-card);
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .category-name {
-            font-size: 1.2rem;
+        .play-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--secondary-gradient);
+            border: none;
+            border-radius: 10px;
+            color: white;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
         }
 
-        .category-count {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
         }
 
         /* Stats Section */
@@ -375,6 +371,17 @@
             margin: 4rem 0;
             backdrop-filter: blur(10px);
             text-align: center;
+        }
+
+        .stats-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
         }
 
         .stats-grid {
@@ -501,18 +508,19 @@
                 font-size: 0.9rem;
             }
             
-            .featured-grid {
-                grid-template-columns: 1fr;
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 gap: 1.5rem;
             }
             
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 1rem;
             }
             
-            .category-card {
-                padding: 1.5rem;
+            .category-title {
+                font-size: 1.5rem;
             }
             
             .stats-grid {
@@ -527,7 +535,7 @@
         }
 
         @media (max-width: 480px) {
-            .categories-grid {
+            .games-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -551,6 +559,11 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Hidden class for filtering */
+        .hidden {
+            display: none !important;
         }
 
         /* Parallax Background Elements */
@@ -631,6 +644,8 @@
                 <a href="#" class="nav-button" data-category="action">⚡ Action</a>
                 <a href="#" class="nav-button" data-category="card">🃏 Card</a>
                 <a href="#" class="nav-button" data-category="strategy">🧠 Strategy</a>
+                <a href="#" class="nav-button" data-category="idle">🔄 Idle</a>
+                <a href="#" class="nav-button" data-category="word">📝 Word</a>
             </nav>
 
             <!-- Search -->
@@ -643,627 +658,1759 @@
 
     <!-- Main Content -->
     <main class="container">
-        <!-- Featured Games Section -->
-        <section class="featured-section loading">
-            <h2 class="section-title">🏆 Featured Games</h2>
-            <div class="featured-grid">
-                <div class="featured-card" onclick="playGame('2048-deluxe')">
-                    <div class="card-image">🔢</div>
-                    <div class="card-content">
-                        <h3 class="card-title">2048 Deluxe</h3>
-                        <p class="card-description">The addictive number puzzle game with stunning visuals and smooth animations.</p>
-                        <div class="card-stats">
+        <!-- Puzzle Games Section -->
+        <section class="game-category" data-category="puzzle">
+            <div class="category-header">
+                <h2 class="category-title">🧩 Puzzle Games</h2>
+                <span class="category-count">20 Games</span>
+            </div>
+            <div class="games-grid">
+                <div class="game-card" onclick="playGame('2048-deluxe')">
+                    <div class="game-image">🔢</div>
+                    <div class="game-content">
+                        <h3 class="game-title">2048 Deluxe</h3>
+                        <p class="game-description">The addictive number puzzle game with stunning visuals and smooth animations.</p>
+                        <div class="game-stats">
                             <span class="play-count">👥 50.2K plays</span>
                             <span class="rating">⭐ 4.8</span>
                         </div>
+                        <button class="play-button">▶️ Play Now</button>
                     </div>
                 </div>
 
-                <div class="featured-card" onclick="playGame('snake-evolution')">
-                    <div class="card-image">🐍</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Snake Evolution</h3>
-                        <p class="card-description">Classic snake game with modern twists, power-ups, and challenging levels.</p>
-                        <div class="card-stats">
-                            <span class="play-count">👥 42.7K plays</span>
-                            <span class="rating">⭐ 4.9</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="featured-card" onclick="playGame('bubble-pop-master')">
-                    <div class="card-image">🫧</div>
-                    <div class="card-content">
-                        <h3 class="card-title">Bubble Pop Master</h3>
-                        <p class="card-description">Match and pop colorful bubbles in this relaxing yet challenging puzzle game.</p>
-                        <div class="card-stats">
-                            <span class="play-count">👥 38.9K plays</span>
+                <div class="game-card" onclick="playGame('match-3-master')">
+                    <div class="game-image">💎</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Match 3 Master</h3>
+                        <p class="game-description">Match colorful gems in this classic puzzle adventure with exciting power-ups.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 38.5K plays</span>
                             <span class="rating">⭐ 4.7</span>
                         </div>
+                        <button class="play-button">▶️ Play Now</button>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Game Categories -->
-        <section class="categories-section loading">
-            <h2 class="section-title">🎯 Game Categories</h2>
-            <div class="categories-grid">
-                <div class="category-card" onclick="filterCategory('puzzle')">
-                    <span class="category-icon">🧩</span>
-                    <h3 class="category-name">Puzzle Games</h3>
-                    <p class="category-count">20 Games Available</p>
-                </div>
-
-                <div class="category-card" onclick="filterCategory('arcade')">
-                    <span class="category-icon">🕹️</span>
-                    <h3 class="category-name">Arcade Games</h3>
-                    <p class="category-count">20 Games Available</p>
-                </div>
-
-                <div class="category-card" onclick="filterCategory('action')">
-                    <span class="category-icon">⚡</span>
-                    <h3 class="category-name">Action Games</h3>
-                    <p class="category-count">15 Games Available</p>
-                </div>
-
-                <div class="category-card" onclick="filterCategory('card')">
-                    <span class="category-icon">🃏</span>
-                    <h3 class="category-name">Card Games</h3>
-                    <p class="category-count">15 Games Available</p>
-                </div>
-
-                <div class="category-card" onclick="filterCategory('strategy')">
-                    <span class="category-icon">🧠</span>
-                    <h3 class="category-name">Strategy Games</h3>
-                    <p class="category-count">10 Games Available</p>
-                </div>
-
-                <div class="category-card" onclick="filterCategory('idle')">
-                    <span class="category-icon">🔄</span>
-                    <h3 class="category-name">Idle Games</h3>
-                    <p class="category-count">10 Games Available</p>
-                </div>
-
-                <div class="category-card" onclick="filterCategory('word')">
-                    <span class="category-icon">📝</span>
-                    <h3 class="category-name">Word Games</h3>
-                    <p class="category-count">9 Games Available</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Section -->
-        <section class="stats-section loading">
-            <h2 class="section-title">📊 Platform Statistics</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="99">0</span>
-                    <span class="stat-label">Total Games</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="2500000">0</span>
-                    <span class="stat-label">Games Played</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="150000">0</span>
-                    <span class="stat-label">Daily Players</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="48">0</span>
-                    <span class="stat-label">Average Rating</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Bottom Ad Container -->
-    <div class="ad-container-bottom">
-        <div class="ad-placeholder">728x90 Footer Advertisement</div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="/about">About Us</a>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="/contact">Contact</a>
-                <a href="/developers">For Developers</a>
-                <a href="/blog">Blog</a>
-            </div>
-            
-            <div class="footer-social">
-                <div class="social-links">
-                    <a href="#" class="social-link" title="Facebook">📘</a>
-                    <a href="#" class="social-link" title="Twitter">🐦</a>
-                    <a href="#" class="social-link" title="Instagram">📷</a>
-                    <a href="#" class="social-link" title="YouTube">📺</a>
-                    <a href="#" class="social-link" title="TikTok">🎵</a>
-                </div>
-            </div>
-            
-            <div class="footer-copyright">
-                <p>&copy; 2025 GameHub 99. All rights reserved. | Premium HTML5 Games Collection</p>
-                <p>Made with ❤️ for gamers worldwide</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Game data structure
-        const gameCategories = {
-            puzzle: ['2048 Deluxe', 'Match 3 Master', 'Block Puzzle', 'Sudoku Pro', 'Word Search'],
-            arcade: ['Snake Evolution', 'Tetris Modern', 'Pac-Man Deluxe', 'Space Invaders', 'Frogger'],
-            action: ['Bubble Pop Master', 'Zombie Shooter', 'Racing Thunder', 'Platform Hero', 'Ninja Run'],
-            card: ['Solitaire Classic', 'Poker Master', 'Blackjack Pro', 'Memory Cards', 'UNO Online'],
-            strategy: ['Chess Master', 'Tower Defense', 'Risk Online', 'Civilization Mini', 'Age of War'],
-            idle: ['Cookie Clicker', 'Idle Miner', 'Business Empire', 'Farm Tycoon', 'Space Colony'],
-            word: ['Word Puzzle', 'Crossword Daily', 'Anagram Master', 'Letter Connect', 'Spelling Bee']
-        };
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = '0.1s';
-                    entry.target.classList.add('loading');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.loading').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Counter animation
-        function animateCounter(element, target) {
-            const increment = target / 100;
-            let current = 0;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                
-                if (target >= 1000000) {
-                    element.textContent = (current / 1000000).toFixed(1) + 'M';
-                } else if (target >= 1000) {
-                    element.textContent = (current / 1000).toFixed(0) + 'K';
-                } else {
-                    element.textContent = current.toFixed(1);
-                }
-            }, 20);
-        }
-
-        // Initialize counters when stats section is visible
-        const statsSection = document.querySelector('.stats-section');
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    document.querySelectorAll('.stat-number').forEach(stat => {
-                        const target = parseInt(stat.getAttribute('data-target'));
-                        animateCounter(stat, target);
-                    });
-                    statsObserver.unobserve(entry.target);
-                }
-                });
-}, { threshold: 0.5 });
-statsObserver.observe(statsSection);
-
-    // Navigation functionality
-    function filterCategory(category) {
-        // Update active nav button
-        document.querySelectorAll('.nav-button').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        document.querySelector(`[data-category="${category}"]`).classList.add('active');
-
-        // Show loading state
-        showLoadingState();
-        
-        // Simulate loading and filter games
-        setTimeout(() => {
-            displayGames(category);
-        }, 500);
-    }
-
-    // Category card click handler
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const category = card.onclick.toString().match(/'([^']+)'/)[1];
-            filterCategory(category);
-            
-            // Smooth scroll to games section
-            document.querySelector('.featured-section').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Search functionality
-    document.getElementById('gameSearch').addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        if (searchTerm.length >= 2) {
-            searchGames(searchTerm);
-        } else if (searchTerm.length === 0) {
-            displayFeaturedGames();
-        }
-    });
-
-    function searchGames(term) {
-        const allGames = Object.values(gameCategories).flat();
-        const matchingGames = allGames.filter(game => 
-            game.toLowerCase().includes(term)
-        );
-        
-        displaySearchResults(matchingGames, term);
-    }
-
-    function displaySearchResults(games, searchTerm) {
-        const featuredGrid = document.querySelector('.featured-grid');
-        const sectionTitle = document.querySelector('.section-title');
-        
-        sectionTitle.innerHTML = `🔍 Search Results for "${searchTerm}"`;
-        
-        if (games.length === 0) {
-            featuredGrid.innerHTML = `
-                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-secondary);">
-                    <h3>No games found</h3>
-                    <p>Try searching with different keywords</p>
-                </div>
-            `;
-            return;
-        }
-
-        featuredGrid.innerHTML = games.slice(0, 9).map(game => `
-            <div class="featured-card" onclick="playGame('${game.toLowerCase().replace(/\s+/g, '-')}')">
-                <div class="card-image">${getGameIcon(game)}</div>
-                <div class="card-content">
-                    <h3 class="card-title">${game}</h3>
-                    <p class="card-description">${getGameDescription(game)}</p>
-                    <div class="card-stats">
-                        <span class="play-count">👥 ${getRandomPlays()}K plays</span>
-                        <span class="rating">⭐ ${getRandomRating()}</span>
+                <div class="game-card" onclick="playGame('block-puzzle-classic')">
+                    <div class="game-image">🧱</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Block Puzzle Classic</h3>
+                        <p class="game-description">Drag and drop blocks to create lines and clear the board in this relaxing puzzle game.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 42.1K plays</span>
+                            <span class="rating">⭐ 4.6</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
                     </div>
                 </div>
-            </div>
-        `).join('');
-    }
 
-    function displayGames(category) {
-        const featuredGrid = document.querySelector('.featured-grid');
-        const sectionTitle = document.querySelector('.section-title');
-        
-        if (category === 'all') {
-            displayFeaturedGames();
-            return;
-        }
-
-        const categoryGames = gameCategories[category] || [];
-        const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
-        const categoryIcon = getCategoryIcon(category);
-        
-        sectionTitle.innerHTML = `${categoryIcon} ${categoryName} Games`;
-        
-        featuredGrid.innerHTML = categoryGames.map(game => `
-            <div class="featured-card" onclick="playGame('${game.toLowerCase().replace(/\s+/g, '-')}')">
-                <div class="card-image">${getGameIcon(game)}</div>
-                <div class="card-content">
-                    <h3 class="card-title">${game}</h3>
-                    <p class="card-description">${getGameDescription(game)}</p>
-                    <div class="card-stats">
-                        <span class="play-count">👥 ${getRandomPlays()}K plays</span>
-                        <span class="rating">⭐ ${getRandomRating()}</span>
+                <div class="game-card" onclick="playGame('sudoku-pro')">
+                    <div class="game-image">🔢</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Sudoku Pro</h3>
+                        <p class="game-description">Challenge your logic with this classic number puzzle game featuring multiple difficulty levels.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 35.8K plays</span>
+                            <span class="rating">⭐ 4.9</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
                     </div>
                 </div>
-            </div>
-        `).join('');
-    }
 
-    function displayFeaturedGames() {
-        const sectionTitle = document.querySelector('.section-title');
-        sectionTitle.innerHTML = '🏆 Featured Games';
-        
-        // Reset to original featured games
-        location.reload();
-    }
+                <div class="game-card" onclick="playGame('word-search-deluxe')">
+                    <div class="game-image">🔤</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Word Search Deluxe</h3>
+                        <p class="game-description">Find hidden words in this classic word search puzzle with themed categories.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 29.3K plays</span>
+                            <span class="rating">⭐ 4.5</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    function showLoadingState() {
-        const featuredGrid = document.querySelector('.featured-grid');
-        featuredGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                <div style="width: 50px; height: 50px; border: 3px solid var(--card-border); border-top: 3px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
-                <p style="color: var(--text-secondary);">Loading games...</p>
-            </div>
-        `;
-    }
+                <div class="game-card" onclick="playGame('jigsaw-puzzle')">
+                    <div class="game-image">🧩</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Jigsaw Puzzle</h3>
+                        <p class="game-description">Piece together beautiful images in this relaxing jigsaw puzzle game.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 31.7K plays</span>
+                            <span class="rating">⭐ 4.4</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    // Helper functions
-    function getCategoryIcon(category) {
-        const icons = {
-            puzzle: '🧩',
-            arcade: '🕹️',
-            action: '⚡',
-            card: '🃏',
-            strategy: '🧠',
-            idle: '🔄',
-            word: '📝'
-        };
-        return icons[category] || '🎮';
-    }
+                <div class="game-card" onclick="playGame('crossword-master')">
+                    <div class="game-image">📋</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Crossword Master</h3>
+                        <p class="game-description">Test your vocabulary with challenging crossword puzzles of varying difficulty.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 27.9K plays</span>
+                            <span class="rating">⭐ 4.6</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    function getGameIcon(gameName) {
-        const icons = {
-            '2048': '🔢', 'snake': '🐍', 'bubble': '🫧', 'tetris': '🧱',
-            'match': '💎', 'block': '🟩', 'sudoku': '🔢', 'word': '📝',
-            'pac-man': '👻', 'space': '🚀', 'frogger': '🐸', 'zombie': '🧟',
-            'racing': '🏎️', 'platform': '🦘', 'ninja': '🥷', 'solitaire': '♠️',
-            'poker': '🎰', 'blackjack': '🃏', 'memory': '🧠', 'uno': '🎨',
-            'chess': '♟️', 'tower': '🏰', 'risk': '🗺️', 'civilization': '🏛️',
-            'cookie': '🍪', 'miner': '⛏️', 'business': '💼', 'farm': '🚜',
-            'crossword': '📋', 'anagram': '🔤', 'letter': '🔗', 'spelling': '🐝'
-        };
-        
-        for (let key in icons) {
-            if (gameName.toLowerCase().includes(key)) {
-                return icons[key];
-            }
-        }
-        return '🎮';
-    }
+                <div class="game-card" onclick="playGame('number-connect')">
+                    <div class="game-image">🔗</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Number Connect</h3>
+                        <p class="game-description">Connect matching numbers to clear the board in this addictive puzzle game.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 33.2K plays</span>
+                            <span class="rating">⭐ 4.5</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    function getGameDescription(gameName) {
-        const descriptions = {
-            '2048 deluxe': 'The addictive number puzzle game with stunning visuals and smooth animations.',
-            'snake evolution': 'Classic snake game with modern twists, power-ups, and challenging levels.',
-            'bubble pop master': 'Match and pop colorful bubbles in this relaxing yet challenging puzzle game.',
-            'match 3 master': 'Swap and match gems in this colorful and addictive puzzle adventure.',
-            'tetris modern': 'The timeless block-stacking game with modern graphics and effects.',
-            'pac-man deluxe': 'Navigate mazes, eat dots, and avoid ghosts in this classic arcade game.',
-            'solitaire classic': 'The traditional card game that never gets old, now optimized for web.',
-            'chess master': 'Challenge your mind with this classic strategy game against AI or friends.'
-        };
-        
-        return descriptions[gameName.toLowerCase()] || 'An exciting and engaging game that will keep you entertained for hours!';
-    }
+                <div class="game-card" onclick="playGame('color-match')">
+                    <div class="game-image">🎨</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Color Match</h3>
+                        <p class="game-description">Match colors and patterns in this visually stunning puzzle challenge.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 26.4K plays</span>
+                            <span class="rating">⭐ 4.3</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    function getRandomPlays() {
-        return (Math.random() * 50 + 10).toFixed(1);
-    }
+                <div class="game-card" onclick="playGame('pattern-memory')">
+                    <div class="game-image">🧠</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Pattern Memory</h3>
+                        <p class="game-description">Test your memory by repeating increasingly complex patterns.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 28.1K plays</span>
+                            <span class="rating">⭐ 4.4</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    function getRandomRating() {
-        return (Math.random() * 1 + 4).toFixed(1);
-    }
+                <div class="game-card" onclick="playGame('sliding-puzzle')">
+                    <div class="game-image">📱</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Sliding Puzzle</h3>
+                        <p class="game-description">Slide tiles to recreate the original image in this classic puzzle game.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 24.7K plays</span>
+                            <span class="rating">⭐ 4.2</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    // Game play function
-    function playGame(gameSlug) {
-        // Show loading overlay
-        showGameLoadingOverlay(gameSlug);
-        
-        // Simulate game loading
-        setTimeout(() => {
-            // In a real implementation, this would redirect to the game page
-            window.location.href = `/games/${gameSlug}.html`;
-        }, 1000);
-    }
+                <div class="game-card" onclick="playGame('logic-blocks')">
+                    <div class="game-image">🧮</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Logic Blocks</h3>
+                        <p class="game-description">Solve logical puzzles by arranging blocks according to specific rules.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 22.3K plays</span>
+                            <span class="rating">⭐ 4.6</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    function showGameLoadingOverlay(gameSlug) {
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            backdrop-filter: blur(10px);
-        `;
-        
-        overlay.innerHTML = `
-            <div style="text-align: center; color: white;">
-                <div style="width: 60px; height: 60px; border: 4px solid var(--card-border); border-top: 4px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 2rem;"></div>
-                <h2 style="font-family: 'Orbitron', monospace; margin-bottom: 1rem;">Loading Game...</h2>
-                <p style="color: var(--text-secondary);">Preparing ${gameSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} for you</p>
-            </div>
-        `;
-        
-        document.body.appendChild(overlay);
-        
-        // Remove overlay after timeout
-        setTimeout(() => {
-            document.body.removeChild(overlay);
-        }, 5000);
-    }
+                <div class="game-card" onclick="playGame('maze-runner')">
+                    <div class="game-image">🗺️</div>
+                    <div class="game-content">
+                        <h3 class="game-title">Maze Runner</h3>
+                        <p class="game-description">Navigate through increasingly complex mazes to reach the exit.</p>
+                        <div class="game-stats">
+                            <span class="play-count">👥 30.5K plays</span>
+                            <span class="rating">⭐ 4.3</span>
+                        </div>
+                        <button class="play-button">▶️ Play Now</button>
+                    </div>
+                </div>
 
-    // Navigation button functionality
-    document.querySelectorAll('.nav-button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const category = button.getAttribute('data-category');
-            
-            // Update active state
-            document.querySelectorAll('.nav-button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            button.classList.add('active');
-            
-            // Filter games
-            if (category === 'all') {
-                displayFeaturedGames();
-            } else {
-                filterCategory(category);
-            }
-        });
-    });
+                <div class="game-card" onclick="playGame('brain-teaser')">
+                   <div class="game-image">🤔</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Brain Teaser</h3>
+                       <p class="game-description">Challenge your mind with clever riddles and brain-bending puzzles.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 25.8K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Search button functionality
-    document.querySelector('.search-button').addEventListener('click', () => {
-        const searchInput = document.getElementById('gameSearch');
-        const searchTerm = searchInput.value.trim();
-        if (searchTerm) {
-            searchGames(searchTerm);
-        }
-    });
+               <div class="game-card" onclick="playGame('tile-matcher')">
+                   <div class="game-image">🎯</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Tile Matcher</h3>
+                       <p class="game-description">Match identical tiles to clear the board in this satisfying puzzle game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 21.9K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Enter key search
-    document.getElementById('gameSearch').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            const searchTerm = e.target.value.trim();
-            if (searchTerm) {
-                searchGames(searchTerm);
-            }
-        }
-    });
+               <div class="game-card" onclick="playGame('word-scramble')">
+                   <div class="game-image">🔀</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Word Scramble</h3>
+                       <p class="game-description">Unscramble letters to form words in this fast-paced word puzzle.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 19.6K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Smooth scrolling for category cards
-    document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('click', () => {
-            setTimeout(() => {
-                document.querySelector('.featured-section').scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }, 100);
-        });
-    });
+               <div class="game-card" onclick="playGame('number-sequence')">
+                   <div class="game-image">🔢</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Number Sequence</h3>
+                       <p class="game-description">Find the pattern and complete the number sequences.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 23.1K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Add CSS animation for loading spinner
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    `;
-    document.head.appendChild(style);
+               <div class="game-card" onclick="playGame('color-sort')">
+                   <div class="game-image">🌈</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Color Sort</h3>
+                       <p class="game-description">Sort colored balls into tubes in this relaxing puzzle game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 27.4K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Progressive Web App features
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('SW registered: ', registration);
-                })
-                .catch(registrationError => {
-                    console.log('SW registration failed: ', registrationError);
-                });
-        });
-    }
+               <div class="game-card" onclick="playGame('shape-fitter')">
+                   <div class="game-image">📐</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Shape Fitter</h3>
+                       <p class="game-description">Fit geometric shapes into their matching slots.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 20.2K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Performance optimization - Lazy load images
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
+               <div class="game-card" onclick="playGame('mind-bender')">
+                   <div class="game-image">🌀</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Mind Bender</h3>
+                       <p class="game-description">Twist your brain with these challenging logic puzzles.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 18.7K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+           </div>
+       </section>
 
-    // Theme toggle functionality (future enhancement)
-    function toggleTheme() {
-        document.body.classList.toggle('light-theme');
-        localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
-    }
+       <!-- Arcade Games Section -->
+       <section class="game-category" data-category="arcade">
+           <div class="category-header">
+               <h2 class="category-title">🕹️ Arcade Games</h2>
+               <span class="category-count">20 Games</span>
+           </div>
+           <div class="games-grid">
+               <div class="game-card" onclick="playGame('snake-evolution')">
+                   <div class="game-image">🐍</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Snake Evolution</h3>
+                       <p class="game-description">Classic snake game with modern twists, power-ups, and evolution mechanics.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 65.3K plays</span>
+                           <span class="rating">⭐ 4.9</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-    }
+               <div class="game-card" onclick="playGame('tetris-modern')">
+                   <div class="game-image">🟦</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Tetris Modern</h3>
+                       <p class="game-description">The timeless block-stacking game with stunning graphics and smooth gameplay.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 72.1K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Analytics tracking (placeholder)
-    function trackGameClick(gameSlug) {
-        // gtag('event', 'game_start', {
-        //     'game_name': gameSlug,
-        //     'category': 'engagement'
-        // });
-        console.log(`Game started: ${gameSlug}`);
-    }
+               <div class="game-card" onclick="playGame('pac-man-deluxe')">
+                   <div class="game-image">👻</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Pac-Man Deluxe</h3>
+                       <p class="game-description">Navigate mazes, eat dots, and avoid ghosts in this enhanced classic.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 58.7K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    function trackCategoryView(category) {
-        // gtag('event', 'category_view', {
-        //     'category_name': category,
-        //     'category': 'navigation'
-        // });
-        console.log(`Category viewed: ${category}`);
-    }
+               <div class="game-card" onclick="playGame('space-invaders')">
+                   <div class="game-image">🚀</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Space Invaders</h3>
+                       <p class="game-description">Defend Earth from alien invaders in this retro arcade shooter.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 54.2K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Add click tracking to game cards
-    document.addEventListener('click', (e) => {
-        const gameCard = e.target.closest('.featured-card');
-        if (gameCard && gameCard.onclick) {
-            const gameSlug = gameCard.onclick.toString().match(/'([^']+)'/)?.[1];
-            if (gameSlug) {
-                trackGameClick(gameSlug);
-            }
-        }
-    });
+               <div class="game-card" onclick="playGame('frogger-classic')">
+                   <div class="game-image">🐸</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Frogger Classic</h3>
+                       <p class="game-description">Help the frog cross busy roads and rivers safely.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 41.8K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Initialize page
-    document.addEventListener('DOMContentLoaded', () => {
-        // Animate elements on load
-        setTimeout(() => {
-            document.querySelectorAll('.loading').forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }, 100);
+               <div class="game-card" onclick="playGame('breakout-master')">
+                   <div class="game-image">🏓</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Breakout Master</h3>
+                       <p class="game-description">Break all the bricks with your paddle and ball in this classic arcade game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 39.5K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-        // Initialize tooltips for better UX
-        initializeTooltips();
-    });
+               <div class="game-card" onclick="playGame('asteroids-redux')">
+                   <div class="game-image">💥</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Asteroids Redux</h3>
+                       <p class="game-description">Pilot your spaceship through dangerous asteroid fields.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 35.9K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    function initializeTooltips() {
-        const cards = document.querySelectorAll('.featured-card, .category-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', (e) => {
-                e.target.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', (e) => {
-                e.target.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-    }
+               <div class="game-card" onclick="playGame('centipede-chaos')">
+                   <div class="game-image">🐛</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Centipede Chaos</h3>
+                       <p class="game-description">Shoot the descending centipede before it reaches the bottom.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 28.3K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Error handling for game loading
-    window.addEventListener('error', (e) => {
-        console.error('Page error:', e.error);
-        // Could implement user-friendly error messages here
-    });
+               <div class="game-card" onclick="playGame('missile-command')">
+                   <div class="game-image">🎯</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Missile Command</h3>
+                       <p class="game-description">Defend your cities from incoming missiles.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 32.1K plays</span>
+                           <span class="rating">⭐ 4.1</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    // Responsive navigation for mobile
-    function handleMobileNavigation() {
-        if (window.innerWidth <= 768) {
-            const nav = document.querySelector('.nav');
-            nav.style.overflowX = 'auto';
-            nav.style.scrollBehavior = 'smooth';
-            nav.style.WebkitOverflowScrolling = 'touch';
-        }
-    }
+               <div class="game-card" onclick="playGame('defender-elite')">
+                   <div class="game-image">🛡️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Defender Elite</h3>
+                       <p class="game-description">Protect humanoids from alien abduction in this side-scrolling shooter.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 29.7K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    window.addEventListener('resize', handleMobileNavigation);
-    handleMobileNavigation(); // Call on load
+               <div class="game-card" onclick="playGame('galaxian-wars')">
+                   <div class="game-image">✨</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Galaxian Wars</h3>
+                       <p class="game-description">Battle against formations of alien ships in space.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 26.4K plays</span>
+                           <span class="rating">⭐ 4.0</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
 
-    console.log('🎮 GameHub 99 initialized successfully!');
-</script>
+               <div class="game-card" onclick="playGame('dig-dug-adventure')">
+                   <div class="game-image">⛏️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Dig Dug Adventure</h3>
+                       <p class="game-description">Dig tunnels and defeat underground monsters.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 24.8K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('bubble-bobble')">
+                   <div class="game-image">🫧</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Bubble Bobble</h3>
+                       <p class="game-description">Trap enemies in bubbles and pop them in this cute platformer.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 37.2K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('qbert-quest')">
+                   <div class="game-image">🔶</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Q*bert Quest</h3>
+                       <p class="game-description">Jump on cubes to change their colors while avoiding enemies.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 22.6K plays</span>
+                           <span class="rating">⭐ 4.1</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('joust-champion')">
+                   <div class="game-image">🦅</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Joust Champion</h3>
+                       <p class="game-description">Ride flying ostriches and defeat enemy knights.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 19.3K plays</span>
+                           <span class="rating">⭐ 4.0</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('robotron-2084')">
+                   <div class="game-image">🤖</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Robotron 2084</h3>
+                       <p class="game-description">Survive waves of robots in this intense twin-stick shooter.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 21.7K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('tempest-tunnel')">
+                   <div class="game-image">🌪️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Tempest Tunnel</h3>
+                       <p class="game-description">Navigate through geometric tunnels while shooting enemies.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 18.9K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('galaga-storm')">
+                   <div class="game-image">🛸</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Galaga Storm</h3>
+                       <p class="game-description">Shoot formations of alien ships in this enhanced space shooter.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 33.5K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('donkey-kong-classic')">
+                   <div class="game-image">🦍</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Donkey Kong Classic</h3>
+                       <p class="game-description">Climb ladders and avoid barrels to rescue the princess.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 44.8K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('mario-bros-adventure')">
+                   <div class="game-image">🍄</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Mario Bros Adventure</h3>
+                       <p class="game-description">Jump on enemies and collect coins in this platform adventure.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 52.1K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Action Games Section -->
+       <section class="game-category" data-category="action">
+           <div class="category-header">
+               <h2 class="category-title">⚡ Action Games</h2>
+               <span class="category-count">15 Games</span>
+           </div>
+           <div class="games-grid">
+               <div class="game-card" onclick="playGame('bubble-pop-master')">
+                   <div class="game-image">🫧</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Bubble Pop Master</h3>
+                       <p class="game-description">Pop colorful bubbles to clear the screen in this fast-paced action game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 48.3K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('zombie-shooter')">
+                   <div class="game-image">🧟</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Zombie Shooter</h3>
+                       <p class="game-description">Survive waves of zombies with powerful weapons and upgrades.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 61.7K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('racing-thunder')">
+                   <div class="game-image">🏎️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Racing Thunder</h3>
+                       <p class="game-description">Race at high speeds through challenging tracks and obstacles.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 55.2K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('platform-hero')">
+                   <div class="game-image">🦘</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Platform Hero</h3>
+                       <p class="game-description">Jump through platforms and defeat enemies in this action platformer.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 42.9K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('ninja-run')">
+                   <div class="game-image">🥷</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Ninja Run</h3>
+                       <p class="game-description">Run, jump, and slice through obstacles as a skilled ninja warrior.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 38.6K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('space-battle')">
+                   <div class="game-image">⚔️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Space Battle</h3>
+                       <p class="game-description">Engage in epic space combat with alien fleets.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 34.1K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('tank-commander')">
+                   <div class="game-image">🏹</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Tank Commander</h3>
+                       <p class="game-description">Command your tank and destroy enemy forces in tactical combat.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 29.8K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('helicopter-rescue')">
+                   <div class="game-image">🚁</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Helicopter Rescue</h3>
+                       <p class="game-description">Pilot rescue missions through dangerous terrain and weather.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 26.7K plays</span>
+                           <span class="rating">⭐ 4.1</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('jet-fighter')">
+                   <div class="game-image">✈️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Jet Fighter</h3>
+                       <p class="game-description">Fly high-speed jets and engage in aerial dogfights.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 31.4K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('robot-wars')">
+                   <div class="game-image">🤖</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Robot Wars</h3>
+                       <p class="game-description">Build and battle robots in this action-packed combat game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 35.9K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('alien-invasion')">
+                   <div class="game-image">👽</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Alien Invasion</h3>
+                       <p class="game-description">Defend Earth from alien invaders with advanced weaponry.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 40.2K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('cyber-punk')">
+                   <div class="game-image">🌆</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Cyber Punk</h3>
+                       <p class="game-description">Navigate a futuristic cyberpunk world filled with danger.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 33.7K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('stealth-mission')">
+                   <div class="game-image">🕵️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Stealth Mission</h3>
+                       <p class="game-description">Complete covert operations without being detected.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 28.5K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('battle-arena')">
+                   <div class="game-image">⚔️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Battle Arena</h3>
+                       <p class="game-description">Fight in gladiator-style combat against multiple opponents.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 37.1K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('survival-quest')">
+                   <div class="game-image">🏝️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Survival Quest</h3>
+                       <p class="game-description">Survive in the wilderness by gathering resources and avoiding danger.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 41.6K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Card Games Section -->
+       <section class="game-category" data-category="card">
+           <div class="category-header">
+               <h2 class="category-title">🃏 Card Games</h2>
+               <span class="category-count">15 Games</span>
+           </div>
+           <div class="games-grid">
+               <div class="game-card" onclick="playGame('solitaire-classic')">
+                   <div class="game-image">♠️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Solitaire Classic</h3>
+                       <p class="game-description">The traditional solitaire card game with beautiful graphics and smooth gameplay.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 78.4K plays</span>
+                           <span class="rating">⭐ 4.9</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('poker-master')">
+                   <div class="game-image">🎰</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Poker Master</h3>
+                       <p class="game-description">Play Texas Hold'em poker against AI opponents with realistic gameplay.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 65.2K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('blackjack-pro')">
+                   <div class="game-image">🃏</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Blackjack Pro</h3>
+                       <p class="game-description">Beat the dealer in this classic casino card game with perfect strategy hints.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 59.8K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('memory-cards')">
+                   <div class="game-image">🧠</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Memory Cards</h3>
+                       <p class="game-description">Test your memory by matching pairs of cards in this brain-training game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 43.7K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('uno-online')">
+                   <div class="game-image">🎨</div>
+                   <div class="game-content">
+                       <h3 class="game-title">UNO Online</h3>
+                       <p class="game-description">Play the popular UNO card game with colorful cards and special action cards.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 52.3K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('hearts-champion')">
+                   <div class="game-image">♥️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Hearts Champion</h3>
+                       <p class="game-description">Avoid penalty cards in this classic trick-taking card game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 38.9K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('spades-master')">
+                   <div class="game-image">♦️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Spades Master</h3>
+                       <p class="game-description">Bid and win tricks in this strategic partnership card game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 34.6K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('bridge-classic')">
+                   <div class="game-image">♣️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Bridge Classic</h3>
+                       <p class="game-description">Master the sophisticated card game of bridge with AI partners.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 29.1K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('gin-rummy')">
+                   <div class="game-image">🎲</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Gin Rummy</h3>
+                       <p class="game-description">Form sets and runs to score points in this classic rummy variant.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 31.8K plays</span>
+                           <span class="rating">⭐ 4.1</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('cribbage-pro')">
+                   <div class="game-image">🎯</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Cribbage Pro</h3>
+                       <p class="game-description">Score points by forming card combinations in this traditional game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 25.4K plays</span>
+                           <span class="rating">⭐ 4.0</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('baccarat-elite')">
+                   <div class="game-image">💎</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Baccarat Elite</h3>
+                       <p class="game-description">Experience the elegance of baccarat with high-quality graphics.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 22.7K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('war-card-game')">
+                   <div class="game-image">⚔️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">War Card Game</h3>
+                       <p class="game-description">Battle with cards in this simple yet exciting card war game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 19.3K plays</span>
+                           <span class="rating">⭐ 3.9</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('go-fish')">
+                   <div class="game-image">🐟</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Go Fish</h3>
+                       <p class="game-description">Collect sets of four cards by asking other players in this family-friendly game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 27.6K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('old-maid')">
+                   <div class="game-image">👵</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Old Maid</h3>
+                       <p class="game-description">Avoid being left with the Old Maid card in this classic matching game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 21.8K plays</span>
+                           <span class="rating">⭐ 4.1</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('crazy-eights')">
+                   <div class="game-image">8️⃣</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Crazy Eights</h3>
+                       <p class="game-description">Match suits or numbers and use eights as wild cards to win.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 24.2K plays</span>
+                           <span class="rating">⭐ 4.0</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Strategy Games Section -->
+       <section class="game-category" data-category="strategy">
+           <div class="category-header">
+               <h2 class="category-title">🧠 Strategy Games</h2>
+               <span class="category-count">10 Games</span>
+           </div>
+           <div class="games-grid">
+               <div class="game-card" onclick="playGame('chess-master')">
+                   <div class="game-image">♟️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Chess Master</h3>
+                       <p class="game-description">Play chess against AI opponents with multiple difficulty levels and beautiful boards.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 67.9K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('tower-defense')">
+                   <div class="game-image">🏰</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Tower Defense</h3>
+                       <p class="game-description">Build defensive towers to stop enemy waves from reaching your base.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 73.4K plays</span>
+                           <span class="rating">⭐ 4.9</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('risk-online')">
+                   <div class="game-image">🗺️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Risk Online</h3>
+                       <p class="game-description">Conquer the world through strategic military campaigns and alliances.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 54.6K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('civilization-mini')">
+                   <div class="game-image">🏛️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Civilization Mini</h3>
+                       <p class="game-description">Build your civilization from ancient times to modern era.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 48.2K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('age-of-war')">
+                   <div class="game-image">⚔️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Age of War</h3>
+                       <p class="game-description">Evolve your army through different ages while defending your base.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 41.8K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('checkers-pro')">
+                   <div class="game-image">🎯</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Checkers Pro</h3>
+                       <p class="game-description">Master the classic strategy game of checkers with intelligent AI.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 35.7K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('backgammon-elite')">
+                   <div class="game-image">🧠</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Backgammon Elite</h3>
+                       <p class="game-description">Play the ancient strategy game with dice and tactical movement.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 29.3K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('reversi-master')">
+                   <div class="game-image">♚</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Reversi Master</h3>
+                       <p class="game-description">Flip your opponent's pieces to control the board in this strategic game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 32.6K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('connect-four')">
+                   <div class="game-image">🔄</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Connect Four</h3>
+                       <p class="game-description">Be the first to connect four pieces in a row in this classic strategy game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 38.1K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('tic-tac-toe-ultimate')">
+                   <div class="game-image">❌</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Tic Tac Toe Ultimate</h3>
+                       <p class="game-description">The classic game with multiple boards and advanced strategies.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 26.4K plays</span>
+                           <span class="rating">⭐ 4.1</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Idle Games Section -->
+       <section class="game-category" data-category="idle">
+           <div class="category-header">
+               <h2 class="category-title">🔄 Idle Games</h2>
+               <span class="category-count">10 Games</span>
+           </div>
+           <div class="games-grid">
+               <div class="game-card" onclick="playGame('cookie-clicker')">
+                   <div class="game-image">🍪</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Cookie Clicker</h3>
+                       <p class="game-description">Click cookies and build an automated cookie empire with upgrades and achievements.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 89.7K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('idle-miner')">
+                   <div class="game-image">⛏️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Idle Miner</h3>
+                       <p class="game-description">Mine resources automatically and upgrade your mining operation.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 76.2K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('business-empire')">
+                   <div class="game-image">💼</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Business Empire</h3>
+                       <p class="game-description">Build your business empire from a small startup to global corporation.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 68.4K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('farm-tycoon')">
+                   <div class="game-image">🚜</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Farm Tycoon</h3>
+                       <p class="game-description">Grow crops and raise animals to build the ultimate farming empire.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 59.3K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('space-colony')">
+                   <div class="game-image">🚀</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Space Colony</h3>
+                       <p class="game-description">Establish and expand your space colony across multiple planets.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 52.8K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('factory-builder')">
+                   <div class="game-image">🏭</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Factory Builder</h3>
+                       <p class="game-description">Design and optimize automated factories for maximum efficiency.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 45.7K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('city-simulator')">
+                   <div class="game-image">🏙️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">City Simulator</h3>
+                       <p class="game-description">Build and manage your own city with automated growth systems.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 61.9K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('restaurant-manager')">
+                   <div class="game-image">🍽️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Restaurant Manager</h3>
+                       <p class="game-description">Run your restaurant empire with automated cooking and serving.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 38.6K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('adventure-capitalist')">
+                   <div class="game-image">💰</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Adventure Capitalist</h3>
+                       <p class="game-description">Invest in businesses and watch your profits grow automatically.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 71.2K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('prestige-tree')">
+                   <div class="game-image">🌳</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Prestige Tree</h3>
+                       <p class="game-description">Grow your prestige tree with complex upgrade systems and mechanics.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 43.5K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Word Games Section -->
+       <section class="game-category" data-category="word">
+           <div class="category-header">
+               <h2 class="category-title">📝 Word Games</h2>
+               <span class="category-count">9 Games</span>
+           </div>
+           <div class="games-grid">
+               <div class="game-card" onclick="playGame('word-puzzle')">
+                   <div class="game-image">📝</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Word Puzzle</h3>
+                       <p class="game-description">Find hidden words in letter grids and expand your vocabulary.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 47.3K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('crossword-daily')">
+                   <div class="game-image">📋</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Crossword Daily</h3>
+                       <p class="game-description">Solve daily crossword puzzles with clues of varying difficulty.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 52.8K plays</span>
+                           <span class="rating">⭐ 4.7</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('anagram-master')">
+                   <div class="game-image">🔤</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Anagram Master</h3>
+                       <p class="game-description">Rearrange letters to form new words in this challenging word game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 34.7K plays</span>
+                           <span class="rating">⭐ 4.5</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('letter-connect')">
+                   <div class="game-image">🔗</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Letter Connect</h3>
+                       <p class="game-description">Connect letters to form words and clear the board.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 29.6K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('spelling-bee')">
+                   <div class="game-image">🐝</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Spelling Bee</h3>
+                       <p class="game-description">Create words using given letters with one required letter in each word.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 41.2K plays</span>
+                           <span class="rating">⭐ 4.8</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('word-chain')">
+                   <div class="game-image">⛓️</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Word Chain</h3>
+                       <p class="game-description">Create word chains where each word starts with the last letter of the previous word.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 26.8K plays</span>
+                           <span class="rating">⭐ 4.3</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('vocabulary-builder')">
+                   <div class="game-image">📚</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Vocabulary Builder</h3>
+                       <p class="game-description">Learn new words while playing engaging vocabulary challenges.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 33.4K plays</span>
+                           <span class="rating">⭐ 4.6</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('rhyme-time')">
+                   <div class="game-image">🎵</div>
+                   <div class="game-content">
+                       <h3 class="game-title">Rhyme Time</h3>
+                       <p class="game-description">Find words that rhyme in this musical word matching game.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 22.7K plays</span>
+                           <span class="rating">⭐ 4.2</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+
+               <div class="game-card" onclick="playGame('word-detective')">
+                   <div class="game-image">🔍</div>
+                   <div class="game-content">
+                    <h3 class="game-title">Word Detective</h3>
+                       <p class="game-description">Solve word mysteries by finding clues and forming words from evidence.</p>
+                       <div class="game-stats">
+                           <span class="play-count">👥 28.1K plays</span>
+                           <span class="rating">⭐ 4.4</span>
+                       </div>
+                       <button class="play-button">▶️ Play Now</button>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <!-- Stats Section -->
+       <section class="stats-section loading">
+           <h2 class="stats-title">📊 Platform Statistics</h2>
+           <div class="stats-grid">
+               <div class="stat-item">
+                   <span class="stat-number" data-target="99">0</span>
+                   <span class="stat-label">Total Games</span>
+               </div>
+               <div class="stat-item">
+                   <span class="stat-number" data-target="2500000">0</span>
+                   <span class="stat-label">Games Played</span>
+               </div>
+               <div class="stat-item">
+                   <span class="stat-number" data-target="150000">0</span>
+                   <span class="stat-label">Daily Players</span>
+               </div>
+               <div class="stat-item">
+                   <span class="stat-number" data-target="48">0</span>
+                   <span class="stat-label">Average Rating</span>
+               </div>
+           </div>
+       </section>
+   </main>
+
+   <!-- Bottom Ad Container -->
+   <div class="ad-container-bottom">
+       <div class="ad-placeholder">728x90 Footer Advertisement</div>
+   </div>
+
+   <!-- Footer -->
+   <footer class="footer">
+       <div class="footer-content">
+           <div class="footer-links">
+               <a href="/about">About Us</a>
+               <a href="/privacy">Privacy Policy</a>
+               <a href="/terms">Terms of Service</a>
+               <a href="/contact">Contact</a>
+               <a href="/developers">For Developers</a>
+               <a href="/blog">Blog</a>
+           </div>
+           
+           <div class="footer-social">
+               <div class="social-links">
+                   <a href="#" class="social-link" title="Facebook">📘</a>
+                   <a href="#" class="social-link" title="Twitter">🐦</a>
+                   <a href="#" class="social-link" title="Instagram">📷</a>
+                   <a href="#" class="social-link" title="YouTube">📺</a>
+                   <a href="#" class="social-link" title="TikTok">🎵</a>
+               </div>
+           </div>
+           
+           <div class="footer-copyright">
+               <p>&copy; 2025 GameHub 99. All rights reserved. | Premium HTML5 Games Collection</p>
+               <p>Made with ❤️ for gamers worldwide | All games are free to play</p>
+           </div>
+       </div>
+   </footer>
+
+   <script>
+       // Game data structure
+       const gameCategories = {
+           puzzle: [
+               '2048-deluxe', 'match-3-master', 'block-puzzle-classic', 'sudoku-pro', 'word-search-deluxe',
+               'jigsaw-puzzle', 'crossword-master', 'number-connect', 'color-match', 'pattern-memory',
+               'sliding-puzzle', 'logic-blocks', 'maze-runner', 'brain-teaser', 'tile-matcher',
+               'word-scramble', 'number-sequence', 'color-sort', 'shape-fitter', 'mind-bender'
+           ],
+           arcade: [
+               'snake-evolution', 'tetris-modern', 'pac-man-deluxe', 'space-invaders', 'frogger-classic',
+               'breakout-master', 'asteroids-redux', 'centipede-chaos', 'missile-command', 'defender-elite',
+               'galaxian-wars', 'dig-dug-adventure', 'bubble-bobble', 'qbert-quest', 'joust-champion',
+               'robotron-2084', 'tempest-tunnel', 'galaga-storm', 'donkey-kong-classic', 'mario-bros-adventure'
+           ],
+           action: [
+               'bubble-pop-master', 'zombie-shooter', 'racing-thunder', 'platform-hero', 'ninja-run',
+               'space-battle', 'tank-commander', 'helicopter-rescue', 'jet-fighter', 'robot-wars',
+               'alien-invasion', 'cyber-punk', 'stealth-mission', 'battle-arena', 'survival-quest'
+           ],
+           card: [
+               'solitaire-classic', 'poker-master', 'blackjack-pro', 'memory-cards', 'uno-online',
+               'hearts-champion', 'spades-master', 'bridge-classic', 'gin-rummy', 'cribbage-pro',
+               'baccarat-elite', 'war-card-game', 'go-fish', 'old-maid', 'crazy-eights'
+           ],
+           strategy: [
+               'chess-master', 'tower-defense', 'risk-online', 'civilization-mini', 'age-of-war',
+               'checkers-pro', 'backgammon-elite', 'reversi-master', 'connect-four', 'tic-tac-toe-ultimate'
+           ],
+           idle: [
+               'cookie-clicker', 'idle-miner', 'business-empire', 'farm-tycoon', 'space-colony',
+               'factory-builder', 'city-simulator', 'restaurant-manager', 'adventure-capitalist', 'prestige-tree'
+           ],
+           word: [
+               'word-puzzle', 'crossword-daily', 'anagram-master', 'letter-connect', 'spelling-bee',
+               'word-chain', 'vocabulary-builder', 'rhyme-time', 'word-detective'
+           ]
+       };
+
+       // Animation on scroll
+       const observerOptions = {
+           threshold: 0.1,
+           rootMargin: '0px 0px -50px 0px'
+       };
+
+       const observer = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   entry.target.style.animationDelay = '0.1s';
+                   entry.target.classList.add('loading');
+               }
+           });
+       }, observerOptions);
+
+       document.querySelectorAll('.loading').forEach(el => {
+           observer.observe(el);
+       });
+
+       // Counter animation
+       function animateCounter(element, target) {
+           const increment = target / 100;
+           let current = 0;
+           const timer = setInterval(() => {
+               current += increment;
+               if (current >= target) {
+                   current = target;
+                   clearInterval(timer);
+               }
+               
+               if (target >= 1000000) {
+                   element.textContent = (current / 1000000).toFixed(1) + 'M';
+               } else if (target >= 1000) {
+                   element.textContent = (current / 1000).toFixed(0) + 'K';
+               } else {
+                   element.textContent = current.toFixed(1);
+               }
+           }, 20);
+       }
+
+       // Initialize counters when stats section is visible
+       const statsSection = document.querySelector('.stats-section');
+       const statsObserver = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                   document.querySelectorAll('.stat-number').forEach(stat => {
+                       const target = parseInt(stat.getAttribute('data-target'));
+                       animateCounter(stat, target);
+                   });
+                   statsObserver.unobserve(entry.target);
+               }
+           });
+       }, { threshold: 0.5 });
+       statsObserver.observe(statsSection);
+
+       // Navigation functionality
+       function filterCategory(category) {
+           // Update active nav button
+           document.querySelectorAll('.nav-button').forEach(btn => {
+               btn.classList.remove('active');
+           });
+           document.querySelector(`[data-category="${category}"]`).classList.add('active');
+
+           // Show/hide sections based on category
+           document.querySelectorAll('.game-category').forEach(section => {
+               if (category === 'all') {
+                   section.style.display = 'block';
+               } else if (section.getAttribute('data-category') === category) {
+                   section.style.display = 'block';
+               } else {
+                   section.style.display = 'none';
+               }
+           });
+
+           // Smooth scroll to first visible section
+           if (category !== 'all') {
+               const targetSection = document.querySelector(`[data-category="${category}"]`);
+               if (targetSection) {
+                   targetSection.scrollIntoView({
+                       behavior: 'smooth',
+                       block: 'start'
+                   });
+               }
+           } else {
+               // Scroll to top for "All Games"
+               window.scrollTo({
+                   top: 0,
+                   behavior: 'smooth'
+               });
+           }
+
+           // Track category view
+           trackEvent('category_view', { category: category });
+       }
+
+       // Navigation button click handlers
+       document.querySelectorAll('.nav-button').forEach(button => {
+           button.addEventListener('click', (e) => {
+               e.preventDefault();
+               const category = button.getAttribute('data-category');
+               filterCategory(category);
+           });
+       });
+
+       // Search functionality
+       document.getElementById('gameSearch').addEventListener('input', (e) => {
+           const searchTerm = e.target.value.toLowerCase();
+           if (searchTerm.length >= 2) {
+               searchGames(searchTerm);
+           } else if (searchTerm.length === 0) {
+               showAllGames();
+           }
+       });
+
+       function searchGames(term) {
+           const allCards = document.querySelectorAll('.game-card');
+           let visibleCount = 0;
+           
+           allCards.forEach(card => {
+               const title = card.querySelector('.game-title').textContent.toLowerCase();
+               const description = card.querySelector('.game-description').textContent.toLowerCase();
+               
+               if (title.includes(term) || description.includes(term)) {
+                   card.style.display = 'block';
+                   visibleCount++;
+               } else {
+                   card.style.display = 'none';
+               }
+           });
+
+           // Show all sections when searching
+           document.querySelectorAll('.game-category').forEach(section => {
+               section.style.display = 'block';
+           });
+
+           // Update navigation to show search is active
+           document.querySelectorAll('.nav-button').forEach(btn => {
+               btn.classList.remove('active');
+           });
+
+           // Track search
+           trackEvent('search', { term: term, results: visibleCount });
+       }
+
+       function showAllGames() {
+           document.querySelectorAll('.game-card').forEach(card => {
+               card.style.display = 'block';
+           });
+           document.querySelectorAll('.game-category').forEach(section => {
+               section.style.display = 'block';
+           });
+           document.querySelector('[data-category="all"]').classList.add('active');
+       }
+
+       // Search button functionality
+       document.querySelector('.search-button').addEventListener('click', () => {
+           const searchInput = document.getElementById('gameSearch');
+           const searchTerm = searchInput.value.trim();
+           if (searchTerm) {
+               searchGames(searchTerm);
+           }
+       });
+
+       // Enter key search
+       document.getElementById('gameSearch').addEventListener('keypress', (e) => {
+           if (e.key === 'Enter') {
+               const searchTerm = e.target.value.trim();
+               if (searchTerm) {
+                   searchGames(searchTerm);
+               }
+           }
+       });
+
+       // Game play function
+       function playGame(gameSlug) {
+           // Show loading state
+           showGameLoadingOverlay(gameSlug);
+           
+           // Track game click
+           trackEvent('game_click', { game: gameSlug });
+           
+           // Redirect to game
+           setTimeout(() => {
+               window.location.href = `/games/${gameSlug}.html`;
+           }, 1000);
+       }
+
+       function showGameLoadingOverlay(gameSlug) {
+           const overlay = document.createElement('div');
+           overlay.style.cssText = `
+               position: fixed;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               background: rgba(0, 0, 0, 0.9);
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+               justify-content: center;
+               z-index: 10000;
+               backdrop-filter: blur(10px);
+           `;
+           
+           overlay.innerHTML = `
+               <div style="text-align: center; color: white;">
+                   <div style="width: 60px; height: 60px; border: 4px solid var(--card-border); border-top: 4px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 2rem;"></div>
+                   <h2 style="font-family: 'Orbitron', monospace; margin-bottom: 1rem;">Loading Game...</h2>
+                   <p style="color: var(--text-secondary);">Preparing ${gameSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} for you</p>
+               </div>
+           `;
+           
+           document.body.appendChild(overlay);
+           
+           // Remove overlay after timeout
+           setTimeout(() => {
+               if (document.body.contains(overlay)) {
+                   document.body.removeChild(overlay);
+               }
+           }, 5000);
+       }
+
+       // Analytics tracking
+       function trackEvent(eventName, parameters = {}) {
+           if (typeof gtag !== 'undefined') {
+               gtag('event', eventName, {
+                   ...parameters,
+                   page_title: 'GameHub 99 - Home'
+               });
+           }
+           console.log(`Event: ${eventName}`, parameters);
+       }
+
+       // Add CSS animation for loading spinner
+       const style = document.createElement('style');
+       style.textContent = `
+           @keyframes spin {
+               0% { transform: rotate(0deg); }
+               100% { transform: rotate(360deg); }
+           }
+       `;
+       document.head.appendChild(style);
+
+       // Initialize page
+       document.addEventListener('DOMContentLoaded', () => {
+           // Animate elements on load
+           setTimeout(() => {
+               document.querySelectorAll('.loading').forEach((el, index) => {
+                   setTimeout(() => {
+                       el.style.opacity = '1';
+                       el.style.transform = 'translateY(0)';
+                   }, index * 100);
+               });
+           }, 100);
+
+           // Track page load
+           trackEvent('page_load', { page: 'home' });
+       });
+
+       // Handle card hover effects
+       document.querySelectorAll('.game-card').forEach(card => {
+           card.addEventListener('mouseenter', () => {
+               card.style.transform = 'translateY(-10px)';
+           });
+           
+           card.addEventListener('mouseleave', () => {
+               card.style.transform = 'translateY(0)';
+           });
+       });
+
+       // Responsive navigation for mobile
+       function handleMobileNavigation() {
+           if (window.innerWidth <= 768) {
+               const nav = document.querySelector('.nav');
+               nav.style.overflowX = 'auto';
+               nav.style.scrollBehavior = 'smooth';
+               nav.style.WebkitOverflowScrolling = 'touch';
+           }
+       }
+
+       window.addEventListener('resize', handleMobileNavigation);
+       handleMobileNavigation();
+
+       // Prevent zoom on double tap (mobile)
+       let lastTouchEnd = 0;
+       document.addEventListener('touchend', function (event) {
+           const now = (new Date()).getTime();
+           if (now - lastTouchEnd <= 300) {
+               event.preventDefault();
+           }
+           lastTouchEnd = now;
+       }, false);
+
+       // Show random featured games periodically
+       setInterval(() => {
+           const cards = document.querySelectorAll('.game-card');
+           if (cards.length > 0) {
+               const randomCard = cards[Math.floor(Math.random() * cards.length)];
+               randomCard.style.boxShadow = 'var(--shadow-glow)';
+               setTimeout(() => {
+                   randomCard.style.boxShadow = '';
+               }, 2000);
+           }
+       }, 10000);
+
+       console.log('🎮 GameHub 99 loaded successfully with 99 games!');
+   </script>
 </body>
 </html>

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Defense - Free HTML5 Game | GameHub 99</title>
+    <meta name="description" content="Play Tower Defense for free! Test your strategic thinking and planning skills! Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="tower-defense, strategy game, html5 game, free online game, browser game, mobile game">
+    <meta name="author" content="GameHub 99">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="game">
+    <meta property="og:url" content="https://gamehub99.com/games/tower-defense.html">
+    <meta property="og:title" content="Tower Defense - Free HTML5 Game">
+    <meta property="og:description" content="Test your strategic thinking and planning skills!">
+    <meta property="og:image" content="https://gamehub99.com/assets/tower-defense-og.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gamehub99.com/games/tower-defense.html">
+    <meta property="twitter:title" content="Tower Defense - Free HTML5 Game">
+    <meta property="twitter:description" content="Test your strategic thinking and planning skills!">
+    <meta property="twitter:image" content="https://gamehub99.com/assets/tower-defense-og.jpg">
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
+            --accent-color: #00d4ff;
+            --success-color: #00ff88;
+            --warning-color: #ffaa00;
+            --text-primary: #ffffff;
+            --text-secondary: #b8c1ec;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.3);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--dark-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ad-container-top, .ad-container-bottom {
+            width: 100%;
+            min-height: 90px;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .ad-placeholder {
+            width: 728px;
+            height: 90px;
+            background: linear-gradient(45deg, #333, #555);
+            border: 2px dashed #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .header {
+            padding: 1rem 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .game-title {
+            font-family: "Orbitron", monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 25px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+        }
+
+        .nav-button:hover {
+            background: var(--accent-color);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        .game-container {
+            flex: 1;
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .game-section {
+            flex: 2;
+            min-width: 320px;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stats-section {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            min-width: 80px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-value {
+            font-family: "Orbitron", monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .control-button {
+            padding: 8px 16px;
+            background: var(--secondary-gradient);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .control-button.new-game {
+            background: var(--success-color);
+        }
+
+        .control-button.pause {
+            background: var(--warning-color);
+        }
+
+        .game-canvas-container {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 15px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            position: relative;
+            text-align: center;
+        }
+
+        #gameCanvas {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid var(--card-border);
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .mobile-controls {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+            max-width: 250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mobile-control {
+            aspect-ratio: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            user-select: none;
+        }
+
+        .mobile-control:hover, .mobile-control:active {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .mobile-control.empty {
+            visibility: hidden;
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .instructions {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+
+        .instructions ul {
+            margin: 0.8rem 0;
+            padding-left: 1.2rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.4rem;
+        }
+
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .game-title {
+                font-size: 1.5rem;
+            }
+            
+            .nav-buttons {
+                justify-content: center;
+            }
+            
+            .game-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            
+            .stats-section {
+                justify-content: center;
+            }
+            
+            .game-controls {
+                justify-content: center;
+            }
+            
+            .mobile-controls {
+                display: grid;
+            }
+            
+            .sidebar {
+                order: -1;
+            }
+            
+            .ad-placeholder {
+                width: 320px;
+                height: 50px;
+                font-size: 12px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Top Ad Container -->
+    <div class="ad-container-top">
+        <div class="ad-placeholder">728x90 Header Advertisement</div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="game-title">🔄 Tower Defense</h1>
+            <nav class="nav-buttons">
+                <a href="/" class="nav-button">🏠 Home</a>
+                <a href="/games" class="nav-button">🎮 More Games</a>
+                <a href="#" class="nav-button" onclick="showInstructions()">❓ How to Play</a>
+                <a href="#" class="nav-button" onclick="toggleFullscreen()">📱 Fullscreen</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <div class="game-container">
+        <!-- Game Section -->
+        <main class="game-section loading">
+            <div class="game-header">
+                <div class="stats-section">
+                    <div class="stat-box">
+                        <div class="stat-label">Score</div>
+                        <div class="stat-value" id="currentScore">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Best</div>
+                        <div class="stat-value" id="bestScore">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Level</div>
+                        <div class="stat-value" id="gameLevel">1</div>
+                    </div>
+                </div>
+                
+                <div class="game-controls">
+                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
+                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
+                    <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
+                </div>
+            </div>
+
+            <!-- Game Canvas -->
+            <div class="game-canvas-container">
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            </div>
+
+            <!-- Mobile Controls -->
+            <div class="mobile-controls">
+                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="moveUp()">⬆️</div>
+                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
+                <div class="mobile-control" onclick="moveDown()">⬇️</div>
+                <div class="mobile-control" onclick="moveRight()">➡️</div>
+                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="newGame()">🆕</div>
+                <div class="mobile-control empty"></div>
+            </div>
+        </main>
+
+        <!-- Sidebar -->
+        <aside class="sidebar loading">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">🎯 How to Play</h3>
+                <div class="instructions">
+                    <p><strong>Test your strategic thinking and planning skills!</strong></p>
+                    <ul>
+                        <li>Use arrow keys or swipe to control</li>
+                        <li>Score points to advance levels</li>
+                        <li>Beat your high score!</li>
+                        <li>Share with friends</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
+                    250x250<br>Sidebar Ad
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Bottom Ad Container -->
+    <div class="ad-container-bottom">
+        <div class="ad-placeholder">728x90 Footer Advertisement</div>
+    </div>
+
+    <script>
+        
+        // Game State
+        const game = {
+            canvas: null,
+            ctx: null,
+            score: 0,
+            bestScore: localStorage.getItem("tower-defenseBest") || 0,
+            level: 1,
+            gameRunning: false,
+            gamePaused: false,
+            gameOver: false
+        };
+
+        // Initialize game
+        function initGame() {
+            game.canvas = document.getElementById("gameCanvas");
+            game.ctx = game.canvas.getContext("2d");
+            
+            // Load best score
+            document.getElementById("bestScore").textContent = game.bestScore;
+            
+            // Event listeners
+            document.addEventListener("keydown", handleKeyPress);
+            
+            // Touch support
+            setupTouchControls();
+            
+            // Start new game
+            newGame();
+            
+            // Animate elements
+            setTimeout(() => {
+                document.querySelectorAll(".loading").forEach(el => {
+                    el.style.opacity = "1";
+                });
+            }, 100);
+        }
+
+        // New Game
+        function newGame() {
+            game.score = 0;
+            game.level = 1;
+            game.gameRunning = true;
+            game.gamePaused = false;
+            game.gameOver = false;
+            
+            updateDisplay();
+            gameLoop();
+            
+            trackEvent("game_start");
+        }
+
+        // Game Loop
+        function gameLoop() {
+            if (!game.gameRunning || game.gamePaused) {
+                if (game.gameRunning && !game.gameOver) {
+                    setTimeout(gameLoop, 50);
+                }
+                return;
+            }
+            
+            updateGame();
+            render();
+            
+            setTimeout(gameLoop, 100);
+        }
+
+        // Update Game State
+        function updateGame() {
+            if (game.gameOver) return;
+            
+            // Game logic here
+            game.score += 10;
+            
+            // Level progression
+            const newLevel = Math.floor(game.score / 500) + 1;
+            if (newLevel > game.level) {
+                game.level = newLevel;
+                showLevelUp();
+            }
+            
+            updateDisplay();
+            
+            // Check game over condition
+            if (Math.random() < 0.001) {
+                endGame();
+            }
+        }
+
+        // Render Game
+        function render() {
+            const ctx = game.ctx;
+            
+            // Clear canvas
+            ctx.fillStyle = "#1a1a2e";
+            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+            
+            // Draw game elements
+            ctx.fillStyle = "#00d4ff";
+            ctx.font = "24px Orbitron";
+            ctx.textAlign = "center";
+            ctx.fillText("Tower Defense", game.canvas.width / 2, game.canvas.height / 2);
+            
+            ctx.fillStyle = "#b8c1ec";
+            ctx.font = "16px Inter";
+            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
+        }
+
+        // Handle Key Press
+        function handleKeyPress(e) {
+            if (game.gameOver) return;
+            
+            const keyMap = {
+                "ArrowUp": "up",
+                "ArrowDown": "down", 
+                "ArrowLeft": "left",
+                "ArrowRight": "right",
+                "KeyW": "up",
+                "KeyS": "down",
+                "KeyA": "left",
+                "KeyD": "right"
+            };
+            
+            if (keyMap[e.code]) {
+                e.preventDefault();
+                handleMove(keyMap[e.code]);
+            } else if (e.code === "Space") {
+                e.preventDefault();
+                togglePause();
+            } else if (e.code === "KeyN") {
+                e.preventDefault();
+                newGame();
+            }
+        }
+
+        // Handle Movement
+        function handleMove(direction) {
+            if (!game.gameRunning || game.gamePaused) return;
+            
+            // Movement logic here
+            console.log("Moving:", direction);
+            trackEvent("move_made", { direction: direction });
+        }
+
+        // Mobile Control Functions
+        function moveUp() { handleMove("up"); }
+        function moveDown() { handleMove("down"); }
+        function moveLeft() { handleMove("left"); }
+        function moveRight() { handleMove("right"); }
+
+        // Setup Touch Controls
+        function setupTouchControls() {
+            let startX, startY;
+            
+            game.canvas.addEventListener("touchstart", (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                e.preventDefault();
+            });
+            
+            game.canvas.addEventListener("touchend", (e) => {
+                if (!startX || !startY) return;
+                
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                
+                const deltaX = endX - startX;
+                const deltaY = endY - startY;
+                
+                const minSwipeDistance = 30;
+                
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    if (Math.abs(deltaX) > minSwipeDistance) {
+                        handleMove(deltaX > 0 ? "right" : "left");
+                    }
+                } else {
+                    if (Math.abs(deltaY) > minSwipeDistance) {
+                        handleMove(deltaY > 0 ? "down" : "up");
+                    }
+                }
+                
+                startX = null;
+                startY = null;
+                e.preventDefault();
+            });
+        }
+
+        // Toggle Pause
+        function togglePause() {
+            if (!game.gameRunning || game.gameOver) return;
+            
+            game.gamePaused = !game.gamePaused;
+            const pauseButton = document.getElementById("pauseButton");
+            
+            if (game.gamePaused) {
+                pauseButton.textContent = "▶️ Resume";
+                pauseButton.classList.add("pulse");
+            } else {
+                pauseButton.textContent = "⏸️ Pause";
+                pauseButton.classList.remove("pulse");
+                gameLoop();
+            }
+            
+            trackEvent("game_paused", { paused: game.gamePaused });
+        }
+
+        // End Game
+        function endGame() {
+            game.gameRunning = false;
+            game.gameOver = true;
+            
+            // Update best score
+            if (game.score > game.bestScore) {
+                game.bestScore = game.score;
+                localStorage.setItem("tower-defenseBest", game.bestScore);
+                document.getElementById("bestScore").textContent = game.bestScore;
+               showNewRecord();
+           }
+           
+           setTimeout(() => showGameOverModal(), 500);
+           trackEvent("game_over", { score: game.score, level: game.level });
+       }
+
+       // Update Display
+       function updateDisplay() {
+           document.getElementById("currentScore").textContent = game.score.toLocaleString();
+           document.getElementById("gameLevel").textContent = game.level;
+       }
+
+       // Show Level Up
+       function showLevelUp() {
+           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
+       }
+
+       // Show New Record
+       function showNewRecord() {
+           showTemporaryMessage("New Record!", "#00ff88");
+       }
+
+       // Show Temporary Message
+       function showTemporaryMessage(message, color) {
+           const messageEl = document.createElement("div");
+           messageEl.textContent = message;
+           messageEl.style.cssText = `
+               position: fixed;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%);
+               background: ${color};
+               color: white;
+               padding: 1rem 2rem;
+               border-radius: 10px;
+               font-weight: bold;
+               font-size: 1.2rem;
+               z-index: 10000;
+               animation: fadeInOut 2s ease;
+               pointer-events: none;
+           `;
+           
+           document.body.appendChild(messageEl);
+           
+           setTimeout(() => {
+               document.body.removeChild(messageEl);
+           }, 2000);
+       }
+
+       // Show Game Over Modal
+       function showGameOverModal() {
+           const modal = document.createElement("div");
+           modal.className = "modal";
+           modal.style.display = "flex";
+           modal.innerHTML = `
+               <div class="modal-content">
+                   <h2 class="modal-title">Game Over!</h2>
+                   <div class="modal-stats">
+                       <div class="modal-stat">
+                           <span>Final Score:</span>
+                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
+                       </div>
+                       <div class="modal-stat">
+                           <span>Level Reached:</span>
+                           <span class="modal-stat-value">${game.level}</span>
+                       </div>
+                   </div>
+                   <div class="modal-buttons">
+                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
+                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
+                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
+                   </div>
+               </div>
+           `;
+           
+           document.body.appendChild(modal);
+       }
+
+       // Close Modal
+       function closeModal() {
+           const modal = document.querySelector(".modal");
+           if (modal) {
+               document.body.removeChild(modal);
+           }
+       }
+
+       // Show Leaderboard
+       function showLeaderboard() {
+           const scores = JSON.parse(localStorage.getItem("tower-defenseLeaderboard") || "[]");
+           let message = "🏆 Top Scores:\n\n";
+           
+           if (scores.length === 0) {
+               message += "No scores yet. Be the first!";
+           } else {
+               scores.slice(0, 5).forEach((score, index) => {
+                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
+               });
+           }
+           
+           alert(message);
+       }
+
+       // Utility Functions
+       function showInstructions() {
+           alert(`🎯 Tower Defense - How to Play
+
+🕹️ Controls:
+- Arrow Keys or WASD to move
+- Spacebar to pause/resume
+- Swipe on mobile devices
+- N for new game
+
+🎮 Gameplay:
+- Test your strategic thinking and planning skills!
+- Score points to advance levels
+- Beat your high score!
+
+Good luck! 🍀`);
+       }
+
+       function toggleFullscreen() {
+           if (!document.fullscreenElement) {
+               document.documentElement.requestFullscreen().catch(err => {
+                   console.log("Fullscreen not supported");
+               });
+           } else {
+               document.exitFullscreen();
+           }
+       }
+
+       function shareScore() {
+           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Tower Defense! Can you beat my score? 🏆`;
+           
+           if (navigator.share) {
+               navigator.share({
+                   title: "Tower Defense - My Score",
+                   text: text,
+                   url: window.location.href
+               });
+           } else {
+               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
+                   alert("Score copied to clipboard! Share it with your friends! 📋");
+               });
+           }
+           
+           trackEvent("score_shared", { score: game.score });
+       }
+
+       // Analytics tracking
+       function trackEvent(eventName, parameters = {}) {
+           if (typeof gtag !== "undefined") {
+               gtag("event", eventName, {
+                   custom_parameter_1: parameters,
+                   game_name: "tower-defense",
+                   ...parameters
+               });
+           }
+           console.log(`Event: ${eventName}`, parameters);
+       }
+
+       // Add CSS animation
+       const style = document.createElement("style");
+       style.textContent = `
+           @keyframes fadeInOut {
+               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+           }
+           .modal {
+               position: fixed;
+               top: 0;
+               left: 0;
+               width: 100%;
+               height: 100%;
+               background: rgba(0, 0, 0, 0.8);
+               display: none;
+               align-items: center;
+               justify-content: center;
+               z-index: 1000;
+               backdrop-filter: blur(10px);
+           }
+           .modal-content {
+               background: var(--dark-gradient);
+               border: 2px solid var(--card-border);
+               border-radius: 15px;
+               padding: 2.5rem;
+               text-align: center;
+               max-width: 380px;
+               width: 90%;
+           }
+           .modal-title {
+               font-family: "Orbitron", monospace;
+               font-size: 1.8rem;
+               font-weight: 900;
+               margin-bottom: 1rem;
+               background: var(--primary-gradient);
+               -webkit-background-clip: text;
+               -webkit-text-fill-color: transparent;
+               background-clip: text;
+           }
+           .modal-stats {
+               margin-bottom: 1.5rem;
+           }
+           .modal-stat {
+               display: flex;
+               justify-content: space-between;
+               margin-bottom: 0.5rem;
+               font-size: 0.9rem;
+           }
+           .modal-stat-value {
+               font-family: "Orbitron", monospace;
+               font-weight: 700;
+               color: var(--accent-color);
+           }
+           .modal-buttons {
+               display: flex;
+               gap: 0.8rem;
+               justify-content: center;
+               flex-wrap: wrap;
+           }
+           .modal-button {
+               padding: 10px 20px;
+               background: var(--secondary-gradient);
+               border: none;
+               border-radius: 8px;
+               color: white;
+               font-weight: 600;
+               cursor: pointer;
+               transition: all 0.3s ease;
+               font-size: 0.9rem;
+           }
+           .modal-button:hover {
+               transform: translateY(-2px);
+               box-shadow: var(--shadow-card);
+           }
+           .modal-button.primary {
+               background: var(--accent-color);
+               color: #000;
+           }
+           .pulse {
+               animation: pulse 1s ease-in-out infinite;
+           }
+           @keyframes pulse {
+               0%, 100% { transform: scale(1); }
+               50% { transform: scale(1.05); }
+           }
+       `;
+       document.head.appendChild(style);
+
+       // Initialize game when page loads
+       document.addEventListener("DOMContentLoaded", () => {
+           initGame();
+       });
+
+       // Prevent zoom on mobile
+       let lastTouchEnd = 0;
+       document.addEventListener("touchend", function (event) {
+           const now = (new Date()).getTime();
+           if (now - lastTouchEnd <= 300) {
+               event.preventDefault();
+           }
+           lastTouchEnd = now;
+       }, false);
+
+       // Prevent context menu
+       document.addEventListener("contextmenu", e => e.preventDefault());
+
+       // Handle page visibility
+       document.addEventListener("visibilitychange", () => {
+           if (document.hidden && game.gameRunning && !game.gamePaused) {
+               togglePause();
+           }
+       });
+
+       console.log("🎮 Tower Defense loaded successfully!");
+       
+    </script>
+</body>
+</html>
