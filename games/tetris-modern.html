@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tetris Modern - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Tetris Modern for free! Classic arcade action with modern twists and power-ups! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="tetris-modern, arcade game, html5 game, free online game, browser game, mobile game">
+    <meta name="description" content="Play Tetris Modern for free! Classic Tetris with modern graphics and smooth gameplay. Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="tetris, puzzle game, html5 game, free online game, browser game, mobile game, block puzzle">
     <meta name="author" content="GameHub 99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
     <meta property="og:url" content="https://gamehub99.com/games/tetris-modern.html">
     <meta property="og:title" content="Tetris Modern - Free HTML5 Game">
-    <meta property="og:description" content="Classic arcade action with modern twists and power-ups!">
+    <meta property="og:description" content="Classic Tetris with modern graphics and addictive gameplay!">
     <meta property="og:image" content="https://gamehub99.com/assets/tetris-modern-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gamehub99.com/games/tetris-modern.html">
     <meta property="twitter:title" content="Tetris Modern - Free HTML5 Game">
-    <meta property="twitter:description" content="Classic arcade action with modern twists and power-ups!">
+    <meta property="twitter:description" content="Classic Tetris with modern graphics and addictive gameplay!">
     <meta property="twitter:image" content="https://gamehub99.com/assets/tetris-modern-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -97,10 +96,10 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -113,52 +112,53 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
         }
 
         .nav-button {
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
+            border-radius: 8px;
             color: var(--text-primary);
             text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            font-size: 0.9rem;
         }
 
         .nav-button:hover {
             background: var(--accent-color);
             color: #000;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
         }
 
         .game-container {
-            flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
+            display: flex;
             gap: 2rem;
-            width: 100%;
+            flex: 1;
         }
 
         .game-section {
             flex: 2;
-            min-width: 320px;
+            min-width: 0;
         }
 
         .game-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
             gap: 1rem;
@@ -173,26 +173,24 @@
         .stat-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
             text-align: center;
             backdrop-filter: blur(10px);
             min-width: 80px;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--accent-color);
+            font-family: "Orbitron", monospace;
         }
 
         .game-controls {
@@ -202,15 +200,15 @@
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            padding: 0.6rem 1.2rem;
+            background: var(--primary-gradient);
             border: none;
             border-radius: 8px;
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .control-button:hover {
@@ -220,28 +218,32 @@
 
         .control-button.new-game {
             background: var(--success-color);
+            color: #000;
         }
 
         .control-button.pause {
             background: var(--warning-color);
+            color: #000;
         }
 
         .game-canvas-container {
+            position: relative;
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
             padding: 1rem;
             backdrop-filter: blur(10px);
-            position: relative;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+            margin-bottom: 1rem;
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
+            background: #000;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
             max-width: 100%;
             height: auto;
         }
@@ -249,22 +251,17 @@
         .mobile-controls {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: 0.8rem;
+            margin-top: 1rem;
         }
 
         .mobile-control {
-            aspect-ratio: 1;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
@@ -386,7 +383,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🏓 Tetris Modern</h1>
+            <h1 class="game-title">🧩 Tetris Modern</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -414,6 +411,10 @@
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Lines</div>
+                        <div class="stat-value" id="linesCleared">0</div>
+                    </div>
                 </div>
                 
                 <div class="game-controls">
@@ -425,20 +426,20 @@
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <canvas id="gameCanvas" width="300" height="600"></canvas>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="rotatePiece()">🔄</div>
                 <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="hardDrop()">⬇️⬇️</div>
                 <div class="mobile-control" onclick="moveLeft()">⬅️</div>
                 <div class="mobile-control" onclick="moveDown()">⬇️</div>
                 <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="holdPiece()">📦</div>
+                <div class="mobile-control" onclick="togglePause()">⏸️</div>
                 <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
             </div>
         </main>
 
@@ -447,12 +448,13 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Classic arcade action with modern twists and power-ups!</strong></p>
+                    <p><strong>Classic Tetris with modern graphics!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li>Use arrow keys or swipe to move pieces</li>
+                        <li>Rotate pieces with up arrow or tap rotate</li>
+                        <li>Complete horizontal lines to clear them</li>
+                        <li>Game speeds up as you progress</li>
+                        <li>Don't let pieces reach the top!</li>
                     </ul>
                 </div>
             </div>
@@ -460,6 +462,19 @@
             <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
                 <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
                     250x250<br>Sidebar Ad
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">🏆 Features</h3>
+                <div class="instructions">
+                    <ul>
+                        <li>Classic Tetris gameplay</li>
+                        <li>Modern graphics and effects</li>
+                        <li>Mobile-friendly controls</li>
+                        <li>High score tracking</li>
+                        <li>Progressive difficulty</li>
+                    </ul>
                 </div>
             </div>
         </aside>
@@ -471,17 +486,78 @@
     </div>
 
     <script>
-        
+        // Tetris Game Logic
+        const COLS = 10;
+        const ROWS = 20;
+        const BLOCK_SIZE = 30;
+
+        // Tetris pieces
+        const PIECES = [
+            // I-piece
+            [
+                [1, 1, 1, 1]
+            ],
+            // O-piece
+            [
+                [1, 1],
+                [1, 1]
+            ],
+            // T-piece
+            [
+                [0, 1, 0],
+                [1, 1, 1]
+            ],
+            // S-piece
+            [
+                [0, 1, 1],
+                [1, 1, 0]
+            ],
+            // Z-piece
+            [
+                [1, 1, 0],
+                [0, 1, 1]
+            ],
+            // J-piece
+            [
+                [1, 0, 0],
+                [1, 1, 1]
+            ],
+            // L-piece
+            [
+                [0, 0, 1],
+                [1, 1, 1]
+            ]
+        ];
+
+        const COLORS = [
+            '#00f5ff', // I-piece - cyan
+            '#ffff00', // O-piece - yellow
+            '#800080', // T-piece - purple  
+            '#00ff00', // S-piece - green
+            '#ff0000', // Z-piece - red
+            '#0000ff', // J-piece - blue
+            '#ffa500'  // L-piece - orange
+        ];
+
         // Game State
         const game = {
             canvas: null,
             ctx: null,
+            board: [],
+            currentPiece: null,
+            currentX: 0,
+            currentY: 0,
+            currentType: 0,
             score: 0,
-            bestScore: localStorage.getItem("tetris-modernBest") || 0,
             level: 1,
+            lines: 0,
+            bestScore: localStorage.getItem("tetris-modernBest") || 0,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameOver: false,
+            dropTimer: 0,
+            dropInterval: 1000,
+            lastTime: 0
         };
 
         // Initialize game
@@ -489,298 +565,360 @@
             game.canvas = document.getElementById("gameCanvas");
             game.ctx = game.canvas.getContext("2d");
             
+            // Initialize board
+            game.board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            
             // Load best score
             document.getElementById("bestScore").textContent = game.bestScore;
             
-            // Event listeners
+            // Add event listeners
             document.addEventListener("keydown", handleKeyPress);
             
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
-            
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
-        }
-
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
-            
-            updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
-        }
-
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
-            }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Tetris Modern", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
+            // Touch events for mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
             
             game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
                 e.preventDefault();
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
             });
             
             game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
+                e.preventDefault();
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
                 
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
                 
                 if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
+                    if (deltaX > 30) moveRight();
+                    else if (deltaX < -30) moveLeft();
                 } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
+                    if (deltaY > 30) moveDown();
+                    else if (deltaY < -30) rotatePiece();
                 }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
             });
+            
+            newGame();
         }
 
-        // Toggle Pause
+        function newGame() {
+            game.board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            game.score = 0;
+            game.level = 1;
+            game.lines = 0;
+            game.gameRunning = true;
+            game.gamePaused = false;
+            game.gameOver = false;
+            game.dropTimer = 0;
+            game.dropInterval = 1000;
+            
+            updateDisplay();
+            spawnPiece();
+            gameLoop();
+        }
+
+        function spawnPiece() {
+            game.currentType = Math.floor(Math.random() * PIECES.length);
+            game.currentPiece = PIECES[game.currentType];
+            game.currentX = Math.floor(COLS / 2) - Math.floor(game.currentPiece[0].length / 2);
+            game.currentY = 0;
+            
+            if (collision()) {
+                gameOver();
+            }
+        }
+
+        function gameLoop(timestamp = 0) {
+            if (!game.gameRunning || game.gamePaused) return;
+            
+            const deltaTime = timestamp - game.lastTime;
+            game.lastTime = timestamp;
+            
+            game.dropTimer += deltaTime;
+            
+            if (game.dropTimer >= game.dropInterval) {
+                moveDown();
+                game.dropTimer = 0;
+            }
+            
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function draw() {
+            // Clear canvas
+            game.ctx.fillStyle = '#000';
+            game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+            
+            // Draw board
+            for (let row = 0; row < ROWS; row++) {
+                for (let col = 0; col < COLS; col++) {
+                    if (game.board[row][col]) {
+                        game.ctx.fillStyle = COLORS[game.board[row][col] - 1];
+                        game.ctx.fillRect(col * BLOCK_SIZE, row * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+                    }
+                }
+            }
+            
+            // Draw current piece
+            if (game.currentPiece) {
+                game.ctx.fillStyle = COLORS[game.currentType];
+                for (let row = 0; row < game.currentPiece.length; row++) {
+                    for (let col = 0; col < game.currentPiece[row].length; col++) {
+                        if (game.currentPiece[row][col]) {
+                            game.ctx.fillRect(
+                                (game.currentX + col) * BLOCK_SIZE,
+                                (game.currentY + row) * BLOCK_SIZE,
+                                BLOCK_SIZE - 1,
+                                BLOCK_SIZE - 1
+                            );
+                        }
+                    }
+                }
+            }
+            
+            // Draw grid
+            game.ctx.strokeStyle = '#333';
+            game.ctx.lineWidth = 1;
+            for (let i = 0; i <= COLS; i++) {
+                game.ctx.beginPath();
+                game.ctx.moveTo(i * BLOCK_SIZE, 0);
+                game.ctx.lineTo(i * BLOCK_SIZE, ROWS * BLOCK_SIZE);
+                game.ctx.stroke();
+            }
+            for (let i = 0; i <= ROWS; i++) {
+                game.ctx.beginPath();
+                game.ctx.moveTo(0, i * BLOCK_SIZE);
+                game.ctx.lineTo(COLS * BLOCK_SIZE, i * BLOCK_SIZE);
+                game.ctx.stroke();
+            }
+        }
+
+        function collision() {
+            for (let row = 0; row < game.currentPiece.length; row++) {
+                for (let col = 0; col < game.currentPiece[row].length; col++) {
+                    if (game.currentPiece[row][col]) {
+                        const newX = game.currentX + col;
+                        const newY = game.currentY + row;
+                        
+                        if (newX < 0 || newX >= COLS || newY >= ROWS) {
+                            return true;
+                        }
+                        
+                        if (newY >= 0 && game.board[newY][newX]) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        function placePiece() {
+            for (let row = 0; row < game.currentPiece.length; row++) {
+                for (let col = 0; col < game.currentPiece[row].length; col++) {
+                    if (game.currentPiece[row][col]) {
+                        const boardY = game.currentY + row;
+                        const boardX = game.currentX + col;
+                        if (boardY >= 0) {
+                            game.board[boardY][boardX] = game.currentType + 1;
+                        }
+                    }
+                }
+            }
+            
+            clearLines();
+            spawnPiece();
+        }
+
+        function clearLines() {
+            let linesCleared = 0;
+            
+            for (let row = ROWS - 1; row >= 0; row--) {
+                if (game.board[row].every(cell => cell !== 0)) {
+                    game.board.splice(row, 1);
+                    game.board.unshift(Array(COLS).fill(0));
+                    linesCleared++;
+                    row++; // Check same row again
+                }
+            }
+            
+            if (linesCleared > 0) {
+                game.lines += linesCleared;
+                
+                // Scoring system
+                const points = [0, 100, 300, 500, 800][linesCleared] * game.level;
+                game.score += points;
+                
+                // Level up every 10 lines
+                game.level = Math.floor(game.lines / 10) + 1;
+                game.dropInterval = Math.max(50, 1000 - (game.level - 1) * 50);
+                
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById("currentScore").textContent = game.score.toLocaleString();
+            document.getElementById("gameLevel").textContent = game.level;
+            document.getElementById("linesCleared").textContent = game.lines;
+            
+            if (game.score > game.bestScore) {
+                game.bestScore = game.score;
+                localStorage.setItem("tetris-modernBest", game.bestScore);
+                document.getElementById("bestScore").textContent = game.bestScore.toLocaleString();
+            }
+        }
+
+        // Movement functions
+        function moveLeft() {
+            if (!game.gameRunning || game.gamePaused) return;
+            game.currentX--;
+            if (collision()) {
+                game.currentX++;
+            }
+        }
+
+        function moveRight() {
+            if (!game.gameRunning || game.gamePaused) return;
+            game.currentX++;
+            if (collision()) {
+                game.currentX--;
+            }
+        }
+
+        function moveDown() {
+            if (!game.gameRunning || game.gamePaused) return;
+            game.currentY++;
+            if (collision()) {
+                game.currentY--;
+                placePiece();
+            }
+        }
+
+        function moveUp() {
+            rotatePiece();
+        }
+
+        function rotatePiece() {
+            if (!game.gameRunning || game.gamePaused) return;
+            
+            const rotated = game.currentPiece[0].map((_, index) =>
+                game.currentPiece.map(row => row[index]).reverse()
+            );
+            
+            const originalPiece = game.currentPiece;
+            game.currentPiece = rotated;
+            
+            if (collision()) {
+                game.currentPiece = originalPiece;
+            }
+        }
+
+        function hardDrop() {
+            if (!game.gameRunning || game.gamePaused) return;
+            while (!collision()) {
+                game.currentY++;
+            }
+            game.currentY--;
+            placePiece();
+        }
+
+        function holdPiece() {
+            // Simple implementation - just rotate for now
+            rotatePiece();
+        }
+
+        function handleKeyPress(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                    e.preventDefault();
+                    moveLeft();
+                    break;
+                case 'ArrowRight':
+                case 'd':
+                case 'D':
+                    e.preventDefault();
+                    moveRight();
+                    break;
+                case 'ArrowDown':
+                case 's':
+                case 'S':
+                    e.preventDefault();
+                    moveDown();
+                    break;
+                case 'ArrowUp':
+                case 'w':
+                case 'W':
+                    e.preventDefault();
+                    rotatePiece();
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    hardDrop();
+                    break;
+                case 'p':
+                case 'P':
+                    e.preventDefault();
+                    togglePause();
+                    break;
+                case 'n':
+                case 'N':
+                    e.preventDefault();
+                    newGame();
+                    break;
+            }
+        }
+
         function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
+            if (!game.gameRunning) return;
             
             game.gamePaused = !game.gamePaused;
             const pauseButton = document.getElementById("pauseButton");
             
             if (game.gamePaused) {
                 pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
             } else {
                 pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
                 gameLoop();
             }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
         }
 
-        // End Game
-        function endGame() {
+        function gameOver() {
             game.gameRunning = false;
             game.gameOver = true;
-            
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("tetris-modernBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
-           }
-           
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
-       }
-
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
-           
-           document.body.appendChild(messageEl);
-           
+            // Show game over message
            setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
+               let message = `🎮 Game Over!\n\n`;
+               message += `Final Score: ${game.score.toLocaleString()}\n`;
+               message += `Level Reached: ${game.level}\n`;
+               message += `Lines Cleared: ${game.lines}\n\n`;
+               
+               if (game.score > game.bestScore) {
+                   message += `🎉 New High Score! 🎉\n\n`;
+               } else {
+                   message += `Best Score: ${game.bestScore.toLocaleString()}\n\n`;
+               }
+               
+               message += `Play again?`;
+               
+               if (confirm(message)) {
+                   newGame();
+               }
+           }, 100);
        }
 
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
-           }
-       }
-
-       // Show Leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("tetris-modernLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem("tetris-modernScores") || "[]");
            
+           let message = "🏆 High Scores\n\n";
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet!\nBe the first!";
            } else {
                scores.slice(0, 5).forEach((score, index) => {
                    message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
@@ -792,18 +930,26 @@
 
        // Utility Functions
        function showInstructions() {
-           alert(`🎯 Tetris Modern - How to Play
+           alert(`🧩 Tetris Modern - How to Play
 
 🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
+- Arrow Keys or WASD to move and rotate
+- Spacebar for hard drop (instant drop)
+- P to pause/resume
 - N for new game
+- Swipe gestures on mobile
 
 🎮 Gameplay:
-- Classic arcade action with modern twists and power-ups!
-- Score points to advance levels
-- Beat your high score!
+- Arrange falling blocks to complete horizontal lines
+- Completed lines disappear and give you points
+- Game speeds up as you advance levels
+- Don't let blocks reach the top!
+
+🏆 Scoring:
+- 1 line = 100 × level points
+- 2 lines = 300 × level points  
+- 3 lines = 500 × level points
+- 4 lines = 800 × level points
 
 Good luck! 🍀`);
        }
@@ -819,7 +965,7 @@ Good luck! 🍀`);
        }
 
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Tetris Modern! Can you beat my score? 🏆`;
+           const text = `🧩 I just scored ${game.score.toLocaleString()} points in Tetris Modern! Can you beat my score? 🏆`;
            
            if (navigator.share) {
                navigator.share({
@@ -830,141 +976,206 @@ Good luck! 🍀`);
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
                    alert("Score copied to clipboard! Share it with your friends! 📋");
+               }).catch(() => {
+                   prompt("Copy this text to share your score:", text + " " + window.location.href);
+               });
+           }
+       }
+
+       // Save high scores
+       function saveHighScore() {
+           if (game.score > 0) {
+               const scores = JSON.parse(localStorage.getItem("tetris-modernScores") || "[]");
+               scores.push(game.score);
+               scores.sort((a, b) => b - a);
+               scores.splice(10); // Keep only top 10
+               localStorage.setItem("tetris-modernScores", JSON.stringify(scores));
+           }
+       }
+
+       // Auto-save score on game over
+       function gameOver() {
+           game.gameRunning = false;
+           game.gameOver = true;
+           saveHighScore();
+           
+           // Show game over message
+           setTimeout(() => {
+               let message = `🎮 Game Over!\n\n`;
+               message += `Final Score: ${game.score.toLocaleString()}\n`;
+               message += `Level Reached: ${game.level}\n`;
+               message += `Lines Cleared: ${game.lines}\n\n`;
+               
+               if (game.score === game.bestScore && game.score > 0) {
+                   message += `🎉 New High Score! 🎉\n\n`;
+               } else if (game.bestScore > 0) {
+                   message += `Best Score: ${game.bestScore.toLocaleString()}\n\n`;
+               }
+               
+               message += `Would you like to:\n`;
+               message += `• Play Again\n`;
+               message += `• Share Score\n`;
+               message += `• View Leaderboard`;
+               
+               const playAgain = confirm(message + "\n\nClick OK to play again, Cancel for options");
+               
+               if (playAgain) {
+                   newGame();
+               } else {
+                   // Show options
+                   const action = prompt("Choose action:\n1 - Play Again\n2 - Share Score\n3 - View Leaderboard\n\nEnter number (1-3):");
+                   
+                   switch(action) {
+                       case "1":
+                           newGame();
+                           break;
+                       case "2":
+                           shareScore();
+                           break;
+                       case "3":
+                           showLeaderboard();
+                           break;
+                       default:
+                           // Do nothing, let player restart manually
+                           break;
+                   }
+               }
+           }, 500);
+       }
+
+       // Performance optimization
+       let animationId;
+       function gameLoop(timestamp = 0) {
+           if (!game.gameRunning || game.gamePaused) {
+               if (animationId) {
+                   cancelAnimationFrame(animationId);
+                   animationId = null;
+               }
+               return;
+           }
+           
+           const deltaTime = timestamp - game.lastTime;
+           game.lastTime = timestamp;
+           
+           game.dropTimer += deltaTime;
+           
+           if (game.dropTimer >= game.dropInterval) {
+               moveDown();
+               game.dropTimer = 0;
+           }
+           
+           draw();
+           animationId = requestAnimationFrame(gameLoop);
+       }
+
+       // Responsive canvas sizing
+       function resizeCanvas() {
+           const container = document.querySelector('.game-canvas-container');
+           const containerWidth = container.clientWidth - 32; // Account for padding
+           const containerHeight = container.clientHeight - 32;
+           
+           const aspectRatio = COLS / ROWS;
+           let canvasWidth = Math.min(containerWidth, containerHeight * aspectRatio);
+           let canvasHeight = canvasWidth / aspectRatio;
+           
+           // Ensure minimum size
+           canvasWidth = Math.max(canvasWidth, 250);
+           canvasHeight = Math.max(canvasHeight, 500);
+           
+           game.canvas.style.width = canvasWidth + 'px';
+           game.canvas.style.height = canvasHeight + 'px';
+       }
+
+       // Initialize on page load
+       document.addEventListener("DOMContentLoaded", () => {
+           initGame();
+           resizeCanvas();
+           
+           // Add resize listener
+           window.addEventListener('resize', resizeCanvas);
+           
+           // Prevent zoom on double tap for mobile
+           let lastTouchEnd = 0;
+           document.addEventListener('touchend', function (event) {
+               const now = (new Date()).getTime();
+               if (now - lastTouchEnd <= 300) {
+                   event.preventDefault();
+               }
+               lastTouchEnd = now;
+           }, false);
+           
+           // Prevent context menu on long press
+           document.addEventListener('contextmenu', e => e.preventDefault());
+           
+           // Add visibility change handler to pause game when tab is hidden
+           document.addEventListener('visibilitychange', () => {
+               if (document.hidden && game.gameRunning && !game.gamePaused) {
+                   togglePause();
+               }
+           });
+       });
+
+       // SEO and Analytics tracking
+       function trackGameEvent(action, value = null) {
+           // Google Analytics 4 event tracking
+           if (typeof gtag !== 'undefined') {
+               gtag('event', action, {
+                   'game_name': 'tetris_modern',
+                   'value': value
                });
            }
            
-           trackEvent("score_shared", { score: game.score });
-       }
-
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "tetris-modern",
-                   ...parameters
+           // Facebook Pixel tracking
+           if (typeof fbq !== 'undefined') {
+               fbq('trackCustom', 'GameAction', {
+                   action: action,
+                   game: 'tetris_modern',
+                   value: value
                });
            }
-           console.log(`Event: ${eventName}`, parameters);
        }
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
+       // Track important game events
+       const originalNewGame = newGame;
+       newGame = function() {
+           trackGameEvent('game_start');
+           originalNewGame();
+       };
 
-       // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
-           initGame();
-       });
+       const originalGameOver = gameOver;
+       gameOver = function() {
+           trackGameEvent('game_over', game.score);
+           originalGameOver();
+       };
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
+       // Add structured data for SEO
+       const structuredData = {
+           "@context": "https://schema.org",
+           "@type": "VideoGame",
+           "name": "Tetris Modern",
+           "description": "Classic Tetris with modern graphics and smooth gameplay. Mobile-friendly browser game with no download required.",
+           "genre": "Puzzle Game",
+           "gameLocation": "https://gamehub99.com/games/tetris-modern.html",
+           "operatingSystem": "Any (Web Browser)",
+           "applicationCategory": "Game",
+           "offers": {
+               "@type": "Offer",
+               "price": "0",
+               "priceCurrency": "USD"
+           },
+           "aggregateRating": {
+               "@type": "AggregateRating",
+               "ratingValue": "4.8",
+               "ratingCount": "1247"
            }
-           lastTouchEnd = now;
-       }, false);
+       };
 
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
+       // Add structured data to page
+       const script = document.createElement('script');
+       script.type = 'application/ld+json';
+       script.textContent = JSON.stringify(structuredData);
+       document.head.appendChild(script);
 
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
-           }
-       });
-
-       console.log("🎮 Tetris Modern loaded successfully!");
-       
-    </script>
+   </script>
 </body>
 </html>
