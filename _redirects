@@ -1,0 +1,10 @@
+# Friendly URLs for games
+/2048               /games/2048-deluxe.html           301
+/snake              /games/snake-evolution.html       301
+/bubble-pop         /games/bubble-pop-master.html     301
+
+# API endpoints (if you add them later)
+/api/*              /.netlify/functions/:splat        200
+
+# Fallback
+/*                  /index.html                       404

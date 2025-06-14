@@ -1,0 +1,52 @@
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "/games/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[redirects]]
+  from = "/game/*"
+  to = "/games/:splat.html"
+  status = 301
+
+[[redirects]]
+  from = "/2048"
+  to = "/games/2048-deluxe.html"
+  status = 301
+
+[[redirects]]
+  from = "/snake"
+  to = "/games/snake-evolution.html"
+  status = 301
+
+# 404 redirect
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
