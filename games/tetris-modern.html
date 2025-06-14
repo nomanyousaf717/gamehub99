@@ -320,6 +320,136 @@
             animation: fadeIn 0.6s ease forwards;
         }
 
+        /* Custom Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--dark-gradient);
+            border: 2px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: var(--shadow-glow);
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        .modal-title {
+            font-family: "Orbitron", monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-stats {
+            margin-bottom: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .modal-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .modal-stat:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .modal-stat-value {
+            font-family: "Orbitron", monospace;
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            min-width: 120px;
+        }
+
+        .modal-button.primary {
+            background: var(--success-color);
+            color: #000;
+        }
+
+        .modal-button.secondary {
+            background: var(--secondary-gradient);
+        }
+
+        .modal-button.tertiary {
+            background: var(--warning-color);
+            color: #000;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: scale(0.7) translateY(-50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .modal-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .modal-highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
         @keyframes fadeIn {
             to { opacity: 1; }
         }
@@ -369,6 +499,19 @@
                 width: 320px;
                 height: 50px;
                 font-size: 12px;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
             }
         }
         
@@ -483,6 +626,77 @@
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
         <div class="ad-placeholder">728x90 Footer Advertisement</div>
+    </div>
+
+    <!-- Custom Modals -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">🎮 Game Over!</div>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <span class="modal-stat-label">Final Score:</span>
+                    <span class="modal-stat-value" id="modalFinalScore">0</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-label">Level Reached:</span>
+                    <span class="modal-stat-value" id="modalLevel">1</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-label">Lines Cleared:</span>
+                    <span class="modal-stat-value" id="modalLines">0</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-label">Best Score:</span>
+                    <span class="modal-stat-value" id="modalBestScore">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="closeModal('gameOverModal'); newGame();">🆕 Play Again</button>
+                <button class="modal-button secondary" onclick="shareScore()">📤 Share Score</button>
+                <button class="modal-button tertiary" onclick="closeModal('gameOverModal'); showLeaderboard()">🏆 Leaderboard</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="instructionsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">🧩 How to Play</div>
+            <div class="modal-text">
+                <p><strong>🕹️ Controls:</strong></p>
+                <p>• Arrow Keys or WASD to move and rotate<br>
+                • Spacebar for hard drop (instant drop)<br>
+                • P to pause/resume, N for new game<br>
+                • Swipe gestures on mobile devices</p>
+                
+                <p><strong>🎮 Gameplay:</strong></p>
+                <p>• Arrange falling blocks to complete horizontal lines<br>
+                • Completed lines disappear and give you points<br>
+                • Game speeds up as you advance levels<br>
+                • Don't let blocks reach the top!</p>
+                
+                <p><strong>🏆 Scoring:</strong></p>
+                <p>• 1 line = <span class="modal-highlight">100 × level</span> points<br>
+                • 2 lines = <span class="modal-highlight">300 × level</span> points<br>
+                • 3 lines = <span class="modal-highlight">500 × level</span> points<br>
+                • 4 lines = <span class="modal-highlight">800 × level</span> points</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="closeModal('instructionsModal')">✅ Got It!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="leaderboardModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">🏆 High Scores</div>
+            <div class="modal-stats" id="leaderboardContent">
+                <!-- Leaderboard content will be populated by JavaScript -->
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="closeModal('leaderboardModal')">🔙 Back</button>
+                <button class="modal-button secondary" onclick="closeModal('leaderboardModal'); newGame();">🆕 New Game</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -667,305 +881,293 @@
             if (game.currentPiece) {
                 game.ctx.fillStyle = COLORS[game.currentType];
                 for (let row = 0; row < game.currentPiece.length; row++) {
-                    for (let col = 0; col < game.currentPiece[row].length; col++) {
-                        if (game.currentPiece[row][col]) {
-                            game.ctx.fillRect(
-                                (game.currentX + col) * BLOCK_SIZE,
-                                (game.currentY + row) * BLOCK_SIZE,
-                                BLOCK_SIZE - 1,
-                                BLOCK_SIZE - 1
-                            );
-                        }
-                    }
-                }
-            }
-            
-            // Draw grid
-            game.ctx.strokeStyle = '#333';
-            game.ctx.lineWidth = 1;
-            for (let i = 0; i <= COLS; i++) {
-                game.ctx.beginPath();
-                game.ctx.moveTo(i * BLOCK_SIZE, 0);
-                game.ctx.lineTo(i * BLOCK_SIZE, ROWS * BLOCK_SIZE);
-                game.ctx.stroke();
-            }
-            for (let i = 0; i <= ROWS; i++) {
-                game.ctx.beginPath();
-                game.ctx.moveTo(0, i * BLOCK_SIZE);
-                game.ctx.lineTo(COLS * BLOCK_SIZE, i * BLOCK_SIZE);
-                game.ctx.stroke();
-            }
-        }
-
-        function collision() {
-            for (let row = 0; row < game.currentPiece.length; row++) {
-                for (let col = 0; col < game.currentPiece[row].length; col++) {
-                    if (game.currentPiece[row][col]) {
-                        const newX = game.currentX + col;
-                        const newY = game.currentY + row;
-                        
-                        if (newX < 0 || newX >= COLS || newY >= ROWS) {
-                            return true;
-                        }
-                        
-                        if (newY >= 0 && game.board[newY][newX]) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        function placePiece() {
-            for (let row = 0; row < game.currentPiece.length; row++) {
-                for (let col = 0; col < game.currentPiece[row].length; col++) {
-                    if (game.currentPiece[row][col]) {
-                        const boardY = game.currentY + row;
-                        const boardX = game.currentX + col;
-                        if (boardY >= 0) {
-                            game.board[boardY][boardX] = game.currentType + 1;
-                        }
-                    }
-                }
-            }
-            
-            clearLines();
-            spawnPiece();
-        }
-
-        function clearLines() {
-            let linesCleared = 0;
-            
-            for (let row = ROWS - 1; row >= 0; row--) {
-                if (game.board[row].every(cell => cell !== 0)) {
-                    game.board.splice(row, 1);
-                    game.board.unshift(Array(COLS).fill(0));
-                    linesCleared++;
-                    row++; // Check same row again
-                }
-            }
-            
-            if (linesCleared > 0) {
-                game.lines += linesCleared;
-                
-                // Scoring system
-                const points = [0, 100, 300, 500, 800][linesCleared] * game.level;
-                game.score += points;
-                
-                // Level up every 10 lines
-                game.level = Math.floor(game.lines / 10) + 1;
-                game.dropInterval = Math.max(50, 1000 - (game.level - 1) * 50);
-                
-                updateDisplay();
-            }
-        }
-
-        function updateDisplay() {
-            document.getElementById("currentScore").textContent = game.score.toLocaleString();
-            document.getElementById("gameLevel").textContent = game.level;
-            document.getElementById("linesCleared").textContent = game.lines;
-            
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("tetris-modernBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore.toLocaleString();
-            }
-        }
-
-        // Movement functions
-        function moveLeft() {
-            if (!game.gameRunning || game.gamePaused) return;
-            game.currentX--;
-            if (collision()) {
-                game.currentX++;
-            }
-        }
-
-        function moveRight() {
-            if (!game.gameRunning || game.gamePaused) return;
-            game.currentX++;
-            if (collision()) {
-                game.currentX--;
-            }
-        }
-
-        function moveDown() {
-            if (!game.gameRunning || game.gamePaused) return;
-            game.currentY++;
-            if (collision()) {
-                game.currentY--;
-                placePiece();
-            }
-        }
-
-        function moveUp() {
-            rotatePiece();
-        }
-
-        function rotatePiece() {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            const rotated = game.currentPiece[0].map((_, index) =>
-                game.currentPiece.map(row => row[index]).reverse()
-            );
-            
-            const originalPiece = game.currentPiece;
-            game.currentPiece = rotated;
-            
-            if (collision()) {
-                game.currentPiece = originalPiece;
-            }
-        }
-
-        function hardDrop() {
-            if (!game.gameRunning || game.gamePaused) return;
-            while (!collision()) {
-                game.currentY++;
-            }
-            game.currentY--;
-            placePiece();
-        }
-
-        function holdPiece() {
-            // Simple implementation - just rotate for now
-            rotatePiece();
-        }
-
-        function handleKeyPress(e) {
-            switch(e.key) {
-                case 'ArrowLeft':
-                case 'a':
-                case 'A':
-                    e.preventDefault();
-                    moveLeft();
-                    break;
-                case 'ArrowRight':
-                case 'd':
-                case 'D':
-                    e.preventDefault();
-                    moveRight();
-                    break;
-                case 'ArrowDown':
-                case 's':
-                case 'S':
-                    e.preventDefault();
-                    moveDown();
-                    break;
-                case 'ArrowUp':
-                case 'w':
-                case 'W':
-                    e.preventDefault();
-                    rotatePiece();
-                    break;
-                case ' ':
-                    e.preventDefault();
-                    hardDrop();
-                    break;
-                case 'p':
-                case 'P':
-                    e.preventDefault();
-                    togglePause();
-                    break;
-                case 'n':
-                case 'N':
-                    e.preventDefault();
-                    newGame();
-                    break;
-            }
-        }
-
-        function togglePause() {
-            if (!game.gameRunning) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                gameLoop();
-            }
-        }
-
-        function gameOver() {
-            game.gameRunning = false;
-            game.gameOver = true;
-            // Show game over message
-           setTimeout(() => {
-               let message = `🎮 Game Over!\n\n`;
-               message += `Final Score: ${game.score.toLocaleString()}\n`;
-               message += `Level Reached: ${game.level}\n`;
-               message += `Lines Cleared: ${game.lines}\n\n`;
-               
-               if (game.score > game.bestScore) {
-                   message += `🎉 New High Score! 🎉\n\n`;
-               } else {
-                   message += `Best Score: ${game.bestScore.toLocaleString()}\n\n`;
+                   for (let col = 0; col < game.currentPiece[row].length; col++) {
+                       if (game.currentPiece[row][col]) {
+                           game.ctx.fillRect(
+                               (game.currentX + col) * BLOCK_SIZE,
+                               (game.currentY + row) * BLOCK_SIZE,
+                               BLOCK_SIZE - 1,
+                               BLOCK_SIZE - 1
+                           );
+                       }
+                   }
                }
+           }
+           
+           // Draw grid
+           game.ctx.strokeStyle = '#333';
+           game.ctx.lineWidth = 1;
+           for (let i = 0; i <= COLS; i++) {
+               game.ctx.beginPath();
+               game.ctx.moveTo(i * BLOCK_SIZE, 0);
+               game.ctx.lineTo(i * BLOCK_SIZE, ROWS * BLOCK_SIZE);
+               game.ctx.stroke();
+           }
+           for (let i = 0; i <= ROWS; i++) {
+               game.ctx.beginPath();
+               game.ctx.moveTo(0, i * BLOCK_SIZE);
+               game.ctx.lineTo(COLS * BLOCK_SIZE, i * BLOCK_SIZE);
+               game.ctx.stroke();
+           }
+       }
+
+       function collision() {
+           for (let row = 0; row < game.currentPiece.length; row++) {
+               for (let col = 0; col < game.currentPiece[row].length; col++) {
+                   if (game.currentPiece[row][col]) {
+                       const newX = game.currentX + col;
+                       const newY = game.currentY + row;
+                       
+                       if (newX < 0 || newX >= COLS || newY >= ROWS) {
+                           return true;
+                       }
+                       
+                       if (newY >= 0 && game.board[newY][newX]) {
+                           return true;
+                       }
+                   }
+               }
+           }
+           return false;
+       }
+
+       function placePiece() {
+           for (let row = 0; row < game.currentPiece.length; row++) {
+               for (let col = 0; col < game.currentPiece[row].length; col++) {
+                   if (game.currentPiece[row][col]) {
+                       const boardY = game.currentY + row;
+                       const boardX = game.currentX + col;
+                       if (boardY >= 0) {
+                           game.board[boardY][boardX] = game.currentType + 1;
+                       }
+                   }
+               }
+           }
+           
+           clearLines();
+           spawnPiece();
+       }
+
+       function clearLines() {
+           let linesCleared = 0;
+           
+           for (let row = ROWS - 1; row >= 0; row--) {
+               if (game.board[row].every(cell => cell !== 0)) {
+                   game.board.splice(row, 1);
+                   game.board.unshift(Array(COLS).fill(0));
+                   linesCleared++;
+                   row++; // Check same row again
+               }
+           }
+           
+           if (linesCleared > 0) {
+               game.lines += linesCleared;
                
-               message += `Play again?`;
+               // Scoring system
+               const points = [0, 100, 300, 500, 800][linesCleared] * game.level;
+               game.score += points;
                
-               if (confirm(message)) {
+               // Level up every 10 lines
+               game.level = Math.floor(game.lines / 10) + 1;
+               game.dropInterval = Math.max(50, 1000 - (game.level - 1) * 50);
+               
+               updateDisplay();
+           }
+       }
+
+       function updateDisplay() {
+           document.getElementById("currentScore").textContent = game.score.toLocaleString();
+           document.getElementById("gameLevel").textContent = game.level;
+           document.getElementById("linesCleared").textContent = game.lines;
+           
+           if (game.score > game.bestScore) {
+               game.bestScore = game.score;
+               localStorage.setItem("tetris-modernBest", game.bestScore);
+               document.getElementById("bestScore").textContent = game.bestScore.toLocaleString();
+           }
+       }
+
+       // Movement functions
+       function moveLeft() {
+           if (!game.gameRunning || game.gamePaused) return;
+           game.currentX--;
+           if (collision()) {
+               game.currentX++;
+           }
+       }
+
+       function moveRight() {
+           if (!game.gameRunning || game.gamePaused) return;
+           game.currentX++;
+           if (collision()) {
+               game.currentX--;
+           }
+       }
+
+       function moveDown() {
+           if (!game.gameRunning || game.gamePaused) return;
+           game.currentY++;
+           if (collision()) {
+               game.currentY--;
+               placePiece();
+           }
+       }
+
+       function moveUp() {
+           rotatePiece();
+       }
+
+       function rotatePiece() {
+           if (!game.gameRunning || game.gamePaused) return;
+           
+           const rotated = game.currentPiece[0].map((_, index) =>
+               game.currentPiece.map(row => row[index]).reverse()
+           );
+           
+           const originalPiece = game.currentPiece;
+           game.currentPiece = rotated;
+           
+           if (collision()) {
+               game.currentPiece = originalPiece;
+           }
+       }
+
+       function hardDrop() {
+           if (!game.gameRunning || game.gamePaused) return;
+           while (!collision()) {
+               game.currentY++;
+           }
+           game.currentY--;
+           placePiece();
+       }
+
+       function holdPiece() {
+           // Simple implementation - just rotate for now
+           rotatePiece();
+       }
+
+       function handleKeyPress(e) {
+           switch(e.key) {
+               case 'ArrowLeft':
+               case 'a':
+               case 'A':
+                   e.preventDefault();
+                   moveLeft();
+                   break;
+               case 'ArrowRight':
+               case 'd':
+               case 'D':
+                   e.preventDefault();
+                   moveRight();
+                   break;
+               case 'ArrowDown':
+               case 's':
+               case 'S':
+                   e.preventDefault();
+                   moveDown();
+                   break;
+               case 'ArrowUp':
+               case 'w':
+               case 'W':
+                   e.preventDefault();
+                   rotatePiece();
+                   break;
+               case ' ':
+                   e.preventDefault();
+                   hardDrop();
+                   break;
+               case 'p':
+               case 'P':
+                   e.preventDefault();
+                   togglePause();
+                   break;
+               case 'n':
+               case 'N':
+                   e.preventDefault();
                    newGame();
-               }
-           }, 100);
+                   break;
+           }
+       }
+
+       function togglePause() {
+           if (!game.gameRunning) return;
+           
+           game.gamePaused = !game.gamePaused;
+           const pauseButton = document.getElementById("pauseButton");
+           
+           if (game.gamePaused) {
+               pauseButton.textContent = "▶️ Resume";
+           } else {
+               pauseButton.textContent = "⏸️ Pause";
+               gameLoop();
+           }
+       }
+
+       // Custom Modal Functions
+       function showModal(modalId) {
+           const modal = document.getElementById(modalId);
+           modal.style.display = 'flex';
+           document.body.style.overflow = 'hidden'; // Prevent background scrolling
+       }
+
+       function closeModal(modalId) {
+           const modal = document.getElementById(modalId);
+           modal.style.display = 'none';
+           document.body.style.overflow = 'auto'; // Restore scrolling
+       }
+
+       function gameOver() {
+           game.gameRunning = false;
+           game.gameOver = true;
+           saveHighScore();
+           
+           // Update modal content
+           document.getElementById('modalFinalScore').textContent = game.score.toLocaleString();
+           document.getElementById('modalLevel').textContent = game.level;
+           document.getElementById('modalLines').textContent = game.lines;
+           document.getElementById('modalBestScore').textContent = game.bestScore.toLocaleString();
+           
+           // Show custom modal
+           setTimeout(() => {
+               showModal('gameOverModal');
+           }, 500);
+       }
+
+       function showInstructions() {
+           showModal('instructionsModal');
        }
 
        function showLeaderboard() {
            const scores = JSON.parse(localStorage.getItem("tetris-modernScores") || "[]");
+           const leaderboardContent = document.getElementById('leaderboardContent');
            
-           let message = "🏆 High Scores\n\n";
            if (scores.length === 0) {
-               message += "No scores yet!\nBe the first!";
+               leaderboardContent.innerHTML = `
+                   <div class="modal-text">
+                       <p style="text-align: center; font-size: 1.1rem;">🎯 No scores yet!</p>
+                       <p style="text-align: center;">Be the first to set a high score!</p>
+                   </div>
+               `;
            } else {
+               let html = '';
                scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
+                   const medal = ['🥇', '🥈', '🥉', '🏅', '🏅'][index];
+                   html += `
+                       <div class="modal-stat">
+                           <span class="modal-stat-label">${medal} #${index + 1}</span>
+                           <span class="modal-stat-value">${score.toLocaleString()}</span>
+                       </div>
+                   `;
                });
+               leaderboardContent.innerHTML = html;
            }
            
-           alert(message);
-       }
-
-       // Utility Functions
-       function showInstructions() {
-           alert(`🧩 Tetris Modern - How to Play
-
-🕹️ Controls:
-- Arrow Keys or WASD to move and rotate
-- Spacebar for hard drop (instant drop)
-- P to pause/resume
-- N for new game
-- Swipe gestures on mobile
-
-🎮 Gameplay:
-- Arrange falling blocks to complete horizontal lines
-- Completed lines disappear and give you points
-- Game speeds up as you advance levels
-- Don't let blocks reach the top!
-
-🏆 Scoring:
-- 1 line = 100 × level points
-- 2 lines = 300 × level points  
-- 3 lines = 500 × level points
-- 4 lines = 800 × level points
-
-Good luck! 🍀`);
-       }
-
-       function toggleFullscreen() {
-           if (!document.fullscreenElement) {
-               document.documentElement.requestFullscreen().catch(err => {
-                   console.log("Fullscreen not supported");
-               });
-           } else {
-               document.exitFullscreen();
-           }
+           showModal('leaderboardModal');
        }
 
        function shareScore() {
            const text = `🧩 I just scored ${game.score.toLocaleString()} points in Tetris Modern! Can you beat my score? 🏆`;
+           const button = event.target;
            
            if (navigator.share) {
                navigator.share({
@@ -975,9 +1177,30 @@ Good luck! 🍀`);
                });
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+                   // Show success message
+                   const originalText = button.textContent;
+                   button.textContent = "✅ Copied!";
+                   button.style.background = "var(--success-color)";
+                   button.style.color = "#000";
+                   setTimeout(() => {
+                       button.textContent = originalText;
+                       button.style.background = "var(--secondary-gradient)";
+                       button.style.color = "white";
+                   }, 2000);
                }).catch(() => {
-                   prompt("Copy this text to share your score:", text + " " + window.location.href);
+                   // Fallback
+                   const textArea = document.createElement('textarea');
+                   textArea.value = text + " " + window.location.href;
+                   document.body.appendChild(textArea);
+                   textArea.select();
+                   document.execCommand('copy');
+                   document.body.removeChild(textArea);
+                   
+                   const originalText = button.textContent;
+                   button.textContent = "✅ Copied!";
+                   setTimeout(() => {
+                       button.textContent = originalText;
+                   }, 2000);
                });
            }
        }
@@ -993,79 +1216,14 @@ Good luck! 🍀`);
            }
        }
 
-       // Auto-save score on game over
-       function gameOver() {
-           game.gameRunning = false;
-           game.gameOver = true;
-           saveHighScore();
-           
-           // Show game over message
-           setTimeout(() => {
-               let message = `🎮 Game Over!\n\n`;
-               message += `Final Score: ${game.score.toLocaleString()}\n`;
-               message += `Level Reached: ${game.level}\n`;
-               message += `Lines Cleared: ${game.lines}\n\n`;
-               
-               if (game.score === game.bestScore && game.score > 0) {
-                   message += `🎉 New High Score! 🎉\n\n`;
-               } else if (game.bestScore > 0) {
-                   message += `Best Score: ${game.bestScore.toLocaleString()}\n\n`;
-               }
-               
-               message += `Would you like to:\n`;
-               message += `• Play Again\n`;
-               message += `• Share Score\n`;
-               message += `• View Leaderboard`;
-               
-               const playAgain = confirm(message + "\n\nClick OK to play again, Cancel for options");
-               
-               if (playAgain) {
-                   newGame();
-               } else {
-                   // Show options
-                   const action = prompt("Choose action:\n1 - Play Again\n2 - Share Score\n3 - View Leaderboard\n\nEnter number (1-3):");
-                   
-                   switch(action) {
-                       case "1":
-                           newGame();
-                           break;
-                       case "2":
-                           shareScore();
-                           break;
-                       case "3":
-                           showLeaderboard();
-                           break;
-                       default:
-                           // Do nothing, let player restart manually
-                           break;
-                   }
-               }
-           }, 500);
-       }
-
-       // Performance optimization
-       let animationId;
-       function gameLoop(timestamp = 0) {
-           if (!game.gameRunning || game.gamePaused) {
-               if (animationId) {
-                   cancelAnimationFrame(animationId);
-                   animationId = null;
-               }
-               return;
+       function toggleFullscreen() {
+           if (!document.fullscreenElement) {
+               document.documentElement.requestFullscreen().catch(err => {
+                   console.log("Fullscreen not supported");
+               });
+           } else {
+               document.exitFullscreen();
            }
-           
-           const deltaTime = timestamp - game.lastTime;
-           game.lastTime = timestamp;
-           
-           game.dropTimer += deltaTime;
-           
-           if (game.dropTimer >= game.dropInterval) {
-               moveDown();
-               game.dropTimer = 0;
-           }
-           
-           draw();
-           animationId = requestAnimationFrame(gameLoop);
        }
 
        // Responsive canvas sizing
@@ -1085,6 +1243,25 @@ Good luck! 🍀`);
            game.canvas.style.width = canvasWidth + 'px';
            game.canvas.style.height = canvasHeight + 'px';
        }
+
+       // Add click outside to close modal
+       document.addEventListener('click', (e) => {
+           if (e.target.classList.contains('modal')) {
+               closeModal(e.target.id);
+           }
+       });
+
+       // Add escape key to close modal
+       document.addEventListener('keydown', (e) => {
+           if (e.key === 'Escape') {
+               const modals = document.querySelectorAll('.modal');
+               modals.forEach(modal => {
+                   if (modal.style.display === 'flex') {
+                       closeModal(modal.id);
+                   }
+               });
+           }
+       });
 
        // Initialize on page load
        document.addEventListener("DOMContentLoaded", () => {
@@ -1114,39 +1291,6 @@ Good luck! 🍀`);
                }
            });
        });
-
-       // SEO and Analytics tracking
-       function trackGameEvent(action, value = null) {
-           // Google Analytics 4 event tracking
-           if (typeof gtag !== 'undefined') {
-               gtag('event', action, {
-                   'game_name': 'tetris_modern',
-                   'value': value
-               });
-           }
-           
-           // Facebook Pixel tracking
-           if (typeof fbq !== 'undefined') {
-               fbq('trackCustom', 'GameAction', {
-                   action: action,
-                   game: 'tetris_modern',
-                   value: value
-               });
-           }
-       }
-
-       // Track important game events
-       const originalNewGame = newGame;
-       newGame = function() {
-           trackGameEvent('game_start');
-           originalNewGame();
-       };
-
-       const originalGameOver = gameOver;
-       gameOver = function() {
-           trackGameEvent('game_over', game.score);
-           originalGameOver();
-       };
 
        // Add structured data for SEO
        const structuredData = {
