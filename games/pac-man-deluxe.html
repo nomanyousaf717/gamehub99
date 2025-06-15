@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pac Man Deluxe - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Pac Man Deluxe for free! Classic arcade action with modern twists and power-ups! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="pac-man-deluxe, arcade game, html5 game, free online game, browser game, mobile game">
+    <title>Pac-Man Deluxe - Free HTML5 Game | GameHub 99</title>
+    <meta name="description" content="Play Pac-Man Deluxe for free! Classic arcade action with modern twists, power-ups, and ghosts. Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="pac-man, pacman deluxe, arcade game, html5 game, free online game, browser game, mobile game, ghosts, maze">
     <meta name="author" content="GameHub 99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
     <meta property="og:url" content="https://gamehub99.com/games/pac-man-deluxe.html">
-    <meta property="og:title" content="Pac Man Deluxe - Free HTML5 Game">
+    <meta property="og:title" content="Pac-Man Deluxe - Free HTML5 Game">
     <meta property="og:description" content="Classic arcade action with modern twists and power-ups!">
     <meta property="og:image" content="https://gamehub99.com/assets/pac-man-deluxe-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gamehub99.com/games/pac-man-deluxe.html">
-    <meta property="twitter:title" content="Pac Man Deluxe - Free HTML5 Game">
+    <meta property="twitter:title" content="Pac-Man Deluxe - Free HTML5 Game">
     <meta property="twitter:description" content="Classic arcade action with modern twists and power-ups!">
     <meta property="twitter:image" content="https://gamehub99.com/assets/pac-man-deluxe-og.jpg">
 
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -36,8 +35,8 @@
         }
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --primary-gradient: linear-gradient(135deg, #ffff00 0%, #ffaa00 100%);
+            --secondary-gradient: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
             --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
             --accent-color: #00d4ff;
             --success-color: #00ff88;
@@ -46,7 +45,7 @@
             --text-secondary: #b8c1ec;
             --card-bg: rgba(255, 255, 255, 0.05);
             --card-border: rgba(255, 255, 255, 0.1);
-            --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.3);
+            --shadow-glow: 0 0 40px rgba(255, 255, 0, 0.3);
             --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
@@ -113,12 +112,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            order: 1;
         }
 
         .nav-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            order: 2;
         }
 
         .nav-button {
@@ -153,6 +154,7 @@
         .game-section {
             flex: 2;
             min-width: 320px;
+            order: 1;
         }
 
         .game-header {
@@ -168,6 +170,7 @@
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
+            order: 1;
         }
 
         .stat-box {
@@ -199,6 +202,7 @@
             display: flex;
             gap: 0.8rem;
             flex-wrap: wrap;
+            order: 2;
         }
 
         .control-button {
@@ -211,6 +215,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.8rem;
+            white-space: nowrap;
+            min-width: 100px;
         }
 
         .control-button:hover {
@@ -220,10 +226,18 @@
 
         .control-button.new-game {
             background: var(--success-color);
+            order: 1;
         }
 
         .control-button.pause {
             background: var(--warning-color);
+            order: 2;
+        }
+
+        .control-button.scores {
+            background: var(--accent-color);
+            color: #000;
+            order: 3;
         }
 
         .game-canvas-container {
@@ -237,13 +251,61 @@
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
+            background: #000;
+            border: 2px solid #0066ff;
             border-radius: 10px;
             display: block;
             margin: 0 auto;
             max-width: 100%;
             height: auto;
+        }
+
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-overlay:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .start-overlay h2 {
+            font-family: "Orbitron", monospace;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .start-overlay p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .start-button {
+            padding: 15px 30px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 25px;
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
         .mobile-controls {
@@ -271,60 +333,92 @@
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
+        .mobile-control:active {
+            transform: scale(0.95);
             background: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .mobile-control.empty {
-            visibility: hidden;
         }
 
         .sidebar {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
+            max-width: 400px;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
+            order: 2;
         }
 
-        .sidebar-section {
+        .info-section {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
             backdrop-filter: blur(10px);
         }
 
-        .sidebar-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+        .info-section h3 {
+            font-family: "Orbitron", monospace;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
-        .instructions {
-            color: var(--text-secondary);
-            line-height: 1.5;
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: var(--dark-gradient);
+            border: 2px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .modal-button {
+            padding: 12px 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
             font-size: 0.9rem;
+            margin: 0.5rem;
         }
 
-        .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
         }
 
-        .instructions li {
-            margin-bottom: 0.4rem;
+        .modal-button.primary {
+            background: var(--accent-color);
+            color: #000;
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        @keyframes modalSlideIn {
+            from { transform: scale(0.8) translateY(-50px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         @media (max-width: 768px) {
@@ -333,39 +427,16 @@
                 padding: 1rem;
             }
             
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .game-title {
-                font-size: 1.5rem;
-            }
-            
-            .nav-buttons {
-                justify-content: center;
-            }
-            
-            .game-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            
-            .stats-section {
-                justify-content: center;
-            }
-            
-            .game-controls {
-                justify-content: center;
-            }
-            
             .mobile-controls {
                 display: grid;
             }
             
-            .sidebar {
-                order: -1;
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .game-title {
+                font-size: 1.5rem;
             }
             
             .ad-placeholder {
@@ -373,8 +444,16 @@
                 height: 50px;
                 font-size: 12px;
             }
+            
+            .stats-section {
+                order: 1;
+            }
+            
+            .game-controls {
+                order: 2;
+                justify-content: center;
+            }
         }
-        
     </style>
 </head>
 <body>
@@ -386,7 +465,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🏓 Pac Man Deluxe</h1>
+            <h1 class="game-title">🌟 Pac-Man Deluxe</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -399,7 +478,7 @@
     <!-- Main Game Container -->
     <div class="game-container">
         <!-- Game Section -->
-        <main class="game-section loading">
+        <main class="game-section">
             <div class="game-header">
                 <div class="stats-section">
                     <div class="stat-box">
@@ -414,55 +493,89 @@
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Lives</div>
+                        <div class="stat-value" id="gameLives">3</div>
+                    </div>
                 </div>
                 
                 <div class="game-controls">
                     <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
                     <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
-                    <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
+                    <button class="control-button scores" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
             </div>
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
                 <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <div class="start-overlay" id="startOverlay">
+                    <h2>🌟 Pac-Man Deluxe</h2>
+                    <p>Collect all dots while avoiding ghosts!</p>
+                    <button class="start-button" onclick="startGame()">🎮 Start Game</button>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control"></div>
+                <div class="mobile-control" onclick="movePlayer(0, -1)">⬆️</div>
+                <div class="mobile-control"></div>
+                <div class="mobile-control" onclick="movePlayer(-1, 0)">⬅️</div>
+                <div class="mobile-control" onclick="togglePause()">⏸️</div>
+                <div class="mobile-control" onclick="movePlayer(1, 0)">➡️</div>
+                <div class="mobile-control"></div>
+                <div class="mobile-control" onclick="movePlayer(0, 1)">⬇️</div>
+                <div class="mobile-control"></div>
             </div>
         </main>
 
         <!-- Sidebar -->
-        <aside class="sidebar loading">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">🎯 How to Play</h3>
-                <div class="instructions">
-                    <p><strong>Classic arcade action with modern twists and power-ups!</strong></p>
-                    <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
-                    </ul>
-                </div>
+        <aside class="sidebar">
+            <div class="info-section">
+                <h3>🎯 How to Play</h3>
+                <p><strong>Objective:</strong> Collect all dots while avoiding the colorful ghosts!</p>
+                <ul style="text-align: left; margin-top: 1rem; line-height: 1.8;">
+                    <li>Use arrow keys or WASD to move</li>
+                    <li>Collect dots for points</li>
+                    <li>Eat power pellets to turn ghosts blue</li>
+                    <li>Avoid ghosts or lose a life</li>
+                    <li>Clear all dots to advance levels</li>
+                    <li>Use tunnels on left/right to escape!</li>
+                </ul>
             </div>
 
-            <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
-                    250x250<br>Sidebar Ad
-                </div>
+            <div class="info-section">
+                <h3>🏆 Power-ups</h3>
+                <ul style="text-align: left; line-height: 1.8;">
+                    <li>🔴 <strong>Power Pellet:</strong> Makes ghosts vulnerable</li>
+                    <li>🍒 <strong>Cherry:</strong> Bonus points</li>
+                    <li>⚡ <strong>Speed Boost:</strong> Move faster</li>
+                    <li>💎 <strong>Super Dot:</strong> Extra points</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>📊 Game Stats</h3>
+                <p><strong>Games Played:</strong> <span id="gamesPlayed">0</span></p>
+                <p><strong>Total Score:</strong> <span id="totalScore">0</span></p>
+                <p><strong>Best Streak:</strong> <span id="bestStreak">0</span></p>
             </div>
         </aside>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2 style="color: var(--warning-color); margin-bottom: 1rem;">Game Over!</h2>
+            <p style="margin-bottom: 1rem;">Your Score: <span id="finalScore" style="color: var(--accent-color); font-weight: bold;">0</span></p>
+            <p style="margin-bottom: 2rem;">Level Reached: <span id="finalLevel" style="color: var(--success-color); font-weight: bold;">1</span></p>
+            <div>
+                <button class="modal-button primary" onclick="newGame()">🎮 Play Again</button>
+                <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
+                <button class="modal-button" onclick="closeModal()">❌ Close</button>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Ad Container -->
@@ -471,316 +584,724 @@
     </div>
 
     <script>
-        
-        // Game State
-        const game = {
-            canvas: null,
-            ctx: null,
+        // Game Variables
+        let canvas, ctx;
+        let game = {
             score: 0,
-            bestScore: localStorage.getItem("pac-man-deluxeBest") || 0,
             level: 1,
+            lives: 3,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameStarted: false
         };
+
+        // Game grid
+        const GRID_SIZE = 20;
+        const ROWS = 20;
+        const COLS = 20;
+
+        // Game timing
+        let lastTime = 0;
+        let ghostMoveCounter = 0;
+        const GHOST_MOVE_SPEED = 15; // Ghosts move every 15 frames
+
+        // Game objects
+        let player = { x: 1, y: 1, dx: 0, dy: 0 };
+        let ghosts = [];
+        let dots = [];
+        let powerPellets = [];
+        let maze = [];
+
+        // Initialize maze layout - improved for better accessibility
+        function initMaze() {
+            maze = [
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],
+                [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,1,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,0,1],
+                [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],
+                [1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Horizontal tunnel
+                [1,1,1,0,1,0,1,1,0,0,0,0,1,1,0,1,0,1,1,1],
+                [0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0], // Center open area
+                [1,1,1,0,1,0,1,1,0,0,0,0,1,1,0,1,0,1,1,1],
+                [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // Horizontal tunnel
+                [1,1,1,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1],
+                [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],
+                [1,0,1,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,0,1],
+                [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+                [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],
+                [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+            ];
+            console.log("Maze initialized with dimensions:", maze.length, "x", maze[0] ? maze[0].length : 0);
+        }
 
         // Initialize game
         function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
             
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
+            // Initialize maze first
+            initMaze();
             
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
+            loadGameStats();
+            setupEventListeners();
             
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
-            
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
+            console.log("Pac-Man Deluxe initialized!");
         }
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
+        // Setup event listeners
+        function setupEventListeners() {
+            document.addEventListener('keydown', handleKeyPress);
+            
+            // Touch events for mobile
+            let touchStartX, touchStartY;
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+            });
+
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+            });
+
+            canvas.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                if (!touchStartX || !touchStartY) return;
+
+                const touch = e.changedTouches[0];
+                const touchEndX = touch.clientX;
+                const touchEndY = touch.clientY;
+
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    if (diffX > 0) movePlayer(-1, 0); // Left
+                    else movePlayer(1, 0); // Right
+                } else {
+                    if (diffY > 0) movePlayer(0, -1); // Up
+                    else movePlayer(0, 1); // Down
+                }
+
+                touchStartX = null;
+                touchStartY = null;
+            });
+        }
+
+        // Handle keyboard input
+        function handleKeyPress(e) {
+            if (!game.gameRunning) return;
+
+            switch(e.key.toLowerCase()) {
+                case 'arrowup':
+                case 'w':
+                    e.preventDefault();
+                    movePlayer(0, -1);
+                    break;
+                case 'arrowdown':
+                case 's':
+                    e.preventDefault();
+                    movePlayer(0, 1);
+                    break;
+                case 'arrowleft':
+                case 'a':
+                    e.preventDefault();
+                    movePlayer(-1, 0);
+                    break;
+                case 'arrowright':
+                case 'd':
+                    e.preventDefault();
+                    movePlayer(1, 0);
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    togglePause();
+                    break;
+                case 'n':
+                    e.preventDefault();
+                    newGame();
+                    break;
+            }
+        }
+
+        // Start game
+        function startGame() {
+            document.getElementById('startOverlay').style.display = 'none';
+            game.gameStarted = true;
             game.gameRunning = true;
             game.gamePaused = false;
-            game.gameOver = false;
-            
-            updateDisplay();
+            resetGameState();
+            createDots();
+            createGhosts();
             gameLoop();
-            
-            trackEvent("game_start");
+            trackEvent('game_started');
         }
 
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
+        // Reset game state
+        function resetGameState() {
+            player = { x: 1, y: 1, dx: 0, dy: 0 };
+            ghosts = [];
+            dots = [];
+            powerPellets = [];
+            game.score = 0;
+            game.level = 1;
+            game.lives = 3;
+            ghostMoveCounter = 0;
+            updateUI();
+        }
+
+        // Create dots on the maze - all accessible paths
+        function createDots() {
+            dots = [];
+            powerPellets = [];
+            
+            console.log("Creating dots... maze dimensions:", maze.length, "x", (maze[0] ? maze[0].length : 0));
+            
+            if (!maze || maze.length === 0) {
+                console.error("Maze not initialized!");
+                initMaze(); // Re-initialize if needed
             }
             
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Pac Man Deluxe", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
+            for (let row = 0; row < ROWS && row < maze.length; row++) {
+                if (!maze[row]) {
+                    console.error("Maze row", row, "is undefined");
+                    continue;
                 }
                 
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
+                for (let col = 0; col < COLS && col < maze[row].length; col++) {
+                    if (maze[row][col] === 0) {
+                        // Skip player starting position and central ghost area
+                        if ((row === 1 && col === 1) || 
+                            (row >= 8 && row <= 11 && col >= 8 && col <= 11)) continue;
+                        
+                        // Add dots to all accessible spaces
+                        dots.push({ x: col, y: row, type: 'dot', points: 10 });
+                    }
+                }
             }
             
-            trackEvent("game_paused", { paused: game.gamePaused });
-        }
-
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
+            // Add power pellets in 4 corners and remove regular dots there
+            const powerPelletPositions = [
+                {x: 1, y: 3}, {x: 18, y: 3}, {x: 1, y: 15}, {x: 18, y: 15}
+            ];
             
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("pac-man-deluxeBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+            powerPelletPositions.forEach(pos => {
+                // Remove any regular dot at this position
+                for (let i = dots.length - 1; i >= 0; i--) {
+                    if (dots[i].x === pos.x && dots[i].y === pos.y) {
+                        dots.splice(i, 1);
+                       break;
+                   }
+               }
+               // Add power pellet
+               powerPellets.push({ x: pos.x, y: pos.y, active: true });
+           });
+           
+           console.log("Created", dots.length, "dots and", powerPellets.length, "power pellets");
+       }
+
+       // Create ghosts
+       function createGhosts() {
+           ghosts = [
+               { x: 9, y: 9, dx: 1, dy: 0, color: '#ff0000', vulnerable: false, vulnerableTime: 0 },
+               { x: 10, y: 9, dx: -1, dy: 0, color: '#ffb6c1', vulnerable: false, vulnerableTime: 0 },
+               { x: 9, y: 10, dx: 0, dy: 1, color: '#00ffff', vulnerable: false, vulnerableTime: 0 },
+               { x: 10, y: 10, dx: 0, dy: -1, color: '#ffa500', vulnerable: false, vulnerableTime: 0 }
+           ];
+       }
+
+       // Handle tunnel wrapping and movement
+       function movePlayer(dx, dy) {
+           if (!game.gameRunning || game.gamePaused) return;
+
+           let newX = player.x + dx;
+           let newY = player.y + dy;
+
+           // Handle left-right tunnel wrapping
+           if (newX < 0) {
+               // Check if we're in a tunnel row (rows 7, 9, 11)
+               if (newY === 7 || newY === 9 || newY === 11) {
+                   newX = COLS - 1; // Wrap to right side
+               } else {
+                   return; // Block movement if not in tunnel
+               }
+           } else if (newX >= COLS) {
+               // Check if we're in a tunnel row
+               if (newY === 7 || newY === 9 || newY === 11) {
+                   newX = 0; // Wrap to left side
+               } else {
+                   return; // Block movement if not in tunnel
+               }
            }
+
+           // Check bounds and walls for normal movement
+           if (newY >= 0 && newY < ROWS && 
+               maze[newY] && maze[newY][newX] === 0) {
+               player.x = newX;
+               player.y = newY;
+               player.dx = dx;
+               player.dy = dy;
+               
+               checkCollisions();
+           }
+       }
+
+       // Handle ghost tunnel wrapping
+       function wrapGhost(ghost) {
+           // Handle left-right tunnel wrapping for ghosts
+           if (ghost.x < 0) {
+               if (ghost.y === 7 || ghost.y === 9 || ghost.y === 11) {
+                   ghost.x = COLS - 1;
+               }
+           } else if (ghost.x >= COLS) {
+               if (ghost.y === 7 || ghost.y === 9 || ghost.y === 11) {
+                   ghost.x = 0;
+               }
+           }
+       }
+
+       // Check collisions
+       function checkCollisions() {
+           // Check dot collision
+           for (let i = dots.length - 1; i >= 0; i--) {
+               if (dots[i].x === player.x && dots[i].y === player.y) {
+                   game.score += dots[i].points;
+                   dots.splice(i, 1);
+                   updateUI();
+                   
+                   // Check if all dots collected
+                   if (dots.length === 0) {
+                       nextLevel();
+                       return;
+                   }
+               }
+           }
+
+           // Check power pellet collision
+           for (let i = powerPellets.length - 1; i >= 0; i--) {
+               if (powerPellets[i].x === player.x && powerPellets[i].y === player.y && powerPellets[i].active) {
+                   game.score += 50;
+                   powerPellets[i].active = false;
+                   
+                   // Make all ghosts vulnerable
+                   ghosts.forEach(ghost => {
+                       ghost.vulnerable = true;
+                       ghost.vulnerableTime = 300; // 5 seconds at 60fps
+                   });
+                   updateUI();
+               }
+           }
+
+           // Check ghost collision - FIXED LOGIC
+           ghosts.forEach((ghost, index) => {
+               if (ghost.x === player.x && ghost.y === player.y) {
+                   if (ghost.vulnerable) {
+                       // Eat ghost - award points and respawn ghost
+                       game.score += 200;
+                       ghost.vulnerable = false;
+                       ghost.vulnerableTime = 0;
+                       // Respawn ghost at center
+                       ghost.x = 9 + Math.floor(Math.random() * 2);
+                       ghost.y = 9 + Math.floor(Math.random() * 2);
+                       updateUI();
+                   } else {
+                       // Player hit non-vulnerable ghost - lose life
+                       loseLife();
+                       return; // Exit to prevent multiple life losses
+                   }
+               }
+           });
+       }
+
+       // Lose a life - FIXED to prevent pause popup
+       function loseLife() {
+           game.lives--;
+           updateUI();
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           if (game.lives <= 0) {
+               gameOver();
+           } else {
+               // Reset player position without pausing
+               player.x = 1;
+               player.y = 1;
+               player.dx = 0;
+               player.dy = 0;
+               
+               // Reset ghosts to starting positions
+               createGhosts();
+               
+               // Brief visual indication without pause
+               console.log("Life lost! Lives remaining:", game.lives);
+           }
        }
 
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+       // Next level
+       function nextLevel() {
+           game.level++;
+           updateUI();
            
-           document.body.appendChild(messageEl);
+           // Brief pause for level transition
+           game.gamePaused = true;
            
            setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
+               createDots();
+               createGhosts();
+               // Reset player position
+               player.x = 1;
+               player.y = 1;
+               player.dx = 0;
+               player.dy = 0;
+               
+               if (game.gameRunning) {
+                   game.gamePaused = false;
+               }
+           }, 1500);
        }
 
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
+       // Move ghosts (controlled timing with tunnel support)
+       function moveGhosts() {
+           // Only move ghosts every GHOST_MOVE_SPEED frames
+           ghostMoveCounter++;
+           if (ghostMoveCounter < GHOST_MOVE_SPEED) {
+               return;
+           }
+           ghostMoveCounter = 0;
+
+           ghosts.forEach(ghost => {
+               // Update vulnerable time
+               if (ghost.vulnerable && ghost.vulnerableTime > 0) {
+                   ghost.vulnerableTime--;
+                   if (ghost.vulnerableTime <= 0) {
+                       ghost.vulnerable = false;
+                   }
+               }
+
+               // Simple AI: move randomly when hitting walls
+               let newX = ghost.x + ghost.dx;
+               let newY = ghost.y + ghost.dy;
+
+               // Handle tunnel wrapping first
+               if (newX < 0 || newX >= COLS) {
+                   if (newY === 7 || newY === 9 || newY === 11) {
+                       ghost.x = newX < 0 ? COLS - 1 : 0;
+                       ghost.y = newY;
+                       return;
+                   }
+               }
+
+               // Check if new position is valid
+               if (newX < 0 || newX >= COLS || newY < 0 || newY >= ROWS || 
+                   !maze[newY] || maze[newY][newX] === 1) {
+                   // Change direction randomly
+                   const directions = [
+                       { dx: 1, dy: 0 },
+                       { dx: -1, dy: 0 },
+                       { dx: 0, dy: 1 },
+                       { dx: 0, dy: -1 }
+                   ];
+                   const validDirections = directions.filter(dir => {
+                       const testX = ghost.x + dir.dx;
+                       const testY = ghost.y + dir.dy;
+                       
+                       // Allow tunnel movement
+                       if (testX < 0 || testX >= COLS) {
+                           return (testY === 7 || testY === 9 || testY === 11);
+                       }
+                       
+                       return testX >= 0 && testX < COLS && testY >= 0 && testY < ROWS && 
+                              maze[testY] && maze[testY][testX] === 0;
+                   });
+                   
+                   if (validDirections.length > 0) {
+                       const randomDir = validDirections[Math.floor(Math.random() * validDirections.length)];
+                       ghost.dx = randomDir.dx;
+                       ghost.dy = randomDir.dy;
+                   }
+               } else {
+                   ghost.x = newX;
+                   ghost.y = newY;
+               }
+               
+               // Apply tunnel wrapping after movement
+               wrapGhost(ghost);
+           });
+       }
+
+       // Draw game
+       function draw() {
+           // Clear canvas
+           ctx.fillStyle = '#000';
+           ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+           // Draw maze
+           ctx.fillStyle = '#0066ff';
+           for (let row = 0; row < ROWS && row < maze.length; row++) {
+               if (!maze[row]) continue;
+               for (let col = 0; col < COLS && col < maze[row].length; col++) {
+                   if (maze[row][col] === 1) {
+                       ctx.fillRect(col * GRID_SIZE, row * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+                   }
+               }
+           }
+
+           // Draw tunnel indicators
+           ctx.fillStyle = '#444';
+           // Left tunnel entrances
+           ctx.fillRect(-1, 7 * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+           ctx.fillRect(-1, 9 * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+           ctx.fillRect(-1, 11 * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+           // Right tunnel entrances
+           ctx.fillRect(COLS * GRID_SIZE, 7 * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+           ctx.fillRect(COLS * GRID_SIZE, 9 * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+           ctx.fillRect(COLS * GRID_SIZE, 11 * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+
+           // Draw dots
+           ctx.fillStyle = '#ffff00';
+           dots.forEach(dot => {
+               ctx.beginPath();
+               ctx.arc(
+                   dot.x * GRID_SIZE + GRID_SIZE/2,
+                   dot.y * GRID_SIZE + GRID_SIZE/2,
+                   2,
+                   0,
+                   Math.PI * 2
+               );
+               ctx.fill();
+           });
+
+           // Draw power pellets (with blinking effect)
+           const blinkTime = Math.floor(Date.now() / 300) % 2;
+           if (blinkTime === 0) {
+               ctx.fillStyle = '#ffff00';
+               powerPellets.forEach(pellet => {
+                   if (pellet.active) {
+                       ctx.beginPath();
+                       ctx.arc(
+                           pellet.x * GRID_SIZE + GRID_SIZE/2,
+                           pellet.y * GRID_SIZE + GRID_SIZE/2,
+                           6,
+                           0,
+                           Math.PI * 2
+                       );
+                       ctx.fill();
+                   }
+               });
+           }
+
+           // Draw player (Pac-Man)
+           ctx.fillStyle = '#ffff00';
+           ctx.beginPath();
            
-           document.body.appendChild(modal);
-       }
+           // Calculate mouth angle based on direction
+           let startAngle = 0;
+           let endAngle = Math.PI * 2;
+           
+           if (player.dx === 1) { // Right
+               startAngle = 0.2 * Math.PI;
+               endAngle = 1.8 * Math.PI;
+           } else if (player.dx === -1) { // Left
+               startAngle = 1.2 * Math.PI;
+               endAngle = 0.8 * Math.PI;
+           } else if (player.dy === -1) { // Up
+               startAngle = 1.7 * Math.PI;
+               endAngle = 1.3 * Math.PI;
+           } else if (player.dy === 1) { // Down
+               startAngle = 0.7 * Math.PI;
+               endAngle = 0.3 * Math.PI;
+           }
+           
+           ctx.arc(
+               player.x * GRID_SIZE + GRID_SIZE/2,
+               player.y * GRID_SIZE + GRID_SIZE/2,
+               GRID_SIZE/2 - 2,
+               startAngle,
+               endAngle
+           );
+           ctx.lineTo(
+               player.x * GRID_SIZE + GRID_SIZE/2,
+               player.y * GRID_SIZE + GRID_SIZE/2
+           );
+           ctx.fill();
 
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           // Draw ghosts
+           ghosts.forEach(ghost => {
+               ctx.fillStyle = ghost.vulnerable ? '#0000ff' : ghost.color;
+               
+               // Ghost body
+               ctx.beginPath();
+               ctx.arc(
+                   ghost.x * GRID_SIZE + GRID_SIZE/2,
+                   ghost.y * GRID_SIZE + GRID_SIZE/2 - 2,
+                   GRID_SIZE/2 - 2,
+                   Math.PI,
+                   0,
+                   false
+               );
+               ctx.lineTo(ghost.x * GRID_SIZE + GRID_SIZE - 2, ghost.y * GRID_SIZE + GRID_SIZE - 2);
+               
+               // Ghost bottom with triangular teeth
+               for (let i = 0; i < 3; i++) {
+                   ctx.lineTo(
+                       ghost.x * GRID_SIZE + GRID_SIZE - 2 - (i + 0.5) * (GRID_SIZE - 4) / 3,
+                       ghost.y * GRID_SIZE + GRID_SIZE - 6
+                   );
+                   ctx.lineTo(
+                       ghost.x * GRID_SIZE + GRID_SIZE - 2 - (i + 1) * (GRID_SIZE - 4) / 3,
+                       ghost.y * GRID_SIZE + GRID_SIZE - 2
+                   );
+               }
+               
+               ctx.lineTo(ghost.x * GRID_SIZE + 2, ghost.y * GRID_SIZE + GRID_SIZE - 2);
+               ctx.closePath();
+               ctx.fill();
+
+               // Ghost eyes
+               ctx.fillStyle = '#fff';
+               ctx.fillRect(ghost.x * GRID_SIZE + 5, ghost.y * GRID_SIZE + 6, 3, 4);
+               ctx.fillRect(ghost.x * GRID_SIZE + 12, ghost.y * GRID_SIZE + 6, 3, 4);
+               ctx.fillStyle = '#000';
+               ctx.fillRect(ghost.x * GRID_SIZE + 6, ghost.y * GRID_SIZE + 7, 1, 2);
+               ctx.fillRect(ghost.x * GRID_SIZE + 13, ghost.y * GRID_SIZE + 7, 1, 2);
+           });
+
+           // Draw level transition message (only for level complete)
+           if (game.gamePaused && game.gameRunning && game.lives > 0 && dots.length === 0) {
+               ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+               ctx.fillRect(0, 0, canvas.width, canvas.height);
+               ctx.fillStyle = '#ffff00';
+               ctx.font = 'bold 24px Arial';
+               ctx.textAlign = 'center';
+               ctx.fillText(`Level ${game.level}!`, canvas.width/2, canvas.height/2);
+               ctx.font = '16px Arial';
+               ctx.fillText('Get Ready!', canvas.width/2, canvas.height/2 + 30);
+           }
+           
+           // Draw manual pause overlay
+           if (game.gamePaused && game.gameRunning && dots.length > 0) {
+               ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+               ctx.fillRect(0, 0, canvas.width, canvas.height);
+               ctx.fillStyle = '#fff';
+               ctx.font = 'bold 24px Arial';
+               ctx.textAlign = 'center';
+               ctx.fillText('PAUSED', canvas.width/2, canvas.height/2);
+               ctx.font = '14px Arial';
+               ctx.fillText('Press SPACE to continue', canvas.width/2, canvas.height/2 + 30);
            }
        }
 
-       // Show Leaderboard
+       // Game loop
+       function gameLoop() {
+           if (!game.gameRunning) return;
+
+           if (!game.gamePaused) {
+               moveGhosts();
+               checkCollisions();
+           }
+           
+           draw();
+           
+           requestAnimationFrame(gameLoop);
+       }
+
+       // Update UI
+       function updateUI() {
+           document.getElementById('currentScore').textContent = game.score.toLocaleString();
+           document.getElementById('gameLevel').textContent = game.level;
+           document.getElementById('gameLives').textContent = game.lives;
+           
+           const bestScore = parseInt(localStorage.getItem('pacmanBestScore') || '0');
+           if (game.score > bestScore) {
+               localStorage.setItem('pacmanBestScore', game.score);
+               document.getElementById('bestScore').textContent = game.score.toLocaleString();
+           } else {
+               document.getElementById('bestScore').textContent = bestScore.toLocaleString();
+           }
+       }
+
+       // Game over
+       function gameOver() {
+           game.gameRunning = false;
+           game.gamePaused = false;
+           
+           // Save stats
+           saveGameStats();
+           
+           // Show game over modal
+           document.getElementById('finalScore').textContent = game.score.toLocaleString();
+           document.getElementById('finalLevel').textContent = game.level;
+           document.getElementById('gameOverModal').style.display = 'flex';
+           
+           trackEvent('game_over', { score: game.score, level: game.level });
+       }
+
+       // New game
+       function newGame() {
+           closeModal();
+           document.getElementById('startOverlay').style.display = 'none';
+           game.gameStarted = true;
+           game.gameRunning = true;
+           game.gamePaused = false;
+           
+           // Ensure maze is initialized
+           if (!maze || maze.length === 0) {
+               initMaze();
+           }
+           
+           resetGameState();
+           createDots();
+           createGhosts();
+           
+           // Update pause button text
+           document.getElementById('pauseButton').textContent = '⏸️ Pause';
+           
+           gameLoop();
+           trackEvent('new_game');
+       }
+
+       // Toggle pause
+       function togglePause() {
+           if (!game.gameRunning) return;
+           
+           game.gamePaused = !game.gamePaused;
+           document.getElementById('pauseButton').textContent = game.gamePaused ? '▶️ Resume' : '⏸️ Pause';
+       }
+
+       // Close modal
+       function closeModal() {
+           document.getElementById('gameOverModal').style.display = 'none';
+       }
+
+       // Load game stats
+       function loadGameStats() {
+           const stats = JSON.parse(localStorage.getItem('pacmanGameStats') || '{}');
+           document.getElementById('gamesPlayed').textContent = stats.gamesPlayed || 0;
+           document.getElementById('totalScore').textContent = (stats.totalScore || 0).toLocaleString();
+           document.getElementById('bestStreak').textContent = stats.bestStreak || 0;
+           document.getElementById('bestScore').textContent = (parseInt(localStorage.getItem('pacmanBestScore') || '0')).toLocaleString();
+       }
+
+       // Save game stats
+       function saveGameStats() {
+           const stats = JSON.parse(localStorage.getItem('pacmanGameStats') || '{}');
+           stats.gamesPlayed = (stats.gamesPlayed || 0) + 1;
+           stats.totalScore = (stats.totalScore || 0) + game.score;
+           
+           localStorage.setItem('pacmanGameStats', JSON.stringify(stats));
+           loadGameStats();
+       }
+
+       // Show leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("pac-man-deluxeLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem('pacmanHighScores') || '[]');
+           let message = "🏆 High Scores:\n\n";
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet.\nBe the first!";
            } else {
                scores.slice(0, 5).forEach((score, index) => {
                    message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
@@ -792,7 +1313,7 @@
 
        // Utility Functions
        function showInstructions() {
-           alert(`🎯 Pac Man Deluxe - How to Play
+           alert(`🎯 Pac-Man Deluxe - How to Play
 
 🕹️ Controls:
 - Arrow Keys or WASD to move
@@ -801,9 +1322,12 @@
 - N for new game
 
 🎮 Gameplay:
-- Classic arcade action with modern twists and power-ups!
-- Score points to advance levels
-- Beat your high score!
+- Collect all yellow dots to advance levels
+- Eat power pellets to make ghosts vulnerable
+- Avoid ghosts or lose a life
+- Eat vulnerable ghosts for bonus points
+- Use tunnels on left/right sides to escape!
+- Clear all dots to reach the next level
 
 Good luck! 🍀`);
        }
@@ -819,11 +1343,11 @@ Good luck! 🍀`);
        }
 
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Pac Man Deluxe! Can you beat my score? 🏆`;
+           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Pac-Man Deluxe! Can you beat my score? 🏆`;
            
            if (navigator.share) {
                navigator.share({
-                   title: "Pac Man Deluxe - My Score",
+                   title: "Pac-Man Deluxe - My Score",
                    text: text,
                    url: window.location.href
                });
@@ -848,96 +1372,6 @@ Good luck! 🍀`);
            console.log(`Event: ${eventName}`, parameters);
        }
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
-
        // Initialize game when page loads
        document.addEventListener("DOMContentLoaded", () => {
            initGame();
@@ -956,15 +1390,7 @@ Good luck! 🍀`);
        // Prevent context menu
        document.addEventListener("contextmenu", e => e.preventDefault());
 
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
-           }
-       });
-
-       console.log("🎮 Pac Man Deluxe loaded successfully!");
-       
-    </script>
+       console.log("🎮 Pac-Man Deluxe loaded successfully!");
+   </script>
 </body>
 </html>
