@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -97,7 +96,7 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -107,59 +106,63 @@
 
         .game-title {
             font-family: "Orbitron", monospace;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 900;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .nav-button {
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
+            border-radius: 10px;
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            font-size: 0.9rem;
         }
 
         .nav-button:hover {
             background: var(--accent-color);
-            color: #000;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         .game-container {
-            flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
             gap: 2rem;
-            width: 100%;
+            flex: 1;
         }
 
         .game-section {
-            flex: 2;
-            min-width: 320px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
         }
 
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -173,49 +176,51 @@
         .stat-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            padding: 1rem;
             text-align: center;
-            backdrop-filter: blur(10px);
             min-width: 80px;
+            backdrop-filter: blur(10px);
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            font-weight: 500;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-color);
+            font-family: "Orbitron", monospace;
         }
 
         .game-controls {
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            padding: 0.7rem 1.2rem;
+            background: var(--primary-gradient);
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .control-button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .control-button:active {
+            transform: translateY(0);
         }
 
         .control-button.new-game {
@@ -227,119 +232,226 @@
         }
 
         .game-canvas-container {
-            background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
             position: relative;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            min-height: 400px;
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
+            border-radius: 15px;
+            background: #000;
             max-width: 100%;
             height: auto;
         }
 
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            z-index: 10;
+        }
+
+        .start-overlay h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+
         .mobile-controls {
-            display: none;
+            display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 300px;
+            margin: 0 auto;
         }
 
         .mobile-control {
-            aspect-ratio: 1;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
+        .mobile-control:hover {
             background: var(--accent-color);
             transform: translateY(-2px);
         }
 
+        .mobile-control:active {
+            transform: translateY(0);
+        }
+
         .mobile-control.empty {
-            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .sidebar {
-            flex: 1;
-            min-width: 280px;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .sidebar-section {
             background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.5rem;
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
             backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
         }
 
         .sidebar-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 700;
             color: var(--accent-color);
+            margin-bottom: 1rem;
         }
 
         .instructions {
-            color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
+            line-height: 1.8;
         }
 
         .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+            list-style: none;
+            padding-left: 0;
         }
 
         .instructions li {
-            margin-bottom: 0.4rem;
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
-        .loading {
+        .instructions li:before {
+            content: "🎯";
+            position: absolute;
+            left: 0;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
             opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-button {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .modal-button.secondary {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 1024px) {
+            .game-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .game-container {
-                flex-direction: column;
-                padding: 1rem;
+            .game-title {
+                font-size: 2rem;
             }
             
             .header-content {
                 flex-direction: column;
                 text-align: center;
-            }
-            
-            .game-title {
-                font-size: 1.5rem;
             }
             
             .nav-buttons {
@@ -349,7 +461,6 @@
             .game-header {
                 flex-direction: column;
                 align-items: stretch;
-                text-align: center;
             }
             
             .stats-section {
@@ -360,21 +471,13 @@
                 justify-content: center;
             }
             
-            .mobile-controls {
-                display: grid;
-            }
-            
-            .sidebar {
-                order: -1;
-            }
-            
             .ad-placeholder {
-                width: 320px;
+                width: 100%;
+                max-width: 320px;
                 height: 50px;
                 font-size: 12px;
             }
         }
-        
     </style>
 </head>
 <body>
@@ -399,7 +502,7 @@
     <!-- Main Game Container -->
     <div class="game-container">
         <!-- Game Section -->
-        <main class="game-section loading">
+        <main class="game-section">
             <div class="game-header">
                 <div class="stats-section">
                     <div class="stat-box">
@@ -426,15 +529,20 @@
             <!-- Game Canvas -->
             <div class="game-canvas-container">
                 <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <div class="start-overlay" id="startOverlay">
+                    <h2>🎯 Color Match</h2>
+                    <p>Match colors to score points!</p>
+                    <button class="start-button" onclick="startGame()">🚀 Start Game</button>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
                 <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
+                <div class="mobile-control" onclick="rotatePattern()">🔄</div>
                 <div class="mobile-control empty"></div>
                 <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
+                <div class="mobile-control" onclick="dropPattern()">⬇️</div>
                 <div class="mobile-control" onclick="moveRight()">➡️</div>
                 <div class="mobile-control empty"></div>
                 <div class="mobile-control" onclick="newGame()">🆕</div>
@@ -443,16 +551,17 @@
         </main>
 
         <!-- Sidebar -->
-        <aside class="sidebar loading">
+        <aside class="sidebar">
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
+                    <p><strong>Match colors to score points and advance levels!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li>Drop color patterns from the top</li>
+                        <li>Match 3 or more colors to clear them</li>
+                        <li>Use arrow keys or touch controls</li>
+                        <li>Score combos for bonus points</li>
+                        <li>Avoid filling the screen!</li>
                     </ul>
                 </div>
             </div>
@@ -465,23 +574,68 @@
         </aside>
     </div>
 
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-title">🎯 Game Over!</div>
+            <div class="modal-text" id="gameOverText">
+                Great job! You scored <span id="finalScore">0</span> points and reached level <span id="finalLevel">1</span>!
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button" onclick="playAgain()">🚀 Play Again</button>
+                <button class="modal-button secondary" onclick="closeModal()">📊 View Stats</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions Modal -->
+    <div class="modal" id="instructionsModal">
+        <div class="modal-content">
+            <div class="modal-title">🎯 How to Play Color Match</div>
+            <div class="modal-text">
+                <p><strong>Objective:</strong> Match colors to score points and clear the board!</p>
+                <br>
+                <p><strong>Controls:</strong></p>
+                <ul style="text-align: left; margin: 1rem 0;">
+                    <li>⬅️ ➡️ Arrow keys to move</li>
+                    <li>⬇️ Down arrow to drop faster</li>
+                    <li>🔄 Up arrow to rotate pattern</li>
+                    <li>📱 Touch controls for mobile</li>
+                </ul>
+                <p><strong>Tips:</strong> Create combos for bonus points and plan your moves carefully!</p>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button" onclick="closeModal()">Got it!</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
         <div class="ad-placeholder">728x90 Footer Advertisement</div>
     </div>
 
     <script>
+        // Game Configuration
+        const GRID_SIZE = 8;
+        const CELL_SIZE = 45;
+        const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FECA57', '#FF9FF3', '#54A0FF', '#FD79A8'];
         
         // Game State
         const game = {
             canvas: null,
             ctx: null,
+            grid: [],
+            currentPattern: null,
             score: 0,
-            bestScore: localStorage.getItem("color-matchBest") || 0,
+            bestScore: localStorage.getItem("colorMatchBest") || 0,
             level: 1,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameOver: false,
+            dropTimer: 0,
+            dropInterval: 1000,
+            lastTime: 0
         };
 
         // Initialize game
@@ -489,463 +643,454 @@
             game.canvas = document.getElementById("gameCanvas");
             game.ctx = game.canvas.getContext("2d");
             
+            // Set canvas size
+            game.canvas.width = GRID_SIZE * CELL_SIZE;
+            game.canvas.height = GRID_SIZE * CELL_SIZE;
+            
+            // Initialize grid
+            game.grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(null));
+            
             // Load best score
             document.getElementById("bestScore").textContent = game.bestScore;
             
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
+            // Add keyboard controls
+            document.addEventListener('keydown', handleKeyPress);
             
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
-            
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
+            // Start render loop
+            gameLoop();
         }
 
-        // New Game
-        function newGame() {
+        // Start new game
+        function startGame() {
+            document.getElementById("startOverlay").style.display = "none";
+            game.gameRunning = true;
+            game.gameOver = false;
             game.score = 0;
             game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
-            
+            game.grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(null));
+            game.currentPattern = createPattern();
             updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
         }
 
-        // Game Loop
-        function gameLoop() {
+        // Create new pattern
+        function createPattern() {
+            return {
+                x: Math.floor(GRID_SIZE / 2) - 1,
+                y: 0,
+                colors: [
+                    COLORS[Math.floor(Math.random() * COLORS.length)],
+                    COLORS[Math.floor(Math.random() * COLORS.length)]
+                ],
+                shape: Math.random() > 0.5 ? 'horizontal' : 'vertical'
+            };
+        }
+
+        // Game loop
+        function gameLoop(currentTime = 0) {
             if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
+                requestAnimationFrame(gameLoop);
                 return;
             }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
 
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
+            const deltaTime = currentTime - game.lastTime;
+            game.dropTimer += deltaTime;
 
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Color Match", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
+            if (game.dropTimer >= game.dropInterval) {
+                if (game.currentPattern) {
+                    if (canMove(game.currentPattern, 0, 1)) {
+                        game.currentPattern.y++;
+                    } else {
+                        placePattern();
+                        checkMatches();
+                        game.currentPattern = createPattern();
+                        
+                        // Check game over
+                        if (!canMove(game.currentPattern, 0, 0)) {
+                            gameOver();
+                        }
                     }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
+                }
+                game.dropTimer = 0;
+            }
+
+            render();
+            game.lastTime = currentTime;
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Check if pattern can move
+        function canMove(pattern, dx, dy) {
+            const newX = pattern.x + dx;
+            const newY = pattern.y + dy;
+            
+            if (pattern.shape === 'horizontal') {
+                return newX >= 0 && newX + 1 < GRID_SIZE && 
+                       newY >= 0 && newY < GRID_SIZE &&
+                       !game.grid[newY][newX] && !game.grid[newY][newX + 1];
+            } else {
+                return newX >= 0 && newX < GRID_SIZE && 
+                       newY >= 0 && newY + 1 < GRID_SIZE &&
+                       !game.grid[newY][newX] && !game.grid[newY + 1][newX];
+            }
+        }
+
+        // Place pattern on grid
+        function placePattern() {
+            const pattern = game.currentPattern;
+            if (pattern.shape === 'horizontal') {
+                game.grid[pattern.y][pattern.x] = pattern.colors[0];
+                game.grid[pattern.y][pattern.x + 1] = pattern.colors[1];
+            } else {
+                game.grid[pattern.y][pattern.x] = pattern.colors[0];
+                game.grid[pattern.y + 1][pattern.x] = pattern.colors[1];
+            }
+        }
+
+        // Check for matches
+        function checkMatches() {
+            const matches = [];
+            
+            // Check horizontal matches
+            for (let y = 0; y < GRID_SIZE; y++) {
+                let count = 1;
+                let currentColor = game.grid[y][0];
+                
+                for (let x = 1; x < GRID_SIZE; x++) {
+                    if (game.grid[y][x] === currentColor && currentColor !== null) {
+                        count++;
+                    } else {
+                        if (count >= 3 && currentColor !== null) {
+                            for (let i = x - count; i < x; i++) {
+                                matches.push([y, i]);
+                            }
+                        }
+                        count = 1;
+                        currentColor = game.grid[y][x];
                     }
                 }
                 
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
+                if (count >= 3 && currentColor !== null) {
+                    for (let i = GRID_SIZE - count; i < GRID_SIZE; i++) {
+                        matches.push([y, i]);
+                    }
+                }
             }
             
-            trackEvent("game_paused", { paused: game.gamePaused });
+            // Check vertical matches
+            for (let x = 0; x < GRID_SIZE; x++) {
+                let count = 1;
+                let currentColor = game.grid[0][x];
+                
+                for (let y = 1; y < GRID_SIZE; y++) {
+                    if (game.grid[y][x] === currentColor && currentColor !== null) {
+                        count++;
+                    } else {
+                        if (count >= 3 && currentColor !== null) {
+                            for (let i = y - count; i < y; i++) {
+                                matches.push([i, x]);
+                            }
+                        }
+                        count = 1;
+                        currentColor = game.grid[y][x];
+                    }
+                }
+                
+                if (count >= 3 && currentColor !== null) {
+                    for (let i = GRID_SIZE - count; i < GRID_SIZE; i++) {
+                        matches.push([i, x]);
+                    }
+                }
+            }
+            
+            // Remove matches and update score
+            if (matches.length > 0) {
+                matches.forEach(([y, x]) => {
+                    game.grid[y][x] = null;
+                });
+                
+                game.score += matches.length * 10;
+                game.level = Math.floor(game.score / 1000) + 1;
+                game.dropInterval = Math.max(200, 1000 - (game.level - 1) * 100);
+                
+                updateDisplay();
+                
+                // Apply gravity
+                applyGravity();
+                
+                // Check for more matches
+                setTimeout(() => checkMatches(), 300);
+            }
         }
 
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
+        // Apply gravity to floating blocks
+        function applyGravity() {
+            for (let x = 0; x < GRID_SIZE; x++) {
+                let writeIndex = GRID_SIZE - 1;
+                
+                for (let y = GRID_SIZE - 1; y >= 0; y--) {
+                    if (game.grid[y][x] !== null) {
+                        game.grid[writeIndex][x] = game.grid[y][x];
+                        if (writeIndex !== y) {
+                            game.grid[y][x] = null;
+                        }
+                        writeIndex--;
+                    }
+                }
+            }
+        }
+
+        // Render game
+        function render() {
+            game.ctx.fillStyle = '#000';
+            game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
             
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("color-matchBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+            // Draw grid
+            for (let y = 0; y < GRID_SIZE; y++) {
+                for (let x = 0; x < GRID_SIZE; x++) {
+                    if (game.grid[y][x]) {
+                        game.ctx.fillStyle = game.grid[y][x];
+                        game.ctx.fillRect(x * CELL_SIZE + 1, y * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+                    }
+                }
+            }
+            
+            // Draw current pattern
+            if (game.currentPattern) {
+                const pattern = game.currentPattern;
+                if (pattern.shape === 'horizontal') {
+                    game.ctx.fillStyle = pattern.colors[0];
+                    game.ctx.fillRect(pattern.x * CELL_SIZE + 1, pattern.y * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+                    game.ctx.fillStyle = pattern.colors[1];
+                    game.ctx.
+fillRect((pattern.x + 1) * CELL_SIZE + 1, pattern.y * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+               } else {
+                   game.ctx.fillStyle = pattern.colors[0];
+                   game.ctx.fillRect(pattern.x * CELL_SIZE + 1, pattern.y * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+                   game.ctx.fillStyle = pattern.colors[1];
+                   game.ctx.fillRect(pattern.x * CELL_SIZE + 1, (pattern.y + 1) * CELL_SIZE + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+               }
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Draw grid lines
+           game.ctx.strokeStyle = '#333';
+           game.ctx.lineWidth = 1;
+           for (let i = 0; i <= GRID_SIZE; i++) {
+               game.ctx.beginPath();
+               game.ctx.moveTo(i * CELL_SIZE, 0);
+               game.ctx.lineTo(i * CELL_SIZE, game.canvas.height);
+               game.ctx.stroke();
+               
+               game.ctx.beginPath();
+               game.ctx.moveTo(0, i * CELL_SIZE);
+               game.ctx.lineTo(game.canvas.width, i * CELL_SIZE);
+               game.ctx.stroke();
+           }
        }
 
-       // Update Display
+       // Handle keyboard input
+       function handleKeyPress(event) {
+           if (!game.gameRunning || game.gamePaused || !game.currentPattern) return;
+           
+           switch(event.code) {
+               case 'ArrowLeft':
+                   event.preventDefault();
+                   moveLeft();
+                   break;
+               case 'ArrowRight':
+                   event.preventDefault();
+                   moveRight();
+                   break;
+               case 'ArrowDown':
+                   event.preventDefault();
+                   dropPattern();
+                   break;
+               case 'ArrowUp':
+                   event.preventDefault();
+                   rotatePattern();
+                   break;
+               case 'Space':
+                   event.preventDefault();
+                   togglePause();
+                   break;
+           }
+       }
+
+       // Movement functions
+       function moveLeft() {
+           if (game.currentPattern && canMove(game.currentPattern, -1, 0)) {
+               game.currentPattern.x--;
+           }
+       }
+
+       function moveRight() {
+           if (game.currentPattern && canMove(game.currentPattern, 1, 0)) {
+               game.currentPattern.x++;
+           }
+       }
+
+       function dropPattern() {
+           if (game.currentPattern) {
+               while (canMove(game.currentPattern, 0, 1)) {
+                   game.currentPattern.y++;
+               }
+               game.dropTimer = game.dropInterval; // Force immediate placement
+           }
+       }
+
+       function rotatePattern() {
+           if (game.currentPattern) {
+               const newShape = game.currentPattern.shape === 'horizontal' ? 'vertical' : 'horizontal';
+               const oldShape = game.currentPattern.shape;
+               game.currentPattern.shape = newShape;
+               
+               // Check if rotation is valid
+               if (!canMove(game.currentPattern, 0, 0)) {
+                   // Try to adjust position
+                   if (newShape === 'vertical' && game.currentPattern.x + 1 >= GRID_SIZE) {
+                       game.currentPattern.x = GRID_SIZE - 1;
+                   }
+                   if (newShape === 'horizontal' && game.currentPattern.y + 1 >= GRID_SIZE) {
+                       game.currentPattern.y = GRID_SIZE - 1;
+                   }
+                   
+                   // If still can't place, revert rotation
+                   if (!canMove(game.currentPattern, 0, 0)) {
+                       game.currentPattern.shape = oldShape;
+                   }
+               }
+           }
+       }
+
+       // Game control functions
+       function newGame() {
+           game.grid = Array(GRID_SIZE).fill().map(() => Array(GRID_SIZE).fill(null));
+           game.score = 0;
+           game.level = 1;
+           game.dropInterval = 1000;
+           game.currentPattern = createPattern();
+           game.gameRunning = true;
+           game.gameOver = false;
+           game.gamePaused = false;
+           document.getElementById("startOverlay").style.display = "none";
+           document.getElementById("pauseButton").textContent = "⏸️ Pause";
+           updateDisplay();
+       }
+
+       function togglePause() {
+           if (!game.gameRunning) return;
+           
+           game.gamePaused = !game.gamePaused;
+           const pauseButton = document.getElementById("pauseButton");
+           pauseButton.textContent = game.gamePaused ? "▶️ Resume" : "⏸️ Pause";
+       }
+
+       function gameOver() {
+           game.gameRunning = false;
+           game.gameOver = true;
+           
+           // Update best score
+           if (game.score > game.bestScore) {
+               game.bestScore = game.score;
+               localStorage.setItem("colorMatchBest", game.bestScore);
+               document.getElementById("bestScore").textContent = game.bestScore;
+           }
+           
+           // Show game over modal
+           document.getElementById("finalScore").textContent = game.score;
+           document.getElementById("finalLevel").textContent = game.level;
+           showModal("gameOverModal");
+       }
+
        function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
+           document.getElementById("currentScore").textContent = game.score;
            document.getElementById("gameLevel").textContent = game.level;
        }
 
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
+       // Modal functions
+       function showModal(modalId) {
+           document.getElementById(modalId).classList.add("show");
        }
 
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
-           
-           document.body.appendChild(messageEl);
-           
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
        function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
-           }
+           document.querySelectorAll('.modal').forEach(modal => {
+               modal.classList.remove("show");
+           });
        }
 
-       // Show Leaderboard
-       function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("color-matchLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
-           
-           if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
-           } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
-               });
-           }
-           
-           alert(message);
-       }
-
-       // Utility Functions
        function showInstructions() {
-           alert(`🎯 Color Match - How to Play
-
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
-
-🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
-
-Good luck! 🍀`);
+           showModal("instructionsModal");
        }
 
+       function showLeaderboard() {
+           alert(`Your Best Score: ${game.bestScore}\nCurrent Score: ${game.score}\nLevel: ${game.level}`);
+       }
+
+       function playAgain() {
+           closeModal();
+           newGame();
+       }
+
+       // Utility functions
        function toggleFullscreen() {
            if (!document.fullscreenElement) {
                document.documentElement.requestFullscreen().catch(err => {
-                   console.log("Fullscreen not supported");
+                   console.log('Fullscreen not supported');
                });
            } else {
                document.exitFullscreen();
            }
        }
 
-       function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Color Match! Can you beat my score? 🏆`;
+       // Touch controls for mobile
+       let touchStartX = 0;
+       let touchStartY = 0;
+
+       game.canvas?.addEventListener('touchstart', (e) => {
+           e.preventDefault();
+           touchStartX = e.touches[0].clientX;
+           touchStartY = e.touches[0].clientY;
+       }, { passive: false });
+
+       game.canvas?.addEventListener('touchend', (e) => {
+           e.preventDefault();
+           const touchEndX = e.changedTouches[0].clientX;
+           const touchEndY = e.changedTouches[0].clientY;
            
-           if (navigator.share) {
-               navigator.share({
-                   title: "Color Match - My Score",
-                   text: text,
-                   url: window.location.href
-               });
+           const dx = touchEndX - touchStartX;
+           const dy = touchEndY - touchStartY;
+           
+           const threshold = 30;
+           
+           if (Math.abs(dx) > Math.abs(dy)) {
+               if (dx > threshold) {
+                   moveRight();
+               } else if (dx < -threshold) {
+                   moveLeft();
+               }
            } else {
-               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
-               });
+               if (dy > threshold) {
+                   dropPattern();
+               } else if (dy < -threshold) {
+                   rotatePattern();
+               }
            }
-           
-           trackEvent("score_shared", { score: game.score });
-       }
+       }, { passive: false });
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "color-match",
-                   ...parameters
-               });
+       // Click outside modal to close
+       document.addEventListener('click', (e) => {
+           if (e.target.classList.contains('modal')) {
+               closeModal();
            }
-           console.log(`Event: ${eventName}`, parameters);
-       }
-
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
+       });
 
        // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
+       document.addEventListener('DOMContentLoaded', () => {
            initGame();
        });
 
-       // Prevent zoom on mobile
+       // Prevent zoom on double tap
        let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
+       document.addEventListener('touchend', function (event) {
            const now = (new Date()).getTime();
            if (now - lastTouchEnd <= 300) {
                event.preventDefault();
@@ -953,18 +1098,111 @@ Good luck! 🍀`);
            lastTouchEnd = now;
        }, false);
 
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
+       // Service Worker for offline play
+       if ('serviceWorker' in navigator) {
+           window.addEventListener('load', () => {
+               navigator.serviceWorker.register('/sw.js')
+                   .then((registration) => {
+                       console.log('SW registered: ', registration);
+                   })
+                   .catch((registrationError) => {
+                       console.log('SW registration failed: ', registrationError);
+                   });
+           });
+       }
 
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
+       // Analytics tracking for ad optimization
+       function trackGameEvent(action, value = null) {
+           if (typeof gtag !== 'undefined') {
+               gtag('event', action, {
+                   event_category: 'game',
+                   event_label: 'color-match',
+                   value: value
+               });
            }
-       });
+       }
 
-       console.log("🎮 Color Match loaded successfully!");
-       
-    </script>
+       // Track game start
+       function trackGameStart() {
+           trackGameEvent('game_start');
+       }
+
+       // Track game over
+       function trackGameOver() {
+           trackGameEvent('game_over', game.score);
+       }
+
+       // Track level progression
+       function trackLevelUp(level) {
+           trackGameEvent('level_up', level);
+       }
+
+       // Add tracking to existing functions
+       const originalStartGame = startGame;
+       startGame = function() {
+           trackGameStart();
+           originalStartGame();
+       };
+
+       const originalGameOver = gameOver;
+       gameOver = function() {
+           trackGameOver();
+           originalGameOver();
+       };
+
+       // Lazy load ads for better performance
+       function loadAds() {
+           // Replace with actual AdSense code
+           console.log('Loading ads...');
+       }
+
+       // Load ads after game initialization
+       setTimeout(loadAds, 2000);
+
+       // Performance optimization
+       let lastRenderTime = 0;
+       const targetFPS = 60;
+       const frameInterval = 1000 / targetFPS;
+
+       function optimizedGameLoop(currentTime) {
+           if (currentTime - lastRenderTime >= frameInterval) {
+               gameLoop(currentTime);
+               lastRenderTime = currentTime;
+           }
+           requestAnimationFrame(optimizedGameLoop);
+       }
+
+       // PWA manifest
+       const manifestData = {
+           name: "Color Match - HTML5 Game",
+           short_name: "Color Match",
+           description: "Addictive color matching puzzle game",
+           start_url: "/games/color-match.html",
+           display: "standalone",
+           background_color: "#0c0c0c",
+           theme_color: "#667eea",
+           icons: [
+               {
+                   src: "/icons/icon-192.png",
+                   sizes: "192x192",
+                   type: "image/png"
+               },
+               {
+                   src: "/icons/icon-512.png",
+                   sizes: "512x512",
+                   type: "image/png"
+               }
+           ]
+       };
+
+       // Add manifest link
+       const manifestBlob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+       const manifestURL = URL.createObjectURL(manifestBlob);
+       const manifestLink = document.createElement('link');
+       manifestLink.rel = 'manifest';
+       manifestLink.href = manifestURL;
+       document.head.appendChild(manifestLink);
+
+   </script>
 </body>
 </html>
