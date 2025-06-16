@@ -112,14 +112,14 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            order: 1;
+            flex-shrink: 0;
         }
 
         .nav-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
-            order: 2;
+            flex-shrink: 0;
         }
 
         .nav-button {
@@ -133,6 +133,7 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         .nav-button:hover {
@@ -154,23 +155,21 @@
         .game-section {
             flex: 2;
             min-width: 320px;
-            order: 1;
         }
 
         .game-header {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto;
             align-items: center;
             margin-bottom: 1.5rem;
-            flex-wrap: wrap;
             gap: 1rem;
         }
 
         .stats-section {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
-            flex-wrap: wrap;
-            order: 1;
+            min-width: 340px;
         }
 
         .stat-box {
@@ -199,15 +198,14 @@
         }
 
         .game-controls {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 0.8rem;
-            flex-wrap: wrap;
-            order: 2;
+            min-width: 300px;
         }
 
         .control-button {
             padding: 8px 16px;
-            background: var(--secondary-gradient);
             border: none;
             border-radius: 8px;
             color: white;
@@ -216,7 +214,11 @@
             transition: all 0.3s ease;
             font-size: 0.8rem;
             white-space: nowrap;
-            min-width: 100px;
+            text-align: center;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .control-button:hover {
@@ -224,20 +226,20 @@
             box-shadow: var(--shadow-card);
         }
 
-        .control-button.new-game {
+        .control-button:nth-child(1) {
             background: var(--success-color);
-            order: 1;
+            grid-column: 1;
         }
 
-        .control-button.pause {
+        .control-button:nth-child(2) {
             background: var(--warning-color);
-            order: 2;
+            grid-column: 2;
         }
 
-        .control-button.scores {
+        .control-button:nth-child(3) {
             background: var(--accent-color);
             color: #000;
-            order: 3;
+            grid-column: 3;
         }
 
         .game-canvas-container {
@@ -345,7 +347,6 @@
             display: flex;
             flex-direction: column;
             gap: 2rem;
-            order: 2;
         }
 
         .info-section {
@@ -445,13 +446,18 @@
                 font-size: 12px;
             }
             
+            .game-header {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
             .stats-section {
-                order: 1;
+                grid-template-columns: repeat(2, 1fr);
+                justify-self: center;
             }
             
             .game-controls {
-                order: 2;
-                justify-content: center;
+                justify-self: center;
             }
         }
     </style>
@@ -500,9 +506,9 @@
                 </div>
                 
                 <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
-                    <button class="control-button scores" onclick="showLeaderboard()">🏆 Scores</button>
+                    <button class="control-button" onclick="newGame()">🆕 New Game</button>
+                    <button class="control-button" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
+                    <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
             </div>
 
@@ -519,13 +525,13 @@
             <!-- Mobile Controls -->
             <div class="mobile-controls">
                 <div class="mobile-control"></div>
-                <div class="mobile-control" onclick="movePlayer(0, -1)">⬆️</div>
+                <div class="mobile-control" onclick="setPlayerDirection(0, -1)">⬆️</div>
                 <div class="mobile-control"></div>
-                <div class="mobile-control" onclick="movePlayer(-1, 0)">⬅️</div>
+                <div class="mobile-control" onclick="setPlayerDirection(-1, 0)">⬅️</div>
                 <div class="mobile-control" onclick="togglePause()">⏸️</div>
-                <div class="mobile-control" onclick="movePlayer(1, 0)">➡️</div>
+                <div class="mobile-control" onclick="setPlayerDirection(1, 0)">➡️</div>
                 <div class="mobile-control"></div>
-                <div class="mobile-control" onclick="movePlayer(0, 1)">⬇️</div>
+                <div class="mobile-control" onclick="setPlayerDirection(0, 1)">⬇️</div>
                 <div class="mobile-control"></div>
             </div>
         </main>
@@ -603,10 +609,12 @@
         // Game timing
         let lastTime = 0;
         let ghostMoveCounter = 0;
+        let playerMoveCounter = 0;
         const GHOST_MOVE_SPEED = 15; // Ghosts move every 15 frames
+        const PLAYER_MOVE_SPEED = 8; // Player moves every 8 frames
 
         // Game objects
-        let player = { x: 1, y: 1, dx: 0, dy: 0 };
+        let player = { x: 1, y: 1, dx: 0, dy: 0, nextDx: 0, nextDy: 0 };
         let ghosts = [];
         let dots = [];
         let powerPellets = [];
@@ -681,11 +689,11 @@
                 const diffY = touchStartY - touchEndY;
 
                 if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (diffX > 0) movePlayer(-1, 0); // Left
-                    else movePlayer(1, 0); // Right
+                    if (diffX > 0) setPlayerDirection(-1, 0); // Left
+                    else setPlayerDirection(1, 0); // Right
                 } else {
-                    if (diffY > 0) movePlayer(0, -1); // Up
-                    else movePlayer(0, 1); // Down
+                    if (diffY > 0) setPlayerDirection(0, -1); // Up
+                    else setPlayerDirection(0, 1); // Down
                 }
 
                 touchStartX = null;
@@ -693,7 +701,7 @@
             });
         }
 
-        // Handle keyboard input
+        // Handle keyboard input - set direction
         function handleKeyPress(e) {
             if (!game.gameRunning) return;
 
@@ -701,22 +709,22 @@
                 case 'arrowup':
                 case 'w':
                     e.preventDefault();
-                    movePlayer(0, -1);
+                    setPlayerDirection(0, -1);
                     break;
                 case 'arrowdown':
                 case 's':
                     e.preventDefault();
-                    movePlayer(0, 1);
+                    setPlayerDirection(0, 1);
                     break;
                 case 'arrowleft':
                 case 'a':
                     e.preventDefault();
-                    movePlayer(-1, 0);
+                    setPlayerDirection(-1, 0);
                     break;
                 case 'arrowright':
                 case 'd':
                     e.preventDefault();
-                    movePlayer(1, 0);
+                    setPlayerDirection(1, 0);
                     break;
                 case ' ':
                     e.preventDefault();
@@ -727,6 +735,13 @@
                     newGame();
                     break;
             }
+        }
+
+        // Set player direction for continuous movement
+        function setPlayerDirection(dx, dy) {
+            if (!game.gameRunning || game.gamePaused) return;
+            player.nextDx = dx;
+            player.nextDy = dy;
         }
 
         // Start game
@@ -744,7 +759,7 @@
 
         // Reset game state
         function resetGameState() {
-            player = { x: 1, y: 1, dx: 0, dy: 0 };
+            player = { x: 1, y: 1, dx: 0, dy: 0, nextDx: 0, nextDy: 0 };
             ghosts = [];
             dots = [];
             powerPellets = [];
@@ -752,6 +767,7 @@
             game.level = 1;
             game.lives = 3;
             ghostMoveCounter = 0;
+            playerMoveCounter = 0;
             updateUI();
         }
 
@@ -777,24 +793,24 @@
                     if (maze[row][col] === 0) {
                         // Skip player starting position and central ghost area
                         if ((row === 1 && col === 1) || 
-                            (row >= 8 && row <= 11 && col >= 8 && col <= 11)) continue;
-                        
-                        // Add dots to all accessible spaces
-                        dots.push({ x: col, y: row, type: 'dot', points: 10 });
-                    }
-                }
-            }
-            
-            // Add power pellets in 4 corners and remove regular dots there
-            const powerPelletPositions = [
-                {x: 1, y: 3}, {x: 18, y: 3}, {x: 1, y: 15}, {x: 18, y: 15}
-            ];
-            
-            powerPelletPositions.forEach(pos => {
-                // Remove any regular dot at this position
-                for (let i = dots.length - 1; i >= 0; i--) {
-                    if (dots[i].x === pos.x && dots[i].y === pos.y) {
-                        dots.splice(i, 1);
+                           (row >= 8 && row <= 11 && col >= 8 && col <= 11)) continue;
+                       
+                       // Add dots to all accessible spaces
+                       dots.push({ x: col, y: row, type: 'dot', points: 10 });
+                   }
+               }
+           }
+           
+           // Add power pellets in 4 corners and remove regular dots there
+           const powerPelletPositions = [
+               {x: 1, y: 3}, {x: 18, y: 3}, {x: 1, y: 15}, {x: 18, y: 15}
+           ];
+           
+           powerPelletPositions.forEach(pos => {
+               // Remove any regular dot at this position
+               for (let i = dots.length - 1; i >= 0; i--) {
+                   if (dots[i].x === pos.x && dots[i].y === pos.y) {
+                       dots.splice(i, 1);
                        break;
                    }
                }
@@ -815,39 +831,79 @@
            ];
        }
 
-       // Handle tunnel wrapping and movement
-       function movePlayer(dx, dy) {
-           if (!game.gameRunning || game.gamePaused) return;
+       // Move player continuously
+       function movePlayer() {
+           playerMoveCounter++;
+           if (playerMoveCounter < PLAYER_MOVE_SPEED) {
+               return;
+           }
+           playerMoveCounter = 0;
 
-           let newX = player.x + dx;
-           let newY = player.y + dy;
-
-           // Handle left-right tunnel wrapping
-           if (newX < 0) {
-               // Check if we're in a tunnel row (rows 7, 9, 11)
-               if (newY === 7 || newY === 9 || newY === 11) {
-                   newX = COLS - 1; // Wrap to right side
-               } else {
-                   return; // Block movement if not in tunnel
+           // Try to change direction if new direction is requested
+           if (player.nextDx !== 0 || player.nextDy !== 0) {
+               const newX = player.x + player.nextDx;
+               const newY = player.y + player.nextDy;
+               
+               // Handle tunnel wrapping for direction change
+               let canChangeDirection = false;
+               if (player.nextDx < 0 && player.x === 0) {
+                   // Left tunnel
+                   if (player.y === 7 || player.y === 9 || player.y === 11) {
+                       canChangeDirection = true;
+                   }
+               } else if (player.nextDx > 0 && player.x === COLS - 1) {
+                   // Right tunnel
+                   if (player.y === 7 || player.y === 9 || player.y === 11) {
+                       canChangeDirection = true;
+                   }
+               } else if (newX >= 0 && newX < COLS && newY >= 0 && newY < ROWS && 
+                         maze[newY] && maze[newY][newX] === 0) {
+                   canChangeDirection = true;
                }
-           } else if (newX >= COLS) {
-               // Check if we're in a tunnel row
-               if (newY === 7 || newY === 9 || newY === 11) {
-                   newX = 0; // Wrap to left side
-               } else {
-                   return; // Block movement if not in tunnel
+               
+               if (canChangeDirection) {
+                   player.dx = player.nextDx;
+                   player.dy = player.nextDy;
+                   player.nextDx = 0;
+                   player.nextDy = 0;
                }
            }
 
-           // Check bounds and walls for normal movement
-           if (newY >= 0 && newY < ROWS && 
-               maze[newY] && maze[newY][newX] === 0) {
-               player.x = newX;
-               player.y = newY;
-               player.dx = dx;
-               player.dy = dy;
-               
-               checkCollisions();
+           // Continue moving in current direction
+           if (player.dx !== 0 || player.dy !== 0) {
+               let newX = player.x + player.dx;
+               let newY = player.y + player.dy;
+
+               // Handle left-right tunnel wrapping
+               if (newX < 0) {
+                   if (newY === 7 || newY === 9 || newY === 11) {
+                       newX = COLS - 1; // Wrap to right side
+                   } else {
+                       player.dx = 0; // Stop if not in tunnel
+                       player.dy = 0;
+                       return;
+                   }
+               } else if (newX >= COLS) {
+                   if (newY === 7 || newY === 9 || newY === 11) {
+                       newX = 0; // Wrap to left side
+                   } else {
+                       player.dx = 0; // Stop if not in tunnel
+                       player.dy = 0;
+                       return;
+                   }
+               }
+
+               // Check bounds and walls for normal movement
+               if (newY >= 0 && newY < ROWS && 
+                   maze[newY] && maze[newY][newX] === 0) {
+                   player.x = newX;
+                   player.y = newY;
+                   checkCollisions();
+               } else {
+                   // Stop if hitting wall
+                   player.dx = 0;
+                   player.dy = 0;
+               }
            }
        }
 
@@ -926,11 +982,13 @@
            if (game.lives <= 0) {
                gameOver();
            } else {
-               // Reset player position without pausing
+               // Reset player position and stop movement
                player.x = 1;
                player.y = 1;
                player.dx = 0;
                player.dy = 0;
+               player.nextDx = 0;
+               player.nextDy = 0;
                
                // Reset ghosts to starting positions
                createGhosts();
@@ -951,11 +1009,13 @@
            setTimeout(() => {
                createDots();
                createGhosts();
-               // Reset player position
+               // Reset player position and stop movement
                player.x = 1;
                player.y = 1;
                player.dx = 0;
                player.dy = 0;
+               player.nextDx = 0;
+               player.nextDy = 0;
                
                if (game.gameRunning) {
                    game.gamePaused = false;
@@ -1093,26 +1153,27 @@
                });
            }
 
-           // Draw player (Pac-Man)
+           // Draw player (Pac-Man) with animated mouth
            ctx.fillStyle = '#ffff00';
            ctx.beginPath();
            
-           // Calculate mouth angle based on direction
+           // Calculate mouth angle based on direction and add mouth animation
            let startAngle = 0;
            let endAngle = Math.PI * 2;
+           const mouthAnimation = Math.sin(Date.now() * 0.01) * 0.3 + 0.5; // Animate mouth opening
            
            if (player.dx === 1) { // Right
-               startAngle = 0.2 * Math.PI;
-               endAngle = 1.8 * Math.PI;
+               startAngle = 0.2 * Math.PI * mouthAnimation;
+               endAngle = (2 - 0.2 * mouthAnimation) * Math.PI;
            } else if (player.dx === -1) { // Left
-               startAngle = 1.2 * Math.PI;
-               endAngle = 0.8 * Math.PI;
+               startAngle = (1 + 0.2 * mouthAnimation) * Math.PI;
+               endAngle = (1 - 0.2 * mouthAnimation) * Math.PI;
            } else if (player.dy === -1) { // Up
-               startAngle = 1.7 * Math.PI;
-               endAngle = 1.3 * Math.PI;
+               startAngle = (1.5 + 0.2 * mouthAnimation) * Math.PI;
+               endAngle = (1.5 - 0.2 * mouthAnimation) * Math.PI;
            } else if (player.dy === 1) { // Down
-               startAngle = 0.7 * Math.PI;
-               endAngle = 0.3 * Math.PI;
+               startAngle = (0.5 + 0.2 * mouthAnimation) * Math.PI;
+               endAngle = (0.5 - 0.2 * mouthAnimation) * Math.PI;
            }
            
            ctx.arc(
@@ -1199,6 +1260,7 @@
            if (!game.gameRunning) return;
 
            if (!game.gamePaused) {
+               movePlayer(); // Continuous player movement
                moveGhosts();
                checkCollisions();
            }
