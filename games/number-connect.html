@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Connect - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Number Connect for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="number-connect, puzzle game, html5 game, free online game, browser game, mobile game">
+    <title>Number Connect - Free HTML5 Puzzle Game | GameHub 99</title>
+    <meta name="description" content="Play Number Connect for free! Connect sequential numbers in this addictive puzzle game. Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="number connect, puzzle game, html5 game, free online game, browser game, mobile game, number puzzle">
     <meta name="author" content="GameHub 99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
     <meta property="og:url" content="https://gamehub99.com/games/number-connect.html">
-    <meta property="og:title" content="Number Connect - Free HTML5 Game">
-    <meta property="og:description" content="Challenge your mind with this addictive puzzle game!">
+    <meta property="og:title" content="Number Connect - Free HTML5 Puzzle Game">
+    <meta property="og:description" content="Connect sequential numbers in this addictive puzzle game!">
     <meta property="og:image" content="https://gamehub99.com/assets/number-connect-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gamehub99.com/games/number-connect.html">
-    <meta property="twitter:title" content="Number Connect - Free HTML5 Game">
-    <meta property="twitter:description" content="Challenge your mind with this addictive puzzle game!">
+    <meta property="twitter:title" content="Number Connect - Free HTML5 Puzzle Game">
+    <meta property="twitter:description" content="Connect sequential numbers in this addictive puzzle game!">
     <meta property="twitter:image" content="https://gamehub99.com/assets/number-connect-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -184,46 +183,44 @@
             font-size: 0.7rem;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--accent-color);
+            margin-top: 0.2rem;
         }
 
         .game-controls {
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            padding: 10px 16px;
+            background: var(--primary-gradient);
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.8rem;
+            white-space: nowrap;
         }
 
         .control-button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-glow);
         }
 
         .control-button.new-game {
             background: var(--success-color);
-        }
-
-        .control-button.pause {
-            background: var(--warning-color);
+            color: #000;
         }
 
         .game-canvas-container {
@@ -232,48 +229,121 @@
             border-radius: 15px;
             padding: 1rem;
             backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
+            margin-bottom: 1rem;
             position: relative;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .game-cell {
+            aspect-ratio: 1;
+            background: var(--card-bg);
             border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            color: var(--text-primary);
+            min-height: 50px;
+        }
+
+        .game-cell:hover {
+            background: var(--accent-color);
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        .game-cell.selected {
+            background: var(--success-color);
+            color: #000;
+            border-color: var(--success-color);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .game-cell.connected {
+            background: var(--warning-color);
+            color: #000;
+            border-color: var(--warning-color);
+        }
+
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .start-button {
+            padding: 15px 30px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
         }
 
         .mobile-controls {
-            display: none;
+            display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: 10px;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 1rem;
         }
 
         .mobile-control {
             aspect-ratio: 1;
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
+            border: 2px solid var(--card-border);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
             user-select: none;
+            min-height: 50px;
         }
 
-        .mobile-control:hover, .mobile-control:active {
+        .mobile-control:hover {
             background: var(--accent-color);
-            transform: translateY(-2px);
+            transform: scale(1.1);
         }
 
         .mobile-control.empty {
@@ -288,93 +358,213 @@
             gap: 1.5rem;
         }
 
-        .sidebar-section {
+        .info-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instructions-list {
+            list-style: none;
+        }
+
+        .instructions-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instructions-list li::before {
+            content: "🎯";
+            font-size: 1rem;
+        }
+
+        .game-over-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
             backdrop-filter: blur(10px);
         }
 
-        .sidebar-title {
-            font-size: 1.1rem;
+        .modal-content {
+            background: var(--dark-gradient);
+            border: 2px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .modal-stats {
+            margin: 1.5rem 0;
+        }
+
+        .modal-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .modal-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
             font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .instructions {
-            color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
+        .modal-button.primary {
+            background: var(--success-color);
+            color: #000;
         }
 
-        .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+        .modal-button.secondary {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--card-border);
         }
 
-        .instructions li {
-            margin-bottom: 0.4rem;
-        }
-
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         @media (max-width: 768px) {
-            .game-container {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .game-title {
-                font-size: 1.5rem;
-            }
-            
-            .nav-buttons {
-                justify-content: center;
-            }
-            
-            .game-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            
-            .stats-section {
-                justify-content: center;
-            }
-            
-            .game-controls {
-                justify-content: center;
-            }
-            
-            .mobile-controls {
-                display: grid;
-            }
-            
-            .sidebar {
-                order: -1;
-            }
-            
             .ad-placeholder {
                 width: 320px;
                 height: 50px;
                 font-size: 12px;
             }
+
+            .game-container {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .nav-buttons {
+                justify-content: center;
+            }
+
+            .game-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .stats-section {
+                justify-content: center;
+            }
+
+            .game-controls {
+                justify-content: center;
+            }
+
+            .mobile-controls {
+                display: grid;
+            }
+
+            .game-board {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 6px;
+                padding: 15px;
+            }
+
+            .game-cell {
+                font-size: 1rem;
+                min-height: 40px;
+            }
         }
-        
+
+        @media (max-width: 480px) {
+            .game-board {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 4px;
+                padding: 10px;
+            }
+
+            .game-cell {
+                font-size: 0.9rem;
+                min-height: 35px;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .loading {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
     </style>
 </head>
 <body>
@@ -386,7 +576,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🎲 Number Connect</h1>
+            <h1 class="game-title">🔢 Number Connect</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -411,6 +601,10 @@
                         <div class="stat-value" id="bestScore">0</div>
                     </div>
                     <div class="stat-box">
+                        <div class="stat-label">Moves</div>
+                        <div class="stat-value" id="movesCount">0</div>
+                    </div>
+                    <div class="stat-box">
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
@@ -418,51 +612,103 @@
                 
                 <div class="game-controls">
                     <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
+                    <button class="control-button" onclick="shuffleBoard()">🔄 Shuffle</button>
                     <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
             </div>
 
-            <!-- Game Canvas -->
+            <!-- Game Board -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <div class="start-overlay" id="startOverlay">
+                    <h2 style="color: var(--accent-color); margin-bottom: 1rem;">🔢 Number Connect</h2>
+                    <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1rem;">
+                        Connect sequential numbers to clear the board!<br>
+                        Find pairs of consecutive numbers and click to connect them.
+                    </p>
+                    <button class="start-button" onclick="startGame()">🚀 Start Game</button>
+                </div>
+                
+                <div class="game-board" id="gameBoard">
+                    <!-- Game cells will be generated here -->
+                </div>
             </div>
 
             <!-- Mobile Controls -->
-            <div class="mobile-controls">
+            <div class="mobile-controls" style="display: none;">
                 <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
+                <div class="mobile-control" onclick="showHint()">💡</div>
                 <div class="mobile-control empty"></div>
             </div>
         </main>
 
         <!-- Sidebar -->
         <aside class="sidebar loading">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">🎯 How to Play</h3>
-                <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
-                    <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
-                    </ul>
-                </div>
+            <div class="info-card">
+                <h3 class="card-title">🎯 How to Play</h3>
+                <ul class="instructions-list">
+                    <li>Find pairs of consecutive numbers (1-2, 3-4, etc.)</li>
+                    <li>Click on both numbers to connect them</li>
+                    <li>Connected pairs will disappear from the board</li>
+                    <li>Clear all numbers to advance to the next level</li>
+                    <li>Score points for each successful connection</li>
+                    <li>Use shuffle button when stuck</li>
+                </ul>
             </div>
 
-            <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
-                    250x250<br>Sidebar Ad
+            <div class="info-card">
+                <h3 class="card-title">🏆 Game Features</h3>
+                <ul class="instructions-list">
+                    <li>Progressive difficulty levels</li>
+                    <li>Local high score tracking</li>
+                    <li>Mobile-friendly touch controls</li>
+                    <li>Addictive puzzle gameplay</li>
+                    <li>Beautiful animations and effects</li>
+                    <li>No time limits - play at your pace</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3 class="card-title">🎮 More Games</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    Discover 99 amazing HTML5 games in our collection!
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <a href="/games/2048-deluxe.html" class="nav-button" style="font-size: 0.8rem;">2048 Deluxe</a>
+                    <a href="/games/tetris-modern.html" class="nav-button" style="font-size: 0.8rem;">Tetris Modern</a>
+                    <a href="/games/snake-evolution.html" class="nav-button" style="font-size: 0.8rem;">Snake Evolution</a>
                 </div>
             </div>
         </aside>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-title">🎉 Level Complete!</div>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <span>Score:</span>
+                    <span id="modalScore">0</span>
+                </div>
+                <div class="modal-stat">
+                    <span>Level:</span>
+                    <span id="modalLevel">1</span>
+                </div>
+                <div class="modal-stat">
+                    <span>Moves:</span>
+                    <span id="modalMoves">0</span>
+                </div>
+                <div class="modal-stat">
+                    <span>Best Score:</span>
+                    <span id="modalBest">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="nextLevel()">🚀 Next Level</button>
+                <button class="modal-button secondary" onclick="newGame()">🆕 New Game</button>
+                <button class="modal-button secondary" onclick="shareScore()">📤 Share</button>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Ad Container -->
@@ -471,35 +717,28 @@
     </div>
 
     <script>
-        
         // Game State
         const game = {
-            canvas: null,
-            ctx: null,
+            board: [],
+            gridSize: 6,
             score: 0,
-            bestScore: localStorage.getItem("number-connectBest") || 0,
+            moves: 0,
             level: 1,
-            gameRunning: false,
-            gamePaused: false,
-            gameOver: false
+            bestScore: 0,
+            gameStarted: false,
+            selectedCells: [],
+            numbers: [],
+            maxNumber: 10
         };
 
-        // Initialize game
+        // Initialize Game
         function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
-            
             // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
+            game.bestScore = parseInt(localStorage.getItem('numberConnect_bestScore') || '0');
+            document.getElementById('bestScore').textContent = game.bestScore.toLocaleString();
             
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
-            
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
+            // Setup game board
+            setupBoard();
             
             // Animate elements
             setTimeout(() => {
@@ -509,278 +748,388 @@
             }, 100);
         }
 
+        // Setup Game Board
+        function setupBoard() {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = '';
+            
+            // Adjust grid size based on level
+            const gridSize = Math.min(6 + Math.floor(game.level / 3), 8);
+            game.gridSize = gridSize;
+            
+            // Generate numbers for the board
+            generateNumbers();
+            
+            // Create board cells
+            board.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+            
+            for (let i = 0; i < gridSize * gridSize; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'game-cell';
+                cell.dataset.index = i;
+                cell.textContent = game.numbers[i] || '';
+                cell.onclick = () => selectCell(i);
+                
+                if (!game.numbers[i]) {
+                    cell.style.opacity = '0.3';
+                    cell.style.pointerEvents = 'none';
+                }
+                
+                board.appendChild(cell);
+            }
+        }
+
+        // Generate Numbers for Board
+        function generateNumbers() {
+            const totalCells = game.gridSize * game.gridSize;
+            const usableCells = Math.floor(totalCells * 0.8); // Use 80% of cells
+            const pairCount = Math.floor(usableCells / 2);
+            
+            game.numbers = new Array(totalCells).fill(null);
+            const positions = [];
+            
+            // Get random positions
+            for (let i = 0; i < totalCells; i++) {
+                positions.push(i);
+            }
+            positions.sort(() => Math.random() - 0.5);
+            
+            // Generate consecutive number pairs
+            let usedPositions = 0;
+            for (let i = 1; i <= pairCount && usedPositions < usableCells - 1; i++) {
+                const baseNumber = Math.floor(Math.random() * game.maxNumber) + 1;
+                
+                // Place the pair
+                game.numbers[positions[usedPositions]] = baseNumber;
+                game.numbers[positions[usedPositions + 1]] = baseNumber + 1;
+                
+                usedPositions += 2;
+            }
+        }
+
+        // Start Game
+        function startGame() {
+            document.getElementById('startOverlay').style.display = 'none';
+            game.gameStarted = true;
+            newGame();
+            trackEvent('game_start');
+        }
+
         // New Game
         function newGame() {
             game.score = 0;
+            game.moves = 0;
             game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
+            game.gameStarted = true;
+            game.selectedCells = [];
+            game.maxNumber = 10;
             
+            setupBoard();
             updateDisplay();
-            gameLoop();
+            closeModal();
             
-            trackEvent("game_start");
+            trackEvent('new_game');
         }
 
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
+        // Select Cell
+        function selectCell(index) {
+            if (!game.gameStarted || !game.numbers[index]) return;
+            
+            const cell = document.querySelector(`[data-index="${index}"]`);
+            
+            // If cell is already selected, deselect it
+            if (game.selectedCells.includes(index)) {
+                game.selectedCells = game.selectedCells.filter(i => i !== index);
+                cell.classList.remove('selected');
                 return;
             }
             
-            updateGame();
-            render();
+            // Add to selection
+            game.selectedCells.push(index);
+            cell.classList.add('selected');
             
-            setTimeout(gameLoop, 100);
+            // Check if we have two cells selected
+            if (game.selectedCells.length === 2) {
+                checkConnection();
+            }
         }
 
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
+        // Check Connection
+        function checkConnection() {
+            const [index1, index2] = game.selectedCells;
+            const num1 = game.numbers[index1];
+            const num2 = game.numbers[index2];
             
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
+            // Check if numbers are consecutive
+            if (Math.abs(num1 - num2) === 1) {
+                // Valid connection
+                connectNumbers(index1, index2);
+                game.score += (num1 + num2) * 10;
+                game.moves++;
+                
+                // Add bonus for level
+                game.score += game.level * 50;
+                
+                trackEvent('valid_connection', num1 + '+' + num2);
+            } else {
+                // Invalid connection
+                game.moves++;
+                shakeAnimation();
+                trackEvent('invalid_connection');
             }
             
+            // Clear selection
+            clearSelection();
             updateDisplay();
             
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
+            // Check win condition
+            setTimeout(checkWinCondition, 300);
         }
 
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
+        // Connect Numbers
+        function connectNumbers(index1, index2) {
+            const cell1 = document.querySelector(`[data-index="${index1}"]`);
+            const cell2 = document.querySelector(`[data-index="${index2}"]`);
             
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+            // Animate connection
+            cell1.classList.add('connected');
+            cell2.classList.add('connected');
             
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Number Connect", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
+            // Remove numbers after animation
+            setTimeout(() => {
+                game.numbers[index1] = null;
+                game.numbers[index2] = null;
+                cell1.style.opacity = '0.3';
+                cell2.style.opacity = '0.3';
+                cell1.style.pointerEvents = 'none';
+                cell2.style.pointerEvents = 'none';
+                cell1.textContent = '';
+                cell2.textContent = '';
+                cell1.classList.remove('connected');
+                cell2.classList.remove('connected');
+            }, 500);
         }
 
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
+        // Clear Selection
+       function clearSelection() {
+           game.selectedCells.forEach(index => {
+               const cell = document.querySelector(`[data-index="${index}"]`);
+               cell.classList.remove('selected');
+           });
+           game.selectedCells = [];
+       }
 
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
-            }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
-        }
-
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
-            
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("number-connectBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+       // Check Win Condition
+       function checkWinCondition() {
+           const remainingNumbers = game.numbers.filter(num => num !== null);
+           
+           if (remainingNumbers.length === 0) {
+               // Level complete
+               levelComplete();
+           } else if (!hasValidMoves()) {
+               // No valid moves left
+               gameOver();
            }
+       }
+
+       // Check if there are valid moves
+       function hasValidMoves() {
+           const activeNumbers = [];
+           game.numbers.forEach((num, index) => {
+               if (num !== null) {
+                   activeNumbers.push(num);
+               }
+           });
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Check if any consecutive pairs exist
+           for (let i = 0; i < activeNumbers.length; i++) {
+               for (let j = i + 1; j < activeNumbers.length; j++) {
+                   if (Math.abs(activeNumbers[i] - activeNumbers[j]) === 1) {
+                       return true;
+                   }
+               }
+           }
+           return false;
        }
 
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+       // Level Complete
+       function levelComplete() {
+           game.level++;
+           game.maxNumber = Math.min(game.maxNumber + 2, 20); // Increase difficulty
            
-           document.body.appendChild(messageEl);
+           // Bonus points for completing level
+           const levelBonus = game.level * 500;
+           game.score += levelBonus;
            
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
+           updateBestScore();
+           updateDisplay();
+           
+           // Show completion modal
+           showCompletionModal();
+           
+           trackEvent('level_complete', game.level.toString());
        }
 
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
+       // Game Over
+       function gameOver() {
+           updateBestScore();
            
-           document.body.appendChild(modal);
+           // Show game over modal
+           document.getElementById('gameOverModal').querySelector('.modal-title').textContent = '😔 No More Moves!';
+           showCompletionModal();
+           
+           trackEvent('game_over', game.score.toString());
+       }
+
+       // Show Completion Modal
+       function showCompletionModal() {
+           document.getElementById('modalScore').textContent = game.score.toLocaleString();
+           document.getElementById('modalLevel').textContent = game.level;
+           document.getElementById('modalMoves').textContent = game.moves;
+           document.getElementById('modalBest').textContent = game.bestScore.toLocaleString();
+           
+           document.getElementById('gameOverModal').style.display = 'flex';
+       }
+
+       // Next Level
+       function nextLevel() {
+           closeModal();
+           setupBoard();
+           game.moves = 0;
+           updateDisplay();
        }
 
        // Close Modal
        function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           document.getElementById('gameOverModal').style.display = 'none';
+       }
+
+       // Shuffle Board
+       function shuffleBoard() {
+           if (!game.gameStarted) return;
+           
+           // Get all non-null numbers
+           const activeNumbers = game.numbers.filter(num => num !== null);
+           
+           if (activeNumbers.length === 0) return;
+           
+           // Shuffle the numbers
+           for (let i = activeNumbers.length - 1; i > 0; i--) {
+               const j = Math.floor(Math.random() * (i + 1));
+               [activeNumbers[i], activeNumbers[j]] = [activeNumbers[j], activeNumbers[i]];
+           }
+           
+           // Get available positions
+           const availablePositions = [];
+           game.numbers.forEach((num, index) => {
+               if (num !== null) {
+                   availablePositions.push(index);
+               }
+           });
+           
+           // Clear current numbers
+           game.numbers.fill(null);
+           
+           // Place shuffled numbers
+           activeNumbers.forEach((num, i) => {
+               if (i < availablePositions.length) {
+                   game.numbers[availablePositions[i]] = num;
+               }
+           });
+           
+           // Update board display
+           setupBoard();
+           game.moves++;
+           updateDisplay();
+           
+           trackEvent('board_shuffle');
+       }
+
+       // Show Hint
+       function showHint() {
+           if (!game.gameStarted) return;
+           
+           // Find a valid pair
+           const activeIndices = [];
+           game.numbers.forEach((num, index) => {
+               if (num !== null) {
+                   activeIndices.push(index);
+               }
+           });
+           
+           for (let i = 0; i < activeIndices.length; i++) {
+               for (let j = i + 1; j < activeIndices.length; j++) {
+                   const index1 = activeIndices[i];
+                   const index2 = activeIndices[j];
+                   const num1 = game.numbers[index1];
+                   const num2 = game.numbers[index2];
+                   
+                   if (Math.abs(num1 - num2) === 1) {
+                       // Highlight the hint pair
+                       const cell1 = document.querySelector(`[data-index="${index1}"]`);
+                       const cell2 = document.querySelector(`[data-index="${index2}"]`);
+                       
+                       cell1.style.boxShadow = '0 0 20px var(--warning-color)';
+                       cell2.style.boxShadow = '0 0 20px var(--warning-color)';
+                       
+                       setTimeout(() => {
+                           cell1.style.boxShadow = '';
+                           cell2.style.boxShadow = '';
+                       }, 2000);
+                       
+                       // Deduct points for hint
+                       game.score = Math.max(0, game.score - 100);
+                       updateDisplay();
+                       
+                       trackEvent('hint_used');
+                       return;
+                   }
+               }
+           }
+           
+           alert('No hints available! Try shuffling the board.');
+       }
+
+       // Shake Animation
+       function shakeAnimation() {
+           const gameBoard = document.getElementById('gameBoard');
+           gameBoard.style.animation = 'shake 0.5s ease-in-out';
+           
+           setTimeout(() => {
+               gameBoard.style.animation = '';
+           }, 500);
+       }
+
+       // Update Display
+       function updateDisplay() {
+           document.getElementById('currentScore').textContent = game.score.toLocaleString();
+           document.getElementById('bestScore').textContent = game.bestScore.toLocaleString();
+           document.getElementById('movesCount').textContent = game.moves;
+           document.getElementById('gameLevel').textContent = game.level;
+       }
+
+       // Update Best Score
+       function updateBestScore() {
+           if (game.score > game.bestScore) {
+               game.bestScore = game.score;
+               localStorage.setItem('numberConnect_bestScore', game.bestScore.toString());
+               
+               // Celebration animation
+               const bestScoreElement = document.getElementById('bestScore');
+               bestScoreElement.classList.add('pulse');
+               setTimeout(() => {
+                   bestScoreElement.classList.remove('pulse');
+               }, 1000);
            }
        }
 
        // Show Leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("number-connectLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem('numberConnect_scores') || '[]');
+           let message = "🏆 Number Connect - Top Scores 🏆\n\n";
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet! Be the first!";
            } else {
                scores.slice(0, 5).forEach((score, index) => {
                    message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
@@ -790,22 +1139,44 @@
            alert(message);
        }
 
+       // Save Score
+       function saveScore() {
+           if (game.score === 0) return;
+           
+           const scores = JSON.parse(localStorage.getItem('numberConnect_scores') || '[]');
+           scores.push(game.score);
+           scores.sort((a, b) => b - a);
+           scores.splice(10); // Keep only top 10
+           
+           localStorage.setItem('numberConnect_scores', JSON.stringify(scores));
+       }
+
        // Utility Functions
        function showInstructions() {
-           alert(`🎯 Number Connect - How to Play
+           alert(`🔢 Number Connect - How to Play
+
+🎯 Objective:
+Connect pairs of consecutive numbers to clear the board!
 
 🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
+- Click on two numbers to select them
+- Numbers must be consecutive (1-2, 3-4, etc.)
+- Connected pairs will disappear
+- Clear all numbers to advance levels
 
 🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
+- Score points for each connection
+- Higher numbers = more points
+- Complete levels for bonus points
+- Use shuffle when stuck (costs points)
+- Use hint for help (costs 100 points)
 
-Good luck! 🍀`);
+🏆 Scoring:
+- Connection: (Number1 + Number2) × 10
+- Level bonus: Level × 50
+- Completion bonus: Level × 500
+
+Good luck connecting! 🍀`);
        }
 
        function toggleFullscreen() {
@@ -819,7 +1190,7 @@ Good luck! 🍀`);
        }
 
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Number Connect! Can you beat my score? 🏆`;
+           const text = `🔢 I just scored ${game.score.toLocaleString()} points in Number Connect! Can you beat my score? 🏆`;
            
            if (navigator.share) {
                navigator.share({
@@ -829,123 +1200,146 @@ Good luck! 🍀`);
                });
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+                   alert("Score copied to clipboard! Share it with your friends!");
+               }).catch(() => {
+                   const shareText = text + "\n" + window.location.href;
+                   prompt("Copy this text to share your score:", shareText);
                });
            }
            
-           trackEvent("score_shared", { score: game.score });
+           trackEvent('score_shared', game.score.toString());
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "number-connect",
-                   ...parameters
+       // Analytics Tracking
+       function trackEvent(eventName, eventValue = '') {
+           // Google Analytics 4 tracking
+           if (typeof gtag !== 'undefined') {
+               gtag('event', eventName, {
+                   'game_name': 'number_connect',
+                   'value': eventValue,
+                   'score': game.score,
+                   'level': game.level
                });
            }
-           console.log(`Event: ${eventName}`, parameters);
+           
+           console.log(`Event: ${eventName}`, eventValue);
        }
 
-       // Add CSS animation
-       const style = document.createElement("style");
+       // Keyboard Controls
+       document.addEventListener('keydown', (event) => {
+           switch (event.key) {
+               case 'n':
+               case 'N':
+                   newGame();
+                   break;
+               case 's':
+               case 'S':
+                   shuffleBoard();
+                   break;
+               case 'h':
+               case 'H':
+                   showHint();
+                   break;
+               case 'Escape':
+                   closeModal();
+                   break;
+               case ' ':
+                   event.preventDefault();
+                   if (document.getElementById('startOverlay').style.display !== 'none') {
+                       startGame();
+                   }
+                   break;
+           }
+       });
+
+       // Touch Controls for Mobile
+       let touchStartX = 0;
+       let touchStartY = 0;
+
+       document.addEventListener('touchstart', (event) => {
+           touchStartX = event.touches[0].clientX;
+           touchStartY = event.touches[0].clientY;
+       }, { passive: true });
+
+       document.addEventListener('touchend', (event) => {
+           if (!touchStartX || !touchStartY) return;
+           
+           const touchEndX = event.changedTouches[0].clientX;
+           const touchEndY = event.changedTouches[0].clientY;
+           
+           const deltaX = touchStartX - touchEndX;
+           const deltaY = touchStartY - touchEndY;
+           
+           // Reset values
+           touchStartX = 0;
+           touchStartY = 0;
+       }, { passive: true });
+
+       // Add shake animation CSS
+       const style = document.createElement('style');
        style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+           @keyframes shake {
+               0%, 100% { transform: translateX(0); }
+               25% { transform: translateX(-5px); }
+               75% { transform: translateX(5px); }
            }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
+           
+           @keyframes fadeInUp {
+               from {
+                   opacity: 0;
+                   transform: translateY(30px);
+               }
+               to {
+                   opacity: 1;
+                   transform: translateY(0);
+               }
            }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
+           
+           .game-cell {
+               animation: fadeInUp 0.3s ease forwards;
            }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
+           
+           .game-cell:nth-child(odd) {
+               animation-delay: 0.1s;
            }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
+           
+           .game-cell:nth-child(even) {
+               animation-delay: 0.2s;
            }
        `;
        document.head.appendChild(style);
 
+       // Service Worker for PWA (optional)
+       if ('serviceWorker' in navigator) {
+           window.addEventListener('load', () => {
+               navigator.serviceWorker.register('/sw.js').catch(() => {
+                   console.log('Service Worker registration failed');
+               });
+           });
+       }
+
        // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
-           initGame();
+       document.addEventListener('DOMContentLoaded', initGame);
+
+       // Auto-save score on page unload
+       window.addEventListener('beforeunload', () => {
+           saveScore();
        });
 
-       // Prevent zoom on mobile
+       // Handle visibility change (pause when tab is hidden)
+       document.addEventListener('visibilitychange', () => {
+           if (document.hidden) {
+               // Tab is hidden - could pause game here if needed
+               console.log('Game paused - tab hidden');
+           } else {
+               // Tab is visible again
+               console.log('Game resumed - tab visible');
+           }
+       });
+
+       // Prevent zoom on mobile double-tap
        let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
+       document.addEventListener('touchend', (event) => {
            const now = (new Date()).getTime();
            if (now - lastTouchEnd <= 300) {
                event.preventDefault();
@@ -953,18 +1347,53 @@ Good luck! 🍀`);
            lastTouchEnd = now;
        }, false);
 
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
-
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
-           }
+       // Handle orientation change
+       window.addEventListener('orientationchange', () => {
+           setTimeout(() => {
+               // Recalculate layout after orientation change
+               setupBoard();
+           }, 100);
        });
 
-       console.log("🎮 Number Connect loaded successfully!");
+       // Preload sounds (if you want to add audio)
+       const sounds = {
+           connect: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmEctmQ='), // Connection success
+           error: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmEcBjWh0TqmdDMhAUtmfzJHKAAAGm1'), // Error sound
+           levelUp: new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmEcQMjr0dKfSCgAAAAAAAAA') // Level up
+       };
+
+       // Audio settings
+       const audioEnabled = localStorage.getItem('numberConnect_audio') !== 'false';
        
-    </script>
+       function playSound(soundName) {
+           if (audioEnabled && sounds[soundName]) {
+               sounds[soundName].currentTime = 0;
+               sounds[soundName].play().catch(() => {
+                   // Ignore audio play errors
+               });
+           }
+       }
+
+       // Add sound effects to game actions
+       const originalConnectNumbers = connectNumbers;
+       connectNumbers = function(index1, index2) {
+           playSound('connect');
+           return originalConnectNumbers(index1, index2);
+       };
+
+       const originalShakeAnimation = shakeAnimation;
+       shakeAnimation = function() {
+           playSound('error');
+           return originalShakeAnimation();
+       };
+
+       const originalLevelComplete = levelComplete;
+       levelComplete = function() {
+           playSound('levelUp');
+           return originalLevelComplete();
+       };
+
+       console.log('🔢 Number Connect Game Loaded Successfully! 🎮');
+   </script>
 </body>
 </html>
