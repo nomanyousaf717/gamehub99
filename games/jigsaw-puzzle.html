@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jigsaw Puzzle - Free HTML5 Game | GameHub 99</title>
     <meta name="description" content="Play Jigsaw Puzzle for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="jigsaw-puzzle, puzzle game, html5 game, free online game, browser game, mobile game">
+    <meta name="keywords" content="jigsaw puzzle, puzzle game, html5 game, free online game, browser game, mobile game">
     <meta name="author" content="GameHub 99">
     
     <!-- Open Graph / Facebook -->
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -90,76 +89,76 @@
         .header {
             padding: 1rem 0;
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
         }
 
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .game-title {
             font-family: "Orbitron", monospace;
             font-size: 2rem;
             font-weight: 900;
-            background: var(--primary-gradient);
+            background: linear-gradient(45deg, var(--accent-color), #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
+            margin: 0;
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .nav-button {
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 25px;
             color: var(--text-primary);
             text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            font-size: 0.9rem;
         }
 
         .nav-button:hover {
             background: var(--accent-color);
-            color: #000;
+            border-color: var(--accent-color);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         .game-container {
-            flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: flex;
             gap: 2rem;
-            width: 100%;
+            flex: 1;
         }
 
         .game-section {
             flex: 2;
-            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -167,50 +166,49 @@
         .stats-section {
             display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
         .stat-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
             text-align: center;
             backdrop-filter: blur(10px);
             min-width: 80px;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
+            font-weight: 500;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--accent-color);
+            font-family: "Orbitron", monospace;
         }
 
         .game-controls {
             display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            padding: 0.6rem 1rem;
+            background: var(--primary-gradient);
+            color: white;
             border: none;
             border-radius: 8px;
-            color: white;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .control-button:hover {
@@ -227,40 +225,94 @@
         }
 
         .game-canvas-container {
+            position: relative;
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
             padding: 1rem;
             backdrop-filter: blur(10px);
-            position: relative;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
+            border-radius: 8px;
+            background: #1a1a2e;
+            box-shadow: var(--shadow-card);
+            cursor: pointer;
+        }
+
+        .game-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .overlay-content {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .overlay-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .overlay-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         .mobile-controls {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .mobile-control {
             aspect-ratio: 1;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -268,7 +320,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            user-select: none;
         }
 
         .mobile-control:hover, .mobile-control:active {
@@ -318,6 +369,30 @@
             margin-bottom: 0.4rem;
         }
 
+        .difficulty-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .difficulty-btn {
+            flex: 1;
+            padding: 0.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .difficulty-btn.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
         .loading {
             opacity: 0;
             animation: fadeIn 0.6s ease forwards;
@@ -325,6 +400,72 @@
 
         @keyframes fadeIn {
             to { opacity: 1; }
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .modal-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button.primary {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .modal-button.secondary {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--card-border);
         }
 
         @media (max-width: 768px) {
@@ -336,6 +477,7 @@
             .header-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 1rem;
             }
             
             .game-title {
@@ -344,6 +486,7 @@
             
             .nav-buttons {
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             .game-header {
@@ -374,7 +517,6 @@
                 font-size: 12px;
             }
         }
-        
     </style>
 </head>
 <body>
@@ -386,7 +528,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🎯 Jigsaw Puzzle</h1>
+            <h1 class="game-title">🧩 Jigsaw Puzzle</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -403,42 +545,45 @@
             <div class="game-header">
                 <div class="stats-section">
                     <div class="stat-box">
-                        <div class="stat-label">Score</div>
-                        <div class="stat-value" id="currentScore">0</div>
+                        <div class="stat-label">Moves</div>
+                        <div class="stat-value" id="moveCount">0</div>
                     </div>
                     <div class="stat-box">
                         <div class="stat-label">Best</div>
-                        <div class="stat-value" id="bestScore">0</div>
+                        <div class="stat-value" id="bestMoves">-</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-label">Level</div>
-                        <div class="stat-value" id="gameLevel">1</div>
+                        <div class="stat-label">Time</div>
+                        <div class="stat-value" id="gameTime">0:00</div>
                     </div>
                 </div>
                 
                 <div class="game-controls">
                     <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
                     <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
-                    <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
+                    <button class="control-button" onclick="showHint()">💡 Hint</button>
                 </div>
             </div>
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
                 <canvas id="gameCanvas" width="400" height="400"></canvas>
+                
+                <!-- Start Game Overlay -->
+                <div class="game-overlay" id="startOverlay">
+                    <div class="overlay-content">
+                        <div class="overlay-title">🧩 Jigsaw Puzzle</div>
+                        <div class="overlay-text">Drag and drop puzzle pieces to complete the image!</div>
+                        <button class="start-button" onclick="startGame()">🎯 Start Game</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="shufflePieces()">🔀</div>
+                <div class="mobile-control" onclick="showHint()">💡</div>
                 <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
             </div>
         </main>
 
@@ -449,11 +594,17 @@
                 <div class="instructions">
                     <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li>Drag pieces to move them around</li>
+                        <li>Drop pieces in the correct position</li>
+                        <li>Complete the puzzle to win</li>
+                        <li>Try to solve it in fewer moves!</li>
                     </ul>
+                </div>
+                
+                <div class="difficulty-selector">
+                    <div class="difficulty-btn active" onclick="setDifficulty(3)">3x3</div>
+                    <div class="difficulty-btn" onclick="setDifficulty(4)">4x4</div>
+                    <div class="difficulty-btn" onclick="setDifficulty(5)">5x5</div>
                 </div>
             </div>
 
@@ -465,506 +616,791 @@
         </aside>
     </div>
 
+    <!-- Modals -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-title">🎉 Puzzle Complete!</div>
+            <div id="gameOverStats">
+                <p>Congratulations! You solved the puzzle!</p>
+                <p>Moves: <span id="finalMoves">0</span></p>
+                <p>Time: <span id="finalTime">0:00</span></p>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="newGame(); hideModal('gameOverModal')">🆕 New Game</button>
+                <button class="modal-button secondary" onclick="hideModal('gameOverModal')">❌ Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="instructionsModal">
+        <div class="modal-content">
+            <div class="modal-title">📖 Instructions</div>
+            <div style="text-align: left; margin: 1rem 0;">
+                <h4>How to Play:</h4>
+                <ul style="margin-left: 1rem;">
+                    <li>Click and drag puzzle pieces to move them</li>
+                    <li>Drop pieces near their correct position to snap them in place</li>
+                    <li>Complete the entire puzzle to win</li>
+                    <li>Try to solve it with the fewest moves possible</li>
+                </ul>
+                <h4>Tips:</h4>
+                <ul style="margin-left: 1rem;">
+                    <li>Start with corner and edge pieces</li>
+                    <li>Look for distinctive colors and patterns</li>
+                    <li>Use the hint button if you get stuck</li>
+                    <li>Challenge yourself with harder difficulties</li>
+                </ul>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="hideModal('instructionsModal')">Got it!</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
         <div class="ad-placeholder">728x90 Footer Advertisement</div>
     </div>
 
     <script>
-        
         // Game State
         const game = {
             canvas: null,
             ctx: null,
-            score: 0,
-            bestScore: localStorage.getItem("jigsaw-puzzleBest") || 0,
-            level: 1,
+            pieces: [],
+            gridSize: 3,
+            pieceSize: 0,
+            moveCount: 0,
+            bestMoves: localStorage.getItem("jigsawBestMoves") || null,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameStartTime: null,
+            gameTime: 0,
+            selectedPiece: null,
+            dragOffset: { x: 0, y: 0 },
+            isDragging: false,
+            snapDistance: 30,
+            gameImage: null
         };
+
+        // Puzzle pieces data
+        const puzzleImages = [
+            { 
+                colors: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE'],
+                pattern: 'gradient'
+            },
+            {
+                colors: ['#FF9FF3', '#54A0FF', '#5F27CD', '#00D2D3', '#FF9F43', '#10AC84', '#EE5A24', '#0074D9', '#B33771'],
+                pattern: 'geometric'
+            }
+        ];
 
         // Initialize game
         function initGame() {
             game.canvas = document.getElementById("gameCanvas");
             game.ctx = game.canvas.getContext("2d");
             
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
+            // Set canvas size
+            resizeCanvas();
             
-            // Event listeners
+            // Load best score
+            if (game.bestMoves) {
+                document.getElementById("bestMoves").textContent = game.bestMoves;
+            }
+            
+            // Generate puzzle image
+            generatePuzzleImage();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Draw initial state
+            drawCanvas();
+        }
+
+        function resizeCanvas() {
+            const container = document.querySelector('.game-canvas-container');
+            const containerWidth = container.clientWidth - 32; // Account for padding
+            const containerHeight = container.clientHeight - 32;
+            const size = Math.min(containerWidth, containerHeight, 500);
+            
+            game.canvas.width = size;
+            game.canvas.height = size;
+            game.pieceSize = size / game.gridSize;
+        }
+
+        function generatePuzzleImage() {
+            const imageData = puzzleImages[Math.floor(Math.random() * puzzleImages.length)];
+            game.gameImage = createColorfulImage(imageData);
+        }
+
+        function createColorfulImage(imageData) {
+            const canvas = document.createElement('canvas');
+            canvas.width = game.canvas.width;
+            canvas.height = game.canvas.height;
+            const ctx = canvas.getContext('2d');
+            
+            if (imageData.pattern === 'gradient') {
+                // Create gradient pattern
+                for (let row = 0; row < game.gridSize; row++) {
+                    for (let col = 0; col < game.gridSize; col++) {
+                        const x = col * game.pieceSize;
+                        const y = row * game.pieceSize;
+                        const colorIndex = (row * game.gridSize + col) % imageData.colors.length;
+                        
+                        const gradient = ctx.createLinearGradient(x, y, x + game.pieceSize, y + game.pieceSize);
+                        gradient.addColorStop(0, imageData.colors[colorIndex]);
+                        gradient.addColorStop(1, imageData.colors[(colorIndex + 1) % imageData.colors.length]);
+                        
+                        ctx.fillStyle = gradient;
+                        ctx.fillRect(x, y, game.pieceSize, game.pieceSize);
+                        
+                        // Add some decorative elements
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+                        ctx.beginPath();
+                        ctx.arc(x + game.pieceSize/2, y + game.pieceSize/2, game.pieceSize/4, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            } else {
+                // Create geometric pattern
+                for (let row = 0; row < game.gridSize; row++) {
+                    for (let col = 0; col < game.gridSize; col++) {
+                        const x = col * game.pieceSize;
+                        const y = row * game.pieceSize;
+                        const colorIndex = (row * game.gridSize + col) % imageData.colors.length;
+                        
+                        ctx.fillStyle = imageData.colors[colorIndex];
+                        ctx.fillRect(x, y, game.pieceSize, game.pieceSize);
+                        
+                        // Add geometric shapes
+                        ctx.fillStyle = imageData.colors[(colorIndex + 2) % imageData.colors.length];
+                        if ((row + col) % 2 === 0) {
+                            // Triangle
+                            ctx.beginPath();
+                            ctx.moveTo(x + game.pieceSize/2, y + 10);
+                            ctx.lineTo(x + 10, y + game.pieceSize - 10);
+                            ctx.lineTo(x + game.pieceSize - 10, y + game.pieceSize - 10);
+                            ctx.closePath();
+                            ctx.fill();
+                        } else {
+                            // Circle
+                            ctx.beginPath();
+                            ctx.arc(x + game.pieceSize/2, y + game.pieceSize/2, game.pieceSize/3, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                }
+            }
+            
+            return canvas;
+        }
+
+        function setupEventListeners() {
+            // Keyboard controls
             document.addEventListener("keydown", handleKeyPress);
             
-            // Touch support
-            setupTouchControls();
+            // Mouse controls
+            game.canvas.addEventListener("mousedown", handleMouseDown);
+            game.canvas.addEventListener("mousemove", handleMouseMove);
+            game.canvas.addEventListener("mouseup", handleMouseUp);
             
-            // Start new game
-            newGame();
+            // Touch controls
+            game.canvas.addEventListener("touchstart", handleTouchStart, { passive: false });
+            game.canvas.addEventListener("touchmove", handleTouchMove, { passive: false });
+            game.canvas.addEventListener("touchend", handleTouchEnd, { passive: false });
             
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
+            // Window resize
+            window.addEventListener("resize", () => {
+                resizeCanvas();
+                drawCanvas();
+            });
         }
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
+        function startGame() {
+            document.getElementById("startOverlay").style.display = "none";
             game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
+            game.gameStartTime = Date.now();
+            game.moveCount = 0;
+            game.gameTime = 0;
             
-            updateDisplay();
-            gameLoop();
+            createPuzzlePieces();
+            shufflePieces();
+            startTimer();
+            drawCanvas();
             
-            trackEvent("game_start");
+            // Track game start
+            trackEvent("game_started", { difficulty: game.gridSize + "x" + game.gridSize });
         }
 
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
+        function createPuzzlePieces() {
+            game.pieces = [];
+            
+            for (let row = 0; row < game.gridSize; row++) {
+                for (let col = 0; col < game.gridSize; col++) {
+                    const piece = {
+                        id: row * game.gridSize + col,
+                        correctRow: row,
+                        correctCol: col,
+                        currentRow: row,
+                        currentCol: col,
+                        x: col * game.pieceSize,
+                        y: row * game.pieceSize,
+                        correctX: col * game.pieceSize,
+                        correctY: row * game.pieceSize,
+                        isCorrect: true
+                    };
+                    game.pieces.push(piece);
                 }
-                return;
-            }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
+				}
+   }
 
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Jigsaw Puzzle", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
-            }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
-        }
-
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
-            
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("jigsaw-puzzleBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
-           }
+   function shufflePieces() {
+       // Fisher-Yates shuffle algorithm
+       for (let i = game.pieces.length - 1; i > 0; i--) {
+           const j = Math.floor(Math.random() * (i + 1));
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
-       }
-
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+           // Swap pieces
+           const tempX = game.pieces[i].x;
+           const tempY = game.pieces[i].y;
+           const tempRow = game.pieces[i].currentRow;
+           const tempCol = game.pieces[i].currentCol;
            
-           document.body.appendChild(messageEl);
+           game.pieces[i].x = game.pieces[j].x;
+           game.pieces[i].y = game.pieces[j].y;
+           game.pieces[i].currentRow = game.pieces[j].currentRow;
+           game.pieces[i].currentCol = game.pieces[j].currentCol;
            
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
+           game.pieces[j].x = tempX;
+           game.pieces[j].y = tempY;
+           game.pieces[j].currentRow = tempRow;
+           game.pieces[j].currentCol = tempCol;
        }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
-           }
-       }
-
-       // Show Leaderboard
-       function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("jigsaw-puzzleLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
-           
-           if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
-           } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
-               });
-           }
-           
-           alert(message);
-       }
-
-       // Utility Functions
-       function showInstructions() {
-           alert(`🎯 Jigsaw Puzzle - How to Play
-
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
-
-🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
-
-Good luck! 🍀`);
-       }
-
-       function toggleFullscreen() {
-           if (!document.fullscreenElement) {
-               document.documentElement.requestFullscreen().catch(err => {
-                   console.log("Fullscreen not supported");
-               });
-           } else {
-               document.exitFullscreen();
-           }
-       }
-
-       function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Jigsaw Puzzle! Can you beat my score? 🏆`;
-           
-           if (navigator.share) {
-               navigator.share({
-                   title: "Jigsaw Puzzle - My Score",
-                   text: text,
-                   url: window.location.href
-               });
-           } else {
-               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
-               });
-           }
-           
-           trackEvent("score_shared", { score: game.score });
-       }
-
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "jigsaw-puzzle",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
-       }
-
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
-
-       // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
-           initGame();
-       });
-
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
-
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
-
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
-           }
-       });
-
-       console.log("🎮 Jigsaw Puzzle loaded successfully!");
        
-    </script>
+       // Update correct status
+       game.pieces.forEach(piece => {
+           piece.isCorrect = (piece.currentRow === piece.correctRow && piece.currentCol === piece.correctCol);
+       });
+   }
+
+   function handleMouseDown(e) {
+       if (!game.gameRunning || game.gamePaused) return;
+       
+       const rect = game.canvas.getBoundingClientRect();
+       const x = e.clientX - rect.left;
+       const y = e.clientY - rect.top;
+       
+       const piece = getPieceAt(x, y);
+       if (piece) {
+           game.selectedPiece = piece;
+           game.isDragging = true;
+           game.dragOffset.x = x - piece.x;
+           game.dragOffset.y = y - piece.y;
+           game.canvas.style.cursor = 'grabbing';
+       }
+   }
+
+   function handleMouseMove(e) {
+       if (!game.isDragging || !game.selectedPiece) return;
+       
+       const rect = game.canvas.getBoundingClientRect();
+       const x = e.clientX - rect.left;
+       const y = e.clientY - rect.top;
+       
+       game.selectedPiece.x = x - game.dragOffset.x;
+       game.selectedPiece.y = y - game.dragOffset.y;
+       
+       drawCanvas();
+   }
+
+   function handleMouseUp(e) {
+       if (!game.isDragging || !game.selectedPiece) return;
+       
+       const rect = game.canvas.getBoundingClientRect();
+       const x = e.clientX - rect.left;
+       const y = e.clientY - rect.top;
+       
+       handlePieceDrop(x - game.dragOffset.x, y - game.dragOffset.y);
+       
+       game.isDragging = false;
+       game.selectedPiece = null;
+       game.canvas.style.cursor = 'default';
+   }
+
+   function handleTouchStart(e) {
+       e.preventDefault();
+       const touch = e.touches[0];
+       const rect = game.canvas.getBoundingClientRect();
+       const x = touch.clientX - rect.left;
+       const y = touch.clientY - rect.top;
+       
+       const piece = getPieceAt(x, y);
+       if (piece) {
+           game.selectedPiece = piece;
+           game.isDragging = true;
+           game.dragOffset.x = x - piece.x;
+           game.dragOffset.y = y - piece.y;
+       }
+   }
+
+   function handleTouchMove(e) {
+       e.preventDefault();
+       if (!game.isDragging || !game.selectedPiece) return;
+       
+       const touch = e.touches[0];
+       const rect = game.canvas.getBoundingClientRect();
+       const x = touch.clientX - rect.left;
+       const y = touch.clientY - rect.top;
+       
+       game.selectedPiece.x = x - game.dragOffset.x;
+       game.selectedPiece.y = y - game.dragOffset.y;
+       
+       drawCanvas();
+   }
+
+   function handleTouchEnd(e) {
+       e.preventDefault();
+       if (!game.isDragging || !game.selectedPiece) return;
+       
+       const touch = e.changedTouches[0];
+       const rect = game.canvas.getBoundingClientRect();
+       const x = touch.clientX - rect.left;
+       const y = touch.clientY - rect.top;
+       
+       handlePieceDrop(x - game.dragOffset.x, y - game.dragOffset.y);
+       
+       game.isDragging = false;
+       game.selectedPiece = null;
+   }
+
+   function getPieceAt(x, y) {
+       // Check pieces in reverse order (top to bottom)
+       for (let i = game.pieces.length - 1; i >= 0; i--) {
+           const piece = game.pieces[i];
+           if (x >= piece.x && x < piece.x + game.pieceSize &&
+               y >= piece.y && y < piece.y + game.pieceSize) {
+               return piece;
+           }
+       }
+       return null;
+   }
+
+   function handlePieceDrop(dropX, dropY) {
+       if (!game.selectedPiece) return;
+       
+       // Find the closest valid position
+       const closestPosition = findClosestPosition(dropX, dropY);
+       
+       if (closestPosition) {
+           // Check if position is occupied
+           const occupyingPiece = game.pieces.find(p => 
+               p !== game.selectedPiece && 
+               p.currentRow === closestPosition.row && 
+               p.currentCol === closestPosition.col
+           );
+           
+           if (occupyingPiece) {
+               // Swap pieces
+               swapPieces(game.selectedPiece, occupyingPiece);
+           } else {
+               // Move piece to empty position
+               movePieceToPosition(game.selectedPiece, closestPosition);
+           }
+           
+           game.moveCount++;
+           updateMoveCount();
+           
+           // Check if puzzle is solved
+           if (isPuzzleSolved()) {
+               endGame(true);
+           }
+       } else {
+           // Snap back to original position
+           snapPieceToGrid(game.selectedPiece);
+       }
+       
+       drawCanvas();
+   }
+
+   function findClosestPosition(x, y) {
+       const col = Math.round(x / game.pieceSize);
+       const row = Math.round(y / game.pieceSize);
+       
+       // Check if position is within bounds
+       if (row >= 0 && row < game.gridSize && col >= 0 && col < game.gridSize) {
+           const gridX = col * game.pieceSize;
+           const gridY = row * game.pieceSize;
+           const distance = Math.sqrt((x - gridX) ** 2 + (y - gridY) ** 2);
+           
+           if (distance <= game.snapDistance) {
+               return { row, col, x: gridX, y: gridY };
+           }
+       }
+       
+       return null;
+   }
+
+   function swapPieces(piece1, piece2) {
+       const tempRow = piece1.currentRow;
+       const tempCol = piece1.currentCol;
+       const tempX = piece1.x;
+       const tempY = piece1.y;
+       
+       piece1.currentRow = piece2.currentRow;
+       piece1.currentCol = piece2.currentCol;
+       piece1.x = piece2.x;
+       piece1.y = piece2.y;
+       
+       piece2.currentRow = tempRow;
+       piece2.currentCol = tempCol;
+       piece2.x = tempX;
+       piece2.y = tempY;
+       
+       // Update correct status
+       piece1.isCorrect = (piece1.currentRow === piece1.correctRow && piece1.currentCol === piece1.correctCol);
+       piece2.isCorrect = (piece2.currentRow === piece2.correctRow && piece2.currentCol === piece2.correctCol);
+   }
+
+   function movePieceToPosition(piece, position) {
+       piece.currentRow = position.row;
+       piece.currentCol = position.col;
+       piece.x = position.x;
+       piece.y = position.y;
+       
+       // Update correct status
+       piece.isCorrect = (piece.currentRow === piece.correctRow && piece.currentCol === piece.correctCol);
+   }
+
+   function snapPieceToGrid(piece) {
+       piece.x = piece.currentCol * game.pieceSize;
+       piece.y = piece.currentRow * game.pieceSize;
+   }
+
+   function isPuzzleSolved() {
+       return game.pieces.every(piece => piece.isCorrect);
+   }
+
+   function drawCanvas() {
+       const ctx = game.ctx;
+       
+       // Clear canvas
+       ctx.clearRect(0, 0, game.canvas.width, game.canvas.height);
+       
+       // Draw background grid
+       drawGrid();
+       
+       // Draw pieces (non-selected first)
+       game.pieces.forEach(piece => {
+           if (piece !== game.selectedPiece) {
+               drawPiece(piece);
+           }
+       });
+       
+       // Draw selected piece last (on top)
+       if (game.selectedPiece) {
+           drawPiece(game.selectedPiece, true);
+       }
+   }
+
+   function drawGrid() {
+       const ctx = game.ctx;
+       
+       ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+       ctx.lineWidth = 1;
+       
+       // Draw vertical lines
+       for (let i = 0; i <= game.gridSize; i++) {
+           const x = i * game.pieceSize;
+           ctx.beginPath();
+           ctx.moveTo(x, 0);
+           ctx.lineTo(x, game.canvas.height);
+           ctx.stroke();
+       }
+       
+       // Draw horizontal lines
+       for (let i = 0; i <= game.gridSize; i++) {
+           const y = i * game.pieceSize;
+           ctx.beginPath();
+           ctx.moveTo(0, y);
+           ctx.lineTo(game.canvas.width, y);
+           ctx.stroke();
+       }
+   }
+
+   function drawPiece(piece, isSelected = false) {
+       const ctx = game.ctx;
+       
+       // Save context
+       ctx.save();
+       
+       // Calculate source position in the original image
+       const sourceX = piece.correctCol * game.pieceSize;
+       const sourceY = piece.correctRow * game.pieceSize;
+       
+       // Draw piece shadow if selected
+       if (isSelected) {
+           ctx.shadowColor = 'rgba(0, 212, 255, 0.5)';
+           ctx.shadowBlur = 10;
+           ctx.shadowOffsetX = 2;
+           ctx.shadowOffsetY = 2;
+       }
+       
+       // Draw the piece
+       ctx.drawImage(
+           game.gameImage,
+           sourceX, sourceY, game.pieceSize, game.pieceSize,
+           piece.x, piece.y, game.pieceSize, game.pieceSize
+       );
+       
+       // Draw border
+       ctx.strokeStyle = piece.isCorrect ? '#00ff88' : (isSelected ? '#00d4ff' : 'rgba(255, 255, 255, 0.3)');
+       ctx.lineWidth = piece.isCorrect ? 3 : (isSelected ? 2 : 1);
+       ctx.strokeRect(piece.x, piece.y, game.pieceSize, game.pieceSize);
+       
+       // Draw correct indicator
+       if (piece.isCorrect) {
+           ctx.fillStyle = 'rgba(0, 255, 136, 0.2)';
+           ctx.fillRect(piece.x, piece.y, game.pieceSize, game.pieceSize);
+           
+           // Draw checkmark
+           ctx.strokeStyle = '#00ff88';
+           ctx.lineWidth = 3;
+           ctx.beginPath();
+           ctx.moveTo(piece.x + game.pieceSize * 0.3, piece.y + game.pieceSize * 0.5);
+           ctx.lineTo(piece.x + game.pieceSize * 0.45, piece.y + game.pieceSize * 0.65);
+           ctx.lineTo(piece.x + game.pieceSize * 0.7, piece.y + game.pieceSize * 0.35);
+           ctx.stroke();
+       }
+       
+       // Restore context
+       ctx.restore();
+   }
+
+   function startTimer() {
+       const timer = setInterval(() => {
+           if (!game.gameRunning || game.gamePaused) return;
+           
+           const elapsed = Math.floor((Date.now() - game.gameStartTime) / 1000);
+           game.gameTime = elapsed;
+           updateGameTime();
+           
+           if (!game.gameRunning) {
+               clearInterval(timer);
+           }
+       }, 1000);
+   }
+
+   function updateMoveCount() {
+       document.getElementById("moveCount").textContent = game.moveCount;
+   }
+
+   function updateGameTime() {
+       const minutes = Math.floor(game.gameTime / 60);
+       const seconds = game.gameTime % 60;
+       document.getElementById("gameTime").textContent = 
+           `${minutes}:${seconds.toString().padStart(2, '0')}`;
+   }
+
+   function newGame() {
+       // Reset game state
+       game.gameRunning = false;
+       game.gamePaused = false;
+       game.moveCount = 0;
+       game.gameTime = 0;
+       game.selectedPiece = null;
+       game.isDragging = false;
+       
+       // Update UI
+       updateMoveCount();
+       updateGameTime();
+       document.getElementById("pauseButton").textContent = "⏸️ Pause";
+       
+       // Generate new puzzle
+       generatePuzzleImage();
+       
+       // Show start overlay
+       document.getElementById("startOverlay").style.display = "flex";
+       
+       // Clear canvas
+       drawCanvas();
+       
+       trackEvent("new_game", { difficulty: game.gridSize + "x" + game.gridSize });
+   }
+
+   function togglePause() {
+       if (!game.gameRunning) return;
+       
+       game.gamePaused = !game.gamePaused;
+       const pauseButton = document.getElementById("pauseButton");
+       
+       if (game.gamePaused) {
+           pauseButton.textContent = "▶️ Resume";
+           drawPauseOverlay();
+       } else {
+           pauseButton.textContent = "⏸️ Pause";
+           drawCanvas();
+       }
+       
+       trackEvent("game_paused", { paused: game.gamePaused });
+   }
+
+   function drawPauseOverlay() {
+       const ctx = game.ctx;
+       
+       // Draw semi-transparent overlay
+       ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+       ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+       
+       // Draw pause text
+       ctx.fillStyle = '#ffffff';
+       ctx.font = 'bold 48px Inter';
+       ctx.textAlign = 'center';
+       ctx.fillText('⏸️', game.canvas.width / 2, game.canvas.height / 2 - 20);
+       
+       ctx.font = 'bold 24px Inter';
+       ctx.fillText('PAUSED', game.canvas.width / 2, game.canvas.height / 2 + 30);
+       
+       ctx.font = '16px Inter';
+       ctx.fillText('Click Resume to continue', game.canvas.width / 2, game.canvas.height / 2 + 60);
+   }
+
+   function endGame(won) {
+       game.gameRunning = false;
+       
+       if (won) {
+           // Update best score
+           if (!game.bestMoves || game.moveCount < game.bestMoves) {
+               game.bestMoves = game.moveCount;
+               localStorage.setItem("jigsawBestMoves", game.bestMoves);
+               document.getElementById("bestMoves").textContent = game.bestMoves;
+           }
+           
+           // Show game over modal
+           document.getElementById("finalMoves").textContent = game.moveCount;
+           const minutes = Math.floor(game.gameTime / 60);
+           const seconds = game.gameTime % 60;
+           document.getElementById("finalTime").textContent = 
+               `${minutes}:${seconds.toString().padStart(2, '0')}`;
+           
+           showModal("gameOverModal");
+           
+           trackEvent("game_completed", {
+               moves: game.moveCount,
+               time: game.gameTime,
+               difficulty: game.gridSize + "x" + game.gridSize
+           });
+       }
+   }
+
+   function showHint() {
+       if (!game.gameRunning || game.gamePaused) return;
+       
+       // Find a piece that's not in the correct position
+       const incorrectPiece = game.pieces.find(piece => !piece.isCorrect);
+       
+       if (incorrectPiece) {
+           // Highlight the piece and its correct position
+           const ctx = game.ctx;
+           
+           // Highlight current position
+           ctx.strokeStyle = '#ffaa00';
+           ctx.lineWidth = 4;
+           ctx.strokeRect(incorrectPiece.x, incorrectPiece.y, game.pieceSize, game.pieceSize);
+           
+           // Highlight correct position
+           ctx.strokeStyle = '#00ff88';
+           ctx.setLineDash([10, 5]);
+           ctx.strokeRect(incorrectPiece.correctX, incorrectPiece.correctY, game.pieceSize, game.pieceSize);
+           ctx.setLineDash([]);
+           
+           // Clear hint after 2 seconds
+           setTimeout(() => {
+               drawCanvas();
+           }, 2000);
+           
+           trackEvent("hint_used", { difficulty: game.gridSize + "x" + game.gridSize });
+       }
+   }
+
+   function setDifficulty(size) {
+       game.gridSize = size;
+       game.pieceSize = game.canvas.width / game.gridSize;
+       
+       // Update difficulty buttons
+       document.querySelectorAll('.difficulty-btn').forEach(btn => btn.classList.remove('active'));
+       event.target.classList.add('active');
+       
+       // Generate new puzzle
+       generatePuzzleImage();
+       newGame();
+       
+       trackEvent("difficulty_changed", { new_difficulty: size + "x" + size });
+   }
+
+   function handleKeyPress(e) {
+       const keyMap = {
+           "KeyN": newGame,
+           "Space": togglePause,
+           "KeyH": showHint,
+           "Escape": () => hideModal('instructionsModal')
+       };
+       
+       if (keyMap[e.code]) {
+           e.preventDefault();
+           keyMap[e.code]();
+       }
+   }
+
+   // Modal functions
+   function showModal(modalId) {
+       document.getElementById(modalId).classList.add('show');
+   }
+
+   function hideModal(modalId) {
+       document.getElementById(modalId).classList.remove('show');
+   }
+
+   function showInstructions() {
+       showModal('instructionsModal');
+   }
+
+   // Utility functions
+   function toggleFullscreen() {
+       if (!document.fullscreenElement) {
+           document.documentElement.requestFullscreen().catch(() => {
+               alert('Fullscreen not supported on this device');
+           });
+       } else {
+           document.exitFullscreen();
+       }
+   }
+
+   function trackEvent(eventName, parameters = {}) {
+       // Analytics tracking (replace with your analytics service)
+       if (typeof gtag !== 'undefined') {
+           gtag('event', eventName, parameters);
+       }
+       console.log('Event:', eventName, parameters);
+   }
+
+   // Initialize game when page loads
+   document.addEventListener("DOMContentLoaded", () => {
+       initGame();
+       
+       // Add loading animation completion
+       setTimeout(() => {
+           document.querySelectorAll('.loading').forEach(el => {
+               el.style.opacity = '1';
+           });
+       }, 100);
+   });
+
+   // Handle visibility change (pause game when tab is hidden)
+   document.addEventListener('visibilitychange', () => {
+       if (document.hidden && game.gameRunning && !game.gamePaused) {
+           togglePause();
+       }
+   });
+   </script>
 </body>
 </html>
