@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pattern Memory - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Pattern Memory for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="pattern-memory, puzzle game, html5 game, free online game, browser game, mobile game">
+    <meta name="description" content="Play Pattern Memory for free! Challenge your mind with this addictive puzzle game that tests your memory skills. Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="pattern memory, memory game, puzzle game, html5 game, free online game, browser game, mobile game, brain training">
     <meta name="author" content="GameHub 99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
     <meta property="og:url" content="https://gamehub99.com/games/pattern-memory.html">
     <meta property="og:title" content="Pattern Memory - Free HTML5 Game">
-    <meta property="og:description" content="Challenge your mind with this addictive puzzle game!">
+    <meta property="og:description" content="Challenge your mind with this addictive memory puzzle game!">
     <meta property="og:image" content="https://gamehub99.com/assets/pattern-memory-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://gamehub99.com/games/pattern-memory.html">
     <meta property="twitter:title" content="Pattern Memory - Free HTML5 Game">
-    <meta property="twitter:description" content="Challenge your mind with this addictive puzzle game!">
+    <meta property="twitter:description" content="Challenge your mind with this addictive memory puzzle game!">
     <meta property="twitter:image" content="https://gamehub99.com/assets/pattern-memory-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -42,6 +41,7 @@
             --accent-color: #00d4ff;
             --success-color: #00ff88;
             --warning-color: #ffaa00;
+            --danger-color: #ff4757;
             --text-primary: #ffffff;
             --text-secondary: #b8c1ec;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -97,7 +97,7 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,6 +113,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
         .nav-buttons {
@@ -122,15 +123,15 @@
         }
 
         .nav-button {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
+            border-radius: 8px;
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            cursor: pointer;
             font-size: 0.9rem;
         }
 
@@ -141,18 +142,22 @@
         }
 
         .game-container {
-            flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
             gap: 2rem;
-            width: 100%;
+            flex: 1;
         }
 
         .game-section {
-            flex: 2;
-            min-width: 320px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
         }
 
         .game-header {
@@ -171,12 +176,11 @@
         }
 
         .stat-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
             text-align: center;
-            backdrop-filter: blur(10px);
+            background: var(--card-bg);
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
             min-width: 80px;
         }
 
@@ -226,24 +230,114 @@
             background: var(--warning-color);
         }
 
-        .game-canvas-container {
+        .game-area {
             background: var(--card-bg);
             border: 2px solid var(--card-border);
             border-radius: 15px;
-            padding: 1rem;
+            padding: 2rem;
             backdrop-filter: blur(10px);
             position: relative;
             text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+            max-width: 300px;
+        }
+
+        .pattern-tile {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pattern-tile:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--card-bg);
+            border-radius: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .pattern-tile span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pattern-tile.active {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .pattern-tile.active:before {
+            background: var(--accent-color);
+        }
+
+        .pattern-tile.correct {
+            border-color: var(--success-color);
+            animation: correctPulse 0.5s ease;
+        }
+
+        .pattern-tile.wrong {
+            border-color: var(--danger-color);
+            animation: wrongShake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px var(--success-color); }
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .game-status {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
         }
 
         .mobile-controls {
@@ -271,9 +365,9 @@
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
+        .mobile-control:active {
+            transform: scale(0.95);
             background: var(--accent-color);
-            transform: translateY(-2px);
         }
 
         .mobile-control.empty {
@@ -281,8 +375,6 @@
         }
 
         .sidebar {
-            flex: 1;
-            min-width: 280px;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
@@ -291,90 +383,237 @@
         .sidebar-section {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
             backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
         }
 
         .sidebar-title {
             font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
         .instructions {
             color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+            margin-left: 1rem;
+            margin-top: 0.5rem;
         }
 
         .instructions li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .modal-content {
+            background: var(--dark-gradient);
+            margin: 10% auto;
+            padding: 2rem;
+            border: 2px solid var(--card-border);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-glow);
         }
 
+        .modal-title {
+            font-family: "Orbitron", monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin: 1rem 0;
+            font-family: "Orbitron", monospace;
+        }
+
+        .modal-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .modal-stat {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+        }
+
+        .modal-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .modal-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-button.primary {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        .modal-button.secondary {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--card-border);
+        }
+
+        .pulse {
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             .game-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 padding: 1rem;
+                gap: 1rem;
             }
-            
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+
             .header-content {
                 flex-direction: column;
                 text-align: center;
             }
-            
-            .game-title {
-                font-size: 1.5rem;
-            }
-            
+
             .nav-buttons {
                 justify-content: center;
             }
-            
+
             .game-header {
                 flex-direction: column;
                 align-items: stretch;
                 text-align: center;
             }
-            
+
             .stats-section {
                 justify-content: center;
             }
-            
+
             .game-controls {
                 justify-content: center;
             }
-            
+
             .mobile-controls {
                 display: grid;
             }
-            
-            .sidebar {
-                order: -1;
+
+            .pattern-grid {
+                max-width: 250px;
             }
-            
+
             .ad-placeholder {
                 width: 320px;
                 height: 50px;
                 font-size: 12px;
             }
+
+            .modal-content {
+                margin: 20% auto;
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-score {
+                font-size: 2rem;
+            }
         }
-        
+
+        @media (max-width: 480px) {
+            .game-section, .sidebar-section {
+                padding: 1rem;
+            }
+
+            .pattern-grid {
+                max-width: 200px;
+                gap: 0.5rem;
+            }
+
+            .pattern-tile {
+                font-size: 1.5rem;
+            }
+
+            .game-title {
+                font-size: 1.2rem;
+            }
+
+            .nav-button {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .control-button {
+                padding: 6px 12px;
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -386,7 +625,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🔢 Pattern Memory</h1>
+            <h1 class="game-title">🧠 Pattern Memory</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -399,7 +638,7 @@
     <!-- Main Game Container -->
     <div class="game-container">
         <!-- Game Section -->
-        <main class="game-section loading">
+        <main class="game-section">
             <div class="game-header">
                 <div class="stats-section">
                     <div class="stat-box">
@@ -414,45 +653,57 @@
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Streak</div>
+                        <div class="stat-value" id="streakCount">0</div>
+                    </div>
                 </div>
                 
                 <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
+                    <button class="control-button new-game" onclick="startNewGame()">🆕 New Game</button>
                     <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
+                    <button class="control-button" onclick="shareScore()">📱 Share</button>
                 </div>
             </div>
 
-            <!-- Game Canvas -->
-            <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <!-- Game Area -->
+            <div class="game-area" id="gameArea">
+                <div class="game-status" id="gameStatus">Ready to challenge your memory?</div>
+                <button class="start-button" onclick="startGame()" id="startButton">🎮 Start Game</button>
+                
+                <div class="pattern-grid" id="patternGrid" style="display: none;">
+                    <div class="pattern-tile" data-index="0"><span>🔴</span></div>
+                    <div class="pattern-tile" data-index="1"><span>🔵</span></div>
+                    <div class="pattern-tile" data-index="2"><span>🟢</span></div>
+                    <div class="pattern-tile" data-index="3"><span>🟡</span></div>
+                    <div class="pattern-tile" data-index="4"><span>🟣</span></div>
+                    <div class="pattern-tile" data-index="5"><span>🟠</span></div>
+                    <div class="pattern-tile" data-index="6"><span>🟤</span></div>
+                    <div class="pattern-tile" data-index="7"><span>⚫</span></div>
+                    <div class="pattern-tile" data-index="8"><span>⚪</span></div>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="showInstructions()">❓</div>
+                <div class="mobile-control" onclick="startNewGame()">🆕</div>
+                <div class="mobile-control" onclick="shareScore()">📱</div>
             </div>
         </main>
 
         <!-- Sidebar -->
-        <aside class="sidebar loading">
+        <aside class="sidebar">
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
+                    <p><strong>Challenge your memory with pattern sequences!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
+                        <li>Watch the pattern sequence carefully</li>
+                        <li>Repeat the pattern by clicking tiles</li>
+                        <li>Each level adds one more step</li>
+                        <li>Score points for correct sequences</li>
                         <li>Beat your high score!</li>
-                        <li>Share with friends</li>
                     </ul>
                 </div>
             </div>
@@ -465,347 +716,408 @@
         </aside>
     </div>
 
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">🎮 Game Over!</h2>
+            <div class="modal-score" id="modalScore">0</div>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <div class="modal-stat-label">Level Reached</div>
+                    <div class="modal-stat-value" id="modalLevel">1</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-label">Best Streak</div>
+                    <div class="modal-stat-value" id="modalStreak">0</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-label">Your Best</div>
+                    <div class="modal-stat-value" id="modalBest">0</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-label">Accuracy</div>
+                    <div class="modal-stat-value" id="modalAccuracy">0%</div>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="playAgain()">🎮 Play Again</button>
+                <button class="modal-button secondary" onclick="shareScore()">📱 Share Score</button>
+                <button class="modal-button secondary" onclick="closeModal()">❌ Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
         <div class="ad-placeholder">728x90 Footer Advertisement</div>
     </div>
 
     <script>
-        
         // Game State
         const game = {
-            canvas: null,
-            ctx: null,
             score: 0,
-            bestScore: localStorage.getItem("pattern-memoryBest") || 0,
+            bestScore: parseInt(localStorage.getItem("patternMemoryBest")) || 0,
             level: 1,
-            gameRunning: false,
-            gamePaused: false,
-            gameOver: false
+            streak: 0,
+            sequence: [],
+            playerSequence: [],
+            isShowing: false,
+            isPlaying: false,
+            gameActive: false,
+            currentStep: 0,
+            totalAttempts: 0,
+            correctAttempts: 0,
+            startTime: 0
         };
 
         // Initialize game
         function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
+            document.getElementById("bestScore").textContent = game.bestScore.toLocaleString();
+            updateDisplay();
             
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
-            
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
-            
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
-            
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
+            // Add click listeners to pattern tiles
+            const tiles = document.querySelectorAll('.pattern-tile');
+            tiles.forEach(tile => {
+                tile.addEventListener('click', () => handleTileClick(parseInt(tile.dataset.index)));
+            });
         }
 
-        // New Game
-        function newGame() {
+        // Start new game
+        function startGame() {
             game.score = 0;
             game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
+            game.streak = 0;
+            game.sequence = [];
+            game.playerSequence = [];
+            game.currentStep = 0;
+            game.totalAttempts = 0;
+            game.correctAttempts = 0;
+            game.gameActive = true;
+            game.startTime = Date.now();
+            
+            document.getElementById("startButton").style.display = "none";
+            document.getElementById("patternGrid").style.display = "grid";
+            document.getElementById("gameStatus").textContent = "Watch the pattern...";
             
             updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
+            nextLevel();
         }
 
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
+        function startNewGame() {
+            if (game.gameActive) {
+                if (confirm("Are you sure you want to start a new game? Your current progress will be lost.")) {
+                    resetGame();
+                    startGame();
                 }
-                return;
+            } else {
+                startGame();
             }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
         }
 
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
+        // Reset game state
+        function resetGame() {
+            game.gameActive = false;
+            game.isShowing = false;
+            game.isPlaying = false;
             
-            // Game logic here
-            game.score += 10;
+            document.getElementById("startButton").style.display = "block";
+            document.getElementById("patternGrid").style.display = "none";
+            document.getElementById("gameStatus").textContent = "Ready to challenge your memory?";
             
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
+            // Clear all tile animations
+            const tiles = document.querySelectorAll('.pattern-tile');
+            tiles.forEach(tile => {
+                tile.classList.remove('active', 'correct', 'wrong');
+            });
+        }
+
+        // Generate next level
+        function nextLevel() {
+            if (!game.gameActive) return;
+            
+            game.level++;
+            game.sequence.push(Math.floor(Math.random() * 9));
+            game.playerSequence = [];
+            game.currentStep = 0;
             
             updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
+            showSequence();
         }
 
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
+        // Show sequence to player
+        function showSequence() {
+            game.isShowing = true;
+            game.isPlaying = false;
             
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+            document.getElementById("gameStatus").textContent = `Level ${game.level} - Watch carefully!`;
             
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Pattern Memory", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
+            let index = 0;
+            const showNext = () => {
+                if (index < game.sequence.length && game.gameActive) {
+                    const tileIndex = game.sequence[index];
+                    const tile = document.querySelector(`[data-index="${tileIndex}"]`);
+                    
+                    // Light up tile
+                    tile.classList.add('active');
+                    
+                    // Sound effect (optional)
+                    playSound('show');
+                    
+                    setTimeout(() => {
+                        tile.classList.remove('active');
+                        index++;
+                        if (index < game.sequence.length) {
+                            setTimeout(showNext, 200);
+                        } else {
+                            setTimeout(() => {
+                                game.isShowing = false;
+                                game.isPlaying = true;
+                                document.getElementById("gameStatus").textContent = "Now repeat the pattern!";
+                            }, 500);
+                        }
+                    }, 600);
+                }
             };
             
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
+            setTimeout(showNext, 1000);
         }
 
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
+        // Handle tile click
+        function handleTileClick(tileIndex) {
+            if (!game.isPlaying || game.isShowing || !game.gameActive) return;
             
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
+            const tile = document.querySelector(`[data-index="${tileIndex}"]`);
+            game.totalAttempts++;
             
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
+            // Check if correct
+            if (tileIndex === game.sequence[game.currentStep]) {
+                // Correct tile
+                tile.classList.add('correct');
+                game.playerSequence.push(tileIndex);
+                game.currentStep++;
+                game.correctAttempts++;
                 
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
-            }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
-        }
-
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
-            
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("pattern-memoryBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+// Calculate score
+               const pointsEarned = game.level * 10;
+               game.score += pointsEarned;
+               game.streak++;
+               
+               playSound('correct');
+               
+               setTimeout(() => {
+                   tile.classList.remove('correct');
+               }, 300);
+               
+               // Check if sequence complete
+               if (game.currentStep >= game.sequence.length) {
+                   // Level complete!
+                   setTimeout(() => {
+                       document.getElementById("gameStatus").textContent = `Great! +${pointsEarned} points`;
+                       updateDisplay();
+                       setTimeout(() => {
+                           nextLevel();
+                       }, 1500);
+                   }, 500);
+               }
+           } else {
+               // Wrong tile - game over
+               tile.classList.add('wrong');
+               game.streak = 0;
+               
+               playSound('wrong');
+               
+               setTimeout(() => {
+                   tile.classList.remove('wrong');
+                   gameOver();
+               }, 500);
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           updateDisplay();
        }
 
-       // Update Display
+       // Game over
+       function gameOver() {
+           game.gameActive = false;
+           game.isPlaying = false;
+           game.isShowing = false;
+           
+           // Update best score
+           if (game.score > game.bestScore) {
+               game.bestScore = game.score;
+               localStorage.setItem("patternMemoryBest", game.bestScore);
+           }
+           
+           // Save score to history
+           saveScore(game.score);
+           
+           // Show game over modal
+           showGameOverModal();
+           
+           updateDisplay();
+       }
+
+       // Show game over modal
+       function showGameOverModal() {
+           const modal = document.getElementById("gameOverModal");
+           const accuracy = game.totalAttempts > 0 ? Math.round((game.correctAttempts / game.totalAttempts) * 100) : 0;
+           
+           document.getElementById("modalScore").textContent = game.score.toLocaleString();
+           document.getElementById("modalLevel").textContent = game.level - 1;
+           document.getElementById("modalStreak").textContent = game.streak;
+           document.getElementById("modalBest").textContent = game.bestScore.toLocaleString();
+           document.getElementById("modalAccuracy").textContent = accuracy + "%";
+           
+           modal.style.display = "block";
+           
+           // Add celebration effect for new high score
+           if (game.score === game.bestScore && game.score > 0) {
+               document.getElementById("modalScore").classList.add("pulse");
+               document.querySelector(".modal-title").textContent = "🎉 New High Score!";
+           }
+       }
+
+       // Close modal
+       function closeModal() {
+           document.getElementById("gameOverModal").style.display = "none";
+           resetGame();
+       }
+
+       // Play again
+       function playAgain() {
+           closeModal();
+           startGame();
+       }
+
+       // Update display
        function updateDisplay() {
            document.getElementById("currentScore").textContent = game.score.toLocaleString();
+           document.getElementById("bestScore").textContent = game.bestScore.toLocaleString();
            document.getElementById("gameLevel").textContent = game.level;
+           document.getElementById("streakCount").textContent = game.streak;
        }
 
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+       // Save score to local storage
+       function saveScore(score) {
+           const scores = JSON.parse(localStorage.getItem("patternMemoryScores") || "[]");
+           scores.push({
+               score: score,
+               level: game.level - 1,
+               date: new Date().toLocaleDateString(),
+               accuracy: game.totalAttempts > 0 ? Math.round((game.correctAttempts / game.totalAttempts) * 100) : 0
+           });
            
-           document.body.appendChild(messageEl);
+           // Keep only top 10 scores
+           scores.sort((a, b) => b.score - a.score);
+           scores.splice(10);
            
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
+           localStorage.setItem("patternMemoryScores", JSON.stringify(scores));
        }
 
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
-           }
-       }
-
-       // Show Leaderboard
+       // Show leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("pattern-memoryLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem("patternMemoryScores") || "[]");
+           
+           let message = "🏆 High Scores:\n\n";
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet! Be the first!";
            } else {
                scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
+                   message += `#${index + 1}: ${score.score.toLocaleString()} pts (Level ${score.level})\n`;
+                   message += `     ${score.accuracy}% accuracy - ${score.date}\n\n`;
                });
            }
            
            alert(message);
        }
 
+       // Share score
+       function shareScore() {
+           const text = `🧠 I just scored ${game.score.toLocaleString()} points in Pattern Memory and reached level ${game.level}! Can you beat my memory skills? 🏆`;
+           
+           if (navigator.share) {
+               navigator.share({
+                   title: "Pattern Memory - My Score",
+                   text: text,
+                   url: window.location.href
+               });
+           } else {
+               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
+                   alert("Score copied to clipboard! Share it with your friends!");
+               }).catch(() => {
+                   alert("Share this: " + text + " " + window.location.href);
+               });
+           }
+       }
+
+       // Play sound effects
+       function playSound(type) {
+           // Create audio context for sound effects
+           if (typeof AudioContext !== 'undefined' || typeof webkitAudioContext !== 'undefined') {
+               const audioContext = new (AudioContext || webkitAudioContext)();
+               
+               const oscillator = audioContext.createOscillator();
+               const gainNode = audioContext.createGain();
+               
+               oscillator.connect(gainNode);
+               gainNode.connect(audioContext.destination);
+               
+               let frequency;
+               let duration;
+               
+               switch(type) {
+                   case 'correct':
+                       frequency = 800;
+                       duration = 0.2;
+                       break;
+                   case 'wrong':
+                       frequency = 200;
+                       duration = 0.5;
+                       break;
+                   case 'show':
+                       frequency = 600;
+                       duration = 0.3;
+                       break;
+                   default:
+                       frequency = 440;
+                       duration = 0.2;
+               }
+               
+               oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+               gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+               gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+               
+               oscillator.start(audioContext.currentTime);
+               oscillator.stop(audioContext.currentTime + duration);
+           }
+       }
+
        // Utility Functions
        function showInstructions() {
-           alert(`🎯 Pattern Memory - How to Play
+           alert(`🧠 Pattern Memory - How to Play
 
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
+🎯 Objective:
+Remember and repeat increasingly complex color patterns!
 
-🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
+🕹️ How to Play:
+1. Watch the sequence of colors light up
+2. Click the tiles in the same order
+3. Each level adds one more step to remember
+4. Score points for each correct sequence
+5. Game ends when you make a mistake
 
-Good luck! 🍀`);
+🏆 Scoring:
+- Points = Level × 10 per correct sequence
+- Build streaks for bragging rights
+- Beat your personal best!
+
+💡 Tips:
+- Focus and concentrate during the sequence
+- Take your time - there's no rush
+- Try to find patterns or create mental associations
+- Practice makes perfect!
+
+Good luck challenging your memory! 🍀`);
        }
 
        function toggleFullscreen() {
@@ -818,125 +1130,60 @@ Good luck! 🍀`);
            }
        }
 
-       function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Pattern Memory! Can you beat my score? 🏆`;
+       // Keyboard controls
+       document.addEventListener('keydown', (e) => {
+           if (!game.gameActive) return;
            
-           if (navigator.share) {
-               navigator.share({
-                   title: "Pattern Memory - My Score",
-                   text: text,
-                   url: window.location.href
-               });
-           } else {
-               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
-               });
+           const keyMap = {
+               '1': 0, '2': 1, '3': 2,
+               '4': 3, '5': 4, '6': 5,
+               '7': 6, '8': 7, '9': 8
+           };
+           
+           if (keyMap.hasOwnProperty(e.key)) {
+               handleTileClick(keyMap[e.key]);
            }
            
-           trackEvent("score_shared", { score: game.score });
-       }
+           // Spacebar to start/restart
+           if (e.code === 'Space') {
+               e.preventDefault();
+               if (!game.gameActive) {
+                   startGame();
+               }
+           }
+           
+           // Escape to pause/menu
+           if (e.code === 'Escape') {
+               if (game.gameActive) {
+                   if (confirm("Pause game and return to menu?")) {
+                       resetGame();
+                   }
+               }
+           }
+       });
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "pattern-memory",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
-       }
+       // Touch controls for mobile
+       let touchStartX = 0;
+       let touchStartY = 0;
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
+       document.addEventListener('touchstart', (e) => {
+           touchStartX = e.touches[0].clientX;
+           touchStartY = e.touches[0].clientY;
+       });
+
+       document.addEventListener('touchend', (e) => {
+           if (!touchStartX || !touchStartY) return;
+           
+           const touchEndX = e.changedTouches[0].clientX;
+           const touchEndY = e.changedTouches[0].clientY;
+           
+           const diffX = touchStartX - touchEndX;
+           const diffY = touchStartY - touchEndY;
+           
+           // Reset values
+           touchStartX = 0;
+           touchStartY = 0;
+       });
 
        // Initialize game when page loads
        document.addEventListener("DOMContentLoaded", () => {
@@ -958,13 +1205,57 @@ Good luck! 🍀`);
 
        // Handle page visibility
        document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
+           if (document.hidden && game.gameActive) {
+               // Pause game when tab becomes inactive
+               game.gameActive = false;
+               document.getElementById("gameStatus").textContent = "Game paused - click to resume";
            }
        });
 
-       console.log("🎮 Pattern Memory loaded successfully!");
-       
-    </script>
+       // Add CSS animations for enhanced feedback
+       const style = document.createElement('style');
+       style.textContent = `
+           @keyframes tilePress {
+               0% { transform: scale(1); }
+               50% { transform: scale(0.9); }
+               100% { transform: scale(1); }
+           }
+           
+           .pattern-tile:active {
+               animation: tilePress 0.1s ease;
+           }
+           
+           .new-high-score {
+               animation: celebration 2s ease infinite;
+           }
+           
+           @keyframes celebration {
+               0%, 100% { 
+                   transform: scale(1) rotate(0deg);
+                   color: var(--accent-color);
+               }
+               25% { 
+                   transform: scale(1.1) rotate(5deg);
+                   color: var(--success-color);
+               }
+               75% { 
+                   transform: scale(1.1) rotate(-5deg);
+                   color: var(--warning-color);
+               }
+           }
+           
+           .loading {
+               opacity: 0;
+               animation: fadeIn 0.5s ease forwards;
+           }
+           
+           @keyframes fadeIn {
+               to { opacity: 1; }
+           }
+       `;
+       document.head.appendChild(style);
+
+       console.log("🧠 Pattern Memory loaded successfully!");
+   </script>
 </body>
 </html>
