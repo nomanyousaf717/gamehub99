@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word Scramble - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Word Scramble for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="word-scramble, puzzle game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Word Scramble - Free Puzzle Game | GamesZone99</title>
+    <meta name="description" content="Play Word Scramble for free! Unscramble letters to form words in this addictive puzzle game. Mobile-friendly with touch controls. No download required!">
+    <meta name="keywords" content="word scramble, word puzzle, letter game, vocabulary game, html5 game, free online game, browser game, mobile game">
+    <meta name="author" content="GamesZone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/word-scramble.html">
-    <meta property="og:title" content="Word Scramble - Free HTML5 Game">
-    <meta property="og:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="og:image" content="https://gamehub99.com/assets/word-scramble-og.jpg">
+    <meta property="og:url" content="https://gameszone99.com/word-scramble.html">
+    <meta property="og:title" content="Word Scramble - Free Puzzle Game">
+    <meta property="og:description" content="Challenge your vocabulary! Unscramble letters to form words in this addictive puzzle game.">
+    <meta property="og:image" content="https://gameszone99.com/assets/word-scramble-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/word-scramble.html">
-    <meta property="twitter:title" content="Word Scramble - Free HTML5 Game">
-    <meta property="twitter:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/word-scramble-og.jpg">
+    <meta property="twitter:url" content="https://gameszone99.com/word-scramble.html">
+    <meta property="twitter:title" content="Word Scramble - Free Puzzle Game">
+    <meta property="twitter:description" content="Challenge your vocabulary! Unscramble letters to form words in this addictive puzzle game.">
+    <meta property="twitter:image" content="https://gameszone99.com/assets/word-scramble-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -42,6 +41,7 @@
             --accent-color: #00d4ff;
             --success-color: #00ff88;
             --warning-color: #ffaa00;
+            --error-color: #ff4757;
             --text-primary: #ffffff;
             --text-secondary: #b8c1ec;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -74,6 +74,13 @@
             z-index: 100;
         }
 
+        .ad-container-bottom {
+            position: sticky;
+            bottom: 0;
+            border-top: 1px solid var(--card-border);
+            border-bottom: none;
+        }
+
         .ad-placeholder {
             width: 728px;
             height: 90px;
@@ -97,7 +104,7 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,53 +120,53 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .nav-button {
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
-            color: var(--text-primary);
+            border-radius: 8px;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-weight: 500;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            font-size: 0.9rem;
         }
 
         .nav-button:hover {
             background: var(--accent-color);
-            color: #000;
+            color: var(--text-primary);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
         }
 
         .game-container {
-            flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: flex;
             gap: 2rem;
-            width: 100%;
+            flex: 1;
         }
 
         .game-section {
             flex: 2;
-            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .game-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -167,13 +174,12 @@
         .stats-section {
             display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
         .stat-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 0.8rem 1rem;
             text-align: center;
             backdrop-filter: blur(10px);
@@ -181,15 +187,12 @@
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--accent-color);
@@ -197,20 +200,19 @@
 
         .game-controls {
             display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            padding: 0.8rem 1.2rem;
+            background: var(--primary-gradient);
             border: none;
             border-radius: 8px;
-            color: white;
+            color: var(--text-primary);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .control-button:hover {
@@ -219,65 +221,186 @@
         }
 
         .control-button.new-game {
-            background: var(--success-color);
+            background: var(--secondary-gradient);
         }
 
-        .control-button.pause {
-            background: var(--warning-color);
+        .control-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
-        .game-canvas-container {
+        .game-area {
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
-            padding: 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
             backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
             position: relative;
+        }
+
+        .start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .start-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .start-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            background: var(--secondary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .game-play {
+            display: none;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .word-display {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 0.2rem;
+            margin: 1rem 0;
+        }
+
+        .scrambled-word {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            letter-spacing: 0.3rem;
+            margin: 1rem 0;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .word-input {
+            padding: 1rem 1.5rem;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            text-align: center;
+            letter-spacing: 0.2rem;
+            min-width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        .word-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .submit-button {
+            padding: 0.8rem 2rem;
+            background: var(--success-color);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .hint-section {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
             text-align: center;
         }
 
-        #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
-        }
-
-        .mobile-controls {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .mobile-control {
-            aspect-ratio: 1;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+        .hint-button {
+            padding: 0.5rem 1rem;
+            background: var(--warning-color);
+            border: none;
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.8rem;
             cursor: pointer;
+            margin-top: 0.5rem;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
-            background: var(--accent-color);
-            transform: translateY(-2px);
+        .hint-button:hover {
+            transform: translateY(-1px);
         }
 
-        .mobile-control.empty {
-            visibility: hidden;
+        .feedback {
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .feedback.correct {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+            opacity: 1;
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 71, 87, 0.2);
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+            opacity: 1;
         }
 
         .sidebar {
@@ -318,6 +441,95 @@
             margin-bottom: 0.4rem;
         }
 
+        .game-over-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1.5rem 0;
+        }
+
+        .modal-stat {
+            text-align: center;
+        }
+
+        .modal-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .modal-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .modal-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button.primary {
+            background: var(--secondary-gradient);
+            color: var(--text-primary);
+        }
+
+        .modal-button.secondary {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            border: 1px solid var(--card-border);
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
         .loading {
             opacity: 0;
             animation: fadeIn 0.6s ease forwards;
@@ -325,6 +537,16 @@
 
         @keyframes fadeIn {
             to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .correct-animation {
+            animation: bounce 0.6s ease-in-out;
         }
 
         @media (max-width: 768px) {
@@ -344,6 +566,7 @@
             
             .nav-buttons {
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             .game-header {
@@ -358,10 +581,7 @@
             
             .game-controls {
                 justify-content: center;
-            }
-            
-            .mobile-controls {
-                display: grid;
+                flex-wrap: wrap;
             }
             
             .sidebar {
@@ -373,8 +593,20 @@
                 height: 50px;
                 font-size: 12px;
             }
+
+            .scrambled-word {
+                font-size: 2rem;
+            }
+
+            .word-input {
+                min-width: 250px;
+                font-size: 1.2rem;
+            }
+
+            .start-title {
+                font-size: 2rem;
+            }
         }
-        
     </style>
 </head>
 <body>
@@ -386,7 +618,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🔢 Word Scramble</h1>
+            <h1 class="game-title">🔤 Word Scramble</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -414,31 +646,47 @@
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Streak</div>
+                        <div class="stat-value" id="gameStreak">0</div>
+                    </div>
                 </div>
                 
                 <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
+                    <button class="control-button new-game" onclick="newGame()">🔄 New Game</button>
+                    <button class="control-button" onclick="skipWord()">⏭️ Skip</button>
                     <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
             </div>
 
-            <!-- Game Canvas -->
-            <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
-            </div>
+            <!-- Game Area -->
+            <div class="game-area" id="gameArea">
+                <!-- Start Screen -->
+                <div class="start-screen" id="startScreen">
+                    <div class="start-title">Word Scramble</div>
+                    <div class="start-description">
+                        Challenge your vocabulary! Unscramble the letters to form the correct word. 
+                        Test your skills with words of increasing difficulty!
+                    </div>
+                    <button class="start-button" onclick="startGame()">🚀 Start Game</button>
+                </div>
 
-            <!-- Mobile Controls -->
-            <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <!-- Game Play Area -->
+                <div class="game-play" id="gamePlay">
+                    <div class="word-display">
+                        Category: <span id="wordCategory">General</span>
+                    </div>
+                    <div class="scrambled-word" id="scrambledWord">LOADING...</div>
+                    <div class="input-section">
+                        <input type="text" class="word-input" id="wordInput" placeholder="Type your answer here..." maxlength="20">
+                        <button class="submit-button" onclick="checkAnswer()">✅ Submit</button>
+                    </div>
+                    <div class="feedback" id="feedback"></div>
+                    <div class="hint-section">
+                        <div id="hintText">Need help? Click for a hint!</div>
+                        <button class="hint-button" onclick="showHint()" id="hintButton">💡 Hint (-10 points)</button>
+                    </div>
+                </div>
             </div>
         </main>
 
@@ -447,12 +695,21 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
+                    <p><strong>Unscramble letters to form words!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li>Look at the scrambled letters</li>
+                        <li>Type the correct word</li>
+                        <li>Earn points for correct answers</li>
+                        <li>Use hints if you're stuck (-10 points)</li>
+                        <li>Build your streak for bonus points!</li>
+                        <li>Words get harder as you progress</li>
+                    </ul>
+                    <p><strong>Scoring:</strong></p>
+                    <ul>
+                        <li>Easy words: 10 points</li>
+                        <li>Medium words: 20 points</li>
+                        <li>Hard words: 30 points</li>
+                        <li>Streak bonus: +5 per streak</li>
                     </ul>
                 </div>
             </div>
@@ -462,7 +719,42 @@
                     250x250<br>Sidebar Ad
                 </div>
             </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">📊 Quick Stats</h3>
+                <div class="instructions">
+                    <p>Words Solved: <span id="wordsCompleted">0</span></p>
+                    <p>Accuracy: <span id="accuracy">0%</span></p>
+                    <p>Avg. Time: <span id="avgTime">0s</span></p>
+                    <p>Hints Used: <span id="hintsUsed">0</span></p>
+                </div>
+            </div>
         </aside>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-title">🎉 Game Complete!</div>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="finalScore">0</div>
+                    <div class="modal-stat-label">Final Score</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="finalLevel">1</div>
+                    <div class="modal-stat-label">Level Reached</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="finalStreak">0</div>
+                    <div class="modal-stat-label">Best Streak</div>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="restartGame()">🔄 Play Again</button>
+                <button class="modal-button secondary" onclick="shareScore()">📱 Share Score</button>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Ad Container -->
@@ -471,316 +763,378 @@
     </div>
 
     <script>
-        
-        // Game State
-        const game = {
-            canvas: null,
-            ctx: null,
-            score: 0,
-            bestScore: localStorage.getItem("word-scrambleBest") || 0,
-            level: 1,
-            gameRunning: false,
-            gamePaused: false,
-            gameOver: false
+        // Word Database
+        const wordDatabase = {
+            easy: [
+                {word: "APPLE", category: "Food", hint: "A red or green fruit"},
+                {word: "HOUSE", category: "Places", hint: "Where you live"},
+                {word: "WATER", category: "Nature", hint: "H2O, essential for life"},
+                {word: "MUSIC", category: "Arts", hint: "Sounds arranged in harmony"},
+                {word: "HAPPY", category: "Emotions", hint: "Feeling joyful"},
+                {word: "PHONE", category: "Technology", hint: "Device for calling"},
+                {word: "BEACH", category: "Places", hint: "Sandy shore by the ocean"},
+                {word: "CLOUD", category: "Nature", hint: "White fluffy thing in sky"},
+                {word: "PAPER", category: "Objects", hint: "Material for writing"},
+                {word: "SMILE", category: "Emotions", hint: "Happy facial expression"},
+                {word: "BREAD", category: "Food", hint: "Baked from flour"},
+                {word: "CHAIR", category: "Furniture", hint: "Something to sit on"},
+                {word: "FLOWER", category: "Nature", hint: "Colorful plant bloom"},
+                {word: "SUMMER", category: "Seasons", hint: "Hottest time of year"},
+                {word: "FRIEND", category: "People", hint: "Someone you like"},
+            ],
+            medium: [
+                {word: "ELEPHANT", category: "Animals", hint: "Largest land mammal"},
+                {word: "RAINBOW", category: "Nature", hint: "Colorful arc in the sky"},
+                {word: "COMPUTER", category: "Technology", hint: "Electronic device for computing"},
+                {word: "VACATION", category: "Activities", hint: "Time off from work"},
+                {word: "MOUNTAIN", category: "Geography", hint: "Large elevated landform"},
+                {word: "LIBRARY", category: "Places", hint: "Place with many books"},
+                {word: "CHOCOLATE", category: "Food", hint: "Sweet brown treat"},
+                {word: "BUTTERFLY", category: "Animals", hint: "Colorful flying insect"},
+                {word: "GUITAR", category: "Music", hint: "Stringed musical instrument"},
+                {word: "ADVENTURE", category: "Activities", hint: "Exciting journey"},
+                {word: "SANDWICH", category: "Food", hint: "Food between two slices"},
+                {word: "DIAMOND", category: "Gems", hint: "Hardest natural substance"},
+                {word: "MYSTERY", category: "Concepts", hint: "Something unexplained"},
+                {word: "PHOTOGRAPH", category: "Arts", hint: "Captured image"},
+                {word: "CALENDAR", category: "Objects", hint: "Shows dates and months"},
+            ],
+            hard: [
+                {word: "ENCYCLOPEDIA", category: "Books", hint: "Large reference book"},
+                {word: "ARCHITECTURE", category: "Arts", hint: "Design of buildings"},
+                {word: "PHILOSOPHER", category: "People", hint: "Deep thinker about life"},
+                {word: "MICROSCOPE", category: "Science", hint: "Device to see tiny things"},
+                {word: "CONSTELLATION", category: "Astronomy", hint: "Group of stars forming pattern"},
+                {word: "GYMNASIUM", category: "Places", hint: "Place for physical exercise"},
+                {word: "REFRIGERATOR", category: "Appliances", hint: "Keeps food cold"},
+                {word: "HELICOPTER", category: "Vehicles", hint: "Aircraft with rotating blades"},
+                {word: "MAGNIFICENT", category: "Adjectives", hint: "Extremely beautiful"},
+                {word: "PARLIAMENT", category: "Government", hint: "Legislative body"},
+                {word: "CALCULATOR", category: "Technology", hint: "Device for math"},
+                {word: "TEMPERATURE", category: "Science", hint: "Measure of heat"},
+                {word: "COUNTRYSIDE", category: "Places", hint: "Rural area outside cities"},
+                {word: "WATERMELON", category: "Food", hint: "Large green fruit with red inside"},
+                {word: "EXTRAORDINARY", category: "Adjectives", hint: "Very unusual or remarkable"},
+            ]
         };
 
-        // Initialize game
-        function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
-            
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
-            
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
-            
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
-            
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
-        }
+        // Game State
+       const game = {
+           score: 0,
+           bestScore: localStorage.getItem("wordScrambleBest") || 0,
+           level: 1,
+           streak: 0,
+           maxStreak: 0,
+           wordsCompleted: 0,
+           hintsUsed: 0,
+           totalAttempts: 0,
+           correctAnswers: 0,
+           gameStartTime: null,
+           wordStartTime: null,
+           totalGameTime: 0,
+           currentWord: null,
+           currentHint: null,
+           currentCategory: null,
+           currentDifficulty: "easy",
+           gameActive: false,
+           hintShown: false
+       };
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
-            
-            updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
-        }
-
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
-            }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Word Scramble", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
-            }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
-        }
-
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
-            
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("word-scrambleBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+       // Analytics tracking
+       function trackEvent(eventName, properties = {}) {
+           // Google Analytics 4 event tracking
+           if (typeof gtag !== 'undefined') {
+               gtag('event', eventName, {
+                   game_name: 'word_scramble',
+                   ...properties
+               });
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Custom analytics can be added here
+           console.log(`Event: ${eventName}`, properties);
        }
 
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+       // Initialize game
+       function initGame() {
+           // Load best score
+           document.getElementById("bestScore").textContent = game.bestScore;
+           updateStats();
            
-           document.body.appendChild(messageEl);
+           // Add event listeners
+           document.getElementById("wordInput").addEventListener("keypress", function(e) {
+               if (e.key === "Enter") {
+                   checkAnswer();
+               }
+           });
+
+           document.addEventListener("keydown", function(e) {
+               if (e.key === "Escape") {
+                   if (document.getElementById("gameOverModal").style.display === "flex") {
+                       closeModal();
+                   }
+               }
+           });
+
+           // Track page load
+           trackEvent("game_loaded");
+       }
+
+       // Start the game
+       function startGame() {
+           game.gameActive = true;
+           game.gameStartTime = Date.now();
+           document.getElementById("startScreen").style.display = "none";
+           document.getElementById("gamePlay").style.display = "flex";
+           
+           nextWord();
+           trackEvent("game_started");
+       }
+
+       // Generate next word
+       function nextWord() {
+           // Determine difficulty based on level
+           if (game.level <= 5) {
+               game.currentDifficulty = "easy";
+           } else if (game.level <= 15) {
+               game.currentDifficulty = "medium";
+           } else {
+               game.currentDifficulty = "hard";
+           }
+
+           // Select random word from difficulty level
+           const words = wordDatabase[game.currentDifficulty];
+           const randomWord = words[Math.floor(Math.random() * words.length)];
+           
+           game.currentWord = randomWord.word;
+           game.currentHint = randomWord.hint;
+           game.currentCategory = randomWord.category;
+           game.hintShown = false;
+           game.wordStartTime = Date.now();
+
+           // Display scrambled word
+           const scrambled = scrambleWord(game.currentWord);
+           document.getElementById("scrambledWord").textContent = scrambled;
+           document.getElementById("wordCategory").textContent = game.currentCategory;
+           document.getElementById("wordInput").value = "";
+           document.getElementById("wordInput").focus();
+           document.getElementById("feedback").className = "feedback";
+           document.getElementById("feedback").textContent = "";
+           document.getElementById("hintText").textContent = "Need help? Click for a hint!";
+           document.getElementById("hintButton").textContent = "💡 Hint (-10 points)";
+           document.getElementById("hintButton").disabled = false;
+       }
+
+       // Scramble word function
+       function scrambleWord(word) {
+           let scrambled;
+           do {
+               const letters = word.split('');
+               for (let i = letters.length - 1; i > 0; i--) {
+                   const j = Math.floor(Math.random() * (i + 1));
+                   [letters[i], letters[j]] = [letters[j], letters[i]];
+               }
+               scrambled = letters.join('');
+           } while (scrambled === word && word.length > 2);
+           
+           return scrambled;
+       }
+
+       // Check answer
+       function checkAnswer() {
+           if (!game.gameActive) return;
+
+           const userInput = document.getElementById("wordInput").value.toUpperCase().trim();
+           game.totalAttempts++;
+
+           if (userInput === game.currentWord) {
+               // Correct answer
+               game.correctAnswers++;
+               game.wordsCompleted++;
+               game.streak++;
+               game.maxStreak = Math.max(game.maxStreak, game.streak);
+
+               // Calculate score
+               let points = 0;
+               switch (game.currentDifficulty) {
+                   case "easy": points = 10; break;
+                   case "medium": points = 20; break;
+                   case "hard": points = 30; break;
+               }
+
+               // Streak bonus
+               points += game.streak * 5;
+
+               // Subtract hint penalty if hint was used
+               if (game.hintShown) {
+                   points = Math.max(0, points - 10);
+               }
+
+               game.score += points;
+
+               // Update display
+               document.getElementById("currentScore").textContent = game.score;
+               document.getElementById("gameStreak").textContent = game.streak;
+               
+               // Show positive feedback
+               const feedback = document.getElementById("feedback");
+               feedback.textContent = `🎉 Correct! +${points} points`;
+               feedback.className = "feedback correct";
+               
+               // Add bounce animation
+               document.getElementById("scrambledWord").classList.add("correct-animation");
+               setTimeout(() => {
+                   document.getElementById("scrambledWord").classList.remove("correct-animation");
+               }, 600);
+
+               // Level up logic
+               if (game.wordsCompleted % 5 === 0) {
+                   game.level++;
+                   document.getElementById("gameLevel").textContent = game.level;
+                   
+                   // Show level up message
+                   setTimeout(() => {
+                       alert(`🎊 Level ${game.level} reached! Words are getting harder!`);
+                   }, 800);
+               }
+
+               // Next word after delay
+               setTimeout(() => {
+                   nextWord();
+               }, 1500);
+
+               trackEvent("word_solved", {
+                   word: game.currentWord,
+                   difficulty: game.currentDifficulty,
+                   points: points,
+                   streak: game.streak,
+                   hint_used: game.hintShown
+               });
+
+           } else {
+               // Incorrect answer
+               game.streak = 0;
+               document.getElementById("gameStreak").textContent = game.streak;
+               
+               const feedback = document.getElementById("feedback");
+               feedback.textContent = `❌ Try again! "${userInput}" is not correct.`;
+               feedback.className = "feedback incorrect";
+
+               // Clear feedback after delay
+               setTimeout(() => {
+                   feedback.className = "feedback";
+                   feedback.textContent = "";
+               }, 2000);
+
+               trackEvent("word_failed", {
+                   word: game.currentWord,
+                   user_answer: userInput,
+                   difficulty: game.currentDifficulty
+               });
+           }
+
+           updateStats();
+       }
+
+       // Show hint
+       function showHint() {
+           if (game.hintShown) return;
+           
+           game.hintShown = true;
+           game.hintsUsed++;
+           
+           document.getElementById("hintText").textContent = `💡 ${game.currentHint}`;
+           document.getElementById("hintButton").textContent = "Hint used (-10 points)";
+           document.getElementById("hintButton").disabled = true;
+           
+           updateStats();
+           trackEvent("hint_used", {
+               word: game.currentWord,
+               hint: game.currentHint
+           });
+       }
+
+       // Skip current word
+       function skipWord() {
+           if (!game.gameActive) return;
+           
+           game.streak = 0;
+           document.getElementById("gameStreak").textContent = game.streak;
+           
+           const feedback = document.getElementById("feedback");
+           feedback.textContent = `⏭️ Skipped! The answer was "${game.currentWord}"`;
+           feedback.className = "feedback incorrect";
            
            setTimeout(() => {
-               document.body.removeChild(messageEl);
+               nextWord();
            }, 2000);
+
+           trackEvent("word_skipped", {
+               word: game.currentWord,
+               difficulty: game.currentDifficulty
+           });
        }
 
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
+       // New game
+       function newGame() {
+           // Reset game state
+           game.score = 0;
+           game.level = 1;
+           game.streak = 0;
+           game.wordsCompleted = 0;
+           game.hintsUsed = 0;
+           game.totalAttempts = 0;
+           game.correctAnswers = 0;
+           game.maxStreak = 0;
+           game.gameActive = false;
+
+           // Reset display
+           document.getElementById("currentScore").textContent = "0";
+           document.getElementById("gameLevel").textContent = "1";
+           document.getElementById("gameStreak").textContent = "0";
+           document.getElementById("startScreen").style.display = "flex";
+           document.getElementById("gamePlay").style.display = "none";
+           document.getElementById("gameOverModal").style.display = "none";
+
+           updateStats();
+           trackEvent("new_game_started");
+       }
+
+       // Restart game (from game over)
+       function restartGame() {
+           document.getElementById("gameOverModal").style.display = "none";
+           newGame();
+       }
+
+       // Update statistics
+       function updateStats() {
+           document.getElementById("wordsCompleted").textContent = game.wordsCompleted;
+           document.getElementById("hintsUsed").textContent = game.hintsUsed;
            
-           document.body.appendChild(modal);
+           const accuracy = game.totalAttempts > 0 ? Math.round((game.correctAnswers / game.totalAttempts) * 100) : 0;
+           document.getElementById("accuracy").textContent = accuracy + "%";
+           
+           const avgTime = game.wordsCompleted > 0 ? Math.round(game.totalGameTime / game.wordsCompleted / 1000) : 0;
+           document.getElementById("avgTime").textContent = avgTime + "s";
        }
 
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+       // Save high score
+       function saveHighScore() {
+           if (game.score > game.bestScore) {
+               game.bestScore = game.score;
+               localStorage.setItem("wordScrambleBest", game.bestScore);
+               document.getElementById("bestScore").textContent = game.bestScore;
+               return true;
            }
+           return false;
        }
 
-       // Show Leaderboard
+       // Show leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("word-scrambleLeaderboard") || "[]");
+           const scores = JSON.parse(localStorage.getItem("wordScrambleScores") || "[]");
            let message = "🏆 Top Scores:\n\n";
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet!\nBe the first!";
            } else {
                scores.slice(0, 5).forEach((score, index) => {
                    message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
@@ -788,24 +1142,77 @@
            }
            
            alert(message);
+           trackEvent("leaderboard_viewed");
+       }
+
+       // Game over
+       function gameOver() {
+           game.gameActive = false;
+           const isNewBest = saveHighScore();
+           
+           // Save score to leaderboard
+           const scores = JSON.parse(localStorage.getItem("wordScrambleScores") || "[]");
+           scores.push(game.score);
+           scores.sort((a, b) => b - a);
+           scores.splice(10); // Keep top 10
+           localStorage.setItem("wordScrambleScores", JSON.stringify(scores));
+
+           // Show game over modal
+           document.getElementById("finalScore").textContent = game.score.toLocaleString();
+           document.getElementById("finalLevel").textContent = game.level;
+           document.getElementById("finalStreak").textContent = game.maxStreak;
+           document.getElementById("gameOverModal").style.display = "flex";
+
+           if (isNewBest) {
+               document.querySelector(".modal-title").textContent = "🎉 New Best Score!";
+           }
+
+           trackEvent("game_over", {
+               final_score: game.score,
+               level_reached: game.level,
+               words_completed: game.wordsCompleted,
+               max_streak: game.maxStreak,
+               hints_used: game.hintsUsed,
+               accuracy: Math.round((game.correctAnswers / game.totalAttempts) * 100)
+           });
+       }
+
+       // Close modal
+       function closeModal() {
+           document.getElementById("gameOverModal").style.display = "none";
        }
 
        // Utility Functions
        function showInstructions() {
-           alert(`🎯 Word Scramble - How to Play
+           const instructions = `🎯 Word Scramble - How to Play
 
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
+🔤 Objective:
+Unscramble the letters to form the correct word!
 
-🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
+🎮 How to Play:
+- Look at the scrambled letters
+- Type the correct word in the input field
+- Press Enter or click Submit
+- Use hints if you're stuck (costs 10 points)
+- Skip words if needed (breaks streak)
 
-Good luck! 🍀`);
+📊 Scoring:
+- Easy words: 10 points
+- Medium words: 20 points  
+- Hard words: 30 points
+- Streak bonus: +5 points per streak level
+- Hint penalty: -10 points
+
+🏆 Tips:
+- Build streaks for bonus points
+- Words get harder every 5 levels
+- Try to solve without hints for maximum score
+- Categories give clues about the word type
+
+Good luck! 🍀`;
+
+           alert(instructions);
+           trackEvent("instructions_viewed");
        }
 
        function toggleFullscreen() {
@@ -816,155 +1223,101 @@ Good luck! 🍀`);
            } else {
                document.exitFullscreen();
            }
+           trackEvent("fullscreen_toggled");
        }
 
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Word Scramble! Can you beat my score? 🏆`;
+           const text = `🔤 I just scored ${game.score.toLocaleString()} points in Word Scramble! 
+🏆 Level ${game.level} reached with a ${game.maxStreak} word streak! 
+Can you beat my score? 🧠`;
            
            if (navigator.share) {
                navigator.share({
                    title: "Word Scramble - My Score",
                    text: text,
                    url: window.location.href
+               }).then(() => {
+                   trackEvent("score_shared", { platform: "native" });
                });
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+                   alert("Score copied to clipboard! Share it with your friends!");
+                   trackEvent("score_shared", { platform: "clipboard" });
                });
            }
-           
-           trackEvent("score_shared", { score: game.score });
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "word-scramble",
-                   ...parameters
-               });
+       // Prevent right-click context menu on game area
+       document.addEventListener("contextmenu", function(e) {
+           if (e.target.closest(".game-area")) {
+               e.preventDefault();
            }
-           console.log(`Event: ${eventName}`, parameters);
-       }
+       });
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+       // Prevent text selection on game elements
+       document.addEventListener("selectstart", function(e) {
+           if (e.target.closest(".game-area")) {
+               e.preventDefault();
            }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
+       });
 
        // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
+       document.addEventListener("DOMContentLoaded", function() {
            initGame();
+           
+           // Add loading animation delay
+           setTimeout(() => {
+               document.querySelectorAll(".loading").forEach(el => {
+                   el.style.opacity = "1";
+               });
+           }, 100);
        });
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
+       // Service Worker for offline capability (optional)
+       if ('serviceWorker' in navigator) {
+           window.addEventListener('load', function() {
+               navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                   console.log('SW registered: ', registration);
+               }, function(registrationError) {
+                   console.log('SW registration failed: ', registrationError);
+               });
+           });
+       }
 
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
+       // Google Analytics 4 (replace with your tracking ID)
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'GA_MEASUREMENT_ID'); // Replace with your actual GA4 measurement ID
 
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
-           }
-       });
+   </script>
 
-       console.log("🎮 Word Scramble loaded successfully!");
-       
-    </script>
+   <!-- Google AdSense Script (replace with your publisher ID) -->
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+   
+   <!-- Schema.org structured data for SEO -->
+   <script type="application/ld+json">
+   {
+       "@context": "https://schema.org",
+       "@type": "Game",
+       "name": "Word Scramble",
+       "description": "Challenge your vocabulary! Unscramble letters to form words in this addictive puzzle game.",
+       "url": "https://gameszone99.com/word-scramble.html",
+       "genre": "Puzzle",
+       "gamePlatform": "Web Browser",
+       "operatingSystem": "Any",
+       "applicationCategory": "Game",
+       "offers": {
+           "@type": "Offer",
+           "price": "0",
+           "priceCurrency": "USD"
+       },
+       "aggregateRating": {
+           "@type": "AggregateRating",
+           "ratingValue": "4.8",
+           "ratingCount": "1250"
+       }
+   }
+   </script>
 </body>
 </html>

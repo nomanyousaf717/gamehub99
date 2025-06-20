@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain Teaser - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Brain Teaser for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="brain-teaser, puzzle game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Brain Teaser - Challenge Your Mind | GamesZone99.com</title>
+    <meta name="description" content="Play Brain Teaser for free! Challenge your mind with this addictive number sequence puzzle game. Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="brain teaser, puzzle game, html5 game, free online game, browser game, mobile game, number sequence, mind challenge">
+    <meta name="author" content="GamesZone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/brain-teaser.html">
-    <meta property="og:title" content="Brain Teaser - Free HTML5 Game">
-    <meta property="og:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="og:image" content="https://gamehub99.com/assets/brain-teaser-og.jpg">
+    <meta property="og:url" content="https://gameszone99.com/brain-teaser.html">
+    <meta property="og:title" content="Brain Teaser - Challenge Your Mind">
+    <meta property="og:description" content="Challenge your mind with this addictive number sequence puzzle game!">
+    <meta property="og:image" content="https://gameszone99.com/assets/brain-teaser-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/brain-teaser.html">
-    <meta property="twitter:title" content="Brain Teaser - Free HTML5 Game">
-    <meta property="twitter:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/brain-teaser-og.jpg">
+    <meta property="twitter:url" content="https://gameszone99.com/brain-teaser.html">
+    <meta property="twitter:title" content="Brain Teaser - Challenge Your Mind">
+    <meta property="twitter:description" content="Challenge your mind with this addictive number sequence puzzle game!">
+    <meta property="twitter:image" content="https://gameszone99.com/assets/brain-teaser-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -42,6 +41,7 @@
             --accent-color: #00d4ff;
             --success-color: #00ff88;
             --warning-color: #ffaa00;
+            --danger-color: #ff4757;
             --text-primary: #ffffff;
             --text-secondary: #b8c1ec;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -74,6 +74,13 @@
             z-index: 100;
         }
 
+        .ad-container-bottom {
+            position: sticky;
+            bottom: 0;
+            border-top: 1px solid var(--card-border);
+            border-bottom: none;
+        }
+
         .ad-placeholder {
             width: 728px;
             height: 90px;
@@ -97,62 +104,62 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .game-title {
             font-family: "Orbitron", monospace;
             font-size: 2rem;
             font-weight: 900;
-            background: var(--primary-gradient);
+            background: linear-gradient(45deg, var(--accent-color), #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
         .nav-buttons {
             display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
+            align-items: center;
         }
 
         .nav-button {
-            padding: 10px 20px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
             color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            font-size: 0.9rem;
         }
 
         .nav-button:hover {
             background: var(--accent-color);
             color: #000;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
         }
 
         .game-container {
             flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: flex;
             gap: 2rem;
-            width: 100%;
+            align-items: flex-start;
         }
 
         .game-section {
             flex: 2;
-            min-width: 320px;
+            min-width: 0;
         }
 
         .game-header {
@@ -167,13 +174,12 @@
         .stats-section {
             display: flex;
             gap: 1rem;
-            flex-wrap: wrap;
         }
 
         .stat-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 0.8rem 1rem;
             text-align: center;
             backdrop-filter: blur(10px);
@@ -181,11 +187,9 @@
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
         .stat-value {
@@ -202,77 +206,132 @@
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            background: var(--primary-gradient);
             border: none;
-            border-radius: 8px;
             color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            box-shadow: var(--shadow-card);
         }
 
         .control-button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-glow);
         }
 
         .control-button.new-game {
             background: var(--success-color);
+            color: #000;
         }
 
         .control-button.pause {
             background: var(--warning-color);
+            color: #000;
         }
 
         .game-canvas-container {
             background: var(--card-bg);
             border: 2px solid var(--card-border);
-            border-radius: 15px;
-            padding: 1rem;
+            border-radius: 12px;
+            padding: 1.5rem;
             backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
             position: relative;
-            text-align: center;
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
             max-width: 100%;
             height: auto;
+            cursor: pointer;
+        }
+
+        .start-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .start-title {
+            font-family: "Orbitron", monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent-color), #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .start-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .start-button {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
         }
 
         .mobile-controls {
-            display: none;
+            display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            gap: 0.8rem;
             margin-top: 1.5rem;
-            max-width: 250px;
+            max-width: 300px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .mobile-control {
-            aspect-ratio: 1;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             user-select: none;
+            font-weight: 700;
         }
 
         .mobile-control:hover, .mobile-control:active {
             background: var(--accent-color);
+            color: #000;
             transform: translateY(-2px);
         }
 
@@ -336,6 +395,7 @@
             .header-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 1rem;
             }
             
             .game-title {
@@ -344,6 +404,7 @@
             
             .nav-buttons {
                 justify-content: center;
+                flex-wrap: wrap;
             }
             
             .game-header {
@@ -360,10 +421,6 @@
                 justify-content: center;
             }
             
-            .mobile-controls {
-                display: grid;
-            }
-            
             .sidebar {
                 order: -1;
             }
@@ -373,8 +430,11 @@
                 height: 50px;
                 font-size: 12px;
             }
+
+            .start-title {
+                font-size: 2rem;
+            }
         }
-        
     </style>
 </head>
 <body>
@@ -386,10 +446,10 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🎭 Brain Teaser</h1>
+            <h1 class="game-title">🧠 Brain Teaser</h1>
             <nav class="nav-buttons">
-                <a href="/" class="nav-button">🏠 Home</a>
-                <a href="/games" class="nav-button">🎮 More Games</a>
+                <a href="https://gameszone99.com" class="nav-button">🏠 Home</a>
+                <a href="https://gameszone99.com/games" class="nav-button">🎮 More Games</a>
                 <a href="#" class="nav-button" onclick="showInstructions()">❓ How to Play</a>
                 <a href="#" class="nav-button" onclick="toggleFullscreen()">📱 Fullscreen</a>
             </nav>
@@ -414,6 +474,10 @@
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Time</div>
+                        <div class="stat-value" id="gameTime">0:00</div>
+                    </div>
                 </div>
                 
                 <div class="game-controls">
@@ -425,20 +489,25 @@
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <canvas id="gameCanvas" width="500" height="400"></canvas>
+                <div class="start-screen" id="startScreen">
+                    <div class="start-title">🧠 Brain Teaser</div>
+                    <div class="start-subtitle">Find the pattern and complete the sequence!</div>
+                    <button class="start-button" onclick="startGame()">🚀 Start Game</button>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="selectNumber(1)">1</div>
+                <div class="mobile-control" onclick="selectNumber(2)">2</div>
+                <div class="mobile-control" onclick="selectNumber(3)">3</div>
+                <div class="mobile-control" onclick="selectNumber(4)">4</div>
+                <div class="mobile-control" onclick="selectNumber(5)">5</div>
+                <div class="mobile-control" onclick="selectNumber(6)">6</div>
+                <div class="mobile-control" onclick="selectNumber(7)">7</div>
+                <div class="mobile-control" onclick="selectNumber(8)">8</div>
+                <div class="mobile-control" onclick="selectNumber(9)">9</div>
             </div>
         </main>
 
@@ -447,12 +516,19 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
+                    <p><strong>Challenge your mind with number sequences!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
+                        <li>Study the number pattern</li>
+                        <li>Find the missing number</li>
+                        <li>Click the correct answer</li>
                         <li>Beat your high score!</li>
                         <li>Share with friends</li>
+                    </ul>
+                    <p><strong>Scoring:</strong></p>
+                    <ul>
+                        <li>Correct answer: +10 points</li>
+                        <li>Speed bonus: +5 points</li>
+                        <li>Level bonus: +Level points</li>
                     </ul>
                 </div>
             </div>
@@ -460,6 +536,19 @@
             <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
                 <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
                     250x250<br>Sidebar Ad
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">🎮 More Games</h3>
+                <div class="instructions">
+                    <p>Enjoy more free games at GamesZone99:</p>
+                    <ul>
+                        <li><a href="https://gameszone99.com/snake.html" style="color: var(--accent-color);">🐍 Snake Game</a></li>
+                        <li><a href="https://gameszone99.com/tetris.html" style="color: var(--accent-color);">🧩 Tetris</a></li>
+                        <li><a href="https://gameszone99.com/2048.html" style="color: var(--accent-color);">🔢 2048</a></li>
+                        <li><a href="https://gameszone99.com/memory.html" style="color: var(--accent-color);">🃏 Memory Game</a></li>
+                    </ul>
                 </div>
             </div>
         </aside>
@@ -471,18 +560,61 @@
     </div>
 
     <script>
-        
         // Game State
         const game = {
             canvas: null,
             ctx: null,
             score: 0,
-            bestScore: localStorage.getItem("brain-teaserBest") || 0,
+            bestScore: localStorage.getItem("brainTeaserBest") || 0,
             level: 1,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameOver: false,
+            gameStarted: false,
+            startTime: 0,
+            currentTime: 0,
+            currentSequence: [],
+            correctAnswer: 0,
+            answerOptions: [],
+            timeBonus: 0,
+            animationId: null
         };
+
+        // Sequence patterns
+        const patterns = [
+            // Arithmetic sequences
+            { type: 'arithmetic', generate: (start, diff, length) => {
+                const seq = [];
+                for(let i = 0; i < length; i++) {
+                    seq.push(start + i * diff);
+                }
+                return seq;
+            }},
+            // Geometric sequences
+            { type: 'geometric', generate: (start, ratio, length) => {
+                const seq = [];
+                for(let i = 0; i < length; i++) {
+                    seq.push(Math.round(start * Math.pow(ratio, i)));
+                }
+                return seq;
+            }},
+            // Fibonacci-like
+            { type: 'fibonacci', generate: (a, b, length) => {
+                const seq = [a, b];
+                for(let i = 2; i < length; i++) {
+                    seq.push(seq[i-1] + seq[i-2]);
+                }
+                return seq;
+            }},
+            // Square numbers
+            { type: 'squares', generate: (start, length) => {
+                const seq = [];
+                for(let i = 0; i < length; i++) {
+                    seq.push(Math.pow(start + i, 2));
+                }
+                return seq;
+            }}
+        ];
 
         // Initialize game
         function initGame() {
@@ -492,318 +624,485 @@
             // Load best score
             document.getElementById("bestScore").textContent = game.bestScore;
             
-            // Event listeners
+            // Set up canvas
+            resizeCanvas();
+            
+            // Add event listeners
+            setupEventListeners();
+            
+            // Start game loop
+            gameLoop();
+        }
+
+        function resizeCanvas() {
+            const container = document.querySelector('.game-canvas-container');
+            const maxWidth = Math.min(500, container.clientWidth - 40);
+            game.canvas.style.width = maxWidth + 'px';
+            game.canvas.style.height = (maxWidth * 0.8) + 'px';
+        }
+
+        function setupEventListeners() {
+            // Keyboard controls
             document.addEventListener("keydown", handleKeyPress);
             
-            // Touch support
-            setupTouchControls();
+            // Window resize
+            window.addEventListener("resize", resizeCanvas);
             
-            // Start new game
-            newGame();
+            // Prevent right-click menu
+            game.canvas.addEventListener("contextmenu", e => e.preventDefault());
             
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
+            // Canvas click
+            game.canvas.addEventListener("click", handleCanvasClick);
         }
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
-            
-            updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
-        }
-
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
-            }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Brain Teaser", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
         function handleKeyPress(e) {
-            if (game.gameOver) return;
+            if (!game.gameStarted) return;
             
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
+            const key = e.key;
             
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
+            if (key >= '1' && key <= '9') {
+                selectNumber(parseInt(key));
+            } else if (key === ' ') {
                 e.preventDefault();
                 togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
+            } else if (key === 'r' || key === 'R') {
                 newGame();
             }
         }
 
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
+        function handleCanvasClick(e) {
+            if (!game.gameStarted || game.gamePaused) return;
             
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
+            const rect = game.canvas.getBoundingClientRect();
+            const scaleX = game.canvas.width / rect.width;
+            const scaleY = game.canvas.height / rect.height;
+            
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+            
+            // Check if clicked on answer options
+            checkAnswerClick(x, y);
         }
 
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
+        function generateSequence() {
+            const patternType = patterns[Math.floor(Math.random() * patterns.length)];
+            const level = Math.min(game.level, 10);
             
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
+            let sequence = [];
+            let correctAnswer = 0;
             
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
+            switch(patternType.type) {
+                case 'arithmetic':
+                    const start = Math.floor(Math.random() * 10) + 1;
+                    const diff = Math.floor(Math.random() * 5) + 1 + Math.floor(level/2);
+                    sequence = patternType.generate(start, diff, 5);
+                    correctAnswer = sequence[4];
+                    sequence = sequence.slice(0, 4);
+                    break;
+                    
+                case 'geometric':
+                    const gStart = Math.floor(Math.random() * 3) + 1;
+                    const ratio = 2;
+                    sequence = patternType.generate(gStart, ratio, 5);
+                    correctAnswer = sequence[4];
+                    sequence = sequence.slice(0, 4);
+                    break;
+                    
+                case 'fibonacci':
+                    const a = Math.floor(Math.random() * 3) + 1;
+                    const b = Math.floor(Math.random() * 3) + 1;
+                    sequence = patternType.generate(a, b, 5);
+                    correctAnswer = sequence[4];
+                    sequence = sequence.slice(0, 4);
+                    break;
+                    
+                case 'squares':
+                    const sStart = Math.floor(Math.random() * 3) + 1;
+                    sequence = patternType.generate(sStart, 5);
+                    correctAnswer = sequence[4];
+                    sequence = sequence.slice(0, 4);
+                    break;
             }
             
-            trackEvent("game_paused", { paused: game.gamePaused });
+            // Generate wrong answers
+            const answerOptions = [correctAnswer];
+            while(answerOptions.length < 4) {
+                const wrongAnswer = correctAnswer + Math.floor(Math.random() * 20) - 10;
+                if (wrongAnswer > 0 && !answerOptions.includes(wrongAnswer)) {
+                    answerOptions.push(wrongAnswer);
+                }
+            }
+            
+            // Shuffle options
+            for(let i = answerOptions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [answerOptions[i], answerOptions[j]] = [answerOptions[j], answerOptions[i]];
+            }
+            
+            game.currentSequence = sequence;
+            game.correctAnswer = correctAnswer;
+            game.answerOptions = answerOptions;
         }
 
-        // End Game
+        function startGame() {
+            document.getElementById("startScreen").style.display = "none";
+            game.gameStarted = true;
+            game.gameRunning = true;
+            game.startTime = Date.now();
+            generateSequence();
+        }
+
+        function newGame() {
+            game.score = 0;
+            game.level = 1;
+            game.gameRunning = false;
+            game.gamePaused = false;
+            game.gameOver = false;
+            game.gameStarted = false;
+            game.startTime = 0;
+            game.currentTime = 0;
+            
+            document.getElementById("startScreen").style.display = "flex";
+            document.getElementById("currentScore").textContent = "0";
+            document.getElementById("gameLevel").textContent = "1";
+            document.getElementById("gameTime").textContent = "0:00";
+            document.getElementById("pauseButton").textContent = "⏸️ Pause";
+        }
+
+        function selectNumber(number) {
+            if (!game.gameRunning || game.gamePaused) return;
+            
+            console.log("Selected number:", number, "Correct answer:", game.correctAnswer);
+            
+            const timeElapsed = (Date.now() - game.startTime) / 1000;
+            const speedBonus = Math.max(0, Math.floor(10 - timeElapsed));
+            
+            if (number === game.correctAnswer) {
+                // Correct answer
+                const points = 10 + speedBonus + game.level;
+                game.score += points;
+                game.level++;
+                
+                // Update display
+                document.getElementById("currentScore").textContent = game.score;
+                document.getElementById("gameLevel").textContent = game.level;
+                
+                // Generate new sequence
+                game.startTime = Date.now();
+                generateSequence();
+                
+                // Visual feedback
+                showFeedback("Correct! +" + points, true);
+                
+            } else {
+                // Wrong answer - game over
+                endGame();
+            }
+        }
+
+        function checkAnswerClick(x, y) {
+            const canvas = game.canvas;
+            const optionWidth = 80;
+            const optionHeight = 40;
+            const optionsY = canvas.height - 60;
+            const totalWidth = game.answerOptions.length * optionWidth;
+            const startX = (canvas.width - totalWidth) / 2;
+            
+            for(let i = 0; i < game.answerOptions.length; i++) {
+                const optionX = startX + (i * optionWidth) + 10;
+                
+                if (x >= optionX && x <= optionX + optionWidth - 20 && 
+                    y >= optionsY && y <= optionsY + optionHeight) {
+                    selectNumber(game.answerOptions[i]);
+                    break;
+                }
+            }
+        }
+
+        function togglePause() {
+            if (!game.gameStarted) return;
+            
+            game.gamePaused = !game.gamePaused;
+            const button = document.getElementById("pauseButton");
+            
+            if (game.gamePaused) {
+                button.textContent = "▶️ Resume";
+                game.gameRunning = false;
+            } else {
+                button.textContent = "⏸️ Pause";
+                game.gameRunning = true;
+                game.startTime = Date.now() - (game.currentTime * 1000);
+            }
+        }
+
         function endGame() {
             game.gameRunning = false;
             game.gameOver = true;
             
-            // Update best score
             if (game.score > game.bestScore) {
                 game.bestScore = game.score;
-                localStorage.setItem("brain-teaserBest", game.bestScore);
+                localStorage.setItem("brainTeaserBest", game.bestScore);
                 document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
-           }
-           
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
-       }
+            }
+            
+            // Save score to leaderboard
+            saveScore(game.score);
+            
+            showGameOverModal();
+        }
 
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
-           
-           document.body.appendChild(messageEl);
-           
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
+        function showGameOverModal() {
+            const isNewRecord = game.score > 0 && game.score >= game.bestScore;
+            const modal = document.createElement("div");
+           modal.className = "modal-overlay";
            modal.innerHTML = `
                <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
+                   <div class="modal-header">
+                       <h2>${isNewRecord ? '🏆 New Record!' : '🧠 Game Over'}</h2>
+                   </div>
+                   <div class="modal-body">
+                       <div class="final-stats">
+                           <div class="stat-item">
+                               <span class="stat-label">Final Score</span>
+                               <span class="stat-value">${game.score.toLocaleString()}</span>
+                           </div>
+                           <div class="stat-item">
+                               <span class="stat-label">Level Reached</span>
+                               <span class="stat-value">${game.level}</span>
+                           </div>
+                           <div class="stat-item">
+                               <span class="stat-label">Best Score</span>
+                               <span class="stat-value">${game.bestScore.toLocaleString()}</span>
+                           </div>
+                           <div class="stat-item">
+                               <span class="stat-label">Time Played</span>
+                               <span class="stat-value">${formatTime(game.currentTime)}</span>
+                           </div>
                        </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
+                       <div class="modal-message">
+                           ${isNewRecord ? 
+                               "🎉 Congratulations! You've set a new personal record!" : 
+                               "Keep practicing to improve your pattern recognition skills!"
+                           }
                        </div>
                    </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
+                   <div class="modal-footer">
+                       <button class="modal-button primary" onclick="this.parentElement.parentElement.parentElement.remove(); newGame();">
+                           🚀 Play Again
+                       </button>
+                       <button class="modal-button" onclick="shareScore()">
+                           📤 Share Score
+                       </button>
+                       <button class="modal-button" onclick="showLeaderboard()">
+                           🏆 Leaderboard
+                       </button>
+                       <button class="modal-button" onclick="this.parentElement.parentElement.parentElement.remove();">
+                           ❌ Close
+                       </button>
                    </div>
                </div>
            `;
            
            document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           
+           // Add pulse animation to new record
+           if (isNewRecord) {
+               modal.querySelector('.modal-content').classList.add('pulse');
            }
        }
 
-       // Show Leaderboard
-       function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("brain-teaserLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+       function showFeedback(message, isCorrect) {
+           const feedback = document.createElement("div");
+           feedback.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+           feedback.textContent = message;
+           feedback.style.cssText = `
+               position: fixed;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%);
+               background: ${isCorrect ? 'var(--success-color)' : 'var(--danger-color)'};
+               color: #000;
+               padding: 1rem 2rem;
+               border-radius: 50px;
+               font-weight: 700;
+               font-size: 1.2rem;
+               z-index: 1000;
+               animation: feedbackPop 2s ease forwards;
+               pointer-events: none;
+           `;
            
+           document.body.appendChild(feedback);
+           
+           setTimeout(() => {
+               if (feedback.parentNode) {
+                   feedback.parentNode.removeChild(feedback);
+               }
+           }, 2000);
+       }
+
+       function draw() {
+           const canvas = game.canvas;
+           const ctx = game.ctx;
+           
+           // Clear canvas
+           ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+           ctx.fillRect(0, 0, canvas.width, canvas.height);
+           
+           if (!game.gameStarted) return;
+           
+           // Draw sequence
+           ctx.fillStyle = '#ffffff';
+           ctx.font = 'bold 20px Orbitron';
+           ctx.textAlign = 'center';
+           
+           const sequenceY = canvas.height / 3;
+           ctx.fillText('Find the pattern:', canvas.width / 2, sequenceY - 40);
+           
+           // Calculate spacing for sequence numbers to fit properly
+           const boxSize = 60;
+           const totalBoxes = game.currentSequence.length + 1; // +1 for question mark
+           const spacing = Math.min(boxSize + 20, (canvas.width - 40) / totalBoxes);
+           const startX = (canvas.width - (spacing * (totalBoxes - 1))) / 2;
+           
+           // Draw sequence numbers
+           game.currentSequence.forEach((num, index) => {
+               const x = startX + (index * spacing);
+               
+               // Draw box
+               ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+               ctx.fillRect(x - boxSize/2, sequenceY - boxSize/2, boxSize, boxSize);
+               ctx.strokeStyle = '#00d4ff';
+               ctx.lineWidth = 2;
+               ctx.strokeRect(x - boxSize/2, sequenceY - boxSize/2, boxSize, boxSize);
+               
+               // Draw number
+               ctx.fillStyle = '#ffffff';
+               ctx.font = 'bold 24px Orbitron';
+               ctx.fillText(num, x, sequenceY + 8);
+           });
+           
+           // Draw question mark for missing number
+           const questionX = startX + (game.currentSequence.length * spacing);
+           ctx.fillStyle = 'rgba(255, 107, 107, 0.2)';
+           ctx.fillRect(questionX - boxSize/2, sequenceY - boxSize/2, boxSize, boxSize);
+           ctx.strokeStyle = '#ff6b6b';
+           ctx.strokeRect(questionX - boxSize/2, sequenceY - boxSize/2, boxSize, boxSize);
+           ctx.fillStyle = '#ff6b6b';
+           ctx.font = 'bold 32px Orbitron';
+           ctx.fillText('?', questionX, sequenceY + 12);
+           
+           // Draw answer options
+           const optionsY = canvas.height - 60;
+           ctx.fillStyle = '#ffffff';
+           ctx.font = 'bold 16px Inter';
+           ctx.fillText('Choose the correct answer:', canvas.width / 2, optionsY - 30);
+           
+           const optionWidth = 80;
+           const totalWidth = game.answerOptions.length * optionWidth;
+           const optionsStartX = (canvas.width - totalWidth) / 2;
+           
+           game.answerOptions.forEach((option, index) => {
+               const optionX = optionsStartX + (index * optionWidth) + 10;
+               
+               // Draw option box
+               ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+               ctx.fillRect(optionX, optionsY, optionWidth - 20, 40);
+               ctx.strokeStyle = '#00d4ff';
+               ctx.lineWidth = 1;
+               ctx.strokeRect(optionX, optionsY, optionWidth - 20, 40);
+               
+               // Draw option number
+               ctx.fillStyle = '#ffffff';
+               ctx.font = 'bold 18px Orbitron';
+               ctx.fillText(option, optionX + (optionWidth - 20) / 2, optionsY + 25);
+           });
+           
+           // Draw pause overlay
+           if (game.gamePaused) {
+               ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+               ctx.fillRect(0, 0, canvas.width, canvas.height);
+               ctx.fillStyle = '#ffffff';
+               ctx.font = 'bold 32px Orbitron';
+               ctx.textAlign = 'center';
+               ctx.fillText('PAUSED', canvas.width / 2, canvas.height / 2);
+               ctx.font = 'bold 16px Inter';
+               ctx.fillText('Press SPACE or click Pause to resume', canvas.width / 2, canvas.height / 2 + 40);
+           }
+       }
+
+       function updateTime() {
+           if (game.gameStarted && game.gameRunning && !game.gamePaused) {
+               game.currentTime = (Date.now() - game.startTime) / 1000;
+               document.getElementById("gameTime").textContent = formatTime(game.currentTime);
+           }
+       }
+
+       function formatTime(seconds) {
+           const mins = Math.floor(seconds / 60);
+           const secs = Math.floor(seconds % 60);
+           return `${mins}:${secs.toString().padStart(2, '0')}`;
+       }
+
+       function gameLoop() {
+           updateTime();
+           draw();
+           game.animationId = requestAnimationFrame(gameLoop);
+       }
+
+       function saveScore(score) {
+           const scores = JSON.parse(localStorage.getItem("brainTeaserScores") || "[]");
+           scores.push({
+               score: score,
+               level: game.level,
+               time: game.currentTime,
+               date: new Date().toLocaleDateString()
+           });
+           scores.sort((a, b) => b.score - a.score);
+           scores.splice(10); // Keep only top 10
+           localStorage.setItem("brainTeaserScores", JSON.stringify(scores));
+       }
+
+       function showLeaderboard() {
+           const scores = JSON.parse(localStorage.getItem("brainTeaserScores") || "[]");
+           
+           let message = "🏆 LEADERBOARD 🏆\n\n";
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet!\nBe the first!";
            } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
+               scores.slice(0, 5).forEach((scoreData, index) => {
+                   message += `#${index + 1}: ${scoreData.score.toLocaleString()} pts\n`;
+                   message += `    Level ${scoreData.level} • ${scoreData.date}\n\n`;
                });
            }
            
            alert(message);
        }
 
-       // Utility Functions
        function showInstructions() {
-           alert(`🎯 Brain Teaser - How to Play
+           alert(`🧠 Brain Teaser - How to Play
+
+🎯 Objective:
+Find the pattern in number sequences and complete them!
 
 🕹️ Controls:
-- Arrow Keys or WASD to move
+- Click number buttons or use keyboard (1-9)
 - Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
+- Click "New Game" to restart
 
 🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
+- Study the sequence of numbers
+- Find the mathematical pattern
+- Choose the correct next number
+- Wrong answer ends the game!
+
+🏆 Scoring:
+- Correct answer: +10 points
+- Speed bonus: up to +10 points
+- Level bonus: +Level points
+
+📱 Mobile:
+- Touch the number buttons
+- Optimized for all screen sizes
 
 Good luck! 🍀`);
        }
@@ -819,7 +1118,7 @@ Good luck! 🍀`);
        }
 
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Brain Teaser! Can you beat my score? 🏆`;
+           const text = `🧠 I just scored ${game.score.toLocaleString()} points in Brain Teaser! Can you beat my pattern recognition skills? 🏆`;
            
            if (navigator.share) {
                navigator.share({
@@ -829,96 +1128,96 @@ Good luck! 🍀`);
                });
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+                   alert("Score copied to clipboard! Share it with your friends!");
+               }).catch(() => {
+                   alert("Share: " + text + " " + window.location.href);
                });
            }
-           
-           trackEvent("score_shared", { score: game.score });
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "brain-teaser",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
-       }
-
-       // Add CSS animation
-       const style = document.createElement("style");
+       // Additional CSS for modal and animations
+       const style = document.createElement('style');
        style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
+           .modal-overlay {
                position: fixed;
                top: 0;
                left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
+               right: 0;
+               bottom: 0;
+               background: rgba(0, 0, 0, 0.9);
+               display: flex;
                align-items: center;
                justify-content: center;
                z-index: 1000;
-               backdrop-filter: blur(10px);
+               animation: fadeIn 0.3s ease;
            }
            .modal-content {
-               background: var(--dark-gradient);
+               background: var(--card-bg);
                border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
+               border-radius: 16px;
+               padding: 2rem;
+               max-width: 500px;
                width: 90%;
+               backdrop-filter: blur(20px);
+               box-shadow: var(--shadow-card);
+               animation: slideUp 0.3s ease;
            }
-           .modal-title {
+           .modal-header h2 {
                font-family: "Orbitron", monospace;
                font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
+               text-align: center;
+               margin-bottom: 1.5rem;
+               background: linear-gradient(45deg, var(--accent-color), #ff6b6b);
                -webkit-background-clip: text;
                -webkit-text-fill-color: transparent;
                background-clip: text;
            }
-           .modal-stats {
+           .final-stats {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 1rem;
                margin-bottom: 1.5rem;
            }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
+           .stat-item {
+               background: rgba(255, 255, 255, 0.05);
+               padding: 1rem;
+               border-radius: 8px;
+               text-align: center;
            }
-           .modal-stat-value {
+           .stat-item .stat-label {
+               display: block;
+               font-size: 0.9rem;
+               color: var(--text-secondary);
+               margin-bottom: 0.5rem;
+           }
+           .stat-item .stat-value {
                font-family: "Orbitron", monospace;
+               font-size: 1.2rem;
                font-weight: 700;
                color: var(--accent-color);
            }
-           .modal-buttons {
+           .modal-message {
+               text-align: center;
+               margin: 1.5rem 0;
+               font-size: 1.1rem;
+               color: var(--text-secondary);
+           }
+           .modal-footer {
                display: flex;
                gap: 0.8rem;
-               justify-content: center;
                flex-wrap: wrap;
+               justify-content: center;
            }
            .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
+               background: var(--card-bg);
+               border: 1px solid var(--card-border);
+               color: var(--text-primary);
+               padding: 0.8rem 1.2rem;
                border-radius: 8px;
-               color: white;
+               font-size: 0.9rem;
                font-weight: 600;
                cursor: pointer;
                transition: all 0.3s ease;
-               font-size: 0.9rem;
            }
            .modal-button:hover {
                transform: translateY(-2px);
@@ -934,6 +1233,41 @@ Good luck! 🍀`);
            @keyframes pulse {
                0%, 100% { transform: scale(1); }
                50% { transform: scale(1.05); }
+           }
+           @keyframes slideUp {
+               from {
+                   transform: translateY(50px);
+                   opacity: 0;
+               }
+               to {
+                   transform: translateY(0);
+                   opacity: 1;
+               }
+           }
+           @keyframes feedbackPop {
+               0% {
+                   transform: translate(-50%, -50%) scale(0.5);
+                   opacity: 0;
+               }
+               20% {
+                   transform: translate(-50%, -50%) scale(1.1);
+                   opacity: 1;
+               }
+               100% {
+                   transform: translate(-50%, -50%) scale(0.8);
+                   opacity: 0;
+               }
+           }
+           @media (max-width: 480px) {
+               .final-stats {
+                   grid-template-columns: 1fr;
+               }
+               .modal-footer {
+                   flex-direction: column;
+               }
+               .modal-button {
+                   width: 100%;
+               }
            }
        `;
        document.head.appendChild(style);
@@ -963,8 +1297,15 @@ Good luck! 🍀`);
            }
        });
 
-       console.log("🎮 Brain Teaser loaded successfully!");
+       // Handle beforeunload
+       window.addEventListener("beforeunload", () => {
+           if (game.animationId) {
+               cancelAnimationFrame(game.animationId);
+           }
+       });
+
+       console.log("🧠 Brain Teaser loaded successfully!");
        
-    </script>
+   </script>
 </body>
 </html>

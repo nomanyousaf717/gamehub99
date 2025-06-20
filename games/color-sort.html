@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Color Sort - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Color Sort for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="color-sort, puzzle game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Color Sort - Free HTML5 Game | gameszone99.com</title>
+    <meta name="description" content="Play Color Sort for free! Sort colored balls into tubes in this addictive puzzle game! Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="color sort, ball sort, puzzle game, html5 game, free online game, browser game, mobile game, sorting game">
+    <meta name="author" content="gameszone99.com">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/color-sort.html">
+    <meta property="og:url" content="https://gameszone99.com/games/color-sort.html">
     <meta property="og:title" content="Color Sort - Free HTML5 Game">
-    <meta property="og:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="og:image" content="https://gamehub99.com/assets/color-sort-og.jpg">
+    <meta property="og:description" content="Sort colored balls into tubes in this addictive puzzle game!">
+    <meta property="og:image" content="https://gameszone99.com/assets/color-sort-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/color-sort.html">
+    <meta property="twitter:url" content="https://gameszone99.com/games/color-sort.html">
     <meta property="twitter:title" content="Color Sort - Free HTML5 Game">
-    <meta property="twitter:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/color-sort-og.jpg">
+    <meta property="twitter:description" content="Sort colored balls into tubes in this addictive puzzle game!">
+    <meta property="twitter:image" content="https://gameszone99.com/assets/color-sort-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -97,7 +96,7 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -106,53 +105,63 @@
         }
 
         .game-title {
-            font-family: "Orbitron", monospace;
+            font-family: "Orbitron", sans-serif;
             font-size: 2rem;
             font-weight: 900;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .nav-button {
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
+            border-radius: 8px;
             color: var(--text-primary);
             text-decoration: none;
-            font-weight: 500;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
             font-size: 0.9rem;
         }
 
         .nav-button:hover {
             background: var(--accent-color);
-            color: #000;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         .game-container {
             flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
             gap: 2rem;
-            width: 100%;
         }
 
         .game-section {
-            flex: 2;
-            min-width: 320px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .game-section.loading {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .game-header {
@@ -171,51 +180,48 @@
         }
 
         .stat-box {
-            background: var(--card-bg);
+            background: var(--dark-gradient);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
             text-align: center;
-            backdrop-filter: blur(10px);
             min-width: 80px;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--accent-color);
+            font-family: "Orbitron", sans-serif;
         }
 
         .game-controls {
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            padding: 0.5rem 1rem;
+            background: var(--primary-gradient);
             border: none;
             border-radius: 8px;
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .control-button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-glow);
         }
 
         .control-button.new-game {
@@ -227,154 +233,245 @@
         }
 
         .game-canvas-container {
-            background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
             position: relative;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+            background: var(--dark-gradient);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 2px solid var(--card-border);
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
             max-width: 100%;
             height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            background: var(--success-color);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
         }
 
         .mobile-controls {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .mobile-control {
             aspect-ratio: 1;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
+        .mobile-control:hover {
             background: var(--accent-color);
-            transform: translateY(-2px);
+            transform: scale(0.95);
         }
 
         .mobile-control.empty {
-            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .sidebar {
-            flex: 1;
-            min-width: 280px;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.6s ease 0.2s;
+        }
+
+        .sidebar.loading {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .sidebar-section {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
             backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
         }
 
         .sidebar-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
-        .instructions {
-            color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
-        }
-
         .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+            list-style: none;
+            padding: 0;
         }
 
         .instructions li {
-            margin-bottom: 0.4rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--card-border);
+            color: var(--text-secondary);
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .instructions li:last-child {
+            border-bottom: none;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--dark-gradient);
+            border: 2px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .modal-score {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: var(--success-color);
+            font-family: "Orbitron", sans-serif;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .modal-button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button.primary {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .modal-button.secondary {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--card-border);
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
             .game-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                gap: 1rem;
                 padding: 1rem;
             }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
+
             .game-title {
                 font-size: 1.5rem;
             }
-            
+
+            .header-content {
+                text-align: center;
+            }
+
             .nav-buttons {
                 justify-content: center;
             }
-            
+
             .game-header {
                 flex-direction: column;
                 align-items: stretch;
                 text-align: center;
             }
-            
+
             .stats-section {
                 justify-content: center;
             }
-            
+
             .game-controls {
                 justify-content: center;
             }
-            
+
             .mobile-controls {
                 display: grid;
             }
-            
-            .sidebar {
-                order: -1;
-            }
-            
+
             .ad-placeholder {
                 width: 320px;
                 height: 50px;
                 font-size: 12px;
             }
         }
-        
     </style>
 </head>
 <body>
@@ -386,7 +483,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🎯 Color Sort</h1>
+            <h1 class="game-title">🌈 Color Sort</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -403,42 +500,44 @@
             <div class="game-header">
                 <div class="stats-section">
                     <div class="stat-box">
-                        <div class="stat-label">Score</div>
-                        <div class="stat-value" id="currentScore">0</div>
+                        <div class="stat-label">Level</div>
+                        <div class="stat-value" id="gameLevel">1</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Moves</div>
+                        <div class="stat-value" id="moveCount">0</div>
                     </div>
                     <div class="stat-box">
                         <div class="stat-label">Best</div>
-                        <div class="stat-value" id="bestScore">0</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Level</div>
-                        <div class="stat-value" id="gameLevel">1</div>
+                        <div class="stat-value" id="bestLevel">1</div>
                     </div>
                 </div>
                 
                 <div class="game-controls">
                     <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
-                    <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
+                    <button class="control-button" onclick="undoMove()" id="undoButton">↶ Undo</button>
+                    <button class="control-button" onclick="restartLevel()">🔄 Restart</button>
                 </div>
             </div>
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <canvas id="gameCanvas" width="400" height="500"></canvas>
+                <div class="start-overlay" id="startOverlay">
+                    <h2 style="color: var(--accent-color); margin-bottom: 1rem;">🌈 Color Sort</h2>
+                    <p style="color: var(--text-secondary); text-align: center; margin-bottom: 1rem;">
+                        Sort all colored balls into separate tubes!<br>
+                        Click any tube to select, then click another to pour.
+                    </p>
+                    <button class="start-button" onclick="startGame()">🎮 Start Game</button>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
                 <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="undoMove()">↶</div>
+                <div class="mobile-control" onclick="restartLevel()">🔄</div>
             </div>
         </main>
 
@@ -447,12 +546,13 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
+                    <p><strong>Sort colored balls into tubes!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li>🎯 Click a tube to select it</li>
+                        <li>🌈 Click another tube to pour balls</li>
+                        <li>📏 Only same colors can stack</li>
+                        <li>🎮 Complete when all sorted</li>
+                        <li>↶ Use undo to fix mistakes</li>
                     </ul>
                 </div>
             </div>
@@ -465,23 +565,57 @@
         </aside>
     </div>
 
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-title">🎉 Level Complete!</div>
+            <div class="modal-score" id="modalScore">Level 1 Complete!</div>
+            <p style="color: var(--text-secondary); margin: 1rem 0;">
+                Great job! Ready for the next challenge?
+            </p>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="nextLevel()">▶️ Next Level</button>
+                <button class="modal-button secondary" onclick="closeModal()">🏠 Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Win Modal -->
+    <div class="modal" id="winModal">
+        <div class="modal-content">
+            <div class="modal-title">🏆 Congratulations!</div>
+            <div class="modal-score">You've mastered Color Sort!</div>
+            <p style="color: var(--text-secondary); margin: 1rem 0;">
+                Amazing! You've completed all levels. Share your achievement!
+            </p>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="shareScore()">📱 Share</button>
+                <button class="modal-button secondary" onclick="newGame()">🆕 New Game</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
         <div class="ad-placeholder">728x90 Footer Advertisement</div>
     </div>
 
     <script>
-        
         // Game State
         const game = {
             canvas: null,
             ctx: null,
-            score: 0,
-            bestScore: localStorage.getItem("color-sortBest") || 0,
             level: 1,
-            gameRunning: false,
-            gamePaused: false,
-            gameOver: false
+            bestLevel: localStorage.getItem("colorSortBest") || 1,
+            moveCount: 0,
+            gameStarted: false,
+            tubes: [],
+            selectedTube: -1,
+            colors: ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#98d8c8', '#fad2ac'],
+            tubeWidth: 50,
+            tubeHeight: 160,
+            ballRadius: 18,
+            gameHistory: []
         };
 
         // Initialize game
@@ -489,17 +623,18 @@
             game.canvas = document.getElementById("gameCanvas");
             game.ctx = game.canvas.getContext("2d");
             
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
+            // Load best level
+            document.getElementById("bestLevel").textContent = game.bestLevel;
             
             // Event listeners
+            game.canvas.addEventListener('click', handleCanvasClick);
             document.addEventListener("keydown", handleKeyPress);
             
             // Touch support
             setupTouchControls();
             
-            // Start new game
-            newGame();
+            // Setup initial level
+            setupLevel(game.level);
             
             // Animate elements
             setTimeout(() => {
@@ -509,54 +644,202 @@
             }, 100);
         }
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
-            
-            updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
-        }
-
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
-            }
-            
-            updateGame();
+        // Start Game
+        function startGame() {
+            game.gameStarted = true;
+            document.getElementById('startOverlay').style.display = 'none';
             render();
-            
-            setTimeout(gameLoop, 100);
         }
 
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
+        // Setup Level
+        function setupLevel(level) {
+            game.moveCount = 0;
+            game.selectedTube = -1;
+            game.gameHistory = [];
             
-            // Game logic here
-            game.score += 10;
+            // Calculate tubes and colors based on level
+            const numColors = Math.min(3 + Math.floor(level / 2), 8);
+            const numTubes = numColors + 2; // Always 2 extra empty tubes
             
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
+            game.tubes = [];
+            
+            // Create tubes with mixed balls
+            const ballsPerColor = 4;
+            const allBalls = [];
+            
+            // Create balls for each color
+            for (let c = 0; c < numColors; c++) {
+                for (let i = 0; i < ballsPerColor; i++) {
+                    allBalls.push(game.colors[c]);
+                }
+            }
+            
+            // Shuffle balls
+            for (let i = allBalls.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allBalls[i], allBalls[j]] = [allBalls[j], allBalls[i]];
+            }
+            
+            // Fill tubes (leave 2 empty)
+            for (let t = 0; t < numTubes; t++) {
+                game.tubes[t] = [];
+                if (t < numColors) {
+                    // Fill with mixed balls
+                    for (let i = 0; i < ballsPerColor; i++) {
+                        if (allBalls.length > 0) {
+                            game.tubes[t].push(allBalls.pop());
+                        }
+                    }
+                }
             }
             
             updateDisplay();
+            if (game.gameStarted) {
+                render();
+            }
+        }
+
+        // Handle Canvas Click
+        function handleCanvasClick(event) {
+            if (!game.gameStarted) return;
             
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
+            const rect = game.canvas.getBoundingClientRect();
+            const scaleX = game.canvas.width / rect.width;
+            const scaleY = game.canvas.height / rect.height;
+            
+            const x = (event.clientX - rect.left) * scaleX;
+            const y = (event.clientY - rect.top) * scaleY;
+            
+            const tubeIndex = getTubeAtPosition(x, y);
+            
+            if (tubeIndex !== -1) {
+                handleTubeClick(tubeIndex);
+            }
+        }
+
+        // Get Tube at Position
+        function getTubeAtPosition(x, y) {
+            const tubesPerRow = Math.min(6, game.tubes.length);
+            const startX = (game.canvas.width - (tubesPerRow * (game.tubeWidth + 20) - 20)) / 2;
+            
+            for (let i = 0; i < game.tubes.length; i++) {
+                const row = Math.floor(i / tubesPerRow);
+                const col = i % tubesPerRow;
+                const tubeX = startX + col * (game.tubeWidth + 20);
+                const tubeY = 50 + row * (game.tubeHeight + 30);
+                
+                if (x >= tubeX && x <= tubeX + game.tubeWidth && 
+                    y >= tubeY && y <= tubeY + game.tubeHeight) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // Handle Tube Click
+        function handleTubeClick(tubeIndex) {
+            if (game.selectedTube === -1) {
+                // Select tube
+                if (game.tubes[tubeIndex].length > 0) {
+                    game.selectedTube = tubeIndex;
+                }
+            } else {
+                if (game.selectedTube === tubeIndex) {
+                    // Deselect
+                    game.selectedTube = -1;
+                } else {
+                    // Try to pour
+                    if (canPour(game.selectedTube, tubeIndex)) {
+                        saveGameState();
+                        pourBalls(game.selectedTube, tubeIndex);
+                        game.selectedTube = -1;
+                        game.moveCount++;
+                        updateDisplay();
+                        
+                        if (checkWin()) {
+                            setTimeout(() => {
+                                levelComplete();
+                            }, 500);
+                        }
+                    } else {
+                        game.selectedTube = tubeIndex;
+                        if (game.tubes[tubeIndex].length === 0) {
+                            game.selectedTube = -1;
+                        }
+                    }
+                }
+            }
+            render();
+        }
+
+        // Can Pour
+        function canPour(fromTube, toTube) {
+            const from = game.tubes[fromTube];
+            const to = game.tubes[toTube];
+            
+            if (from.length === 0) return false;
+            if (to.length >= 4) return false;
+            if (to.length > 0 && to[to.length - 1] !== from[from.length - 1]) return false;
+            
+            return true;
+        }
+
+        // Pour Balls
+        function pourBalls(fromTube, toTube) {
+            const from = game.tubes[fromTube];
+            const to = game.tubes[toTube];
+            const color = from[from.length - 1];
+            
+            // Count consecutive balls of same color from top
+            let count = 0;
+            for (let i = from.length - 1; i >= 0 && from[i] === color; i--) {
+                count++;
+                if (to.length + count >= 4) break; // Don't overflow destination
+            }
+            
+            // Move balls
+            for (let i = 0; i < count; i++) {
+                to.push(from.pop());
+            }
+        }
+
+        // Check Win
+        function checkWin() {
+            for (let tube of game.tubes) {
+                if (tube.length === 0) continue;
+                if (tube.length !== 4) return false;
+                
+                const color = tube[0];
+                for (let ball of tube) {
+                    if (ball !== color) return false;
+                }
+            }
+            return true;
+        }
+
+        // Save Game State
+        function saveGameState() {
+            game.gameHistory.push({
+                tubes: game.tubes.map(tube => [...tube]),
+                moveCount: game.moveCount,
+                selectedTube: game.selectedTube
+            });
+            
+            // Keep only last 10 moves
+            if (game.gameHistory.length > 10) {
+                game.gameHistory.shift();
+            }
+        }
+
+        // Undo Move
+        function undoMove() {
+            if (game.gameHistory.length > 0) {
+                const lastState = game.gameHistory.pop();
+                game.tubes = lastState.tubes;
+                game.moveCount = lastState.moveCount;
+                game.selectedTube = -1;
+                updateDisplay();
+                render();
             }
         }
 
@@ -568,242 +851,221 @@
             ctx.fillStyle = "#1a1a2e";
             ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
             
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Color Sort", game.canvas.width / 2, game.canvas.height / 2);
+            // Draw tubes
+            const tubesPerRow = Math.min(6, game.tubes.length);
+            const startX = (game.canvas.width - (tubesPerRow * (game.tubeWidth + 20) - 20)) / 2;
             
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
+            for (let i = 0; i < game.tubes.length; i++) {
+                const row = Math.floor(i / tubesPerRow);
+                const col = i % tubesPerRow;
+                const x = startX + col * (game.tubeWidth + 20);
+                const y = 50 + row * (game.tubeHeight + 30);
+                
+                drawTube(ctx, x, y, game.tubes[i], i === game.selectedTube);
             }
         }
 
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
-            }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
-        }
-
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
-            
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("color-sortBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+        // Draw Tube (continued)
+       function drawTube(ctx, x, y, balls, selected) {
+           // Draw tube outline
+           ctx.strokeStyle = selected ? "#00d4ff" : "#666";
+           ctx.lineWidth = selected ? 3 : 2;
+           ctx.strokeRect(x, y, game.tubeWidth, game.tubeHeight);
+           
+           // Draw tube background
+           ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+           ctx.fillRect(x + 1, y + 1, game.tubeWidth - 2, game.tubeHeight - 2);
+           
+           // Draw balls
+           for (let i = 0; i < balls.length; i++) {
+               const ballX = x + game.tubeWidth / 2;
+               const ballY = y + game.tubeHeight - 20 - (i * game.ballRadius * 2.2);
+               
+               // Ball shadow
+               ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+               ctx.beginPath();
+               ctx.arc(ballX + 2, ballY + 2, game.ballRadius, 0, Math.PI * 2);
+               ctx.fill();
+               
+               // Ball
+               ctx.fillStyle = balls[i];
+               ctx.beginPath();
+               ctx.arc(ballX, ballY, game.ballRadius, 0, Math.PI * 2);
+               ctx.fill();
+               
+               // Ball highlight
+               ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+               ctx.beginPath();
+               ctx.arc(ballX - 5, ballY - 5, game.ballRadius * 0.3, 0, Math.PI * 2);
+               ctx.fill();
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Selection glow
+           if (selected) {
+               ctx.shadowColor = "#00d4ff";
+               ctx.shadowBlur = 20;
+               ctx.strokeStyle = "#00d4ff";
+               ctx.lineWidth = 1;
+               ctx.strokeRect(x - 5, y - 5, game.tubeWidth + 10, game.tubeHeight + 10);
+               ctx.shadowBlur = 0;
+           }
+       }
+
+       // Level Complete
+       function levelComplete() {
+           game.level++;
+           
+           // Update best level
+           if (game.level > game.bestLevel) {
+               game.bestLevel = game.level;
+               localStorage.setItem("colorSortBest", game.bestLevel);
+           }
+           
+           document.getElementById('modalScore').textContent = `Level ${game.level - 1} Complete in ${game.moveCount} moves!`;
+           document.getElementById('gameOverModal').style.display = 'flex';
+           
+           // Track analytics
+           trackEvent("level_complete", { level: game.level - 1, moves: game.moveCount });
+       }
+
+       // Next Level
+       function nextLevel() {
+           closeModal();
+           setupLevel(game.level);
+           updateDisplay();
+           render();
+       }
+
+       // New Game
+       function newGame() {
+           game.level = 1;
+           game.gameStarted = false;
+           setupLevel(game.level);
+           document.getElementById('startOverlay').style.display = 'flex';
+           updateDisplay();
+           trackEvent("game_start");
+       }
+
+       // Restart Level
+       function restartLevel() {
+           setupLevel(game.level);
+           render();
+           trackEvent("level_restart");
        }
 
        // Update Display
        function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
            document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+           document.getElementById("moveCount").textContent = game.moveCount;
+           document.getElementById("bestLevel").textContent = game.bestLevel;
            
-           document.body.appendChild(messageEl);
-           
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
+           // Update undo button
+           const undoButton = document.getElementById("undoButton");
+           undoButton.style.opacity = game.gameHistory.length > 0 ? "1" : "0.5";
+           undoButton.disabled = game.gameHistory.length === 0;
        }
 
        // Close Modal
        function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           document.getElementById('gameOverModal').style.display = 'none';
+           document.getElementById('winModal').style.display = 'none';
+       }
+
+       // Handle Key Press
+       function handleKeyPress(event) {
+           switch(event.key.toLowerCase()) {
+               case 'n':
+                   newGame();
+                   break;
+               case 'r':
+                   restartLevel();
+                   break;
+               case 'u':
+               case 'z':
+                   if (event.ctrlKey || event.metaKey) {
+                       event.preventDefault();
+                       undoMove();
+                   }
+                   break;
+               case 'escape':
+                   game.selectedTube = -1;
+                   render();
+                   break;
            }
        }
 
-       // Show Leaderboard
-       function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("color-sortLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
-           
-           if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
-           } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
+       // Touch Controls
+       function setupTouchControls() {
+           let touchStartX = 0;
+           let touchStartY = 0;
+
+           game.canvas.addEventListener('touchstart', function(e) {
+               e.preventDefault();
+               const touch = e.touches[0];
+               const rect = game.canvas.getBoundingClientRect();
+               touchStartX = touch.clientX - rect.left;
+               touchStartY = touch.clientY - rect.top;
+           });
+
+           game.canvas.addEventListener('touchend', function(e) {
+               e.preventDefault();
+               const rect = game.canvas.getBoundingClientRect();
+               const scaleX = game.canvas.width / rect.width;
+               const scaleY = game.canvas.height / rect.height;
+               
+               const x = touchStartX * scaleX;
+               const y = touchStartY * scaleY;
+               
+               const tubeIndex = getTubeAtPosition(x, y);
+               
+               if (tubeIndex !== -1) {
+                   handleTubeClick(tubeIndex);
+               }
+           });
+       }
+
+       // Analytics
+       function trackEvent(eventName, properties = {}) {
+           // Google Analytics 4
+           if (typeof gtag !== 'undefined') {
+               gtag('event', eventName, {
+                   game_name: 'color_sort',
+                   ...properties
                });
            }
            
-           alert(message);
+           // Console log for debugging
+           console.log('Event:', eventName, properties);
        }
 
        // Utility Functions
        function showInstructions() {
-           alert(`🎯 Color Sort - How to Play
+           alert(`🌈 Color Sort - How to Play
 
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
+🎯 Goal: Sort all colored balls into separate tubes!
 
-🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
+🎮 Controls:
+- Click a tube to select it
+- Click another tube to pour balls
+- Only same colors can stack on top
+- Tubes can hold maximum 4 balls
+
+🎲 Rules:
+- You can only move the top balls
+- You can only pour onto same color or empty space
+- Complete the level when all colors are sorted
+
+⚡ Tips:
+- Use the empty tubes strategically
+- Plan your moves carefully
+- Use undo if you make a mistake
+- Try to keep one tube for temporary storage
+
+🎹 Hotkeys:
+- N - New Game
+- R - Restart Level  
+- U or Ctrl+Z - Undo Move
+- Esc - Deselect tube
 
 Good luck! 🍀`);
        }
@@ -811,7 +1073,7 @@ Good luck! 🍀`);
        function toggleFullscreen() {
            if (!document.fullscreenElement) {
                document.documentElement.requestFullscreen().catch(err => {
-                   console.log("Fullscreen not supported");
+                   console.log('Fullscreen not supported');
                });
            } else {
                document.exitFullscreen();
@@ -819,7 +1081,7 @@ Good luck! 🍀`);
        }
 
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Color Sort! Can you beat my score? 🏆`;
+           const text = `🌈 I just completed level ${game.level - 1} in Color Sort! Can you beat my score? 🏆`;
            
            if (navigator.share) {
                navigator.share({
@@ -829,142 +1091,181 @@ Good luck! 🍀`);
                });
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+                   alert("Score copied to clipboard! Share it with your friends!");
+               }).catch(() => {
+                   const dummy = document.createElement('textarea');
+                   document.body.appendChild(dummy);
+                   dummy.value = text + " " + window.location.href;
+                   dummy.select();
+                   document.execCommand('copy');
+                   document.body.removeChild(dummy);
+                   alert("Score copied to clipboard! Share it with your friends!");
                });
            }
+       }
+
+       // Service Worker for offline play
+       if ('serviceWorker' in navigator) {
+           window.addEventListener('load', function() {
+               navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                   console.log('ServiceWorker registration successful');
+               }, function(err) {
+                   console.log('ServiceWorker registration failed');
+               });
+           });
+       }
+
+       // Performance optimization
+       function optimizePerformance() {
+           // Reduce canvas quality on slower devices
+           const canvas = game.canvas;
+           const ctx = game.ctx;
            
-           trackEvent("score_shared", { score: game.score });
+           // Check device performance
+           const isSlowDevice = navigator.hardwareConcurrency < 4 || 
+                              /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+           
+           if (isSlowDevice) {
+               // Reduce canvas resolution for better performance
+               canvas.style.width = canvas.width + 'px';
+               canvas.style.height = canvas.height + 'px';
+               
+               // Enable image smoothing
+               ctx.imageSmoothingEnabled = true;
+               ctx.imageSmoothingQuality = 'medium';
+           }
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "color-sort",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
+       // Accessibility improvements
+       function setupAccessibility() {
+           // Add keyboard navigation
+           document.addEventListener('keydown', function(e) {
+               if (!game.gameStarted) return;
+               
+               let newSelection = game.selectedTube;
+               
+               switch(e.key) {
+                   case 'ArrowLeft':
+                       e.preventDefault();
+                       newSelection = Math.max(0, (game.selectedTube === -1 ? 0 : game.selectedTube) - 1);
+                       break;
+                   case 'ArrowRight':
+                       e.preventDefault();
+                       newSelection = Math.min(game.tubes.length - 1, (game.selectedTube === -1 ? 0 : game.selectedTube) + 1);
+                       break;
+                   case 'Enter':
+                   case ' ':
+                       e.preventDefault();
+                       if (game.selectedTube !== -1) {
+                           // Try to find a valid move
+                           for (let i = 0; i < game.tubes.length; i++) {
+                               if (i !== game.selectedTube && canPour(game.selectedTube, i)) {
+                                   handleTubeClick(i);
+                                   break;
+                               }
+                           }
+                       }
+                       break;
+               }
+               
+               if (newSelection !== game.selectedTube && newSelection >= 0 && newSelection < game.tubes.length) {
+                   game.selectedTube = game.tubes[newSelection].length > 0 ? newSelection : -1;
+                   render();
+               }
+           });
        }
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
-
-       // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
+       // Initialize everything when page loads
+       window.addEventListener('load', function() {
            initGame();
+           optimizePerformance();
+           setupAccessibility();
+           
+           // Animate loading
+           setTimeout(() => {
+               document.querySelectorAll(".loading").forEach(el => {
+                   el.style.opacity = "1";
+                   el.style.transform = "translateY(0)";
+               });
+           }, 100);
        });
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
-
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
-
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
+       // Prevent context menu on canvas
+       document.addEventListener('contextmenu', function(e) {
+           if (e.target.tagName === 'CANVAS') {
+               e.preventDefault();
            }
        });
 
-       console.log("🎮 Color Sort loaded successfully!");
-       
-    </script>
+       // Handle visibility change for pause
+       document.addEventListener('visibilitychange', function() {
+           if (document.hidden && game.gameStarted) {
+               // Auto-save game state when tab becomes hidden
+               localStorage.setItem('colorSortAutoSave', JSON.stringify({
+                   level: game.level,
+                   moveCount: game.moveCount,
+                   tubes: game.tubes,
+                   gameHistory: game.gameHistory
+               }));
+           }
+       });
+
+       // Auto-restore on page load
+       window.addEventListener('load', function() {
+           const autoSave = localStorage.getItem('colorSortAutoSave');
+           if (autoSave) {
+               try {
+                   const saveData = JSON.parse(autoSave);
+                   if (confirm('Would you like to continue your previous game?')) {
+                       game.level = saveData.level;
+                       game.moveCount = saveData.moveCount;
+                       game.tubes = saveData.tubes;
+                       game.gameHistory = saveData.gameHistory || [];
+                       updateDisplay();
+                       localStorage.removeItem('colorSortAutoSave');
+                   }
+               } catch (e) {
+                   console.log('Failed to restore save data');
+               }
+           }
+       });
+   </script>
+
+   <!-- Google Analytics 4 -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+   <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'GA_MEASUREMENT_ID');
+   </script>
+
+   <!-- JSON-LD Structured Data -->
+   <script type="application/ld+json">
+   {
+       "@context": "https://schema.org",
+       "@type": "Game",
+       "name": "Color Sort",
+       "description": "Sort colored balls into tubes in this addictive puzzle game!",
+       "url": "https://gameszone99.com/games/color-sort.html",
+       "image": "https://gameszone99.com/assets/color-sort-og.jpg",
+       "author": {
+           "@type": "Organization",
+           "name": "gameszone99.com"
+       },
+       "publisher": {
+           "@type": "Organization",
+           "name": "gameszone99.com"
+       },
+       "gameType": "Puzzle",
+       "operatingSystem": "Any",
+       "applicationCategory": "Game",
+       "offers": {
+           "@type": "Offer",
+           "price": "0",
+           "priceCurrency": "USD"
+       }
+   }
+   </script>
 </body>
 </html>

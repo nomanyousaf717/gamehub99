@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tile Matcher - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Tile Matcher for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="tile-matcher, puzzle game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Tile Matcher - Free HTML5 Game | GamesZone99</title>
+    <meta name="description" content="Play Tile Matcher for free! Challenge your memory with this addictive puzzle game! Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="tile-matcher, memory game, puzzle game, html5 game, free online game, browser game, mobile game">
+    <meta name="author" content="GamesZone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/tile-matcher.html">
+    <meta property="og:url" content="https://gameszone99.com/games/tile-matcher.html">
     <meta property="og:title" content="Tile Matcher - Free HTML5 Game">
-    <meta property="og:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="og:image" content="https://gamehub99.com/assets/tile-matcher-og.jpg">
+    <meta property="og:description" content="Challenge your memory with this addictive tile-matching puzzle game!">
+    <meta property="og:image" content="https://gameszone99.com/assets/tile-matcher-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/tile-matcher.html">
+    <meta property="twitter:url" content="https://gameszone99.com/games/tile-matcher.html">
     <meta property="twitter:title" content="Tile Matcher - Free HTML5 Game">
-    <meta property="twitter:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/tile-matcher-og.jpg">
+    <meta property="twitter:description" content="Challenge your memory with this addictive puzzle game!">
+    <meta property="twitter:image" content="https://gameszone99.com/assets/tile-matcher-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -74,6 +73,13 @@
             z-index: 100;
         }
 
+        .ad-container-bottom {
+            border-top: 1px solid var(--card-border);
+            border-bottom: none;
+            position: static;
+            margin-top: auto;
+        }
+
         .ad-placeholder {
             width: 728px;
             height: 90px;
@@ -97,7 +103,7 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -107,31 +113,31 @@
 
         .game-title {
             font-family: "Orbitron", monospace;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
         }
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .nav-button {
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
+            border-radius: 8px;
             color: var(--text-primary);
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .nav-button:hover {
@@ -141,18 +147,22 @@
         }
 
         .game-container {
-            flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
             gap: 2rem;
-            width: 100%;
+            flex: 1;
         }
 
         .game-section {
-            flex: 2;
-            min-width: 320px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
         }
 
         .game-header {
@@ -173,23 +183,19 @@
         .stat-box {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            padding: 0.75rem;
             text-align: center;
-            backdrop-filter: blur(10px);
             min-width: 80px;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--accent-color);
@@ -197,92 +203,138 @@
 
         .game-controls {
             display: flex;
-            gap: 0.8rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
         }
 
         .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+            padding: 0.5rem 1rem;
+            background: var(--primary-gradient);
             border: none;
             border-radius: 8px;
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .control-button:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-glow);
         }
 
         .control-button.new-game {
             background: var(--success-color);
-        }
-
-        .control-button.pause {
-            background: var(--warning-color);
+            color: #000;
         }
 
         .game-canvas-container {
-            background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
             position: relative;
-            text-align: center;
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
         }
 
-        #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        #gameBoard {
+            display: grid;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
             border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
+        }
+
+        .tile {
+            width: 70px;
+            height: 70px;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tile:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .tile.flipped {
+            background: var(--primary-gradient);
+            transform: scale(1.1);
+        }
+
+        .tile.matched {
+            background: var(--success-color);
+            border-color: var(--success-color);
+            color: #000;
+        }
+
+        .tile.hidden {
+            background: var(--card-bg);
+            color: transparent;
+        }
+
+        .start-screen {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .start-button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
         }
 
         .mobile-controls {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .mobile-control {
-            aspect-ratio: 1;
+            padding: 1rem;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 8px;
+            text-align: center;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
+        .mobile-control:hover {
             background: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .mobile-control.empty {
-            visibility: hidden;
+            color: #000;
         }
 
         .sidebar {
-            flex: 1;
-            min-width: 280px;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
@@ -292,89 +344,179 @@
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 1.2rem;
+            padding: 1.5rem;
             backdrop-filter: blur(10px);
         }
 
         .sidebar-title {
             font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
         .instructions {
-            color: var(--text-secondary);
-            line-height: 1.5;
             font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+            margin: 1rem 0;
+            padding-left: 1.5rem;
         }
 
         .instructions li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .difficulty-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .difficulty-btn {
+            flex: 1;
+            padding: 0.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .difficulty-btn.active {
+            background: var(--accent-color);
+            color: #000;
+        }
+
+        .game-over-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--dark-gradient);
+            border: 2px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-button {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            min-width: 100px;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-button.primary {
+            background: var(--accent-color);
+            color: #000;
         }
 
         @media (max-width: 768px) {
             .game-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 padding: 1rem;
+                gap: 1rem;
             }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .game-title {
-                font-size: 1.5rem;
-            }
-            
-            .nav-buttons {
-                justify-content: center;
-            }
-            
+
             .game-header {
                 flex-direction: column;
                 align-items: stretch;
-                text-align: center;
             }
-            
+
             .stats-section {
                 justify-content: center;
             }
-            
+
             .game-controls {
                 justify-content: center;
             }
-            
+
             .mobile-controls {
                 display: grid;
             }
-            
-            .sidebar {
-                order: -1;
+
+            .tile {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
             }
-            
+
             .ad-placeholder {
                 width: 320px;
                 height: 50px;
                 font-size: 12px;
             }
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-buttons {
+                justify-content: center;
+            }
         }
-        
+
+        @media (max-width: 480px) {
+            .tile {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .game-canvas-container {
+                padding: 0.5rem;
+                min-height: 400px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -399,7 +541,7 @@
     <!-- Main Game Container -->
     <div class="game-container">
         <!-- Game Section -->
-        <main class="game-section loading">
+        <main class="game-section">
             <div class="game-header">
                 <div class="stats-section">
                     <div class="stat-box">
@@ -411,49 +553,57 @@
                         <div class="stat-value" id="bestScore">0</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-label">Level</div>
-                        <div class="stat-value" id="gameLevel">1</div>
+                        <div class="stat-label">Moves</div>
+                        <div class="stat-value" id="moveCount">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Time</div>
+                        <div class="stat-value" id="gameTime">0:00</div>
                     </div>
                 </div>
                 
                 <div class="game-controls">
                     <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
                     <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
             </div>
 
-            <!-- Game Canvas -->
+            <!-- Game Board -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <div id="gameStart" class="start-screen">
+                    <h2>🎯 Tile Matcher</h2>
+                    <p>Match pairs of tiles to clear the board!</p>
+                    <button class="start-button" onclick="startGame()">🎮 Start Game</button>
+                </div>
+                <div id="gameBoard" style="display: none;"></div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="newGame()">🆕 New</div>
+                <div class="mobile-control" onclick="showHint()">💡 Hint</div>
+                <div class="mobile-control" onclick="shuffleTiles()">🔄 Shuffle</div>
             </div>
         </main>
 
         <!-- Sidebar -->
-        <aside class="sidebar loading">
+        <aside class="sidebar">
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
+                    <p><strong>Match pairs of tiles to clear the board!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li>Click tiles to flip them over</li>
+                        <li>Match identical tiles to keep them flipped</li>
+                        <li>Clear all tiles to win!</li>
+                        <li>Fewer moves = higher score</li>
                     </ul>
+                    
+                    <div class="difficulty-selector">
+                        <button class="difficulty-btn active" onclick="setDifficulty('easy')">Easy</button>
+                        <button class="difficulty-btn" onclick="setDifficulty('medium')">Medium</button>
+                        <button class="difficulty-btn" onclick="setDifficulty('hard')">Hard</button>
+                    </div>
                 </div>
             </div>
 
@@ -465,322 +615,316 @@
         </aside>
     </div>
 
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="game-over-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">🎉 Congratulations!</h2>
+            <div id="gameOverStats"></div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="playAgain()">🎮 Play Again</button>
+                <button class="modal-button" onclick="shareScore()">📱 Share</button>
+                <button class="modal-button" onclick="closeModal()">❌ Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
         <div class="ad-placeholder">728x90 Footer Advertisement</div>
     </div>
 
     <script>
-        
         // Game State
         const game = {
-            canvas: null,
-            ctx: null,
+            board: [],
+            flippedTiles: [],
+            matchedPairs: 0,
+            totalPairs: 0,
             score: 0,
-            bestScore: localStorage.getItem("tile-matcherBest") || 0,
-            level: 1,
+            bestScore: localStorage.getItem("tileMatcherBest") || 0,
+            moves: 0,
             gameRunning: false,
-            gamePaused: false,
-            gameOver: false
+            gameStartTime: null,
+            gameTimer: null,
+            difficulty: 'easy',
+            gridSize: { easy: 4, medium: 6, hard: 8 }
         };
+
+        // Tile symbols
+        const tileSymbols = ['🎮', '🎯', '🎲', '🎨', '🎪', '🎭', '🎺', '🎸', '🎹', '🎤', '🎧', '🎵', '🎶', '🎼', '🎳', '🎱', '🏀', '⚽', '🏈', '🎾', '🏐', '🏓', '🏸', '🏒', '🥅', '🏆', '🏅', '🥇', '🥈', '🥉', '🏵️', '🎖️'];
 
         // Initialize game
         function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
-            
-            // Load best score
             document.getElementById("bestScore").textContent = game.bestScore;
-            
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
-            
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
-            
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
+            updateStats();
         }
 
-        // New Game
-        function newGame() {
+        // Start game
+        function startGame() {
+            document.getElementById("gameStart").style.display = "none";
+            document.getElementById("gameBoard").style.display = "grid";
+            
+            const size = game.gridSize[game.difficulty];
+            game.totalPairs = (size * size) / 2;
+            game.matchedPairs = 0;
             game.score = 0;
-            game.level = 1;
+            game.moves = 0;
             game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
+            game.gameStartTime = Date.now();
             
-            updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
+            createBoard();
+            startTimer();
+            updateStats();
         }
 
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
+        // Create game board
+        function createBoard() {
+            const gameBoard = document.getElementById("gameBoard");
+            const size = game.gridSize[game.difficulty];
+            
+            gameBoard.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+            gameBoard.innerHTML = "";
+            
+            // Create pairs of symbols
+            const symbols = [];
+            for (let i = 0; i < game.totalPairs; i++) {
+                symbols.push(tileSymbols[i], tileSymbols[i]);
             }
             
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
+            // Shuffle symbols
+            for (let i = symbols.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [symbols[i], symbols[j]] = [symbols[j], symbols[i]];
             }
             
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Tile Matcher", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
+            // Create tiles
+            game.board = [];
+            symbols.forEach((symbol, index) => {
+                const tile = document.createElement("div");
+                tile.className = "tile hidden";
+                tile.dataset.symbol = symbol;
+                tile.dataset.index = index;
+                tile.addEventListener("click", () => flipTile(index));
+                gameBoard.appendChild(tile);
+                game.board.push({ symbol, element: tile, flipped: false, matched: false });
             });
         }
 
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
+        // Flip tile
+        function flipTile(index) {
+            if (!game.gameRunning || game.flippedTiles.length >= 2) return;
             
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
+            const tile = game.board[index];
+            if (tile.flipped || tile.matched) return;
             
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
+            tile.flipped = true;
+            tile.element.classList.remove("hidden");
+            tile.element.classList.add("flipped");
+            tile.element.textContent = tile.symbol;
+            
+            game.flippedTiles.push(index);
+            
+            if (game.flippedTiles.length === 2) {
+                game.moves++;
+                updateStats();
+                setTimeout(checkMatch, 1000);
+            }
+        }
+
+        // Check for match
+        function checkMatch() {
+            const [index1, index2] = game.flippedTiles;
+            const tile1 = game.board[index1];
+            const tile2 = game.board[index2];
+            
+            if (tile1.symbol === tile2.symbol) {
+                // Match found
+                tile1.matched = true;
+                tile2.matched = true;
+                tile1.element.classList.remove("flipped");
+                tile2.element.classList.remove("flipped");
+                tile1.element.classList.add("matched");
+                tile2.element.classList.add("matched");
+                
+                game.matchedPairs++;
+                game.score += 100 + (Math.max(0, 50 - game.moves) * 2);
+                
+                if (game.matchedPairs === game.totalPairs) {
+                    gameWin();
+                }
             } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
+                // No match
+                tile1.flipped = false;
+                tile2.flipped = false;
+                tile1.element.classList.remove("flipped");
+                tile2.element.classList.remove("flipped");
+                tile1.element.classList.add("hidden");
+                tile2.element.classList.add("hidden");
+                tile1.element.textContent = "";
+                tile2.element.textContent = "";
             }
             
-            trackEvent("game_paused", { paused: game.gamePaused });
+            game.flippedTiles = [];
+            updateStats();
         }
 
-        // End Game
-        function endGame() {
+        // Game win
+        function gameWin() {
             game.gameRunning = false;
-            game.gameOver = true;
+            clearInterval(game.gameTimer);
+            
+            // Time bonus
+            const timeBonus = Math.max(0, 300 - Math.floor((Date.now() - game.gameStartTime) / 1000)) * 5;
+            game.score += timeBonus;
             
             // Update best score
             if (game.score > game.bestScore) {
                 game.bestScore = game.score;
-                localStorage.setItem("tile-matcherBest", game.bestScore);
+                localStorage.setItem("tileMatcherBest", game.bestScore);
                 document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+            }
+            
+            // Save score to history
+            const scores = JSON.parse(localStorage.getItem("tileMatcherScores") || "[]");
+            scores.push(game.score);
+            scores.sort((a, b) => b - a);
+            localStorage.setItem("tileMatcherScores", JSON.stringify(scores.slice(0, 10)));
+            
+            showGameOverModal();
+        }
+
+        // Show game over modal
+        function showGameOverModal() {
+            const modal = document.getElementById("gameOverModal");
+            const stats = document.getElementById("gameOverStats");
+            const gameTime = Math.floor((Date.now() - game.gameStartTime) / 1000);
+            
+            stats.innerHTML = `
+                <p><strong>Final Score: ${game.score.toLocaleString()}</strong></p>
+                <p>Moves: ${game.moves}</p>
+                <p>Time: ${Math.floor(gameTime / 60)}:${(gameTime % 60).toString().padStart(2, '0')}</p>
+                <p>Difficulty: ${game.difficulty.charAt(0).toUpperCase() + game.difficulty.slice(1)}</p>
+            `;
+            
+            modal.style.display = "flex";
+        }
+
+        // New game
+        function newGame() {
+            game.gameRunning = false;
+            clearInterval(game.gameTimer);
+            document.getElementById("gameStart").style.display = "block";
+            document.getElementById("gameBoard").style.display = "none";
+            closeModal();
+        }
+
+        // Play again
+        function playAgain() {
+            closeModal();
+            startGame();
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById("gameOverModal").style.display = "none";
+        }
+
+        // Set difficulty
+        function setDifficulty(level) {
+            game.difficulty = level;
+            document.querySelectorAll('.difficulty-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Show hint
+        function showHint() {
+            if (!game.gameRunning || game.flippedTiles.length > 0) return;
+            
+            // Find two matching tiles that aren't matched yet
+            const unmatched = game.board.filter(tile => !tile.matched);
+            const symbols = {};
+            
+            unmatched.forEach((tile, index) => {
+                if (!symbols[tile.symbol]) {
+                    symbols[tile.symbol] = [];
+                }
+                symbols[tile.symbol].push(tile);
+            });
+            
+            // Find a pair and highlight briefly
+            for (let symbol in symbols) {
+                if (symbols[symbol].length >= 2) {
+                    const pair = symbols[symbol].slice(0, 2);
+                    pair.forEach(tile => {
+                        tile.element.style.boxShadow = "0 0 20px #ffaa00";
+                        setTimeout(() => {
+                            tile.element.style.boxShadow = "";
+                        }, 2000);
+                    });
+                    break;
+                }
+            }
+        }
+
+        // Shuffle tiles (cheat)
+       function shuffleTiles() {
+           if (!game.gameRunning) return;
+           
+           const unmatched = game.board.filter(tile => !tile.matched);
+           const symbols = unmatched.map(tile => tile.symbol);
+           
+           // Shuffle the symbols
+           for (let i = symbols.length - 1; i > 0; i--) {
+               const j = Math.floor(Math.random() * (i + 1));
+               [symbols[i], symbols[j]] = [symbols[j], symbols[i]];
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Reassign symbols to unmatched tiles
+           let symbolIndex = 0;
+           game.board.forEach(tile => {
+               if (!tile.matched) {
+                   tile.symbol = symbols[symbolIndex++];
+                   tile.element.dataset.symbol = tile.symbol;
+                   if (tile.flipped) {
+                       tile.element.textContent = tile.symbol;
+                   }
+               }
+           });
+           
+           game.moves += 5; // Penalty for shuffling
+           updateStats();
        }
 
-       // Update Display
-       function updateDisplay() {
+       // Start timer
+       function startTimer() {
+           game.gameTimer = setInterval(() => {
+               if (game.gameRunning) {
+                   updateGameTime();
+               }
+           }, 1000);
+       }
+
+       // Update game time
+       function updateGameTime() {
+           const elapsed = Math.floor((Date.now() - game.gameStartTime) / 1000);
+           const minutes = Math.floor(elapsed / 60);
+           const seconds = elapsed % 60;
+           document.getElementById("gameTime").textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+       }
+
+       // Update stats display
+       function updateStats() {
            document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
+           document.getElementById("moveCount").textContent = game.moves;
        }
 
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
-           
-           document.body.appendChild(messageEl);
-           
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
-           }
-       }
-
-       // Show Leaderboard
+       // Show leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("tile-matcherLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem("tileMatcherScores") || "[]");
+           let message = "🏆 HIGH SCORES 🏆\n\n";
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet!\nBe the first!";
            } else {
                scores.slice(0, 5).forEach((score, index) => {
                    message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
@@ -790,24 +934,35 @@
            alert(message);
        }
 
-       // Utility Functions
+       // Show instructions
        function showInstructions() {
            alert(`🎯 Tile Matcher - How to Play
 
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
+🎮 Objective:
+Match all pairs of identical tiles to clear the board!
 
-🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
+🕹️ How to Play:
+- Click on tiles to flip them over
+- Try to find matching pairs
+- When you find a match, both tiles stay flipped
+- Clear all tiles to win!
+
+⭐ Scoring:
+- Base points for each match: 100 pts
+- Bonus for fewer moves
+- Time bonus for quick completion
+- Penalty for using shuffle
+
+🎯 Tips:
+- Remember tile positions
+- Use fewer moves for higher scores
+- Try different difficulty levels
+- Use hints sparingly
 
 Good luck! 🍀`);
        }
 
+       // Toggle fullscreen
        function toggleFullscreen() {
            if (!document.fullscreenElement) {
                document.documentElement.requestFullscreen().catch(err => {
@@ -818,6 +973,7 @@ Good luck! 🍀`);
            }
        }
 
+       // Share score
        function shareScore() {
            const text = `🎮 I just scored ${game.score.toLocaleString()} points in Tile Matcher! Can you beat my score? 🏆`;
            
@@ -829,118 +985,53 @@ Good luck! 🍀`);
                });
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+                   alert("Score copied to clipboard! Share it with your friends! 📱");
+               }).catch(() => {
+                   alert(`Your score: ${game.score.toLocaleString()} points!\n\nShare this link: ${window.location.href}`);
                });
            }
-           
-           trackEvent("score_shared", { score: game.score });
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "tile-matcher",
-                   ...parameters
-               });
+       // Keyboard controls
+       document.addEventListener("keydown", (e) => {
+           switch(e.code) {
+               case "KeyN":
+                   e.preventDefault();
+                   newGame();
+                   break;
+               case "KeyH":
+                   e.preventDefault();
+                   showHint();
+                   break;
+               case "KeyS":
+                   e.preventDefault();
+                   shuffleTiles();
+                   break;
+               case "Escape":
+                   e.preventDefault();
+                   closeModal();
+                   break;
+               case "Space":
+                   e.preventDefault();
+                   if (!game.gameRunning && document.getElementById("gameStart").style.display !== "none") {
+                       startGame();
+                   }
+                   break;
            }
-           console.log(`Event: ${eventName}`, parameters);
-       }
+       });
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
+       // Touch handling for mobile
+       let touchStartTime = 0;
+       document.addEventListener("touchstart", (e) => {
+           touchStartTime = Date.now();
+       });
 
-       // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
-           initGame();
+       document.addEventListener("touchend", (e) => {
+           const touchDuration = Date.now() - touchStartTime;
+           if (touchDuration > 500) {
+               // Long press - show hint
+               showHint();
+           }
        });
 
        // Prevent zoom on mobile
@@ -958,13 +1049,114 @@ Good luck! 🍀`);
 
        // Handle page visibility
        document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
+           if (document.hidden && game.gameRunning) {
+               // Pause timer when page is hidden
+               clearInterval(game.gameTimer);
+           } else if (!document.hidden && game.gameRunning) {
+               // Resume timer when page is visible
+               startTimer();
+           }
+       });
+
+       // Analytics tracking (placeholder)
+       function trackEvent(eventName, properties = {}) {
+           // Add your analytics tracking code here
+           console.log("Event:", eventName, properties);
+       }
+
+       // Track game events
+       function trackGameStart() {
+           trackEvent("game_start", {
+               difficulty: game.difficulty,
+               timestamp: Date.now()
+           });
+       }
+
+       function trackGameEnd() {
+           trackEvent("game_end", {
+               score: game.score,
+               moves: game.moves,
+               difficulty: game.difficulty,
+               duration: Date.now() - game.gameStartTime
+           });
+       }
+
+       // Initialize game when page loads
+       document.addEventListener("DOMContentLoaded", () => {
+           initGame();
+           
+           // Add some visual flair
+           const style = document.createElement('style');
+           style.textContent = `
+               .pulse {
+                   animation: pulse 2s ease-in-out infinite;
+               }
+               @keyframes pulse {
+                   0%, 100% { transform: scale(1); }
+                   50% { transform: scale(1.05); }
+               }
+               .tile {
+                   animation: tileAppear 0.3s ease-out;
+               }
+               @keyframes tileAppear {
+                   from {
+                       transform: scale(0);
+                       opacity: 0;
+                   }
+                   to {
+                       transform: scale(1);
+                       opacity: 1;
+                   }
+               }
+               .tile.flipped {
+                   animation: flip 0.6s ease-in-out;
+               }
+               @keyframes flip {
+                   0% { transform: perspective(400px) rotateY(0deg); }
+                   50% { transform: perspective(400px) rotateY(90deg); }
+                   100% { transform: perspective(400px) rotateY(0deg); }
+               }
+               .tile.matched {
+                   animation: matchPulse 0.5s ease-in-out;
+               }
+               @keyframes matchPulse {
+                   0%, 100% { transform: scale(1); }
+                   50% { transform: scale(1.2); }
+               }
+               .start-button {
+                   animation: pulse 2s ease-in-out infinite;
+               }
+           `;
+           document.head.appendChild(style);
+       });
+
+       // Add some easter eggs
+       let konamiCode = [];
+       const konamiSequence = [
+           'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+           'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+           'KeyB', 'KeyA'
+       ];
+
+       document.addEventListener('keydown', (e) => {
+           konamiCode.push(e.code);
+           if (konamiCode.length > konamiSequence.length) {
+               konamiCode.shift();
+           }
+           
+           if (konamiCode.join(',') === konamiSequence.join(',')) {
+               // Easter egg activated!
+               game.score += 10000;
+               updateStats();
+               alert("🎉 Konami Code activated! +10,000 points! 🎉");
+               konamiCode = [];
            }
        });
 
        console.log("🎮 Tile Matcher loaded successfully!");
+       console.log("💡 Tips: Use 'N' for new game, 'H' for hint, 'S' to shuffle!");
+       console.log("🎯 Try the Konami Code for a surprise!");
        
-    </script>
+   </script>
 </body>
 </html>

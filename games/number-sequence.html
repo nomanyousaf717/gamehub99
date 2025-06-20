@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Sequence - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Number Sequence for free! Challenge your mind with this addictive puzzle game! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="number-sequence, puzzle game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Number Sequence - Free HTML5 Puzzle Game | GamesZone99</title>
+    <meta name="description" content="Play Number Sequence for free! Slide tiles to arrange numbers 1-15 in correct order. Addictive puzzle game with mobile-friendly controls. No download required!">
+    <meta name="keywords" content="number sequence, sliding puzzle, tile puzzle, html5 game, free online game, browser game, mobile game, puzzle game">
+    <meta name="author" content="GamesZone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/number-sequence.html">
-    <meta property="og:title" content="Number Sequence - Free HTML5 Game">
-    <meta property="og:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="og:image" content="https://gamehub99.com/assets/number-sequence-og.jpg">
+    <meta property="og:url" content="https://gameszone99.com/number-sequence.html">
+    <meta property="og:title" content="Number Sequence - Free HTML5 Puzzle Game">
+    <meta property="og:description" content="Challenge your mind with this addictive sliding tile puzzle game!">
+    <meta property="og:image" content="https://gameszone99.com/assets/number-sequence-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/number-sequence.html">
-    <meta property="twitter:title" content="Number Sequence - Free HTML5 Game">
-    <meta property="twitter:description" content="Challenge your mind with this addictive puzzle game!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/number-sequence-og.jpg">
+    <meta property="twitter:url" content="https://gameszone99.com/number-sequence.html">
+    <meta property="twitter:title" content="Number Sequence - Free HTML5 Puzzle Game">
+    <meta property="twitter:description" content="Challenge your mind with this addictive sliding tile puzzle game!">
+    <meta property="twitter:image" content="https://gameszone99.com/assets/number-sequence-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -90,14 +89,20 @@
         .header {
             padding: 1rem 0;
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 90px;
+            z-index: 99;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -113,268 +118,519 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
-        .nav-buttons {
+        .stats-container {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-button {
-            padding: 10px 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 25px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-size: 0.9rem;
-        }
-
-        .nav-button:hover {
-            background: var(--accent-color);
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        .game-container {
-            flex: 1;
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            gap: 2rem;
-            width: 100%;
-        }
-
-        .game-section {
-            flex: 2;
-            min-width: 320px;
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
+            gap: 1.5rem;
             align-items: center;
-            margin-bottom: 1.5rem;
             flex-wrap: wrap;
-            gap: 1rem;
         }
 
-        .stats-section {
+        .stat-item {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-box {
+            flex-direction: column;
+            align-items: center;
             background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
-            text-align: center;
             backdrop-filter: blur(10px);
             min-width: 80px;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .stat-value {
             font-family: "Orbitron", monospace;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--accent-color);
         }
 
-        .game-controls {
+        .main-content {
+            flex: 1;
             display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 2rem 0;
         }
 
-        .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
+        .game-section {
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .game-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-header {
+            padding: 1.5rem;
+            background: var(--primary-gradient);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .game-info h2 {
+            font-family: "Orbitron", monospace;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-info p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
             border: none;
-            border-radius: 8px;
             color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            backdrop-filter: blur(10px);
         }
 
-        .control-button:hover {
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
+        }
+
+        .play-area {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .start-content {
+            text-align: center;
+            max-width: 400px;
+            padding: 2rem;
+        }
+
+        .start-title {
+            font-family: "Orbitron", monospace;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .start-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .start-btn {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+            font-family: "Orbitron", monospace;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+        }
+
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid var(--card-border);
             box-shadow: var(--shadow-card);
         }
 
-        .control-button.new-game {
-            background: var(--success-color);
+        .puzzle-tile {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: "Orbitron", monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .control-button.pause {
-            background: var(--warning-color);
+        .puzzle-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
-        .game-canvas-container {
+        .puzzle-tile.empty {
+            background: transparent;
+            border: 2px dashed var(--card-border);
+            cursor: default;
+        }
+
+        .puzzle-tile.empty:hover {
+            transform: none;
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
             background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
-            position: relative;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
             text-align: center;
+            backdrop-filter: blur(10px);
         }
 
-        #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
+        .stat-box h3 {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-box .value {
+            font-family: "Orbitron", monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
         }
 
         .mobile-controls {
             display: none;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
-            margin-top: 1.5rem;
+            width: 100%;
             max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-top: 1rem;
         }
 
         .mobile-control {
-            aspect-ratio: 1;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
-            background: var(--accent-color);
+        .mobile-control:hover {
+            background: var(--primary-gradient);
+            color: white;
             transform: translateY(-2px);
         }
 
         .mobile-control.empty {
-            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .sidebar {
-            flex: 1;
-            min-width: 280px;
+            width: 300px;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .sidebar-section {
             background: var(--card-bg);
+            border-radius: 16px;
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
-            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
         }
 
         .sidebar-title {
+            font-family: "Orbitron", monospace;
             font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
         .instructions {
             color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+            list-style: none;
+            padding-left: 0;
         }
 
         .instructions li {
-            margin-bottom: 0.4rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--card-border);
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .instructions li:last-child {
+            border-bottom: none;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .instructions li:before {
+            content: "▶";
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .game-over-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-title {
+            font-family: "Orbitron", monospace;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: var(--success-color);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1.5rem 0;
+            gap: 1rem;
+        }
+
+        .modal-stat {
+            text-align: center;
+        }
+
+        .modal-stat .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-stat .value {
+            font-family: "Orbitron", monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-btn {
+            flex: 1;
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-btn.secondary {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
-            .game-container {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
+            .ad-placeholder {
+                width: 320px;
+                height: 50px;
+                font-size: 12px;
             }
             
             .game-title {
                 font-size: 1.5rem;
             }
             
-            .nav-buttons {
-                justify-content: center;
+            .stats-container {
+                gap: 1rem;
             }
             
-            .game-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            
-            .stats-section {
-                justify-content: center;
-            }
-            
-            .game-controls {
-                justify-content: center;
+            .puzzle-tile {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
             }
             
             .mobile-controls {
                 display: grid;
             }
             
-            .sidebar {
-                order: -1;
-            }
-            
-            .ad-placeholder {
-                width: 320px;
-                height: 50px;
-                font-size: 12px;
+            .start-title {
+                font-size: 1.5rem;
             }
         }
-        
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .play-area {
+                padding: 1rem;
+            }
+            
+            .puzzle-tile {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Success Animation */
+        .success-animation {
+            animation: successPulse 0.6s ease-in-out;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Particle Effect */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 2s ease-out forwards;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -385,84 +641,160 @@
 
     <!-- Header -->
     <header class="header">
-        <div class="header-content">
-            <h1 class="game-title">🎰 Number Sequence</h1>
-            <nav class="nav-buttons">
-                <a href="/" class="nav-button">🏠 Home</a>
-                <a href="/games" class="nav-button">🎮 More Games</a>
-                <a href="#" class="nav-button" onclick="showInstructions()">❓ How to Play</a>
-                <a href="#" class="nav-button" onclick="toggleFullscreen()">📱 Fullscreen</a>
-            </nav>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="game-title">🔢 Number Sequence</h1>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-label">MOVES</div>
+                        <div class="stat-value" id="currentMoves">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">TIME</div>
+                        <div class="stat-value" id="currentTime">00:00</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">BEST TIME</div>
+                        <div class="stat-value" id="bestTime">--:--</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Main Game Container -->
-    <div class="game-container">
-        <!-- Game Section -->
-        <main class="game-section loading">
-            <div class="game-header">
-                <div class="stats-section">
-                    <div class="stat-box">
-                        <div class="stat-label">Score</div>
-                        <div class="stat-value" id="currentScore">0</div>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Game Section -->
+            <main class="game-section">
+                <div class="game-container loading">
+                    <div class="game-header">
+                        <div class="game-info">
+                            <h2>🧩 Sliding Number Puzzle</h2>
+                            <p>Arrange numbers 1-15 in correct sequence by sliding tiles</p>
+                        </div>
+                        <div class="game-controls">
+                            <button class="control-btn" onclick="newGame()">🆕 New Game</button>
+                            <button class="control-btn" onclick="showHint()">💡 Hint</button>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Best</div>
-                        <div class="stat-value" id="bestScore">0</div>
+
+                    <div class="play-area">
+                        <!-- Start Overlay -->
+                        <div class="start-overlay" id="startOverlay">
+                            <div class="start-content">
+                                <h2 class="start-title">🔢 Number Sequence</h2>
+                                <p class="start-description">
+                                    Slide tiles to arrange numbers 1-15 in sequence! 
+                                    Use arrow keys or touch controls to move tiles into the empty space.
+                                    Complete the puzzle in minimum moves and fastest time!
+                                </p>
+                                <button class="start-btn" onclick="startGame()">🎮 Start Playing</button>
+                            </div>
+                        </div>
+
+                        <!-- Puzzle Grid -->
+                        <div class="puzzle-grid" id="puzzleGrid">
+                            <!-- Tiles will be generated by JavaScript -->
+                        </div>
+
+                        <!-- Game Stats -->
+                        <div class="game-stats">
+                            <div class="stat-box">
+                                <h3>Moves</h3>
+                                <div class="value" id="moves">0</div>
+                            </div>
+                            <div class="stat-box">
+                                <h3>Time</h3>
+                                <div class="value" id="timer">00:00</div>
+                            </div>
+                            <div class="stat-box">
+                                <h3>Best Moves</h3>
+                                <div class="value" id="bestMoves">--</div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Controls -->
+                        <div class="mobile-controls" id="mobileControls">
+                            <div class="mobile-control empty"></div>
+                            <div class="mobile-control" onclick="moveTile('up')">⬆️</div>
+                            <div class="mobile-control empty"></div>
+                            <div class="mobile-control" onclick="moveTile('left')">⬅️</div>
+                            <div class="mobile-control" onclick="newGame()">🔄</div>
+                            <div class="mobile-control" onclick="moveTile('right')">➡️</div>
+                            <div class="mobile-control empty"></div>
+                            <div class="mobile-control" onclick="moveTile('down')">⬇️</div>
+                            <div class="mobile-control empty"></div>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Level</div>
-                        <div class="stat-value" id="gameLevel">1</div>
+                </div>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar loading">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">🎯 How to Play</h3>
+                    <div class="instructions">
+                        <p><strong>Master the Number Sequence Puzzle!</strong></p>
+                        <ul>
+                            <li>Click tiles adjacent to empty space to slide them</li>
+                            <li>Arrange numbers 1-15 in correct order</li>
+                            <li>Use arrow keys for keyboard control</li>
+                            <li>Complete puzzle in fewest moves</li>
+                            <li>Beat your best time record</li>
+                            <li>Challenge friends with your score</li>
+                        </ul>
                     </div>
                 </div>
-                
-                <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
-                    <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
+
+                <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                    <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
+                        250x250<br>Sidebar Ad
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">🏆 Pro Tips</h3>
+                    <div class="instructions">
+                        <ul>
+                            <li>Start by positioning corner pieces</li>
+                            <li>Work row by row from top to bottom</li>
+                            <li>Plan multiple moves ahead</li>
+                            <li>Use the empty space strategically</li>
+                            <li>Practice to improve your solving time</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2 class="modal-title">🎉 Puzzle Solved!</h2>
+            <p>Congratulations! You've completed the number sequence!</p>
+            
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <div class="label">Moves</div>
+                    <div class="value" id="finalMoves">0</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="label">Time</div>
+                    <div class="value" id="finalTime">00:00</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="label">Rating</div>
+                    <div class="value" id="rating">⭐⭐⭐</div>
                 </div>
             </div>
-
-            <!-- Game Canvas -->
-            <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn" onclick="newGame()">🎮 Play Again</button>
+                <button class="modal-btn secondary" onclick="shareScore()">📱 Share</button>
             </div>
-
-            <!-- Mobile Controls -->
-            <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
-            </div>
-        </main>
-
-        <!-- Sidebar -->
-        <aside class="sidebar loading">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">🎯 How to Play</h3>
-                <div class="instructions">
-                    <p><strong>Challenge your mind with this addictive puzzle game!</strong></p>
-                    <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
-                    250x250<br>Sidebar Ad
-                </div>
-            </div>
-        </aside>
+        </div>
     </div>
 
     <!-- Bottom Ad Container -->
@@ -471,35 +803,24 @@
     </div>
 
     <script>
-        
         // Game State
         const game = {
-            canvas: null,
-            ctx: null,
-            score: 0,
-            bestScore: localStorage.getItem("number-sequenceBest") || 0,
-            level: 1,
-            gameRunning: false,
-            gamePaused: false,
-            gameOver: false
+            board: [],
+            emptyPos: { row: 3, col: 3 },
+            moves: 0,
+            startTime: null,
+            timerInterval: null,
+            gameActive: false,
+            bestMoves: localStorage.getItem("numberSequenceBestMoves") || null,
+            bestTime: localStorage.getItem("numberSequenceBestTime") || null
         };
 
         // Initialize game
         function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
-            
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
-            
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
-            
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
+            loadBestScores();
+            generatePuzzle();
+            updateDisplay();
+            setupEventListeners();
             
             // Animate elements
             setTimeout(() => {
@@ -509,462 +830,556 @@
             }, 100);
         }
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
-            
-            updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
-        }
-
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
+        // Load best scores
+        function loadBestScores() {
+            if (game.bestMoves) {
+                document.getElementById("bestMoves").textContent = game.bestMoves;
             }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
+            if (game.bestTime) {
+                document.getElementById("bestTime").textContent = formatTime(game.bestTime);
             }
         }
 
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Number Sequence", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
+        // Generate puzzle
+        function generatePuzzle() {
+            // Initialize solved board
+            game.board = [];
+            for (let i = 0; i < 4; i++) {
+                game.board[i] = [];
+                for (let j = 0; j < 4; j++) {
+                    if (i === 3 && j === 3) {
+                        game.board[i][j] = 0; // Empty space
+                    } else {
+                        game.board[i][j] = i * 4 + j + 1;
                     }
                 }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
             }
             
-            trackEvent("game_paused", { paused: game.gamePaused });
+            // Shuffle the board
+            shuffleBoard();
+            renderBoard();
         }
 
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
+        // Shuffle board with valid moves
+        function shuffleBoard() {
+            const moves = ['up', 'down', 'left', 'right'];
             
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("number-sequenceBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+            for (let i = 0; i < 1000; i++) {
+                const randomMove = moves[Math.floor(Math.random() * moves.length)];
+                moveTileDirection(randomMove, true);
+            }
+        }
+
+        // Render the board
+        function renderBoard() {
+            const grid = document.getElementById("puzzleGrid");
+            grid.innerHTML = "";
+            
+            for (let i = 0; i < 4; i++) {
+                for (let j = 0; j < 4; j++) {
+                    const tile = document.createElement("div");
+                    tile.className = "puzzle-tile";
+                    
+                    if (game.board[i][j] === 0) {
+                        tile.className += " empty";
+                        tile.textContent = "";
+                    } else {
+                        tile.textContent = game.board[i][j];
+                        tile.onclick = () => clickTile(i, j);
+                    }
+                    
+                    grid.appendChild(tile);
+                }
+            }
+        }
+
+        // Start game
+        function startGame() {
+            document.getElementById("startOverlay").style.display = "none";
+            game.gameActive = true;
+            game.moves = 0;
+            game.startTime = Date.now();
+            startTimer();
+            updateDisplay();
+            
+            // Generate new puzzle
+            generatePuzzle();
+        }
+
+        // New game (continued)
+       function newGame() {
+           // Reset game state
+           game.moves = 0;
+           game.gameActive = false;
+           clearInterval(game.timerInterval);
+           
+           // Hide modals
+           document.getElementById("gameOverModal").style.display = "none";
+           document.getElementById("startOverlay").style.display = "flex";
+           
+           // Reset display
+           updateDisplay();
+           
+           // Generate new puzzle
+           generatePuzzle();
+       }
+
+       // Click tile handler
+       function clickTile(row, col) {
+           if (!game.gameActive) return;
+           
+           // Check if tile is adjacent to empty space
+           const emptyRow = game.emptyPos.row;
+           const emptyCol = game.emptyPos.col;
+           
+           const isAdjacent = 
+               (Math.abs(row - emptyRow) === 1 && col === emptyCol) ||
+               (Math.abs(col - emptyCol) === 1 && row === emptyRow);
+           
+           if (isAdjacent) {
+               // Swap tile with empty space
+               game.board[emptyRow][emptyCol] = game.board[row][col];
+               game.board[row][col] = 0;
+               game.emptyPos = { row, col };
+               
+               game.moves++;
+               updateDisplay();
+               renderBoard();
+               
+               // Add move animation
+               createParticleEffect(row, col);
+               
+               // Check for win
+               if (checkWin()) {
+                   endGame();
+               }
+           }
+       }
+
+       // Move tile by direction
+       function moveTile(direction) {
+           moveTileDirection(direction, false);
+       }
+
+       function moveTileDirection(direction, isShuffle = false) {
+           if (!isShuffle && !game.gameActive) return;
+           
+           const emptyRow = game.emptyPos.row;
+           const emptyCol = game.emptyPos.col;
+           let newRow = emptyRow;
+           let newCol = emptyCol;
+           
+           switch (direction) {
+               case 'up':
+                   newRow = emptyRow + 1;
+                   break;
+               case 'down':
+                   newRow = emptyRow - 1;
+                   break;
+               case 'left':
+                   newCol = emptyCol + 1;
+                   break;
+               case 'right':
+                   newCol = emptyCol - 1;
+                   break;
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Check bounds
+           if (newRow >= 0 && newRow < 4 && newCol >= 0 && newCol < 4) {
+               // Swap
+               game.board[emptyRow][emptyCol] = game.board[newRow][newCol];
+               game.board[newRow][newCol] = 0;
+               game.emptyPos = { row: newRow, col: newCol };
+               
+               if (!isShuffle) {
+                   game.moves++;
+                   updateDisplay();
+                   renderBoard();
+                   
+                   createParticleEffect(newRow, newCol);
+                   
+                   if (checkWin()) {
+                       endGame();
+                   }
+               }
+           }
        }
 
-       // Update Display
+       // Check win condition
+       function checkWin() {
+           let expected = 1;
+           for (let i = 0; i < 4; i++) {
+               for (let j = 0; j < 4; j++) {
+                   if (i === 3 && j === 3) {
+                       return game.board[i][j] === 0;
+                   }
+                   if (game.board[i][j] !== expected) {
+                       return false;
+                   }
+                   expected++;
+               }
+           }
+           return true;
+       }
+
+       // End game
+       function endGame() {
+           game.gameActive = false;
+           clearInterval(game.timerInterval);
+           
+           const finalTime = Math.floor((Date.now() - game.startTime) / 1000);
+           
+           // Update best scores
+           if (!game.bestMoves || game.moves < parseInt(game.bestMoves)) {
+               game.bestMoves = game.moves;
+               localStorage.setItem("numberSequenceBestMoves", game.bestMoves);
+               document.getElementById("bestMoves").textContent = game.bestMoves;
+           }
+           
+           if (!game.bestTime || finalTime < parseInt(game.bestTime)) {
+               game.bestTime = finalTime;
+               localStorage.setItem("numberSequenceBestTime", game.bestTime);
+               document.getElementById("bestTime").textContent = formatTime(game.bestTime);
+           }
+           
+           // Show completion modal
+           showGameOverModal(finalTime);
+           
+           // Success animation
+           document.querySelector(".puzzle-grid").classList.add("success-animation");
+       }
+
+       // Show game over modal
+       function showGameOverModal(finalTime) {
+           document.getElementById("finalMoves").textContent = game.moves;
+           document.getElementById("finalTime").textContent = formatTime(finalTime);
+           
+           // Calculate rating
+           let rating = "⭐⭐⭐";
+           if (game.moves <= 100) rating = "⭐⭐⭐⭐⭐";
+           else if (game.moves <= 150) rating = "⭐⭐⭐⭐";
+           else if (game.moves <= 200) rating = "⭐⭐⭐";
+           else if (game.moves <= 300) rating = "⭐⭐";
+           else rating = "⭐";
+           
+           document.getElementById("rating").textContent = rating;
+           document.getElementById("gameOverModal").style.display = "flex";
+       }
+
+       // Start timer
+       function startTimer() {
+           game.timerInterval = setInterval(() => {
+               if (game.gameActive) {
+                   const elapsed = Math.floor((Date.now() - game.startTime) / 1000);
+                   document.getElementById("timer").textContent = formatTime(elapsed);
+                   document.getElementById("currentTime").textContent = formatTime(elapsed);
+               }
+           }, 1000);
+       }
+
+       // Format time
+       function formatTime(seconds) {
+           const mins = Math.floor(seconds / 60);
+           const secs = seconds % 60;
+           return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+       }
+
+       // Update display
        function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
+           document.getElementById("moves").textContent = game.moves;
+           document.getElementById("currentMoves").textContent = game.moves;
        }
 
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
+       // Show hint
+       function showHint() {
+           if (!game.gameActive) return;
+           
+           // Find next correct position hint
+           let hintText = "💡 Try to position the corner numbers (1, 4, 13, 15) first!";
+           
+           if (game.moves > 50) {
+               hintText = "💡 Work row by row from top to bottom for better results!";
+           } else if (game.moves > 100) {
+               hintText = "💡 Use the empty space strategically to maneuver tiles!";
+           }
+           
+           // Show hint in a temporary notification
+           showNotification(hintText);
        }
 
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
+       // Show notification
+       function showNotification(message) {
+           const notification = document.createElement("div");
+           notification.style.cssText = `
                position: fixed;
                top: 50%;
                left: 50%;
                transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
+               background: var(--card-bg);
+               border: 1px solid var(--card-border);
                padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
+               border-radius: 12px;
+               color: var(--text-primary);
+               backdrop-filter: blur(20px);
+               z-index: 1001;
+               animation: fadeInOut 3s ease-in-out forwards;
+               text-align: center;
+               max-width: 300px;
            `;
+           notification.textContent = message;
            
-           document.body.appendChild(messageEl);
+           // Add fade animation
+           const style = document.createElement("style");
+           style.textContent = `
+               @keyframes fadeInOut {
+                   0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                   10%, 90% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+               }
+           `;
+           document.head.appendChild(style);
+           document.body.appendChild(notification);
            
            setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
+               notification.remove();
+               style.remove();
+           }, 3000);
        }
 
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
+       // Create particle effect
+       function createParticleEffect(row, col) {
+           const grid = document.getElementById("puzzleGrid");
+           const rect = grid.getBoundingClientRect();
            
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           for (let i = 0; i < 5; i++) {
+               const particle = document.createElement("div");
+               particle.className = "particle";
+               particle.style.left = (rect.left + col * 88 + 40 + Math.random() * 20) + "px";
+               particle.style.top = (rect.top + row * 88 + 40 + Math.random() * 20) + "px";
+               
+               document.body.appendChild(particle);
+               
+               setTimeout(() => particle.remove(), 2000);
            }
        }
 
-       // Show Leaderboard
-       function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("number-sequenceLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
-           
-           if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
-           } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
-               });
-           }
-           
-           alert(message);
-       }
-
-       // Utility Functions
-       function showInstructions() {
-           alert(`🎯 Number Sequence - How to Play
-
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
-
-🎮 Gameplay:
-- Challenge your mind with this addictive puzzle game!
-- Score points to advance levels
-- Beat your high score!
-
-Good luck! 🍀`);
-       }
-
-       function toggleFullscreen() {
-           if (!document.fullscreenElement) {
-               document.documentElement.requestFullscreen().catch(err => {
-                   console.log("Fullscreen not supported");
-               });
-           } else {
-               document.exitFullscreen();
-           }
-       }
-
+       // Share score
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Number Sequence! Can you beat my score? 🏆`;
+           const text = `🔢 I just solved the Number Sequence puzzle in ${game.moves} moves! Can you beat my score? Play at gameszone99.com`;
            
            if (navigator.share) {
                navigator.share({
-                   title: "Number Sequence - My Score",
+                   title: "Number Sequence - Puzzle Game",
                    text: text,
                    url: window.location.href
                });
            } else {
-               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+               // Fallback to clipboard
+               navigator.clipboard.writeText(text).then(() => {
+                   showNotification("📋 Score copied to clipboard!");
+               }).catch(() => {
+                   showNotification("📱 Share: " + text);
                });
            }
+       }
+
+       // Setup event listeners
+       function setupEventListeners() {
+           // Keyboard controls
+           document.addEventListener("keydown", (e) => {
+               if (!game.gameActive) return;
+               
+               switch (e.key) {
+                   case "ArrowUp":
+                       e.preventDefault();
+                       moveTile("up");
+                       break;
+                   case "ArrowDown":
+                       e.preventDefault();
+                       moveTile("down");
+                       break;
+                   case "ArrowLeft":
+                       e.preventDefault();
+                       moveTile("left");
+                       break;
+                   case "ArrowRight":
+                       e.preventDefault();
+                       moveTile("right");
+                       break;
+                   case " ":
+                       e.preventDefault();
+                       showHint();
+                       break;
+                   case "Escape":
+                       e.preventDefault();
+                       document.getElementById("gameOverModal").style.display = "none";
+                       break;
+               }
+           });
+
+           // Touch/swipe controls
+           let startX, startY;
+           const grid = document.getElementById("puzzleGrid");
            
-           trackEvent("score_shared", { score: game.score });
+           grid.addEventListener("touchstart", (e) => {
+               startX = e.touches[0].clientX;
+               startY = e.touches[0].clientY;
+           }, { passive: true });
+           
+           grid.addEventListener("touchend", (e) => {
+               if (!startX || !startY || !game.gameActive) return;
+               
+               const endX = e.changedTouches[0].clientX;
+               const endY = e.changedTouches[0].clientY;
+               
+               const diffX = startX - endX;
+               const diffY = startY - endY;
+               
+               if (Math.abs(diffX) > Math.abs(diffY)) {
+                   if (Math.abs(diffX) > 50) {
+                       if (diffX > 0) {
+                           moveTile("right");
+                       } else {
+                           moveTile("left");
+                       }
+                   }
+               } else {
+                   if (Math.abs(diffY) > 50) {
+                       if (diffY > 0) {
+                           moveTile("down");
+                       } else {
+                           moveTile("up");
+                       }
+                   }
+               }
+               
+               startX = null;
+               startY = null;
+           }, { passive: true });
+
+           // Close modal on click outside
+           document.getElementById("gameOverModal").addEventListener("click", (e) => {
+               if (e.target.id === "gameOverModal") {
+                   e.target.style.display = "none";
+               }
+           });
+
+           // Prevent context menu on game area
+           grid.addEventListener("contextmenu", (e) => e.preventDefault());
        }
 
        // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "number-sequence",
-                   ...parameters
+       function trackEvent(action, value = null) {
+           // Google Analytics 4 event tracking
+           if (typeof gtag !== 'undefined') {
+               gtag('event', action, {
+                   'game_name': 'number_sequence',
+                   'value': value
                });
            }
-           console.log(`Event: ${eventName}`, parameters);
        }
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+       // SEO and performance optimizations
+       function optimizePerformance() {
+           // Preload critical resources
+           const link = document.createElement('link');
+           link.rel = 'preload';
+           link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap';
+           link.as = 'style';
+           document.head.appendChild(link);
+           
+           // Set up intersection observer for ads
+           if ('IntersectionObserver' in window) {
+               const adObserver = new IntersectionObserver((entries) => {
+                   entries.forEach(entry => {
+                       if (entry.isIntersecting) {
+                           trackEvent('ad_view', entry.target.className);
+                       }
+                   });
+               });
+               
+               document.querySelectorAll('.ad-container-top, .ad-container-bottom').forEach(ad => {
+                   adObserver.observe(ad);
+               });
            }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
+       }
 
-       // Initialize game when page loads
+       // Initialize everything when page loads
        document.addEventListener("DOMContentLoaded", () => {
            initGame();
+           optimizePerformance();
+           
+           // Track page view
+           trackEvent('page_view');
        });
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
-
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
-
-       // Handle page visibility
+       // Handle page visibility for timer pause
        document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
+           if (document.hidden && game.gameActive) {
+               game.gamePaused = true;
+               clearInterval(game.timerInterval);
+           } else if (!document.hidden && game.gameActive && game.gamePaused) {
+               game.gamePaused = false;
+               game.startTime = Date.now() - (game.moves * 1000); // Approximate time adjustment
+               startTimer();
            }
        });
 
-       console.log("🎮 Number Sequence loaded successfully!");
-       
-    </script>
+       // Service worker registration for PWA capabilities
+       if ('serviceWorker' in navigator) {
+           window.addEventListener('load', () => {
+               navigator.serviceWorker.register('/sw.js')
+                   .then((registration) => {
+                       console.log('SW registered: ', registration);
+                   })
+                   .catch((registrationError) => {
+                       console.log('SW registration failed: ', registrationError);
+                   });
+           });
+       }
+   </script>
+
+   <!-- Schema.org structured data for SEO -->
+   <script type="application/ld+json">
+   {
+       "@context": "https://schema.org",
+       "@type": "Game",
+       "name": "Number Sequence",
+       "description": "Challenge your mind with this addictive sliding tile puzzle game! Arrange numbers 1-15 in correct sequence.",
+       "url": "https://gameszone99.com/number-sequence.html",
+       "image": "https://gameszone99.com/assets/number-sequence-og.jpg",
+       "author": {
+           "@type": "Organization",
+           "name": "GamesZone99"
+       },
+       "publisher": {
+           "@type": "Organization",
+           "name": "GamesZone99",
+           "url": "https://gameszone99.com"
+       },
+       "gameItem": {
+           "@type": "Thing",
+           "name": "HTML5 Browser Game"
+       },
+       "applicationCategory": "Game",
+       "operatingSystem": "Any",
+       "requirements": "Web Browser with HTML5 support",
+       "isAccessibleForFree": true,
+       "gamePlatform": ["Web Browser", "Mobile", "Desktop"],
+       "genre": ["Puzzle", "Brain Teaser", "Logic Game"],
+       "audience": {
+           "@type": "Audience",
+           "audienceType": "All Ages"
+       }
+   }
+   </script>
+
+   <!-- Google Analytics 4 (replace GA_MEASUREMENT_ID with your actual ID) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+   <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'GA_MEASUREMENT_ID');
+   </script>
 </body>
 </html>
