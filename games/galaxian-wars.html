@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galaxian Wars - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Galaxian Wars for free! Classic arcade action with modern twists and power-ups! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="galaxian-wars, arcade game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Galaxian Wars - Epic Space Shooter Game | GamesZone99</title>
+    <meta name="description" content="Play Galaxian Wars - Classic arcade space shooter with alien enemies, power-ups, and addictive gameplay. Free HTML5 game with touch controls!">
+    <meta name="keywords" content="galaxian wars, space shooter, arcade game, alien shooter, html5 game, mobile game, browser game, free games">
+    <meta name="author" content="GamesZone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/galaxian-wars.html">
-    <meta property="og:title" content="Galaxian Wars - Free HTML5 Game">
-    <meta property="og:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="og:image" content="https://gamehub99.com/assets/galaxian-wars-og.jpg">
+    <meta property="og:url" content="https://gameszone99.com/galaxian-wars.html">
+    <meta property="og:title" content="Galaxian Wars - Epic Space Shooter Game">
+    <meta property="og:description" content="Classic arcade space shooter with alien enemies and power-ups. Play for free!">
+    <meta property="og:image" content="https://gameszone99.com/assets/galaxian-wars-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/galaxian-wars.html">
-    <meta property="twitter:title" content="Galaxian Wars - Free HTML5 Game">
-    <meta property="twitter:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/galaxian-wars-og.jpg">
+    <meta property="twitter:url" content="https://gameszone99.com/galaxian-wars.html">
+    <meta property="twitter:title" content="Galaxian Wars - Epic Space Shooter">
+    <meta property="twitter:description" content="Classic arcade space shooter with alien enemies and power-ups!">
+    <meta property="twitter:image" content="https://gameszone99.com/assets/galaxian-wars-og.jpg">
 
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Preload critical fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -40,8 +43,6 @@
             --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
             --accent-color: #00d4ff;
-            --success-color: #00ff88;
-            --warning-color: #ffaa00;
             --text-primary: #ffffff;
             --text-secondary: #b8c1ec;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -51,20 +52,20 @@
         }
 
         body {
-            font-family: "Inter", sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--dark-gradient);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            margin: 0;
+            padding: 0;
         }
 
-        .ad-container-top, .ad-container-bottom {
+        /* Top Ad Container */
+        .ad-container-top {
             width: 100%;
             min-height: 90px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -75,87 +76,63 @@
         }
 
         .ad-placeholder {
-            width: 728px;
+            width: 100%;
+            max-width: 728px;
             height: 90px;
-            background: linear-gradient(45deg, #333, #555);
-            border: 2px dashed #666;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            border: 2px dashed rgba(0, 212, 255, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
+            color: #666;
             font-size: 14px;
             border-radius: 8px;
         }
 
+        /* Header */
         .header {
-            padding: 1rem 0;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--card-border);
+            text-align: center;
+            padding: 2rem 1rem;
+            background: radial-gradient(circle at center, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
         }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .game-title {
-            font-family: "Orbitron", monospace;
-            font-size: 2rem;
+        .header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 900;
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, #00d4ff 0%, #667eea 50%, #f093fb 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: var(--shadow-glow);
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .nav-button {
-            padding: 10px 20px;
+        /* Game Container */
+        .game-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .game-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 25px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-size: 0.9rem;
-        }
-
-        .nav-button:hover {
-            background: var(--accent-color);
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        .game-container {
-            flex: 1;
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
+            border-radius: 16px;
             padding: 2rem;
-            gap: 2rem;
-            width: 100%;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(10px);
         }
 
-        .game-section {
-            flex: 2;
-            min-width: 320px;
-        }
-
-        .game-header {
+        /* Game Stats */
+        .game-stats {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -164,807 +141,1325 @@
             gap: 1rem;
         }
 
-        .stats-section {
+        .stat-item {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            min-width: 80px;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 0.3rem;
         }
 
         .stat-value {
-            font-family: "Orbitron", monospace;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* Game Canvas */
+        .game-area {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        #gameCanvas {
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            background: linear-gradient(180deg, #000428 0%, #004e92 100%);
+            box-shadow: var(--shadow-glow);
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Controls */
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .control-btn {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+            user-select: none;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        .control-btn.secondary {
+            background: var(--secondary-gradient);
+        }
+
+        /* Mobile Touch Controls */
+        .mobile-controls {
+            display: none;
+            grid-template-areas: 
+                ". up ."
+                "left . right"
+                ". down ."
+                "fire fire fire";
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+            max-width: 300px;
+            margin: 2rem auto;
+        }
+
+        .mobile-control-btn {
+            background: rgba(0, 212, 255, 0.8);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-control-btn:active {
+            background: var(--accent-color);
+            transform: scale(0.95);
+        }
+
+        .mobile-control-btn.up { grid-area: up; }
+        .mobile-control-btn.down { grid-area: down; }
+        .mobile-control-btn.left { grid-area: left; }
+        .mobile-control-btn.right { grid-area: right; }
+        .mobile-control-btn.fire { grid-area: fire; }
+
+        /* Instructions */
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .instructions h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instructions li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .instructions li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Game Over Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            min-width: 300px;
+            box-shadow: var(--shadow-glow);
+            backdrop-filter: blur(20px);
+        }
+
+        .modal h2 {
+            font-family: 'Orbitron', monospace;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .final-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .final-stat {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        .final-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .final-stat-value {
+            font-family: 'Orbitron', monospace;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--accent-color);
         }
 
-        .game-controls {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .control-button {
-            padding: 8px 16px;
-            background: var(--secondary-gradient);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.8rem;
-        }
-
-        .control-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-card);
-        }
-
-        .control-button.new-game {
-            background: var(--success-color);
-        }
-
-        .control-button.pause {
-            background: var(--warning-color);
-        }
-
-        .game-canvas-container {
-            background: var(--card-bg);
-            border: 2px solid var(--card-border);
-            border-radius: 15px;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
-            position: relative;
-            text-align: center;
-        }
-
-        #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
-        }
-
-        .mobile-controls {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1.5rem;
-            max-width: 250px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .mobile-control {
-            aspect-ratio: 1;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
+        /* Bottom Ad Container */
+        .ad-container-bottom {
+            width: 100%;
+            min-height: 90px;
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            user-select: none;
+            border-top: 1px solid var(--card-border);
+            margin-top: 3rem;
         }
 
-        .mobile-control:hover, .mobile-control:active {
-            background: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .mobile-control.empty {
-            visibility: hidden;
-        }
-
-        .sidebar {
-            flex: 1;
-            min-width: 280px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .sidebar-section {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .sidebar-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        .instructions {
-            color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
-        }
-
-        .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
-        }
-
-        .instructions li {
-            margin-bottom: 0.4rem;
-        }
-
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .game-container {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .game-title {
-                font-size: 1.5rem;
-            }
-            
-            .nav-buttons {
-                justify-content: center;
-            }
-            
-            .game-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            
-            .stats-section {
-                justify-content: center;
-            }
-            
-            .game-controls {
-                justify-content: center;
-            }
-            
             .mobile-controls {
                 display: grid;
             }
-            
-            .sidebar {
-                order: -1;
+
+            .game-stats {
+                justify-content: center;
             }
-            
+
+            .stat-item {
+                min-width: 80px;
+            }
+
+            .instructions {
+                font-size: 0.9rem;
+            }
+
+            .modal-content {
+                margin: 1rem;
+                min-width: auto;
+                width: calc(100% - 2rem);
+            }
+
             .ad-placeholder {
-                width: 320px;
-                height: 50px;
+                height: 60px;
                 font-size: 12px;
             }
+
+            .final-stats {
+                grid-template-columns: 1fr;
+            }
         }
-        
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes explosion {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <!-- Top Ad Container -->
     <div class="ad-container-top">
-        <div class="ad-placeholder">728x90 Header Advertisement</div>
+        <div class="ad-placeholder">
+            <!-- Google AdSense Ad Unit Here (728x90) -->
+            Advertisement Space - 728x90
+        </div>
     </div>
 
     <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <h1 class="game-title">🐸 Galaxian Wars</h1>
-            <nav class="nav-buttons">
-                <a href="/" class="nav-button">🏠 Home</a>
-                <a href="/games" class="nav-button">🎮 More Games</a>
-                <a href="#" class="nav-button" onclick="showInstructions()">❓ How to Play</a>
-                <a href="#" class="nav-button" onclick="toggleFullscreen()">📱 Fullscreen</a>
-            </nav>
-        </div>
-    </header>
+    <div class="header">
+        <h1>🚀 GALAXIAN WARS 🚀</h1>
+        <p>Defend Earth from alien invaders in this classic arcade space shooter!</p>
+    </div>
 
-    <!-- Main Game Container -->
+    <!-- Game Container -->
     <div class="game-container">
-        <!-- Game Section -->
-        <main class="game-section loading">
-            <div class="game-header">
-                <div class="stats-section">
-                    <div class="stat-box">
-                        <div class="stat-label">Score</div>
-                        <div class="stat-value" id="currentScore">0</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Best</div>
-                        <div class="stat-value" id="bestScore">0</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-label">Level</div>
-                        <div class="stat-value" id="gameLevel">1</div>
-                    </div>
+        <div class="game-card">
+            <!-- Game Stats -->
+            <div class="game-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Score</div>
+                    <div class="stat-value" id="currentScore">0</div>
                 </div>
-                
-                <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
-                    <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
-                    <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
+                <div class="stat-item">
+                    <div class="stat-label">Lives</div>
+                    <div class="stat-value" id="currentLives">3</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Level</div>
+                    <div class="stat-value" id="currentLevel">1</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">High Score</div>
+                    <div class="stat-value" id="highScore">0</div>
                 </div>
             </div>
 
-            <!-- Game Canvas -->
-            <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <!-- Game Area -->
+            <div class="game-area">
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
             </div>
 
-            <!-- Mobile Controls -->
-            <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+            <!-- Desktop Controls -->
+            <div class="controls">
+                <button class="control-btn" onclick="startGame()">🚀 Start Game</button>
+                <button class="control-btn secondary" onclick="pauseGame()">⏸️ Pause</button>
+                <button class="control-btn" onclick="newGame()">🔄 New Game</button>
+                <button class="control-btn secondary" onclick="toggleMute()">🔊 Sound</button>
             </div>
-        </main>
 
-        <!-- Sidebar -->
-        <aside class="sidebar loading">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">🎯 How to Play</h3>
-                <div class="instructions">
-                    <p><strong>Classic arcade action with modern twists and power-ups!</strong></p>
-                    <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
-                    </ul>
+            <!-- Mobile Touch Controls -->
+            <div class="mobile-controls" id="mobileControls">
+                <button class="mobile-control-btn up" onmousedown="moveUp()" ontouchstart="moveUp()">↑</button>
+                <button class="mobile-control-btn down" onmousedown="moveDown()" ontouchstart="moveDown()">↓</button>
+                <button class="mobile-control-btn left" onmousedown="moveLeft()" ontouchstart="moveLeft()">←</button>
+                <button class="mobile-control-btn right" onmousedown="moveRight()" ontouchstart="moveRight()">→</button>
+                <button class="mobile-control-btn fire" onmousedown="fireBullet()" ontouchstart="fireBullet()">🔥 FIRE</button>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <h3>🎮 How to Play</h3>
+                <ul>
+                    <li><strong>Desktop:</strong> Use ARROW KEYS or WASD to move, SPACEBAR to shoot</li>
+                    <li><strong>Mobile:</strong> Use touch controls below the game area</li>
+                    <li>Destroy alien ships to earn points and advance levels</li>
+                    <li>Avoid enemy bullets and collision with aliens</li>
+                    <li>Collect power-ups for enhanced weapons and abilities</li>
+                    <li>Survive as long as possible to achieve the highest score!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2>🎯 GAME OVER</h2>
+            <p id="gameOverMessage">Mission Failed! Try again, Commander!</p>
+            
+            <div class="final-stats">
+                <div class="final-stat">
+                    <div class="final-stat-label">Final Score</div>
+                    <div class="final-stat-value" id="finalScore">0</div>
+                </div>
+                <div class="final-stat">
+                    <div class="final-stat-label">Level Reached</div>
+                    <div class="final-stat-value" id="finalLevel">1</div>
+                </div>
+                <div class="final-stat">
+                    <div class="final-stat-label">Aliens Destroyed</div>
+                    <div class="final-stat-value" id="finalKills">0</div>
+                </div>
+                <div class="final-stat">
+                    <div class="final-stat-label">Accuracy</div>
+                    <div class="final-stat-value" id="finalAccuracy">0%</div>
                 </div>
             </div>
 
-            <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
-                    250x250<br>Sidebar Ad
-                </div>
+            <div class="controls">
+                <button class="control-btn" onclick="newGame()">🚀 Play Again</button>
+                <button class="control-btn secondary" onclick="shareScore()">📱 Share Score</button>
             </div>
-        </aside>
+        </div>
     </div>
 
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
-        <div class="ad-placeholder">728x90 Footer Advertisement</div>
+        <div class="ad-placeholder">
+            <!-- Google AdSense Ad Unit Here (728x90) -->
+            Advertisement Space - 728x90
+        </div>
     </div>
 
     <script>
-        
         // Game State
         const game = {
             canvas: null,
             ctx: null,
-            score: 0,
-            bestScore: localStorage.getItem("galaxian-warsBest") || 0,
-            level: 1,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameOver: false,
+            score: 0,
+            lives: 3,
+            level: 1,
+            highScore: 0,
+            kills: 0,
+            shotsFired: 0,
+            muted: false,
+            keys: {},
+            
+            // Game Objects
+            player: {
+                x: 400,
+                y: 550,
+                width: 40,
+                height: 30,
+                speed: 5,
+                color: '#00d4ff'
+            },
+            
+            bullets: [],
+            enemies: [],
+            enemyBullets: [],
+            powerUps: [],
+            particles: []
         };
 
-        // Initialize game
+        // Initialize Game
         function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
+            game.canvas = document.getElementById('gameCanvas');
+            game.ctx = game.canvas.getContext('2d');
             
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
+            // Load high score
+            game.highScore = parseInt(localStorage.getItem('galaxianWarsHighScore') || '0');
+            updateDisplay();
             
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
+            // Setup event listeners
+            setupEventListeners();
             
-            // Touch support
+            // Setup touch controls for mobile
             setupTouchControls();
             
-            // Start new game
-            newGame();
+            // Create initial enemy formation
+            createEnemyFormation();
             
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
+            console.log('Galaxian Wars initialized successfully!');
         }
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Keyboard controls
+            document.addEventListener('keydown', handleKeyDown);
+            document.addEventListener('keyup', handleKeyUp);
             
-            updateDisplay();
-            gameLoop();
+            // Prevent context menu on canvas
+            game.canvas.addEventListener('contextmenu', (e) => e.preventDefault());
             
-            trackEvent("game_start");
-        }
-
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
+            // Focus management
+            window.addEventListener('focus', () => {
+                if (game.gameRunning && game.gamePaused) {
+                    // Optionally resume game when window gains focus
                 }
-                return;
-            }
+            });
             
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
+            window.addEventListener('blur', () => {
+                if (game.gameRunning && !game.gamePaused) {
+                    pauseGame();
+                }
+            });
         }
 
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
+        // Handle Key Down
+        function handleKeyDown(e) {
+            game.keys[e.code] = true;
             
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Galaxian Wars", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
+            if (e.code === 'Space' || e.code === 'Enter') {
                 e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
+                if (!game.gameRunning) {
+                    startGame();
+                } else if (!game.gamePaused) {
+                    fireBullet();
+                }
+            } else if (e.code === 'KeyP' || e.code === 'Escape') {
                 e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
+                if (game.gameRunning) {
+                    pauseGame();
+                }
+            } else if (e.code === 'KeyR') {
                 e.preventDefault();
                 newGame();
+            } else if (e.code === 'KeyM') {
+                e.preventDefault();
+                toggleMute();
             }
         }
 
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
+        // Handle Key Up
+        function handleKeyUp(e) {
+            game.keys[e.code] = false;
         }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
 
         // Setup Touch Controls
         function setupTouchControls() {
-            let startX, startY;
+            let touchStartX, touchStartY;
             
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
+            game.canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            });
+            
+            game.canvas.addEventListener('touchmove', (e) => {
                 e.preventDefault();
             });
             
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
+            game.canvas.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                if (!game.gameRunning) {
+                    startGame();
+                    return;
+                }
                 
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
                 
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
                 const minSwipeDistance = 30;
                 
                 if (Math.abs(deltaX) > Math.abs(deltaY)) {
                     if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
+                        if (deltaX > 0) {
+                            moveRight();
+                        } else {
+                            moveLeft();
+                        }
                     }
                 } else {
                     if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
+                        if (deltaY > 0) {
+                            moveDown();
+                        } else {
+                            moveUp();
+                        }
+                    } else {
+                        // Tap to fire
+                        fireBullet();
                     }
                 }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
             });
         }
 
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
+        // Game Controls
+        function startGame() {
+            if (game.gameRunning) return;
             
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
+            game.gameRunning = true;
+            game.gamePaused = false;
+            game.gameOver = false;
             
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
-            }
+            // Hide modal if visible
+            document.getElementById('gameOverModal').style.display = 'none';
             
-            trackEvent("game_paused", { paused: game.gamePaused });
+            // Start game loop
+            gameLoop();
+            
+            trackEvent('game_started', { level: game.level });
         }
 
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
+        function pauseGame() {
+            if (!game.gameRunning) return;
             
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("galaxian-warsBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+            game.gamePaused = !game.gamePaused;
+            
+            if (game.gamePaused) {
+                // Game is now paused
+                trackEvent('game_paused', { 
+                    score: game.score, 
+                    level: game.level 
+                });
+            } else {
+                // Game is now resumed
+                gameLoop();
+                trackEvent('game_resumed', { 
+                    score: game.score, 
+                    level: game.level 
+                });
+            }
+        }
+
+        function newGame() {
+            // Reset game state
+            game.gameRunning = false;
+            game.gamePaused = false;
+            game.gameOver = false;
+            game.score = 0;
+            game.lives = 3;
+            game.level = 1;
+            game.kills = 0;
+            game.shotsFired = 0;
+            
+            // Reset player position
+            game.player.x = 400;
+            game.player.y = 550;
+            
+            // Clear arrays
+            game.bullets = [];
+            game.enemies = [];
+            game.enemyBullets = [];
+            game.powerUps = [];
+            game.particles = [];
+            
+            // Create new enemy formation
+            createEnemyFormation();
+            
+            // Update display
+            updateDisplay();
+            
+            // Hide modal
+            document.getElementById('gameOverModal').style.display = 'none';
+            
+            trackEvent('new_game', { previous_score: game.score });
+        }
+
+        function toggleMute() {
+            game.muted = !game.muted;
+            // Update button text or icon as needed
+            trackEvent('sound_toggled', { muted: game.muted });
+        }
+
+        // Movement Functions
+        function moveUp() {
+            if (!game.gameRunning || game.gamePaused) return;
+            if (game.player.y > 400) {
+                game.player.y -= game.player.speed;
+            }
+        }
+
+        function moveDown() {
+            if (!game.gameRunning || game.gamePaused) return;
+            if (game.player.y < game.canvas.height - game.player.height - 10) {
+                game.player.y += game.player.speed;
+            }
+        }
+
+        function moveLeft() {
+            if (!game.gameRunning || game.gamePaused) return;
+            if (game.player.x > 10) {
+                game.player.x -= game.player.speed;
+            }
+        }
+
+        function moveRight() {
+            if (!game.gameRunning || game.gamePaused) return;
+            if (game.player.x < game.canvas.width - game.player.width - 10) {
+                game.player.x += game.player.speed;
+            }
+        }
+
+        function fireBullet() {
+            if (!game.gameRunning || game.gamePaused) return;
+            
+            game.bullets.push({
+                x: game.player.x + game.player.width / 2 - 2,
+                y: game.player.y,
+                width: 4,
+                height: 10,
+                speed: 8,
+                color: '#00ff00'
+            });
+            
+            game.shotsFired++;
+            
+            // Play sound effect (if not muted)
+            if (!game.muted) {
+                // Add sound effect here
+            }
+        }
+
+        // Create Enemy Formation
+        function createEnemyFormation() {
+            game.enemies = [];
+            
+            const rows = 5;
+            const cols = 10;
+            const enemyWidth = 30;
+            const enemyHeight = 25;
+            const spacing = 50;
+            const startX = (game.canvas.width - (cols * spacing)) / 2;
+            const startY = 50;
+            
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const enemyType = row < 2 ? 'fast' : row < 4 ? 'medium' : 'slow';
+                    const points = enemyType === 'fast' ? 30 : enemyType === 'medium' ? 20 : 10;
+                    
+                    game.enemies.push({
+                        x: startX + col * spacing,
+                        y: startY + row * 40,
+                        width: enemyWidth,
+                        height: enemyHeight,
+                        type: enemyType,
+                        points: points,
+                        speed: 1 + (game.level * 0.2),
+                        direction: 1,
+                        shootTimer: Math.random() * 120 + 60,
+                        color: enemyType === 'fast' ? '#ff4444' : enemyType === 'medium' ? '#ffaa00' : '#44ff44'
+                    });
+                }
+            }
+        }
+
+        // Game Loop
+        function gameLoop() {
+            if (!game.gameRunning || game.gamePaused) return;
+            
+            update();
+            render();
+            
+            if (!game.gameOver) {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Update Game State
+        function update() {
+            // Handle keyboard input
+            handleInput();
+            
+            // Update bullets
+            updateBullets();
+            
+            // Update enemies
+            updateEnemies();
+            
+            // Update enemy bullets
+            updateEnemyBullets();
+            
+            // Update power-ups
+            updatePowerUps();
+            
+            // Update particles
+            updateParticles();
+            
+            // Check collisions
+            checkCollisions();
+            
+            // Check win condition
+            if (game.enemies.length === 0) {
+                nextLevel();
+            }
+            
+            // Check game over
+            if (game.lives <= 0) {
+                endGame();
+            }
+        }
+
+        // Handle Input
+        function handleInput() {
+            if (game.keys['ArrowLeft'] || game.keys['KeyA']) {
+                moveLeft();
+            }
+            if (game.keys['ArrowRight'] || game.keys['KeyD']) {
+                moveRight();
+            }
+            if (game.keys['ArrowUp'] || game.keys['KeyW']) {
+                moveUp();
+            }
+            if (game.keys['ArrowDown'] || game.keys['KeyS']) {
+                moveDown();
+            }
+        }
+
+        // Update Bullets (continued)
+       function updateBullets() {
+           game.bullets = game.bullets.filter(bullet => {
+               bullet.y -= bullet.speed;
+               return bullet.y > -bullet.height;
+           });
+       }
+
+       // Update Enemies
+       function updateEnemies() {
+           let changeDirection = false;
+           
+           // Check if any enemy hits the edge
+           for (let enemy of game.enemies) {
+               if ((enemy.x <= 0 && enemy.direction === -1) || 
+                   (enemy.x >= game.canvas.width - enemy.width && enemy.direction === 1)) {
+                   changeDirection = true;
+                   break;
+               }
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Move enemies
+           for (let enemy of game.enemies) {
+               if (changeDirection) {
+                   enemy.direction *= -1;
+                   enemy.y += 20;
+               } else {
+                   enemy.x += enemy.speed * enemy.direction;
+               }
+               
+               // Enemy shooting
+               enemy.shootTimer--;
+               if (enemy.shootTimer <= 0 && Math.random() < 0.01) {
+                   game.enemyBullets.push({
+                       x: enemy.x + enemy.width / 2 - 2,
+                       y: enemy.y + enemy.height,
+                       width: 4,
+                       height: 8,
+                       speed: 3 + game.level * 0.5,
+                       color: '#ff6666'
+                   });
+                   enemy.shootTimer = Math.random() * 180 + 60;
+               }
+           }
+       }
+
+       // Update Enemy Bullets
+       function updateEnemyBullets() {
+           game.enemyBullets = game.enemyBullets.filter(bullet => {
+               bullet.y += bullet.speed;
+               return bullet.y < game.canvas.height + bullet.height;
+           });
+       }
+
+       // Update Power-ups
+       function updatePowerUps() {
+           game.powerUps = game.powerUps.filter(powerUp => {
+               powerUp.y += powerUp.speed;
+               powerUp.rotation += 0.1;
+               return powerUp.y < game.canvas.height + powerUp.height;
+           });
+       }
+
+       // Update Particles
+       function updateParticles() {
+           game.particles = game.particles.filter(particle => {
+               particle.x += particle.vx;
+               particle.y += particle.vy;
+               particle.life--;
+               particle.alpha = particle.life / particle.maxLife;
+               return particle.life > 0;
+           });
+       }
+
+       // Check Collisions
+       function checkCollisions() {
+           // Player bullets vs enemies
+           for (let i = game.bullets.length - 1; i >= 0; i--) {
+               const bullet = game.bullets[i];
+               
+               for (let j = game.enemies.length - 1; j >= 0; j--) {
+                   const enemy = game.enemies[j];
+                   
+                   if (isColliding(bullet, enemy)) {
+                       // Create explosion effect
+                       createExplosion(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2, enemy.color);
+                       
+                       // Add score
+                       game.score += enemy.points * game.level;
+                       game.kills++;
+                       
+                       // Remove bullet and enemy
+                       game.bullets.splice(i, 1);
+                       game.enemies.splice(j, 1);
+                       
+                       // Chance to drop power-up
+                       if (Math.random() < 0.1) {
+                           createPowerUp(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2);
+                       }
+                       
+                       updateDisplay();
+                       break;
+                   }
+               }
+           }
+           
+           // Enemy bullets vs player
+           for (let i = game.enemyBullets.length - 1; i >= 0; i--) {
+               const bullet = game.enemyBullets[i];
+               
+               if (isColliding(bullet, game.player)) {
+                   // Create explosion effect
+                   createExplosion(game.player.x + game.player.width / 2, game.player.y + game.player.height / 2, '#ff4444');
+                   
+                   // Remove bullet
+                   game.enemyBullets.splice(i, 1);
+                   
+                   // Lose life
+                   game.lives--;
+                   updateDisplay();
+                   
+                   // Reset player position
+                   game.player.x = 400;
+                   game.player.y = 550;
+                   
+                   break;
+               }
+           }
+           
+           // Enemies vs player
+           for (let enemy of game.enemies) {
+               if (isColliding(enemy, game.player)) {
+                   // Create explosion effect
+                   createExplosion(game.player.x + game.player.width / 2, game.player.y + game.player.height / 2, '#ff4444');
+                   
+                   // Lose life
+                   game.lives--;
+                   updateDisplay();
+                   
+                   // Reset player position
+                   game.player.x = 400;
+                   game.player.y = 550;
+                   
+                   break;
+               }
+               
+               // Check if enemies reached bottom
+               if (enemy.y + enemy.height >= game.canvas.height - 50) {
+                   endGame();
+                   return;
+               }
+           }
+           
+           // Power-ups vs player
+           for (let i = game.powerUps.length - 1; i >= 0; i--) {
+               const powerUp = game.powerUps[i];
+               
+               if (isColliding(powerUp, game.player)) {
+                   // Apply power-up effect
+                   applyPowerUp(powerUp.type);
+                   
+                   // Create collection effect
+                   createExplosion(powerUp.x + powerUp.width / 2, powerUp.y + powerUp.height / 2, '#00ff00');
+                   
+                   // Remove power-up
+                   game.powerUps.splice(i, 1);
+               }
+           }
+       }
+
+       // Collision Detection
+       function isColliding(rect1, rect2) {
+           return rect1.x < rect2.x + rect2.width &&
+                  rect1.x + rect1.width > rect2.x &&
+                  rect1.y < rect2.y + rect2.height &&
+                  rect1.y + rect1.height > rect2.y;
+       }
+
+       // Create Explosion Effect
+       function createExplosion(x, y, color) {
+           for (let i = 0; i < 15; i++) {
+               game.particles.push({
+                   x: x,
+                   y: y,
+                   vx: (Math.random() - 0.5) * 8,
+                   vy: (Math.random() - 0.5) * 8,
+                   life: 30,
+                   maxLife: 30,
+                   color: color,
+                   alpha: 1,
+                   size: Math.random() * 4 + 2
+               });
+           }
+       }
+
+       // Create Power-up
+       function createPowerUp(x, y) {
+           const types = ['multiShot', 'rapidFire', 'shield', 'extraLife'];
+           const type = types[Math.floor(Math.random() * types.length)];
+           
+           game.powerUps.push({
+               x: x - 15,
+               y: y,
+               width: 30,
+               height: 30,
+               speed: 2,
+               type: type,
+               rotation: 0,
+               color: type === 'multiShot' ? '#00ffff' : 
+                      type === 'rapidFire' ? '#ffff00' : 
+                      type === 'shield' ? '#ff00ff' : '#00ff00'
+           });
+       }
+
+       // Apply Power-up Effect
+       function applyPowerUp(type) {
+           switch (type) {
+               case 'multiShot':
+                   // Temporary multi-shot ability
+                   // Implementation would require more complex bullet system
+                   game.score += 100;
+                   break;
+               case 'rapidFire':
+                   // Temporary rapid fire
+                   game.score += 100;
+                   break;
+               case 'shield':
+                   // Temporary shield
+                   game.score += 100;
+                   break;
+               case 'extraLife':
+                   game.lives++;
+                   updateDisplay();
+                   break;
+           }
+       }
+
+       // Next Level
+       function nextLevel() {
+           game.level++;
+           game.score += game.lives * 1000; // Bonus for remaining lives
+           
+           // Create new enemy formation
+           createEnemyFormation();
+           
+           // Reset player position
+           game.player.x = 400;
+           game.player.y = 550;
+           
+           updateDisplay();
+           
+           trackEvent('level_completed', {
+               level: game.level - 1,
+               score: game.score,
+               lives_remaining: game.lives
+           });
+       }
+
+       // End Game
+       function endGame() {
+           game.gameRunning = false;
+           game.gameOver = true;
+           
+           // Update high score
+           if (game.score > game.highScore) {
+               game.highScore = game.score;
+               localStorage.setItem('galaxianWarsHighScore', game.highScore.toString());
+           }
+           
+           // Calculate accuracy
+           const accuracy = game.shotsFired > 0 ? Math.round((game.kills / game.shotsFired) * 100) : 0;
+           
+           // Update final stats
+           document.getElementById('finalScore').textContent = game.score.toLocaleString();
+           document.getElementById('finalLevel').textContent = game.level;
+           document.getElementById('finalKills').textContent = game.kills;
+           document.getElementById('finalAccuracy').textContent = accuracy + '%';
+           
+           // Show game over message
+           let message = "Mission Failed! Try again, Commander!";
+           if (game.score > 0) {
+               if (game.score >= 50000) {
+                   message = "🏆 LEGENDARY COMMANDER! Outstanding performance!";
+               } else if (game.score >= 25000) {
+                   message = "🥇 ELITE PILOT! Excellent skills!";
+               } else if (game.score >= 10000) {
+                   message = "⭐ SKILLED DEFENDER! Well done!";
+               } else {
+                   message = "💪 Good effort! Keep practicing!";
+               }
+           }
+           
+           document.getElementById('gameOverMessage').textContent = message;
+           
+           // Show modal
+           document.getElementById('gameOverModal').style.display = 'block';
+           
+           updateDisplay();
+           
+           trackEvent('game_ended', {
+               final_score: game.score,
+               final_level: game.level,
+               kills: game.kills,
+               accuracy: accuracy,
+               high_score_beaten: game.score > (game.highScore - game.score)
+           });
+       }
+
+       // Render Game
+       function render() {
+           // Clear canvas
+           game.ctx.fillStyle = 'rgba(0, 4, 40, 0.1)';
+           game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+           
+           // Draw stars background
+           drawStars();
+           
+           // Draw player
+           drawPlayer();
+           
+           // Draw bullets
+           drawBullets();
+           
+           // Draw enemies
+           drawEnemies();
+           
+           // Draw enemy bullets
+           drawEnemyBullets();
+           
+           // Draw power-ups
+           drawPowerUps();
+           
+           // Draw particles
+           drawParticles();
+           
+           // Draw UI overlay
+           drawUI();
+       }
+
+       // Draw Stars Background
+       function drawStars() {
+           game.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+           for (let i = 0; i < 100; i++) {
+               const x = (i * 37) % game.canvas.width;
+               const y = (i * 71 + Date.now() * 0.01) % game.canvas.height;
+               const size = (i % 3) + 1;
+               game.ctx.fillRect(x, y, size, size);
+           }
+       }
+
+       // Draw Player
+       function drawPlayer() {
+           game.ctx.fillStyle = game.player.color;
+           game.ctx.fillRect(game.player.x, game.player.y, game.player.width, game.player.height);
+           
+           // Draw player details
+           game.ctx.fillStyle = '#ffffff';
+           game.ctx.fillRect(game.player.x + 5, game.player.y + 5, 30, 5);
+           game.ctx.fillRect(game.player.x + 18, game.player.y, 4, 15);
+       }
+
+       // Draw Bullets
+       function drawBullets() {
+           game.ctx.fillStyle = '#00ff00';
+           for (let bullet of game.bullets) {
+               game.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+               
+               // Add glow effect
+               game.ctx.shadowColor = '#00ff00';
+               game.ctx.shadowBlur = 10;
+               game.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+               game.ctx.shadowBlur = 0;
+           }
+       }
+
+       // Draw Enemies
+       function drawEnemies() {
+           for (let enemy of game.enemies) {
+               game.ctx.fillStyle = enemy.color;
+               game.ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+               
+               // Draw enemy details
+               game.ctx.fillStyle = '#ffffff';
+               game.ctx.fillRect(enemy.x + 5, enemy.y + 5, 20, 3);
+               game.ctx.fillRect(enemy.x + 10, enemy.y + 15, 10, 5);
+           }
+       }
+
+       // Draw Enemy Bullets
+       function drawEnemyBullets() {
+           game.ctx.fillStyle = '#ff6666';
+           for (let bullet of game.enemyBullets) {
+               game.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+               
+               // Add glow effect
+               game.ctx.shadowColor = '#ff6666';
+               game.ctx.shadowBlur = 8;
+               game.ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+               game.ctx.shadowBlur = 0;
+           }
+       }
+
+       // Draw Power-ups
+       function drawPowerUps() {
+           for (let powerUp of game.powerUps) {
+               game.ctx.save();
+               game.ctx.translate(powerUp.x + powerUp.width / 2, powerUp.y + powerUp.height / 2);
+               game.ctx.rotate(powerUp.rotation);
+               
+               game.ctx.fillStyle = powerUp.color;
+               game.ctx.fillRect(-powerUp.width / 2, -powerUp.height / 2, powerUp.width, powerUp.height);
+               
+               // Add glow
+               game.ctx.shadowColor = powerUp.color;
+               game.ctx.shadowBlur = 15;
+               game.ctx.fillRect(-powerUp.width / 2, -powerUp.height / 2, powerUp.width, powerUp.height);
+               game.ctx.shadowBlur = 0;
+               
+               game.ctx.restore();
+           }
+       }
+
+       // Draw Particles
+       function drawParticles() {
+           for (let particle of game.particles) {
+               game.ctx.save();
+               game.ctx.globalAlpha = particle.alpha;
+               game.ctx.fillStyle = particle.color;
+               game.ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
+               game.ctx.restore();
+           }
+       }
+
+       // Draw UI Overlay
+       function drawUI() {
+           if (game.gamePaused) {
+               game.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+               game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+               
+               game.ctx.fillStyle = '#ffffff';
+               game.ctx.font = 'bold 48px Orbitron';
+               game.ctx.textAlign = 'center';
+               game.ctx.fillText('PAUSED', game.canvas.width / 2, game.canvas.height / 2);
+               
+               game.ctx.font = '20px Inter';
+               game.ctx.fillText('Press P to resume', game.canvas.width / 2, game.canvas.height / 2 + 50);
+           }
+           
+           if (!game.gameRunning && !game.gameOver) {
+               game.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+               game.ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+               
+               game.ctx.fillStyle = '#00d4ff';
+               game.ctx.font = 'bold 36px Orbitron';
+               game.ctx.textAlign = 'center';
+               game.ctx.fillText('GALAXIAN WARS', game.canvas.width / 2, game.canvas.height / 2 - 50);
+               
+               game.ctx.fillStyle = '#ffffff';
+               game.ctx.font = '24px Inter';
+               game.ctx.fillText('Click START GAME to begin', game.canvas.width / 2, game.canvas.height / 2 + 20);
+               
+               game.ctx.font = '16px Inter';
+               game.ctx.fillText('Use ARROW KEYS or WASD to move, SPACE to shoot', game.canvas.width / 2, game.canvas.height / 2 + 60);
+           }
+           
+           game.ctx.textAlign = 'left';
        }
 
        // Update Display
        function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
+           document.getElementById('currentScore').textContent = game.score.toLocaleString();
+           document.getElementById('currentLives').textContent = game.lives;
+           document.getElementById('currentLevel').textContent = game.level;
+           document.getElementById('highScore').textContent = game.highScore.toLocaleString();
        }
 
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
-           
-           document.body.appendChild(messageEl);
-           
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
-           }
-       }
-
-       // Show Leaderboard
-       function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("galaxian-warsLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
-           
-           if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
-           } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
-               });
-           }
-           
-           alert(message);
-       }
-
-       // Utility Functions
-       function showInstructions() {
-           alert(`🎯 Galaxian Wars - How to Play
-
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
-
-🎮 Gameplay:
-- Classic arcade action with modern twists and power-ups!
-- Score points to advance levels
-- Beat your high score!
-
-Good luck! 🍀`);
-       }
-
-       function toggleFullscreen() {
-           if (!document.fullscreenElement) {
-               document.documentElement.requestFullscreen().catch(err => {
-                   console.log("Fullscreen not supported");
-               });
-           } else {
-               document.exitFullscreen();
-           }
-       }
-
+       // Share Score
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Galaxian Wars! Can you beat my score? 🏆`;
+           const shareText = `🚀 I just scored ${game.score.toLocaleString()} points in Galaxian Wars! Can you beat my score? Play at gameszone99.com`;
            
            if (navigator.share) {
                navigator.share({
-                   title: "Galaxian Wars - My Score",
-                   text: text,
+                   title: 'Galaxian Wars - High Score!',
+                   text: shareText,
                    url: window.location.href
-               });
+               }).catch(console.error);
            } else {
-               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+               // Fallback for browsers without Web Share API
+               if (navigator.clipboard) {
+                   navigator.clipboard.writeText(shareText + ' ' + window.location.href)
+                       .then(() => alert('Score copied to clipboard!'))
+                       .catch(() => fallbackCopyText(shareText + ' ' + window.location.href));
+               } else {
+                   fallbackCopyText(shareText + ' ' + window.location.href);
+               }
+           }
+           
+           trackEvent('score_shared', { score: game.score, level: game.level });
+       }
+
+       // Fallback copy function
+       function fallbackCopyText(text) {
+           const textArea = document.createElement('textarea');
+           textArea.value = text;
+           document.body.appendChild(textArea);
+           textArea.focus();
+           textArea.select();
+           try {
+               document.execCommand('copy');
+               alert('Score copied to clipboard!');
+           } catch (err) {
+               console.error('Could not copy text: ', err);
+               alert('Could not copy score. Please copy manually: ' + text);
+           }
+           document.body.removeChild(textArea);
+       }
+
+       // Analytics Tracking
+       function trackEvent(eventName, properties = {}) {
+           // Google Analytics 4 event tracking
+           if (typeof gtag !== 'undefined') {
+               gtag('event', eventName, {
+                   game_name: 'galaxian_wars',
+                   ...properties
                });
            }
            
-           trackEvent("score_shared", { score: game.score });
+           // Console log for development
+           console.log('Event:', eventName, properties);
        }
-
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "galaxian-wars",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
-       }
-
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
 
        // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
-           initGame();
-       });
+       window.addEventListener('load', initGame);
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
-
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
-
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
+       // Handle visibility change
+       document.addEventListener('visibilitychange', () => {
            if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
+               pauseGame();
            }
        });
 
-       console.log("🎮 Galaxian Wars loaded successfully!");
-       
-    </script>
+       // Prevent right-click context menu on game canvas
+       document.addEventListener('contextmenu', (e) => {
+           if (e.target.id === 'gameCanvas') {
+               e.preventDefault();
+           }
+       });
+   </script>
+
+   <!-- Google Analytics 4 (replace GA_MEASUREMENT_ID with your actual ID) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+   <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'GA_MEASUREMENT_ID');
+   </script>
 </body>
 </html>

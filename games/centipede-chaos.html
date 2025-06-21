@@ -3,101 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centipede Chaos - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Centipede Chaos for free! Classic arcade action with modern twists and power-ups! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="centipede-chaos, arcade game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Centipede Chaos - Classic Arcade Shooter | Gameszone99.com</title>
+    <meta name="description" content="Play Centipede Chaos - Classic arcade shooter with modern graphics! Blast centipedes, avoid obstacles, and beat your high score. Free HTML5 game with touch controls!">
+    <meta name="keywords" content="centipede game, arcade shooter, html5 game, mobile game, browser game, classic arcade, free games, centipede chaos">
+    <meta name="author" content="Gameszone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/centipede-chaos.html">
-    <meta property="og:title" content="Centipede Chaos - Free HTML5 Game">
-    <meta property="og:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="og:image" content="https://gamehub99.com/assets/centipede-chaos-og.jpg">
+    <meta property="og:url" content="https://gameszone99.com/centipede-chaos.html">
+    <meta property="og:title" content="Centipede Chaos - Classic Arcade Shooter">
+    <meta property="og:description" content="Classic arcade shooter with modern graphics! Blast centipedes and beat your high score!">
+    <meta property="og:image" content="https://gameszone99.com/assets/centipede-chaos-preview.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/centipede-chaos.html">
-    <meta property="twitter:title" content="Centipede Chaos - Free HTML5 Game">
-    <meta property="twitter:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/centipede-chaos-og.jpg">
-
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta property="twitter:url" content="https://gameszone99.com/centipede-chaos.html">
+    <meta property="twitter:title" content="Centipede Chaos - Classic Arcade Shooter">
+    <meta property="twitter:description" content="Classic arcade shooter with modern graphics! Play for free!">
+    
+    <link rel="canonical" href="https://gameszone99.com/centipede-chaos.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* Replace the existing color variables and body styles with these */
 
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 100%);
-            --accent-color: #00d4ff;
-            --success-color: #00ff88;
-            --warning-color: #ffaa00;
-            --text-primary: #ffffff;
-            --text-secondary: #b8c1ec;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.3);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --accent-color: #00d4ff;
+    --success-color: #00b894;
+    --warning-color: #fdcb6e;
+    --danger-color: #e17055;
+    --dark-bg: #0f0f23;
+    --light-bg: #1a1a2e;
+    --text-primary: #ffffff;
+    --text-secondary: #b8c1ec;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --shadow-card: 0 8px 32px rgba(108, 92, 231, 0.3);
+    --primary-gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    --secondary-gradient: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+}
 
-        body {
-            font-family: "Inter", sans-serif;
-            background: var(--dark-gradient);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+body {
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
 
-        .ad-container-top, .ad-container-bottom {
-            width: 100%;
-            min-height: 90px;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--card-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* Fix game title gradient to match other games */
+.game-title {
+    font-family: "Orbitron", monospace;
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Fix instruction text colors */
+.instructions {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.instructions strong {
+    color: var(--text-primary);
+}
+
+/* Fix sidebar title color */
+.sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color);
+}
+
+/* Fix stat label colors */
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+}
+
+.stat-value {
+    font-family: "Orbitron", monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Fix modal text colors */
+.modal-title {
+    font-family: "Orbitron", monospace;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.modal-stats {
+    margin: 1.5rem 0;
+    color: var(--text-primary);
+}
+
+.modal-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.modal-stat span:last-child {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Fix start overlay text */
+.start-overlay h2 {
+    font-family: "Orbitron", monospace;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.start-overlay p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    text-align: center;
+    max-width: 300px;
+}
+
+/* Fix ad placeholder colors to match */
+.ad-placeholder {
+    background: linear-gradient(45deg, #0f0f23, #1a1a2e);
+    color: var(--text-secondary);
+    padding: 20px;
+    border: 2px dashed var(--card-border);
+    border-radius: 8px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+/* Fix leaderboard section colors */
+#leaderboard {
+    color: var(--text-secondary);
+}
+
+/* Fix canvas background to match dark theme */
+#gameCanvas {
+    background: linear-gradient(135deg, #0f0f23 0%, #16213e 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ensure all text is properly colored */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+/* Fix any remaining white text issues */
+.header {
+    background: rgba(15, 15, 35, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 1rem 0;
+}
+
+.ad-container-top, .ad-container-bottom {
+    background: rgba(15, 15, 35, 0.8);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.ad-container-bottom {
+    border-top: 1px solid var(--card-border);
+    border-bottom: none;
+}
 
         .ad-placeholder {
-            width: 728px;
-            height: 90px;
             background: linear-gradient(45deg, #333, #555);
-            border: 2px dashed #666;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: #999;
-            font-size: 14px;
+            padding: 20px;
+            border: 2px dashed #666;
             border-radius: 8px;
+            font-size: 14px;
+            display: inline-block;
         }
 
+        /* Header Styles */
         .header {
-            padding: 1rem 0;
             background: var(--card-bg);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--card-border);
+            padding: 1rem 0;
         }
 
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -107,7 +227,7 @@
 
         .game-title {
             font-family: "Orbitron", monospace;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
@@ -117,135 +237,357 @@
 
         .nav-buttons {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .nav-button {
-            padding: 10px 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 25px;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-size: 0.9rem;
-        }
-
-        .nav-button:hover {
-            background: var(--accent-color);
-            color: #000;
-            transform: translateY(-2px);
-        }
-
-        .game-container {
-            flex: 1;
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            gap: 2rem;
-            width: 100%;
-        }
-
-        .game-section {
-            flex: 2;
-            min-width: 320px;
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .stats-section {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 0.8rem 1rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            min-width: 80px;
-        }
-
-        .stat-label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-value {
-            font-family: "Orbitron", monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .game-controls {
-            display: flex;
             gap: 0.8rem;
             flex-wrap: wrap;
         }
 
-        .control-button {
+        .nav-button {
             padding: 8px 16px;
             background: var(--secondary-gradient);
-            border: none;
-            border-radius: 8px;
             color: white;
-            font-weight: 600;
-            cursor: pointer;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
-        .control-button:hover {
+        .nav-button:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-card);
         }
 
-        .control-button.new-game {
-            background: var(--success-color);
-        }
+        /* Replace the existing styles with these corrected ones */
 
-        .control-button.pause {
-            background: var(--warning-color);
-        }
+/* Main Game Container - Fix layout structure */
+.game-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    gap: 2rem;
+}
 
-        .game-canvas-container {
-            background: var(--card-bg);
-            border: 2px solid var(--card-border);
+.game-section {
+    flex: 2;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+/* Fix sidebar to match other games */
+.sidebar {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar-section {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    backdrop-filter: blur(10px);
+}
+
+.sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color);
+}
+
+.instructions {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.instructions ul {
+    margin: 0.8rem 0;
+    padding-left: 1.2rem;
+}
+
+.instructions li {
+    margin-bottom: 0.4rem;
+}
+
+/* Fix game header layout */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Fix stats section */
+.stats-section {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.8rem;
+    border-radius: 8px;
+    min-width: 70px;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+}
+
+.stat-value {
+    font-family: "Orbitron", monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Fix control buttons */
+.game-controls {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.control-button {
+    padding: 8px 14px;
+    background: var(--secondary-gradient);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+/* Fix canvas container */
+.game-canvas-container {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    position: relative;
+    text-align: center;
+}
+
+#gameCanvas {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Fix mobile controls */
+.mobile-controls {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+    max-width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mobile-control {
+    aspect-ratio: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    user-select: none;
+}
+
+.mobile-control:hover, .mobile-control:active {
+    background: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.mobile-control.empty {
+    visibility: hidden;
+}
+
+/* Fix loading animation */
+.loading {
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Fix modal buttons */
+.modal-button {
+    padding: 12px 24px;
+    background: var(--secondary-gradient);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+}
+
+.modal-button.primary {
+    background: var(--accent-color);
+    color: #000;
+}
+
+/* Fix bottom ad container */
+.ad-container-bottom {
+    width: 100%;
+    min-height: 90px;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--card-border);
+    margin-top: 2rem;
+}
+
+/* Fix responsive design to match other games */
+@media (max-width: 768px) {
+    .game-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .game-title {
+        font-size: 1.5rem;
+    }
+    
+    .nav-buttons {
+        justify-content: center;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .stats-section {
+        justify-content: center;
+    }
+    
+    .game-controls {
+        justify-content: center;
+    }
+    
+    .mobile-controls {
+        display: grid;
+    }
+    
+    .sidebar {
+        order: -1;
+    }
+    
+    .ad-placeholder {
+        width: 320px;
+        height: 50px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 0.5rem;
+    }
+    
+    .stats-section {
+        grid-template-columns: repeat(2, 1fr);
+        display: grid;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .control-button {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    #gameCanvas {
+        max-width: 280px;
+        height: 280px;
+    }
+}
+
+        /* Start Game Overlay */
+        .start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             border-radius: 15px;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
-            position: relative;
-            text-align: center;
+            z-index: 10;
         }
 
-        #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border: 2px solid var(--card-border);
-            border-radius: 10px;
-            display: block;
-            margin: 0 auto;
-            max-width: 100%;
-            height: auto;
+        .start-button {
+            padding: 15px 30px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
         }
 
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-card);
+        }
+
+        /* Mobile Controls */
         .mobile-controls {
             display: none;
             grid-template-columns: repeat(3, 1fr);
@@ -272,109 +614,161 @@
         }
 
         .mobile-control:hover, .mobile-control:active {
-            background: var(--accent-color);
-            transform: translateY(-2px);
+            background: var(--primary-color);
+            transform: scale(0.95);
         }
 
         .mobile-control.empty {
             visibility: hidden;
         }
 
-        .sidebar {
-            flex: 1;
-            min-width: 280px;
-            display: flex;
+        /* Game Over Modal */
+        .game-over-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
             flex-direction: column;
-            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            z-index: 20;
         }
 
-        .sidebar-section {
+        .modal-content {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
-            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            max-width: 300px;
+            width: 90%;
         }
 
-        .sidebar-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+        .modal-title {
+            font-family: "Orbitron", monospace;
+            font-size: 1.5rem;
             color: var(--accent-color);
+            margin-bottom: 1rem;
         }
 
-        .instructions {
-            color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
+        .modal-stats {
+            margin: 1.5rem 0;
         }
 
-        .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+        .modal-stat {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
         }
 
-        .instructions li {
-            margin-bottom: 0.4rem;
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .modal-button.primary {
+            background: var(--primary-gradient);
+            color: white;
         }
 
+        .modal-button.secondary {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .game-container {
-                flex-direction: column;
-                padding: 1rem;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                margin: 1rem auto;
             }
-            
+
+            .mobile-controls {
+                display: grid;
+            }
+
+            .game-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+
+            .stats-section, .game-controls {
+                justify-content: center;
+            }
+
             .header-content {
                 flex-direction: column;
                 text-align: center;
             }
-            
-            .game-title {
-                font-size: 1.5rem;
-            }
-            
+
             .nav-buttons {
                 justify-content: center;
             }
-            
-            .game-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
+
+            .game-title {
+                font-size: 1.5rem;
             }
-            
-            .stats-section {
-                justify-content: center;
-            }
-            
-            .game-controls {
-                justify-content: center;
-            }
-            
-            .mobile-controls {
-                display: grid;
-            }
-            
+
             .sidebar {
                 order: -1;
             }
-            
-            .ad-placeholder {
-                width: 320px;
-                height: 50px;
-                font-size: 12px;
+
+            #gameCanvas {
+                width: 100%;
+                max-width: 400px;
             }
         }
-        
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 0 0.5rem;
+            }
+
+            .game-section, .sidebar-section {
+                padding: 1rem;
+            }
+
+            .game-title {
+                font-size: 1.3rem;
+            }
+
+            .nav-button {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .stat-box {
+                min-width: 70px;
+                padding: 0.6rem;
+            }
+
+            .stat-value {
+                font-size: 1rem;
+            }
+
+            .control-button {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -386,7 +780,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🐍 Centipede Chaos</h1>
+            <h1 class="game-title">🐛 Centipede Chaos</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -414,10 +808,14 @@
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Lives</div>
+                        <div class="stat-value" id="playerLives">3</div>
+                    </div>
                 </div>
                 
                 <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
+                    <button class="control-button new-game" onclick="resetGame()">🆕 New Game</button>
                     <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
                     <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
@@ -425,19 +823,53 @@
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <canvas id="gameCanvas" width="600" height="400"></canvas>
+                
+                <!-- Start Game Overlay -->
+                <div class="start-overlay" id="startOverlay">
+                    <h2 style="font-family: Orbitron; color: #fd79a8; margin-bottom: 1rem;">🐛 Centipede Chaos</h2>
+                    <p style="margin-bottom: 1rem; text-align: center; max-width: 300px;">
+                        Classic arcade shooter! Move your ship with arrow keys or touch controls, and blast the centipede to pieces!
+                    </p>
+                    <button class="start-button" onclick="startGame()">🚀 Start Game</button>
+                </div>
+
+                <!-- Game Over Modal -->
+                <div class="game-over-modal" id="gameOverModal">
+                    <div class="modal-content">
+                        <h2 class="modal-title">🎯 Game Over!</h2>
+                        <div class="modal-stats">
+                            <div class="modal-stat">
+                                <span>Final Score:</span>
+                                <span id="finalScore">0</span>
+                            </div>
+                            <div class="modal-stat">
+                                <span>Level Reached:</span>
+                                <span id="finalLevel">1</span>
+                            </div>
+                            <div class="modal-stat">
+                                <span>Best Score:</span>
+                                <span id="modalBestScore">0</span>
+                            </div>
+                        </div>
+                        <div class="modal-buttons">
+                            <button class="modal-button primary" onclick="startNewGame()">🔄 Play Again</button>
+                            <button class="modal-button secondary" onclick="shareScore()">📱 Share</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
                 <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
+                <div class="mobile-control" onmousedown="startMove('up')" onmouseup="stopMove()" ontouchstart="startMove('up')" ontouchend="stopMove()">⬆️</div>
                 <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
+                <div class="mobile-control" onmousedown="startMove('left')" onmouseup="stopMove()" ontouchstart="startMove('left')" ontouchend="stopMove()">⬅️</div>
+                <div class="mobile-control" onclick="fireShot()">🔥</div>
+                <div class="mobile-control" onmousedown="startMove('right')" onmouseup="stopMove()" ontouchstart="startMove('right')" ontouchend="stopMove()">➡️</div>
                 <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
+                <div class="mobile-control" onmousedown="startMove('down')" onmouseup="stopMove()" ontouchstart="startMove('down')" ontouchend="stopMove()">⬇️</div>
                 <div class="mobile-control empty"></div>
             </div>
         </main>
@@ -447,19 +879,31 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Classic arcade action with modern twists and power-ups!</strong></p>
+                    <p><strong>Classic arcade shooter with modern graphics!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li>Use arrow keys or touch controls to move your ship</li>
+                        <li>Press spacebar or tap fire button to shoot</li>
+                        <li>Destroy centipede segments to score points</li>
+                        <li>Avoid touching the centipede or other enemies</li>
+                        <li>Clear the screen to advance to the next level</li>
+                        <li>Collect power-ups for special abilities</li>
                     </ul>
+                    <p style="margin-top: 1rem;"><strong>Pro Tips:</strong> Target the head of the centipede for bonus points! Create barriers by shooting mushrooms strategically.</p>
                 </div>
             </div>
 
             <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
                 <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
                     250x250<br>Sidebar Ad
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">🏆 Leaderboard</h3>
+                <div id="leaderboard">
+                    <div style="text-align: center; color: #999; padding: 2rem;">
+                        Start playing to see scores!
+                    </div>
                 </div>
             </div>
         </aside>
@@ -471,17 +915,39 @@
     </div>
 
     <script>
-        
+        // Game Configuration
+        const CONFIG = {
+            CANVAS_WIDTH: 600,
+            CANVAS_HEIGHT: 400,
+            PLAYER_SPEED: 4,
+            BULLET_SPEED: 8,
+            CENTIPEDE_SPEED: 2,
+            GRID_SIZE: 20,
+            MUSHROOM_COUNT: 30
+        };
+
         // Game State
         const game = {
             canvas: null,
             ctx: null,
             score: 0,
-            bestScore: localStorage.getItem("centipede-chaosBest") || 0,
+            bestScore: parseInt(localStorage.getItem("centipede-chaos-best") || "0"),
             level: 1,
+            lives: 3,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameOver: false,
+            keys: {},
+            moveDirection: null,
+            moveInterval: null,
+            
+            // Game objects
+            player: { x: 300, y: 360, width: 20, height: 20 },
+            bullets: [],
+            centipede: [],
+            mushrooms: [],
+            enemies: [],
+            powerUps: []
         };
 
         // Initialize game
@@ -489,17 +955,23 @@
             game.canvas = document.getElementById("gameCanvas");
             game.ctx = game.canvas.getContext("2d");
             
+            // Set canvas size
+            game.canvas.width = CONFIG.CANVAS_WIDTH;
+            game.canvas.height = CONFIG.CANVAS_HEIGHT;
+            
             // Load best score
             document.getElementById("bestScore").textContent = game.bestScore;
             
             // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
+            document.addEventListener("keydown", handleKeyDown);
+            document.addEventListener("keyup", handleKeyUp);
             
-            // Touch support
+            // Touch controls
             setupTouchControls();
             
-            // Start new game
-            newGame();
+            // Initialize game objects
+            createMushrooms();
+            updateDisplay();
             
             // Animate elements
             setTimeout(() => {
@@ -509,462 +981,749 @@
             }, 100);
         }
 
-        // New Game
-        function newGame() {
+        // Start Game
+        function startGame() {
+            document.getElementById("startOverlay").style.display = "none";
+            resetGame();
+        }
+
+        // Reset/New Game
+        function resetGame() {
             game.score = 0;
             game.level = 1;
+            game.lives = 3;
             game.gameRunning = true;
             game.gamePaused = false;
             game.gameOver = false;
             
+            // Reset player position
+            game.player.x = CONFIG.CANVAS_WIDTH / 2 - 10;
+            game.player.y = CONFIG.CANVAS_HEIGHT - 40;
+            
+            // Clear arrays
+            game.bullets = [];
+            game.centipede = [];
+            game.enemies = [];
+            game.powerUps = [];
+            
+            // Create new level
+            createLevel();
             updateDisplay();
+            
+            // Hide modals
+            document.getElementById("gameOverModal").style.display = "none";
+            
+            // Start game loop
             gameLoop();
             
             trackEvent("game_start");
         }
 
+        // Create Level
+        function createLevel() {
+            // Create centipede
+            game.centipede = [];
+            const segmentCount = 8 + game.level;
+            for (let i = 0; i < segmentCount; i++) {
+                game.centipede.push({
+                    x: i * CONFIG.GRID_SIZE,
+                    y: 0,
+                    width: CONFIG.GRID_SIZE - 2,
+                    height: CONFIG.GRID_SIZE - 2,
+                    direction: 1,
+                    isHead: i === 0
+                });
+            }
+            
+            // Add some random enemies
+            for (let i = 0; i < game.level; i++) {
+                game.enemies.push({
+                    x: Math.random() * (CONFIG.CANVAS_WIDTH - 20),
+                    y: Math.random() * 100 + 50,
+                    width: 15,
+                    height: 15,
+                    speed: 1 + Math.random() * 2,
+                    direction: Math.random() < 0.5 ? -1 : 1
+                });
+            }
+        }
+
+        // Create Mushrooms
+        function createMushrooms() {
+            game.mushrooms = [];
+            for (let i = 0; i < CONFIG.MUSHROOM_COUNT; i++) {
+                game.mushrooms.push({
+                    x: Math.floor(Math.random() * (CONFIG.CANVAS_WIDTH / CONFIG.GRID_SIZE)) * CONFIG.GRID_SIZE,
+                    y: Math.floor(Math.random() * ((CONFIG.CANVAS_HEIGHT - 100) / CONFIG.GRID_SIZE)) * CONFIG.GRID_SIZE + 50,
+                    width: CONFIG.GRID_SIZE - 2,
+                    height: CONFIG.GRID_SIZE - 2,
+                    health: 4,
+                    maxHealth: 4
+                });
+            }
+        }
+
         // Game Loop
         function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
-                return;
-            }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Centipede Chaos", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
             if (!game.gameRunning || game.gameOver) return;
             
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
+            if (!game.gamePaused) {
+                updateGame();
             }
             
-            trackEvent("game_paused", { paused: game.gamePaused });
+            render();
+            requestAnimationFrame(gameLoop);
         }
 
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
+        // Update Game
+        function updateGame() {
+            // Move player
+            if (game.moveDirection) {
+                movePlayer(game.moveDirection);
+            }
             
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("centipede-chaosBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+            // Update bullets
+            updateBullets();
+            
+            // Update centipede
+            updateCentipede();
+            
+            // Update enemies
+            updateEnemies();
+            
+            // Check collisions
+            checkCollisions();
+            
+            // Check level completion
+            if (game.centipede.length === 0) {
+                nextLevel();
+            }
+        }
+
+        // Move Player
+        function movePlayer(direction) {
+            const speed = CONFIG.PLAYER_SPEED;
+            
+            switch (direction) {
+                case 'up':
+                    if (game.player.y > CONFIG.CANVAS_HEIGHT * 0.7) {
+                        game.player.y = Math.max(CONFIG.CANVAS_HEIGHT * 0.7, game.player.y - speed);
+                    }
+                    break;
+                case 'down':
+                    game.player.y = Math.min(CONFIG.CANVAS_HEIGHT - game.player.height, game.player.y + speed);
+                    break;
+                case 'left':
+                    game.player.x = Math.max(0, game.player.x - speed);
+                    break;
+                case 'right':
+                    game.player.x = Math.min(CONFIG.CANVAS_WIDTH - game.player.width, game.player.x + speed);
+                    break;
+            }
+        }
+
+        // Update Bullets
+        function updateBullets() {
+            for (let i = game.bullets.length - 1; i >= 0; i--) {
+                const bullet = game.bullets[i];
+                bullet.y -= CONFIG.BULLET_SPEED;
+                
+                // Remove bullets that are off screen
+                if (bullet.y < 0) {
+                    game.bullets.splice(i, 1);
+                }
+            }
+        }
+
+        // Update Centipede
+        function updateCentipede() {
+            for (let i = 0; i < game.centipede.length; i++) {
+                const segment = game.centipede[i];
+                
+                // Move horizontally
+                segment.x += segment.direction * CONFIG.CENTIPEDE_SPEED;
+                
+                // Check boundaries and obstacles
+                let shouldTurn = false;
+                
+                if (segment.x <= 0 || segment.x >= CONFIG.CANVAS_WIDTH - segment.width) {
+                    shouldTurn = true;
+                }
+                
+                // Check mushroom collisions
+                for (const mushroom of game.mushrooms) {
+                    if (checkCollision(segment, mushroom)) {
+                        shouldTurn = true;
+                        break;
+                    }
+                }
+                
+                if (shouldTurn) {
+                   segment.direction *= -1;
+                   segment.y += CONFIG.GRID_SIZE;
+                   
+                   // If centipede reaches player area, game over
+                   if (segment.y > CONFIG.CANVAS_HEIGHT * 0.8) {
+                       loseLife();
+                   }
+               }
+           }
+       }
+
+       // Update Enemies
+       function updateEnemies() {
+           for (let i = 0; i < game.enemies.length; i++) {
+               const enemy = game.enemies[i];
+               enemy.x += enemy.direction * enemy.speed;
+               
+               // Bounce off walls
+               if (enemy.x <= 0 || enemy.x >= CONFIG.CANVAS_WIDTH - enemy.width) {
+                   enemy.direction *= -1;
+               }
+               
+               // Randomly change direction
+               if (Math.random() < 0.01) {
+                   enemy.direction *= -1;
+               }
+           }
+       }
+
+       // Fire Shot
+       function fireShot() {
+           if (!game.gameRunning || game.gamePaused) return;
+           
+           game.bullets.push({
+               x: game.player.x + game.player.width / 2 - 2,
+               y: game.player.y,
+               width: 4,
+               height: 8
+           });
+       }
+
+       // Check Collisions
+       function checkCollisions() {
+           // Bullet vs Centipede
+           for (let i = game.bullets.length - 1; i >= 0; i--) {
+               const bullet = game.bullets[i];
+               
+               for (let j = game.centipede.length - 1; j >= 0; j--) {
+                   const segment = game.centipede[j];
+                   
+                   if (checkCollision(bullet, segment)) {
+                       // Remove bullet
+                       game.bullets.splice(i, 1);
+                       
+                       // Add score (bonus for head)
+                       const points = segment.isHead ? 100 : 10;
+                       addScore(points);
+                       
+                       // Create mushroom where segment was destroyed
+                       game.mushrooms.push({
+                           x: Math.floor(segment.x / CONFIG.GRID_SIZE) * CONFIG.GRID_SIZE,
+                           y: Math.floor(segment.y / CONFIG.GRID_SIZE) * CONFIG.GRID_SIZE,
+                           width: CONFIG.GRID_SIZE - 2,
+                           height: CONFIG.GRID_SIZE - 2,
+                           health: 4,
+                           maxHealth: 4
+                       });
+                       
+                       // Split centipede
+                       if (j < game.centipede.length - 1) {
+                           // Make next segment the new head
+                           game.centipede[j + 1].isHead = true;
+                       }
+                       
+                       // Remove segment
+                       game.centipede.splice(j, 1);
+                       break;
+                   }
+               }
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
+           // Bullet vs Mushrooms
+           for (let i = game.bullets.length - 1; i >= 0; i--) {
+               const bullet = game.bullets[i];
+               
+               for (let j = game.mushrooms.length - 1; j >= 0; j--) {
+                   const mushroom = game.mushrooms[j];
+                   
+                   if (checkCollision(bullet, mushroom)) {
+                       game.bullets.splice(i, 1);
+                       mushroom.health--;
+                       
+                       if (mushroom.health <= 0) {
+                           game.mushrooms.splice(j, 1);
+                           addScore(1);
+                       }
+                       break;
+                   }
+               }
+           }
+           
+           // Bullet vs Enemies
+           for (let i = game.bullets.length - 1; i >= 0; i--) {
+               const bullet = game.bullets[i];
+               
+               for (let j = game.enemies.length - 1; j >= 0; j--) {
+                   const enemy = game.enemies[j];
+                   
+                   if (checkCollision(bullet, enemy)) {
+                       game.bullets.splice(i, 1);
+                       game.enemies.splice(j, 1);
+                       addScore(50);
+                       break;
+                   }
+               }
+           }
+           
+           // Player vs Centipede
+           for (const segment of game.centipede) {
+               if (checkCollision(game.player, segment)) {
+                   loseLife();
+                   break;
+               }
+           }
+           
+           // Player vs Enemies
+           for (const enemy of game.enemies) {
+               if (checkCollision(game.player, enemy)) {
+                   loseLife();
+                   break;
+               }
+           }
+       }
+
+       // Check Collision Helper
+       function checkCollision(rect1, rect2) {
+           return rect1.x < rect2.x + rect2.width &&
+                  rect1.x + rect1.width > rect2.x &&
+                  rect1.y < rect2.y + rect2.height &&
+                  rect1.y + rect1.height > rect2.y;
+       }
+
+       // Add Score
+       function addScore(points) {
+           game.score += points;
+           updateDisplay();
+           
+           // Check for new best score
+           if (game.score > game.bestScore) {
+               game.bestScore = game.score;
+               localStorage.setItem("centipede-chaos-best", game.bestScore.toString());
+               document.getElementById("bestScore").textContent = game.bestScore;
+           }
+       }
+
+       // Lose Life
+       function loseLife() {
+           game.lives--;
+           updateDisplay();
+           
+           if (game.lives <= 0) {
+               endGame();
+           } else {
+               // Reset player position
+               game.player.x = CONFIG.CANVAS_WIDTH / 2 - 10;
+               game.player.y = CONFIG.CANVAS_HEIGHT - 40;
+               
+               // Brief invincibility
+               setTimeout(() => {
+                   // Game continues
+               }, 1000);
+           }
+       }
+
+       // Next Level
+       function nextLevel() {
+           game.level++;
+           addScore(100 * game.level); // Level completion bonus
+           
+           // Add more mushrooms
+           for (let i = 0; i < 5; i++) {
+               game.mushrooms.push({
+                   x: Math.floor(Math.random() * (CONFIG.CANVAS_WIDTH / CONFIG.GRID_SIZE)) * CONFIG.GRID_SIZE,
+                   y: Math.floor(Math.random() * ((CONFIG.CANVAS_HEIGHT - 100) / CONFIG.GRID_SIZE)) * CONFIG.GRID_SIZE + 50,
+                   width: CONFIG.GRID_SIZE - 2,
+                   height: CONFIG.GRID_SIZE - 2,
+                   health: 4,
+                   maxHealth: 4
+               });
+           }
+           
+           createLevel();
+           updateDisplay();
+       }
+
+       // End Game
+       function endGame() {
+           game.gameOver = true;
+           game.gameRunning = false;
+           
+           // Update modal
+           document.getElementById("finalScore").textContent = game.score;
+           document.getElementById("finalLevel").textContent = game.level;
+           document.getElementById("modalBestScore").textContent = game.bestScore;
+           
+           // Show game over modal
+           document.getElementById("gameOverModal").style.display = "flex";
+           
+           trackEvent("game_end", { score: game.score, level: game.level });
+       }
+
+       // Render Game
+       function render() {
+           const ctx = game.ctx;
+           
+           // Clear canvas with gradient background
+           const gradient = ctx.createLinearGradient(0, 0, 0, CONFIG.CANVAS_HEIGHT);
+           gradient.addColorStop(0, "#0f0f23");
+           gradient.addColorStop(1, "#1a1a2e");
+           ctx.fillStyle = gradient;
+           ctx.fillRect(0, 0, CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT);
+           
+           // Draw player area divider
+           ctx.strokeStyle = "#444";
+           ctx.lineWidth = 2;
+           ctx.setLineDash([5, 5]);
+           ctx.beginPath();
+           ctx.moveTo(0, CONFIG.CANVAS_HEIGHT * 0.7);
+           ctx.lineTo(CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT * 0.7);
+           ctx.stroke();
+           ctx.setLineDash([]);
+           
+           // Draw mushrooms
+           for (const mushroom of game.mushrooms) {
+               const healthRatio = mushroom.health / mushroom.maxHealth;
+               ctx.fillStyle = `hsl(${120 * healthRatio}, 70%, 50%)`;
+               ctx.fillRect(mushroom.x, mushroom.y, mushroom.width, mushroom.height);
+               
+               // Mushroom cap effect
+               ctx.fillStyle = `hsl(${120 * healthRatio}, 70%, 70%)`;
+               ctx.fillRect(mushroom.x + 2, mushroom.y + 2, mushroom.width - 4, mushroom.height / 2);
+           }
+           
+           // Draw centipede
+           for (let i = 0; i < game.centipede.length; i++) {
+               const segment = game.centipede[i];
+               
+               if (segment.isHead) {
+                   // Head - different color
+                   ctx.fillStyle = "#ff6b6b";
+                   ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
+                   
+                   // Eyes
+                   ctx.fillStyle = "#fff";
+                   ctx.fillRect(segment.x + 4, segment.y + 4, 3, 3);
+                   ctx.fillRect(segment.x + segment.width - 7, segment.y + 4, 3, 3);
+               } else {
+                   // Body segments
+                   const hue = (i * 30) % 360;
+                   ctx.fillStyle = `hsl(${hue}, 70%, 50%)`;
+                   ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
+                   
+                   // Segment detail
+                   ctx.fillStyle = `hsl(${hue}, 70%, 70%)`;
+                   ctx.fillRect(segment.x + 2, segment.y + 2, segment.width - 4, segment.height - 4);
+               }
+           }
+           
+           // Draw enemies
+           for (const enemy of game.enemies) {
+               ctx.fillStyle = "#ff4757";
+               ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+               
+               // Enemy glow effect
+               ctx.shadowColor = "#ff4757";
+               ctx.shadowBlur = 10;
+               ctx.fillRect(enemy.x + 2, enemy.y + 2, enemy.width - 4, enemy.height - 4);
+               ctx.shadowBlur = 0;
+           }
+           
+           // Draw player
+           ctx.fillStyle = "#00d4ff";
+           ctx.fillRect(game.player.x, game.player.y, game.player.width, game.player.height);
+           
+           // Player ship details
+           ctx.fillStyle = "#fff";
+           ctx.fillRect(game.player.x + 8, game.player.y + 2, 4, 8);
+           ctx.fillStyle = "#ffd700";
+           ctx.fillRect(game.player.x + 6, game.player.y + 12, 8, 4);
+           
+           // Draw bullets
+           for (const bullet of game.bullets) {
+               ctx.fillStyle = "#ffd700";
+               ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+               
+               // Bullet trail effect
+               ctx.fillStyle = "rgba(255, 215, 0, 0.5)";
+               ctx.fillRect(bullet.x, bullet.y + bullet.height, bullet.width, 4);
+           }
+           
+           // Draw paused overlay
+           if (game.gamePaused) {
+               ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+               ctx.fillRect(0, 0, CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT);
+               
+               ctx.fillStyle = "#fff";
+               ctx.font = "24px Orbitron";
+               ctx.textAlign = "center";
+               ctx.fillText("PAUSED", CONFIG.CANVAS_WIDTH / 2, CONFIG.CANVAS_HEIGHT / 2);
+               
+               ctx.font = "14px Inter";
+               ctx.fillText("Press P or click Pause to continue", CONFIG.CANVAS_WIDTH / 2, CONFIG.CANVAS_HEIGHT / 2 + 30);
+           }
+       }
+
+       // Handle Key Down
+       function handleKeyDown(e) {
+           game.keys[e.code] = true;
+           
+           switch (e.code) {
+               case "ArrowUp":
+               case "KeyW":
+                   e.preventDefault();
+                   startMove("up");
+                   break;
+               case "ArrowDown":
+               case "KeyS":
+                   e.preventDefault();
+                   startMove("down");
+                   break;
+               case "ArrowLeft":
+               case "KeyA":
+                   e.preventDefault();
+                   startMove("left");
+                   break;
+               case "ArrowRight":
+               case "KeyD":
+                   e.preventDefault();
+                   startMove("right");
+                   break;
+               case "Space":
+                   e.preventDefault();
+                   fireShot();
+                   break;
+               case "KeyP":
+                   e.preventDefault();
+                   togglePause();
+                   break;
+               case "KeyN":
+                   e.preventDefault();
+                   if (game.gameOver) startNewGame();
+                   break;
+           }
+       }
+
+       // Handle Key Up
+       function handleKeyUp(e) {
+           game.keys[e.code] = false;
+           
+           switch (e.code) {
+               case "ArrowUp":
+               case "KeyW":
+               case "ArrowDown":
+               case "KeyS":
+               case "ArrowLeft":
+               case "KeyA":
+               case "ArrowRight":
+               case "KeyD":
+                   stopMove();
+                   break;
+           }
+       }
+
+       // Start Move
+       function startMove(direction) {
+           if (game.moveDirection === direction) return;
+           
+           stopMove();
+           game.moveDirection = direction;
+           game.moveInterval = setInterval(() => {
+               if (game.gameRunning && !game.gamePaused) {
+                   movePlayer(direction);
+               }
+           }, 16); // ~60fps
+       }
+
+       // Stop Move
+       function stopMove() {
+           if (game.moveInterval) {
+               clearInterval(game.moveInterval);
+               game.moveInterval = null;
+           }
+           game.moveDirection = null;
+       }
+
+       // Setup Touch Controls
+       function setupTouchControls() {
+           let startX, startY;
+           
+           game.canvas.addEventListener("touchstart", (e) => {
+               startX = e.touches[0].clientX;
+               startY = e.touches[0].clientY;
+               e.preventDefault();
+           });
+           
+           game.canvas.addEventListener("touchend", (e) => {
+               if (!startX || !startY) return;
+               
+               const endX = e.changedTouches[0].clientX;
+               const endY = e.changedTouches[0].clientY;
+               
+               const deltaX = endX - startX;
+               const deltaY = endY - startY;
+               
+               const minSwipeDistance = 30;
+               
+               if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                   if (Math.abs(deltaX) > minSwipeDistance) {
+                       const direction = deltaX > 0 ? "right" : "left";
+                       startMove(direction);
+                       setTimeout(stopMove, 200);
+                   }
+               } else {
+                   if (Math.abs(deltaY) > minSwipeDistance) {
+                       const direction = deltaY > 0 ? "down" : "up";
+                       startMove(direction);
+                       setTimeout(stopMove, 200);
+                   }
+               }
+               
+               startX = null;
+               startY = null;
+               e.preventDefault();
+           });
+           
+           // Tap to shoot
+           game.canvas.addEventListener("click", (e) => {
+               if (game.gameRunning && !game.gamePaused) {
+                   fireShot();
+               }
+               e.preventDefault();
+           });
        }
 
        // Update Display
        function updateDisplay() {
            document.getElementById("currentScore").textContent = game.score.toLocaleString();
            document.getElementById("gameLevel").textContent = game.level;
+           document.getElementById("playerLives").textContent = game.lives;
        }
 
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+       // Toggle Pause
+       function togglePause() {
+           if (!game.gameRunning || game.gameOver) return;
            
-           document.body.appendChild(messageEl);
+           game.gamePaused = !game.gamePaused;
+           document.getElementById("pauseButton").textContent = game.gamePaused ? "▶️ Resume" : "⏸️ Pause";
            
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           if (!game.gamePaused) {
+               gameLoop();
            }
+       }
+
+       // Start New Game
+       function startNewGame() {
+           document.getElementById("gameOverModal").style.display = "none";
+           resetGame();
+       }
+
+       // Share Score
+       function shareScore() {
+           const text = `I just scored ${game.score.toLocaleString()} points in Centipede Chaos! Can you beat my score? Play free at gameszone99.com`;
+           
+           if (navigator.share) {
+               navigator.share({
+                   title: "Centipede Chaos - High Score!",
+                   text: text,
+                   url: window.location.href
+               });
+           } else if (navigator.clipboard) {
+               navigator.clipboard.writeText(text);
+               alert("Score copied to clipboard!");
+           } else {
+               prompt("Copy this text to share your score:", text);
+           }
+       }
+
+       // Show Instructions
+       function showInstructions() {
+           alert("🎯 HOW TO PLAY CENTIPEDE CHAOS\n\n🎮 CONTROLS:\n• Arrow keys or WASD to move\n• Spacebar or click/tap to shoot\n• P to pause\n\n🎯 OBJECTIVE:\n• Destroy all centipede segments\n• Avoid touching enemies\n• Shoot mushrooms to clear paths\n• Survive and advance levels\n\n💡 TIPS:\n• Target the head for bonus points\n• Use mushrooms as barriers\n• Create strategic shooting lanes");
        }
 
        // Show Leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("centipede-chaosLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem("centipede-chaos-scores") || "[]");
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
-           } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
-               });
+               alert("No scores yet! Play a game to set your first record.");
+               return;
            }
            
-           alert(message);
+           let leaderboardText = "🏆 LOCAL LEADERBOARD\n\n";
+           scores.slice(0, 10).forEach((score, index) => {
+               leaderboardText += `${index + 1}. ${score.toLocaleString()} points\n`;
+           });
+           
+           alert(leaderboardText);
        }
 
-       // Utility Functions
-       function showInstructions() {
-           alert(`🎯 Centipede Chaos - How to Play
-
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
-
-🎮 Gameplay:
-- Classic arcade action with modern twists and power-ups!
-- Score points to advance levels
-- Beat your high score!
-
-Good luck! 🍀`);
-       }
-
+       // Toggle Fullscreen
        function toggleFullscreen() {
            if (!document.fullscreenElement) {
-               document.documentElement.requestFullscreen().catch(err => {
-                   console.log("Fullscreen not supported");
-               });
+               document.documentElement.requestFullscreen();
            } else {
                document.exitFullscreen();
            }
        }
 
-       function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Centipede Chaos! Can you beat my score? 🏆`;
-           
-           if (navigator.share) {
-               navigator.share({
-                   title: "Centipede Chaos - My Score",
-                   text: text,
-                   url: window.location.href
-               });
-           } else {
-               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+       // Analytics Tracking
+       function trackEvent(action, properties = {}) {
+           // Google Analytics 4 event tracking
+           if (typeof gtag !== 'undefined') {
+               gtag('event', action, {
+                   game_name: 'centipede_chaos',
+                   ...properties
                });
            }
            
-           trackEvent("score_shared", { score: game.score });
+           // Console log for debugging
+           console.log(`Event: ${action}`, properties);
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "centipede-chaos",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
+       // Save Score to Local Leaderboard
+       function saveScore() {
+           const scores = JSON.parse(localStorage.getItem("centipede-chaos-scores") || "[]");
+           scores.push(game.score);
+           scores.sort((a, b) => b - a);
+           scores.splice(10); // Keep only top 10
+           localStorage.setItem("centipede-chaos-scores", JSON.stringify(scores));
        }
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
-
-       // Initialize game when page loads
+       // Initialize when page loads
        document.addEventListener("DOMContentLoaded", () => {
            initGame();
        });
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
-
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
-
-       // Handle page visibility
+       // Handle page visibility for pause
        document.addEventListener("visibilitychange", () => {
            if (document.hidden && game.gameRunning && !game.gamePaused) {
                togglePause();
            }
        });
 
-       console.log("🎮 Centipede Chaos loaded successfully!");
-       
-    </script>
+       // Prevent context menu on canvas
+       document.getElementById("gameCanvas").addEventListener("contextmenu", (e) => {
+           e.preventDefault();
+       });
+
+       // Add keyboard shortcuts info
+       document.addEventListener("keydown", (e) => {
+           if (e.code === "F1") {
+               e.preventDefault();
+               showInstructions();
+           }
+       });
+   </script>
 </body>
 </html>

@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Defender Elite - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Defender Elite for free! Classic arcade action with modern twists and power-ups! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="defender-elite, arcade game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Defender Elite - Free HTML5 Space Shooter | GamesZone99</title>
+    <meta name="description" content="Play Defender Elite free! Classic arcade space shooter with modern graphics. Protect humanoids from alien abduction in this addictive browser game.">
+    <meta name="keywords" content="defender elite, space shooter, arcade game, html5 game, free online game, browser game, mobile game, classic arcade">
+    <meta name="author" content="GamesZone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/defender-elite.html">
-    <meta property="og:title" content="Defender Elite - Free HTML5 Game">
-    <meta property="og:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="og:image" content="https://gamehub99.com/assets/defender-elite-og.jpg">
+    <meta property="og:url" content="https://gameszone99.com/defender-elite.html">
+    <meta property="og:title" content="Defender Elite - Free HTML5 Space Shooter">
+    <meta property="og:description" content="Classic arcade space shooter with modern graphics. Protect humanoids from alien abduction!">
+    <meta property="og:image" content="https://gameszone99.com/assets/defender-elite-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/defender-elite.html">
-    <meta property="twitter:title" content="Defender Elite - Free HTML5 Game">
-    <meta property="twitter:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/defender-elite-og.jpg">
+    <meta property="twitter:url" content="https://gameszone99.com/defender-elite.html">
+    <meta property="twitter:title" content="Defender Elite - Free HTML5 Space Shooter">
+    <meta property="twitter:description" content="Classic arcade space shooter with modern graphics. Protect humanoids from alien abduction!">
+    <meta property="twitter:image" content="https://gameszone99.com/assets/defender-elite-og.jpg">
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -42,6 +41,7 @@
             --accent-color: #00d4ff;
             --success-color: #00ff88;
             --warning-color: #ffaa00;
+            --danger-color: #ff4757;
             --text-primary: #ffffff;
             --text-secondary: #b8c1ec;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -72,6 +72,13 @@
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+
+        .ad-container-bottom {
+            position: sticky;
+            bottom: 0;
+            border-top: 1px solid var(--card-border);
+            border-bottom: none;
         }
 
         .ad-placeholder {
@@ -237,7 +244,7 @@
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
             border: 2px solid var(--card-border);
             border-radius: 10px;
             display: block;
@@ -246,12 +253,39 @@
             height: auto;
         }
 
+        .start-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .start-button {
+            padding: 15px 30px;
+            background: var(--success-color);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(0, 255, 136, 0.5);
+        }
+
         .mobile-controls {
             display: none;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 1rem;
             margin-top: 1.5rem;
-            max-width: 250px;
+            max-width: 350px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -271,60 +305,121 @@
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
+        .mobile-control:active {
             background: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .mobile-control.empty {
-            visibility: hidden;
+            color: #000;
+            transform: scale(0.95);
         }
 
         .sidebar {
             flex: 1;
             min-width: 280px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            max-width: 350px;
         }
 
-        .sidebar-section {
+        .info-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             backdrop-filter: blur(10px);
         }
 
-        .sidebar-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+        .info-card h3 {
+            font-family: "Orbitron", monospace;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
-        .instructions {
+        .info-card p {
             color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
         }
 
-        .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+        .instructions-list {
+            list-style: none;
+            margin: 1rem 0;
         }
 
-        .instructions li {
-            margin-bottom: 0.4rem;
+        .instructions-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .instructions-list li:last-child {
+            border-bottom: none;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .game-over-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--dark-gradient);
+            border: 2px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-card);
+        }
+
+        .modal-title {
+            font-family: "Orbitron", monospace;
+            font-size: 1.8rem;
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+        }
+
+        .modal-stats {
+            margin: 1rem 0;
+        }
+
+        .modal-stat {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button.primary {
+            background: var(--success-color);
+            color: #000;
+        }
+
+        .modal-button.secondary {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--card-border);
         }
 
         @media (max-width: 768px) {
@@ -332,61 +427,47 @@
                 flex-direction: column;
                 padding: 1rem;
             }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .game-title {
-                font-size: 1.5rem;
-            }
-            
-            .nav-buttons {
-                justify-content: center;
-            }
-            
+
             .game-header {
                 flex-direction: column;
                 align-items: stretch;
-                text-align: center;
+                gap: 1rem;
             }
-            
+
             .stats-section {
                 justify-content: center;
             }
-            
-            .game-controls {
-                justify-content: center;
-            }
-            
+
             .mobile-controls {
                 display: grid;
             }
-            
-            .sidebar {
-                order: -1;
-            }
-            
+
             .ad-placeholder {
                 width: 320px;
                 height: 50px;
                 font-size: 12px;
             }
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-buttons {
+                justify-content: center;
+            }
         }
-        
     </style>
 </head>
 <body>
     <!-- Top Ad Container -->
     <div class="ad-container-top">
-        <div class="ad-placeholder">728x90 Header Advertisement</div>
+        <div class="ad-placeholder">Advertisement Space - 728x90</div>
     </div>
 
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">⚡ Defender Elite</h1>
+            <h1 class="game-title">🛡️ Defender Elite</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -399,7 +480,7 @@
     <!-- Main Game Container -->
     <div class="game-container">
         <!-- Game Section -->
-        <main class="game-section loading">
+        <main class="game-section">
             <div class="game-header">
                 <div class="stats-section">
                     <div class="stat-box">
@@ -411,13 +492,17 @@
                         <div class="stat-value" id="bestScore">0</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-label">Level</div>
-                        <div class="stat-value" id="gameLevel">1</div>
+                        <div class="stat-label">Lives</div>
+                        <div class="stat-value" id="livesCount">3</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Wave</div>
+                        <div class="stat-value" id="waveNumber">1</div>
                     </div>
                 </div>
                 
                 <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
+                    <button class="control-button new-game" onclick="startGame()">🆕 New Game</button>
                     <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
                     <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
@@ -425,387 +510,1043 @@
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <canvas id="gameCanvas" width="800" height="400"></canvas>
+                <div class="start-screen" id="startScreen">
+                    <h2 style="color: var(--accent-color); margin-bottom: 1rem;">🛡️ Defender Elite</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Protect the humanoids from alien abduction!</p>
+                    <button class="start-button" onclick="startGame()">🚀 Start Game</button>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onmousedown="handleInput('left')" onmouseup="handleInputStop('left')" ontouchstart="handleInput('left')" ontouchend="handleInputStop('left')">⬅️</div>
+                <div class="mobile-control" onmousedown="handleInput('up')" onmouseup="handleInputStop('up')" ontouchstart="handleInput('up')" ontouchend="handleInputStop('up')">⬆️</div>
+                <div class="mobile-control" onmousedown="handleInput('down')" onmouseup="handleInputStop('down')" ontouchstart="handleInput('down')" ontouchend="handleInputStop('down')">⬇️</div>
+                <div class="mobile-control" onmousedown="handleInput('right')" onmouseup="handleInputStop('right')" ontouchstart="handleInput('right')" ontouchend="handleInputStop('right')">➡️</div>
+                <div class="mobile-control" onmousedown="handleInput('fire')" onmouseup="handleInputStop('fire')" ontouchstart="handleInput('fire')" ontouchend="handleInputStop('fire')">🔥</div>
             </div>
         </main>
 
         <!-- Sidebar -->
-        <aside class="sidebar loading">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">🎯 How to Play</h3>
-                <div class="instructions">
-                    <p><strong>Classic arcade action with modern twists and power-ups!</strong></p>
-                    <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
-                    </ul>
-                </div>
+        <aside class="sidebar">
+            <div class="info-card">
+                <h3>🎮 How to Play</h3>
+                <ul class="instructions-list">
+                    <li>🕹️ Use ARROW KEYS or WASD to move your ship</li>
+                    <li>🔫 Press SPACEBAR to fire lasers</li>
+                    <li>🛡️ Protect humanoids from alien abduction</li>
+                    <li>👽 Destroy aliens and rescue falling humanoids</li>
+                    <li>💥 Avoid enemy fire and terrain collisions</li>
+                    <li>🏆 Complete waves to advance levels</li>
+                </ul>
             </div>
 
-            <div class="sidebar-section" style="min-height: 250px; display: flex; align-items: center; justify-content: center;">
-                <div style="width: 250px; height: 250px; background: linear-gradient(45deg, #333, #555); border: 2px dashed #666; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; border-radius: 8px; text-align: center;">
-                    250x250<br>Sidebar Ad
-                </div>
+            <div class="info-card">
+                <h3>🎯 Game Features</h3>
+                <p>• Classic arcade-style side-scrolling action</p>
+                <p>• Smooth controls optimized for all devices</p>
+                <p>• Progressive difficulty with new challenges</p>
+                <p>• Local high score tracking</p>
+                <p>• Mobile-friendly touch controls</p>
+                <p>• Retro graphics with modern performance</p>
+            </div>
+
+            <div class="info-card">
+                <h3>🏆 Scoring System</h3>
+                <p><strong>Alien Destruction:</strong> 50-200 pts</p>
+                <p><strong>Humanoid Rescue:</strong> 100-500 pts</p>
+                <p><strong>Wave Completion:</strong> 1000 pts</p>
+                <p><strong>Perfect Wave:</strong> Bonus multiplier</p>
             </div>
         </aside>
     </div>
 
+    <!-- Game Over Modal -->
+    <div class="game-over-modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Game Over</h2>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <span>Final Score:</span>
+                    <span id="finalScore">0</span>
+                </div>
+                <div class="modal-stat">
+                    <span>Wave Reached:</span>
+                    <span id="finalWave">1</span>
+                </div>
+                <div class="modal-stat">
+                    <span>Best Score:</span>
+                    <span id="modalBestScore">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="startGame()">🔄 Play Again</button>
+                <button class="modal-button secondary" onclick="closeGameOver()">📊 View Scores</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
-        <div class="ad-placeholder">728x90 Footer Advertisement</div>
+        <div class="ad-placeholder">Advertisement Space - 728x90</div>
     </div>
 
     <script>
-        
         // Game State
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
         const game = {
-            canvas: null,
-            ctx: null,
+            state: 'menu', // menu, playing, paused, gameOver
             score: 0,
-            bestScore: localStorage.getItem("defender-eliteBest") || 0,
-            level: 1,
-            gameRunning: false,
-            gamePaused: false,
-            gameOver: false
+            lives: 3,
+            wave: 1,
+            keys: {},
+            lastTime: 0,
+            scrollX: 0,
+            player: null,
+            bullets: [],
+            enemies: [],
+            humanoids: [],
+            explosions: [],
+            particles: []
         };
 
-        // Initialize game
-        function initGame() {
-            game.canvas = document.getElementById("gameCanvas");
-            game.ctx = game.canvas.getContext("2d");
-            
-            // Load best score
-            document.getElementById("bestScore").textContent = game.bestScore;
-            
-            // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
-            
-            // Touch support
-            setupTouchControls();
-            
-            // Start new game
-            newGame();
-            
-            // Animate elements
-            setTimeout(() => {
-                document.querySelectorAll(".loading").forEach(el => {
-                    el.style.opacity = "1";
-                });
-            }, 100);
-        }
+        // Player Ship
+        class Player {
+            constructor() {
+                this.x = 100;
+                this.y = canvas.height / 2;
+                this.width = 40;
+                this.height = 20;
+                this.speed = 5;
+                this.thrust = 0.3;
+                this.friction = 0.85;
+                this.vx = 0;
+                this.vy = 0;
+                this.fireRate = 150;
+                this.lastFire = 0;
+            }
 
-        // New Game
-        function newGame() {
-            game.score = 0;
-            game.level = 1;
-            game.gameRunning = true;
-            game.gamePaused = false;
-            game.gameOver = false;
-            
-            updateDisplay();
-            gameLoop();
-            
-            trackEvent("game_start");
-        }
-
-        // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
+            update(deltaTime) {
+                // Handle input
+                if (game.keys['ArrowLeft'] || game.keys['KeyA'] || game.keys['left']) {
+                    this.vx -= this.thrust;
                 }
-                return;
-            }
-            
-            updateGame();
-            render();
-            
-            setTimeout(gameLoop, 100);
-        }
-
-        // Update Game State
-        function updateGame() {
-            if (game.gameOver) return;
-            
-            // Game logic here
-            game.score += 10;
-            
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
-            }
-            
-            updateDisplay();
-            
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
-            }
-        }
-
-        // Render Game
-        function render() {
-            const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Defender Elite", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
+                if (game.keys['ArrowRight'] || game.keys['KeyD'] || game.keys['right']) {
+                    this.vx += this.thrust;
                 }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
+                if (game.keys['ArrowUp'] || game.keys['KeyW'] || game.keys['up']) {
+                    this.vy -= this.thrust;
+                }
+                if (game.keys['ArrowDown'] || game.keys['KeyS'] || game.keys['down']) {
+                    this.vy += this.thrust;
+                }
 
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
+                // Fire bullets
+                if ((game.keys['Space'] || game.keys['fire']) && Date.now() - this.lastFire > this.fireRate) {
+                    this.fire();
+                    this.lastFire = Date.now();
+                }
+
+                // Apply friction
+                this.vx *= this.friction;
+                this.vy *= this.friction;
+
+                // Update position
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Keep on screen
+                this.x = Math.max(0, Math.min(canvas.width - this.width, this.x));
+                this.y = Math.max(0, Math.min(canvas.height - this.height, this.y));
             }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
+
+            fire() {
+                game.bullets.push(new Bullet(this.x + this.width, this.y + this.height / 2, 8, 0));
+                // Add muzzle flash effect
+                this.addMuzzleFlash();
+            }
+
+            addMuzzleFlash() {
+                for (let i = 0; i < 5; i++) {
+                    game.particles.push(new Particle(
+                        this.x + this.width,
+                        this.y + this.height / 2,
+                        Math.random() * 4 - 2,
+                        Math.random() * 4 - 2,
+                        '#ffff00',
+                        200
+                    ));
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = '#00ff88';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                
+                // Ship details
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(this.x + 30, this.y + 5, 10, 10);
+                
+                // Engine glow
+                if (this.vx > 0 || this.vy !== 0) {
+                    ctx.fillStyle = '#ff4400';
+                    ctx.fillRect(this.x - 10, this.y + 7, 8, 6);
+                }
+            }
         }
 
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
+        // Bullet Class
+        class Bullet {
+            constructor(x, y, vx, vy) {
+                this.x = x;
+                this.y = y;
+                this.vx = vx;
+                this.vy = vy;
+                this.width = 8;
+                this.height = 2;
+                this.life = 100;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life--;
+                return this.life > 0 && this.x < canvas.width + 50;
+            }
+
+            draw() {
+                ctx.fillStyle = '#ffff00';
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+        // Enemy Class
+        class Enemy {
+    constructor(x, y, type = 'basic') {
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        this.width = 30;
+        this.height = 20;
+        this.speed = 0.8 + Math.random() * 0.7; // Much slower speed
+        this.direction = 1; // Always start moving right
+        this.health = type === 'boss' ? 3 : 1;
+        this.fireRate = 2000 + Math.random() * 3000; // Less frequent firing
+        this.lastFire = Date.now();
+        this.points = type === 'boss' ? 200 : 50;
+        this.moveTimer = 0;
+    }
+
+    update() {
+        this.moveTimer++;
+        
+        // Move horizontally
+        this.x += this.direction * this.speed;
+        
+        // Bounce off edges and move down
+        if (this.x <= 0) {
+            this.x = 0;
+            this.direction = 1;
+            this.y += 40; // Move down when hitting edge
+        } else if (this.x >= canvas.width - this.width) {
+            this.x = canvas.width - this.width;
+            this.direction = -1;
+            this.y += 40; // Move down when hitting edge
+        }
+
+        // Fire at player occasionally (and only if on screen)
+        if (Date.now() - this.lastFire > this.fireRate && Math.random() < 0.001) {
+            this.fire();
+            this.lastFire = Date.now();
+        }
+
+        return this.y < canvas.height - 50; // Remove if too low
+    }
+
+    fire() {
+        // Only fire if enemy is on screen
+        if (this.x > -50 && this.x < canvas.width + 50) {
+            const dx = game.player.x - this.x;
+            const dy = game.player.y - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
             
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("defender-eliteBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+            game.bullets.push(new EnemyBullet(
+                this.x + this.width / 2,
+                this.y + this.height,
+                (dx / distance) * 1.5, // Slower bullet speed
+                (dy / distance) * 1.5
+            ));
+        }
+    }
+
+    draw() {
+        ctx.fillStyle = this.type === 'boss' ? '#ff0066' : '#ff4400';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        
+        // Enemy details
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(this.x + 5, this.y + 5, 5, 5);
+        ctx.fillRect(this.x + 20, this.y + 5, 5, 5);
+    }
+
+    takeDamage() {
+        this.health--;
+        if (this.health <= 0) {
+            this.explode();
+            game.score += this.points;
+            return true;
+        }
+        return false;
+    }
+
+    explode() {
+        game.explosions.push(new Explosion(this.x + this.width / 2, this.y + this.height / 2));
+        // Add explosion particles
+        for (let i = 0; i < 10; i++) {
+            game.particles.push(new Particle(
+                this.x + this.width / 2,
+                this.y + this.height / 2,
+                Math.random() * 8 - 4,
+                Math.random() * 8 - 4,
+                '#ff4400',
+                500
+            ));
+        }
+    }
+}
+
+        // Enemy Bullet Class
+        class EnemyBullet {
+    constructor(x, y, vx, vy) {
+        this.x = x;
+        this.y = y;
+        this.vx = vx * 0.7; // Slower bullets
+        this.vy = vy * 0.7;
+        this.width = 4;
+        this.height = 4;
+        this.life = 200; // Longer life
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life--;
+        return this.life > 0 && this.x > -50 && this.x < canvas.width + 50 && this.y > -50 && this.y < canvas.height + 50;
+    }
+
+    draw() {
+        ctx.fillStyle = '#ff0066';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+}
+
+// Lander Enemy Class (can abduct humanoids)
+class LanderEnemy extends Enemy {
+    constructor(x, y) {
+        super(x, y, 'lander');
+        this.width = 25;
+        this.height = 15;
+        this.speed = 1.2;
+        this.targetHumanoid = null;
+        this.abductionBeam = false;
+        this.abductionRange = 30;
+        this.state = 'patrol'; // patrol, descending, abducting, ascending
+        this.originalY = y;
+        this.points = 100;
+    }
+
+    update() {
+        switch (this.state) {
+            case 'patrol':
+                this.patrol();
+                this.findHumanoidToAbduct();
+                break;
+            case 'descending':
+                this.descendToHumanoid();
+                break;
+            case 'abducting':
+                this.abductHumanoid();
+                break;
+            case 'ascending':
+                this.ascendWithHumanoid();
+                break;
+        }
+
+        // Fire at player occasionally
+        if (Date.now() - this.lastFire > this.fireRate && Math.random() < 0.001) {
+            this.fire();
+            this.lastFire = Date.now();
+        }
+
+        return this.y < canvas.height + 50 && this.y > -100;
+    }
+
+    patrol() {
+        this.x += this.direction * this.speed;
+        
+        if (this.x <= 0 || this.x >= canvas.width - this.width) {
+            this.direction *= -1;
+        }
+    }
+
+    findHumanoidToAbduct() {
+        if (this.targetHumanoid) return;
+
+        // Find nearest humanoid
+        let nearestHumanoid = null;
+        let nearestDistance = Infinity;
+
+        game.humanoids.forEach(humanoid => {
+            if (!humanoid.beingAbducted && !humanoid.rescued) {
+                const distance = Math.abs(this.x - humanoid.x);
+                if (distance < nearestDistance && distance < 100) {
+                    nearestDistance = distance;
+                    nearestHumanoid = humanoid;
+                }
+            }
+        });
+
+        if (nearestHumanoid) {
+            this.targetHumanoid = nearestHumanoid;
+            this.state = 'descending';
+        }
+    }
+
+    descendToHumanoid() {
+        if (!this.targetHumanoid || this.targetHumanoid.rescued) {
+            this.state = 'patrol';
+            this.targetHumanoid = null;
+            return;
+        }
+
+        // Move towards humanoid
+        const dx = this.targetHumanoid.x - this.x;
+        this.x += Math.sign(dx) * this.speed * 0.8;
+        this.y += 1.5;
+
+        // Check if close enough to start abduction
+        if (Math.abs(dx) < this.abductionRange && 
+            Math.abs(this.y - this.targetHumanoid.y) < 50) {
+            this.state = 'abducting';
+            this.abductionBeam = true;
+            this.targetHumanoid.beingAbducted = true;
+            this.targetHumanoid.abductionBeam = this;
+        }
+    }
+
+    abductHumanoid() {
+        if (!this.targetHumanoid || this.targetHumanoid.rescued) {
+            this.state = 'ascending';
+            this.abductionBeam = false;
+            return;
+        }
+
+        // Pull humanoid up
+        this.targetHumanoid.y -= 1;
+        
+        // If humanoid reaches the lander, start ascending
+        if (this.targetHumanoid.y <= this.y + this.height) {
+            this.state = 'ascending';
+        }
+    }
+
+    ascendWithHumanoid() {
+        this.y -= 2;
+        
+        if (this.targetHumanoid && !this.targetHumanoid.rescued) {
+            this.targetHumanoid.y = this.y + this.height;
+        }
+
+        // If reached top, remove humanoid and return to patrol
+        if (this.y <= 10) {
+            if (this.targetHumanoid) {
+                // Remove abducted humanoid from game
+                const index = game.humanoids.indexOf(this.targetHumanoid);
+                if (index > -1) {
+                    game.humanoids.splice(index, 1);
+                }
+            }
+            this.state = 'patrol';
+            this.y = this.originalY;
+            this.targetHumanoid = null;
+            this.abductionBeam = false;
+            
+            // Lose points for failed protection
+            game.score = Math.max(0, game.score - 200);
+        }
+    }
+
+    draw() {
+        // Draw lander body
+        ctx.fillStyle = '#ff6600';
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        
+        // Draw details
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(this.x + 5, this.y + 3, 3, 3);
+        ctx.fillRect(this.x + 17, this.y + 3, 3, 3);
+        
+        // Draw abduction beam
+        if (this.abductionBeam && this.targetHumanoid) {
+            ctx.strokeStyle = '#ffff00';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(this.x + this.width / 2, this.y + this.height);
+            ctx.lineTo(this.targetHumanoid.x + this.targetHumanoid.width / 2, this.targetHumanoid.y);
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset line dash
+            
+            // Draw beam effect
+            ctx.fillStyle = 'rgba(255, 255, 0, 0.3)';
+            const beamWidth = 20;
+            ctx.fillRect(
+                this.x + this.width / 2 - beamWidth / 2,
+                this.y + this.height,
+                beamWidth,
+                this.targetHumanoid.y - (this.y + this.height)
+            );
+        }
+    }
+
+    takeDamage() {
+        // If destroyed while abducting, free the humanoid
+        if (this.targetHumanoid && this.abductionBeam) {
+            this.targetHumanoid.beingAbducted = false;
+            this.targetHumanoid.abductionBeam = null;
+            this.targetHumanoid.vy = 2; // Make humanoid fall
+        }
+        
+        return super.takeDamage();
+    }
+}
+        // Humanoid Class
+        class Humanoid {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.width = 8;
+        this.height = 12;
+        this.vy = 0;
+        this.onGround = false;
+        this.rescued = false;
+        this.beingAbducted = false;
+        this.abductionBeam = null;
+    }
+
+    update() {
+        if (this.beingAbducted && this.abductionBeam) {
+            // Being pulled up by lander - movement handled by lander
+            return true;
+        } else if (!this.onGround) {
+            // Falling
+            this.vy += 0.5;
+            this.y += this.vy;
+            
+            // Check ground collision
+            if (this.y >= canvas.height - 40 - this.height) {
+                this.y = canvas.height - 40 - this.height;
+                this.vy = 0;
+                this.onGround = true;
+            }
+        }
+        return true;
+    }
+
+    rescue() {
+        if (!this.rescued && !this.beingAbducted) {
+            this.rescued = true;
+            this.beingAbducted = false;
+            this.abductionBeam = null;
+            game.score += 100;
+            
+            // Add rescue particles
+            for (let i = 0; i < 5; i++) {
+                game.particles.push(new Particle(
+                    this.x,
+                    this.y,
+                    Math.random() * 4 - 2,
+                    Math.random() * 4 - 2,
+                    '#00ff88',
+                    300
+                ));
+            }
+        }
+    }
+
+    draw() {
+        if (this.rescued) return;
+        
+        // Change color based on state
+        if (this.beingAbducted) {
+            ctx.fillStyle = '#ffff00'; // Yellow when being abducted
+        } else {
+            ctx.fillStyle = '#00ffff'; // Cyan normally
+        }
+        
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        
+        // Simple humanoid shape
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(this.x + 2, this.y + 2, 4, 3); // head
+    }
+}
+
+       // Explosion Class
+       class Explosion {
+           constructor(x, y) {
+               this.x = x;
+               this.y = y;
+               this.radius = 5;
+               this.maxRadius = 40;
+               this.life = 30;
+           }
+
+           update() {
+               this.radius += 2;
+               this.life--;
+               return this.life > 0;
+           }
+
+           draw() {
+               const alpha = this.life / 30;
+               ctx.save();
+               ctx.globalAlpha = alpha;
+               ctx.fillStyle = '#ff4400';
+               ctx.beginPath();
+               ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+               ctx.fill();
+               ctx.fillStyle = '#ffff00';
+               ctx.beginPath();
+               ctx.arc(this.x, this.y, this.radius * 0.6, 0, Math.PI * 2);
+               ctx.fill();
+               ctx.restore();
+           }
+       }
+
+       // Particle Class
+       class Particle {
+           constructor(x, y, vx, vy, color, life) {
+               this.x = x;
+               this.y = y;
+               this.vx = vx;
+               this.vy = vy;
+               this.color = color;
+               this.life = life;
+               this.maxLife = life;
+           }
+
+           update() {
+               this.x += this.vx;
+               this.y += this.vy;
+               this.life--;
+               return this.life > 0;
+           }
+
+           draw() {
+               const alpha = this.life / this.maxLife;
+               ctx.save();
+               ctx.globalAlpha = alpha;
+               ctx.fillStyle = this.color;
+               ctx.fillRect(this.x, this.y, 2, 2);
+               ctx.restore();
+           }
+       }
+
+       // Game Functions
+       function initGame() {
+           game.player = new Player();
+           game.bullets = [];
+           game.enemies = [];
+           game.humanoids = [];
+           game.explosions = [];
+           game.particles = [];
+           game.score = 0;
+           game.lives = 3;
+           game.wave = 1;
+           
+           spawnWave();
+           updateUI();
+       }
+
+       function spawnWave() {
+    // Clear existing enemies
+    game.enemies = [];
+    
+    // Spawn regular enemies
+    const enemyCount = Math.min(2 + Math.floor(game.wave / 2), 6);
+    for (let i = 0; i < enemyCount; i++) {
+        const x = 50 + (i * 80) % (canvas.width - 100);
+        const y = 50 + Math.floor(i / 8) * 60;
+        const type = Math.random() < 0.05 + (game.wave * 0.02) ? 'boss' : 'basic';
+        game.enemies.push(new Enemy(x, y, type));
+    }
+    
+    // Spawn lander enemies (these can abduct)
+    const landerCount = Math.min(1 + Math.floor(game.wave / 3), 3);
+    for (let i = 0; i < landerCount; i++) {
+        const x = 100 + Math.random() * (canvas.width - 200);
+        const y = 80 + Math.random() * 50;
+        game.enemies.push(new LanderEnemy(x, y));
+    }
+
+    // Spawn humanoids
+    const humanoidCount = Math.min(4 + Math.floor(game.wave / 3), 8);
+    for (let i = 0; i < humanoidCount; i++) {
+        const x = 50 + Math.random() * (canvas.width - 100);
+        const y = canvas.height - 40;
+        game.humanoids.push(new Humanoid(x, y));
+    }
+}
+
+       function startGame() {
+           if (game.state === 'menu') {
+               document.getElementById('startScreen').style.display = 'none';
            }
            
-           setTimeout(() => showGameOverModal(), 500);
-           trackEvent("game_over", { score: game.score, level: game.level });
-       }
-
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+           game.state = 'playing';
+           initGame();
            
-           document.body.appendChild(messageEl);
-           
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           if (!game.gameLoop) {
+               game.gameLoop = requestAnimationFrame(gameLoop);
            }
        }
 
-       // Show Leaderboard
+       function togglePause() {
+           if (game.state === 'playing') {
+               game.state = 'paused';
+               document.getElementById('pauseButton').textContent = '▶️ Resume';
+           } else if (game.state === 'paused') {
+               game.state = 'playing';
+               document.getElementById('pauseButton').textContent = '⏸️ Pause';
+           }
+       }
+
+       function gameLoop(currentTime) {
+           const deltaTime = currentTime - game.lastTime;
+           game.lastTime = currentTime;
+
+           if (game.state === 'playing') {
+               update(deltaTime);
+           }
+           
+           draw();
+           game.gameLoop = requestAnimationFrame(gameLoop);
+       }
+
+       function update(deltaTime) {
+           // Update player
+           game.player.update(deltaTime);
+
+           // Update bullets
+           game.bullets = game.bullets.filter(bullet => {
+               const alive = bullet.update();
+               
+               // Check bullet-enemy collisions
+               // In the update function, modify the bullet-enemy collision section:
+// Check bullet-enemy collisions
+if (bullet.constructor === Bullet) {
+    for (let i = game.enemies.length - 1; i >= 0; i--) {
+        const enemy = game.enemies[i];
+        if (collision(bullet, enemy)) {
+            if (enemy.takeDamage()) {
+                game.enemies.splice(i, 1);
+            }
+            return false; // Remove bullet
+        }
+    }
+}
+               
+               // Check enemy bullet-player collisions
+               if (bullet.constructor === EnemyBullet) {
+                   if (collision(bullet, game.player)) {
+                       playerHit();
+                       return false; // Remove bullet
+                   }
+               }
+               
+               return alive;
+           });
+
+           // Update enemies
+           game.enemies = game.enemies.filter(enemy => {
+               const alive = enemy.update();
+               
+               // Check enemy-player collision
+               if (collision(enemy, game.player)) {
+                   playerHit();
+                   enemy.takeDamage();
+                   return enemy.health > 0;
+               }
+               
+               return alive;
+           });
+
+           // Update humanoids
+           game.humanoids = game.humanoids.filter(humanoid => {
+               const alive = humanoid.update();
+               
+               // Check player-humanoid rescue
+               if (!humanoid.rescued && collision(game.player, humanoid)) {
+                   humanoid.rescue();
+               }
+               
+               return alive && !humanoid.rescued;
+           });
+
+           // Update explosions
+           game.explosions = game.explosions.filter(explosion => explosion.update());
+
+           // Update particles
+           game.particles = game.particles.filter(particle => particle.update());
+
+           // Check wave completion
+           if (game.enemies.length === 0) {
+               game.wave++;
+               game.score += 1000; // Wave bonus
+               spawnWave();
+           }
+
+           // Check game over
+           if (game.lives <= 0) {
+               gameOver();
+           }
+
+           updateUI();
+       }
+
+       function collision(obj1, obj2) {
+           return obj1.x < obj2.x + obj2.width &&
+                  obj1.x + obj1.width > obj2.x &&
+                  obj1.y < obj2.y + obj2.height &&
+                  obj1.y + obj1.height > obj2.y;
+       }
+
+       function playerHit() {
+           game.lives--;
+           
+           // Add hit effect
+           for (let i = 0; i < 15; i++) {
+               game.particles.push(new Particle(
+                   game.player.x + game.player.width / 2,
+                   game.player.y + game.player.height / 2,
+                   Math.random() * 8 - 4,
+                   Math.random() * 8 - 4,
+                   '#ff0066',
+                   400
+               ));
+           }
+           
+           // Brief invincibility and reset position
+           game.player.x = 100;
+           game.player.y = canvas.height / 2;
+           game.player.vx = 0;
+           game.player.vy = 0;
+       }
+
+       function draw() {
+           // Clear canvas
+           ctx.fillStyle = '#0a0a1a';
+           ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+           // Draw stars background
+           drawStars();
+
+           if (game.state === 'playing' || game.state === 'paused') {
+               // Draw game objects
+               game.player.draw();
+               game.bullets.forEach(bullet => bullet.draw());
+               game.enemies.forEach(enemy => enemy.draw());
+               game.humanoids.forEach(humanoid => humanoid.draw());
+               game.explosions.forEach(explosion => explosion.draw());
+               game.particles.forEach(particle => particle.draw());
+
+               // Draw ground
+               ctx.fillStyle = '#333333';
+               ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+
+               // Draw pause overlay
+               if (game.state === 'paused') {
+                   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                   ctx.fillRect(0, 0, canvas.width, canvas.height);
+                   ctx.fillStyle = '#ffffff';
+                   ctx.font = '48px Orbitron';
+                   ctx.textAlign = 'center';
+                   ctx.fillText('PAUSED', canvas.width / 2, canvas.height / 2);
+               }
+           }
+       }
+
+       function drawStars() {
+           ctx.fillStyle = '#ffffff';
+           for (let i = 0; i < 50; i++) {
+               const x = (i * 37) % canvas.width;
+               const y = (i * 23) % canvas.height;
+               const size = (i % 3) + 1;
+               ctx.fillRect(x, y, size, size);
+           }
+       }
+
+       function gameOver() {
+           game.state = 'gameOver';
+           
+           // Update high score
+           const bestScore = localStorage.getItem('defenderEliteBest') || 0;
+           if (game.score > bestScore) {
+               localStorage.setItem('defenderEliteBest', game.score);
+           }
+           
+           // Show game over modal
+           document.getElementById('finalScore').textContent = game.score.toLocaleString();
+           document.getElementById('finalWave').textContent = game.wave;
+           document.getElementById('modalBestScore').textContent = Math.max(game.score, bestScore).toLocaleString();
+           document.getElementById('gameOverModal').style.display = 'flex';
+           
+           updateUI();
+       }
+
+       function closeGameOver() {
+           document.getElementById('gameOverModal').style.display = 'none';
+           showLeaderboard();
+       }
+
+       function updateUI() {
+           document.getElementById('currentScore').textContent = game.score.toLocaleString();
+           document.getElementById('bestScore').textContent = (localStorage.getItem('defenderEliteBest') || 0);
+           document.getElementById('livesCount').textContent = game.lives;
+           document.getElementById('waveNumber').textContent = game.wave;
+       }
+
+       // Input Handlers
+       function handleInput(direction) {
+           game.keys[direction] = true;
+       }
+
+       function handleInputStop(direction) {
+           game.keys[direction] = false;
+       }
+
+       // Event Listeners
+       document.addEventListener('keydown', (e) => {
+           game.keys[e.code] = true;
+           
+           if (e.code === 'Space') {
+               e.preventDefault();
+               if (game.state === 'menu') {
+                   startGame();
+               } else if (game.state === 'playing' || game.state === 'paused') {
+                   togglePause();
+               }
+           }
+           
+           if (e.code === 'KeyN' && game.state !== 'playing') {
+               startGame();
+           }
+       });
+
+       document.addEventListener('keyup', (e) => {
+           game.keys[e.code] = false;
+       });
+
+       // Touch Controls
+       let touchStartX, touchStartY;
+
+       canvas.addEventListener('touchstart', (e) => {
+           e.preventDefault();
+           const touch = e.touches[0];
+           const rect = canvas.getBoundingClientRect();
+           touchStartX = touch.clientX - rect.left;
+           touchStartY = touch.clientY - rect.top;
+       });
+
+       canvas.addEventListener('touchmove', (e) => {
+           e.preventDefault();
+           if (!touchStartX || !touchStartY) return;
+           
+           const touch = e.touches[0];
+           const rect = canvas.getBoundingClientRect();
+           const touchX = touch.clientX - rect.left;
+           const touchY = touch.clientY - rect.top;
+           
+           const deltaX = touchX - touchStartX;
+           const deltaY = touchY - touchStartY;
+           
+           // Determine swipe direction
+           if (Math.abs(deltaX) > Math.abs(deltaY)) {
+               if (deltaX > 30) {
+                   handleInput('right');
+               } else if (deltaX < -30) {
+                   handleInput('left');
+               }
+           } else {
+               if (deltaY > 30) {
+                   handleInput('down');
+               } else if (deltaY < -30) {
+                   handleInput('up');
+               }
+           }
+       });
+
+       canvas.addEventListener('touchend', (e) => {
+           e.preventDefault();
+           touchStartX = touchStartY = null;
+           // Stop all movement
+           handleInputStop('left');
+           handleInputStop('right');
+           handleInputStop('up');
+           handleInputStop('down');
+       });
+
+       canvas.addEventListener('click', () => {
+           if (game.state === 'menu') {
+               startGame();
+           } else if (game.state === 'playing') {
+               handleInput('fire');
+               setTimeout(() => handleInputStop('fire'), 100);
+           }
+       });
+
+       // Utility Functions
+       function showInstructions() {
+           alert(`🛡️ Defender Elite - Instructions
+
+🎮 Controls:
+- Arrow Keys or WASD: Move your ship
+- Spacebar: Fire lasers / Pause game
+- Touch/Swipe: Mobile controls
+- N: New game
+
+🎯 Objective:
+- Protect humanoids from alien abduction
+- Shoot down all aliens to complete waves
+- Rescue falling humanoids for bonus points
+- Survive as long as possible!
+
+🏆 Scoring:
+- Basic Aliens: 50 points
+- Boss Aliens: 200 points  
+- Humanoid Rescue: 100 points
+- Wave Completion: 1000 points
+
+Good luck, Commander! 🚀`);
+       }
+
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("defender-eliteLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem('defenderEliteScores') || '[]');
+           let message = "🏆 DEFENDER ELITE - HIGH SCORES 🏆\n\n";
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet! Be the first!";
            } else {
-               scores.slice(0, 5).forEach((score, index) => {
-                   message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
+               scores.slice(0, 10).forEach((score, index) => {
+                   message += `#${index + 1}: ${score.toLocaleString()} points\n`;
                });
            }
            
            alert(message);
-       }
-
-       // Utility Functions
-       function showInstructions() {
-           alert(`🎯 Defender Elite - How to Play
-
-🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
-
-🎮 Gameplay:
-- Classic arcade action with modern twists and power-ups!
-- Score points to advance levels
-- Beat your high score!
-
-Good luck! 🍀`);
        }
 
        function toggleFullscreen() {
@@ -818,153 +1559,58 @@ Good luck! 🍀`);
            }
        }
 
-       function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Defender Elite! Can you beat my score? 🏆`;
-           
-           if (navigator.share) {
-               navigator.share({
-                   title: "Defender Elite - My Score",
-                   text: text,
-                   url: window.location.href
-               });
-           } else {
-               navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
-               });
-           }
-           
-           trackEvent("score_shared", { score: game.score });
+       // Initialize game
+       updateUI();
+       
+       // Start render loop
+       game.gameLoop = requestAnimationFrame(gameLoop);
+
+       // Save score on game over
+       function saveScore(score) {
+           const scores = JSON.parse(localStorage.getItem('defenderEliteScores') || '[]');
+           scores.push(score);
+           scores.sort((a, b) => b - a);
+           scores.splice(10); // Keep only top 10
+           localStorage.setItem('defenderEliteScores', JSON.stringify(scores));
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "defender-elite",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
-       }
+       // Add score saving to game over function
+       const originalGameOver = gameOver;
+       gameOver = function() {
+           saveScore(game.score);
+           originalGameOver();
+       };
 
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
-
-       // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
-           initGame();
+       // Prevent context menu on right click
+       canvas.addEventListener('contextmenu', (e) => {
+           e.preventDefault();
        });
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
-
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
-
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
+       // Handle window focus/blur for auto-pause
+       window.addEventListener('blur', () => {
+           if (game.state === 'playing') {
                togglePause();
            }
        });
 
-       console.log("🎮 Defender Elite loaded successfully!");
-       
-    </script>
+       // Resize canvas for mobile
+       function resizeCanvas() {
+           const container = canvas.parentElement;
+           const maxWidth = container.clientWidth - 32; // Account for padding
+           const maxHeight = window.innerHeight * 0.6;
+           
+           if (maxWidth < 800) {
+               const scale = maxWidth / 800;
+               canvas.style.width = maxWidth + 'px';
+               canvas.style.height = (400 * scale) + 'px';
+           } else {
+               canvas.style.width = '800px';
+               canvas.style.height = '400px';
+           }
+       }
+
+       window.addEventListener('resize', resizeCanvas);
+       resizeCanvas();
+   </script>
 </body>
 </html>

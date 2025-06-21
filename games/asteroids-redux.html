@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asteroids Redux - Free HTML5 Game | GameHub 99</title>
-    <meta name="description" content="Play Asteroids Redux for free! Classic arcade action with modern twists and power-ups! Mobile-friendly browser game with no download required.">
-    <meta name="keywords" content="asteroids-redux, arcade game, html5 game, free online game, browser game, mobile game">
-    <meta name="author" content="GameHub 99">
+    <title>Asteroids Redux - Free HTML5 Game | GamesZone99</title>
+    <meta name="description" content="Play Asteroids Redux for free! Classic space shooter with modern graphics and power-ups! Mobile-friendly browser game with no download required.">
+    <meta name="keywords" content="asteroids redux, space shooter, arcade game, html5 game, free online game, browser game, mobile game">
+    <meta name="author" content="GamesZone99">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="game">
-    <meta property="og:url" content="https://gamehub99.com/games/asteroids-redux.html">
-    <meta property="og:title" content="Asteroids Redux - Free HTML5 Game">
-    <meta property="og:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="og:image" content="https://gamehub99.com/assets/asteroids-redux-og.jpg">
+    <meta property="og:url" content="https://gameszone99.com/asteroids-redux.html">
+    <meta property="og:title" content="Asteroids Redux - Free HTML5 Space Shooter">
+    <meta property="og:description" content="Classic space shooter with modern graphics and power-ups!">
+    <meta property="og:image" content="https://gameszone99.com/assets/asteroids-redux-og.jpg">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://gamehub99.com/games/asteroids-redux.html">
-    <meta property="twitter:title" content="Asteroids Redux - Free HTML5 Game">
-    <meta property="twitter:description" content="Classic arcade action with modern twists and power-ups!">
-    <meta property="twitter:image" content="https://gamehub99.com/assets/asteroids-redux-og.jpg">
-
+    <meta property="twitter:url" content="https://gameszone99.com/asteroids-redux.html">
+    <meta property="twitter:title" content="Asteroids Redux - Free HTML5 Space Shooter">
+    <meta property="twitter:description" content="Classic space shooter with modern graphics and power-ups!">
+    
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
-        
         * {
             margin: 0;
             padding: 0;
@@ -69,6 +67,9 @@
             align-items: center;
             justify-content: center;
             border-bottom: 1px solid var(--card-border);
+        }
+
+        .ad-container-top {
             position: sticky;
             top: 0;
             z-index: 100;
@@ -97,7 +98,7 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -107,12 +108,13 @@
 
         .game-title {
             font-family: "Orbitron", monospace;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: var(--shadow-glow);
         }
 
         .nav-buttons {
@@ -122,37 +124,44 @@
         }
 
         .nav-button {
-            padding: 10px 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 25px;
-            color: var(--text-primary);
+            padding: 8px 16px;
+            background: var(--secondary-gradient);
+            color: white;
             text-decoration: none;
-            font-weight: 500;
+            border-radius: 8px;
+            font-weight: 600;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .nav-button:hover {
-            background: var(--accent-color);
-            color: #000;
             transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
         }
 
         .game-container {
             flex: 1;
-            display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
             gap: 2rem;
-            width: 100%;
+            align-items: start;
         }
 
         .game-section {
-            flex: 2;
-            min-width: 320px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .game-section.loading {
+            opacity: 1;
         }
 
         .game-header {
@@ -176,7 +185,6 @@
             border-radius: 10px;
             padding: 0.8rem 1rem;
             text-align: center;
-            backdrop-filter: blur(10px);
             min-width: 80px;
         }
 
@@ -237,13 +245,40 @@
         }
 
         #gameCanvas {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
             border: 2px solid var(--card-border);
             border-radius: 10px;
             display: block;
             margin: 0 auto;
             max-width: 100%;
             height: auto;
+        }
+
+        .start-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .start-button {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.4);
         }
 
         .mobile-controls {
@@ -271,110 +306,149 @@
             user-select: none;
         }
 
-        .mobile-control:hover, .mobile-control:active {
-            background: var(--accent-color);
+        .mobile-control:hover {
+            background: var(--secondary-gradient);
             transform: translateY(-2px);
         }
 
         .mobile-control.empty {
-            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .sidebar {
-            flex: 1;
-            min-width: 280px;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .sidebar.loading {
+            opacity: 1;
         }
 
         .sidebar-section {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.2rem;
+            border-radius: 15px;
+            padding: 1.5rem;
             backdrop-filter: blur(10px);
         }
 
         .sidebar-title {
+            font-family: "Orbitron", monospace;
             font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             color: var(--accent-color);
         }
 
         .instructions {
             color: var(--text-secondary);
-            line-height: 1.5;
-            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .instructions ul {
-            margin: 0.8rem 0;
-            padding-left: 1.2rem;
+            margin-left: 1rem;
+            margin-top: 0.5rem;
         }
 
         .instructions li {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
         }
 
-        .loading {
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards;
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-title {
+            font-family: "Orbitron", monospace;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .modal-score {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin: 1rem 0;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-button.primary {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .modal-button.secondary {
+            background: var(--secondary-gradient);
+            color: white;
         }
 
         @media (max-width: 768px) {
             .game-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                gap: 1rem;
                 padding: 1rem;
             }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
+
             .game-title {
                 font-size: 1.5rem;
             }
-            
+
             .nav-buttons {
                 justify-content: center;
+                width: 100%;
             }
-            
-            .game-header {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            
-            .stats-section {
-                justify-content: center;
-            }
-            
-            .game-controls {
-                justify-content: center;
-            }
-            
+
             .mobile-controls {
                 display: grid;
             }
-            
-            .sidebar {
-                order: -1;
-            }
-            
+
             .ad-placeholder {
                 width: 320px;
                 height: 50px;
                 font-size: 12px;
             }
         }
-        
     </style>
 </head>
 <body>
@@ -386,7 +460,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <h1 class="game-title">🎮 Asteroids Redux</h1>
+            <h1 class="game-title">🚀 Asteroids Redux</h1>
             <nav class="nav-buttons">
                 <a href="/" class="nav-button">🏠 Home</a>
                 <a href="/games" class="nav-button">🎮 More Games</a>
@@ -414,10 +488,13 @@
                         <div class="stat-label">Level</div>
                         <div class="stat-value" id="gameLevel">1</div>
                     </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Lives</div>
+                        <div class="stat-value" id="gameLives">3</div>
+                    </div>
                 </div>
                 
                 <div class="game-controls">
-                    <button class="control-button new-game" onclick="newGame()">🆕 New Game</button>
                     <button class="control-button pause" onclick="togglePause()" id="pauseButton">⏸️ Pause</button>
                     <button class="control-button" onclick="showLeaderboard()">🏆 Scores</button>
                 </div>
@@ -425,20 +502,22 @@
 
             <!-- Game Canvas -->
             <div class="game-canvas-container">
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <canvas id="gameCanvas" width="600" height="400"></canvas>
+                <div class="start-screen" id="startScreen">
+                    <h2 style="color: var(--accent-color); margin-bottom: 1rem;">🚀 Asteroids Redux</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Navigate through space, destroy asteroids, and survive!</p>
+                    <button class="start-button" onclick="startGame()">🎮 Start Game</button>
+                </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveUp()">⬆️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="moveLeft()">⬅️</div>
-                <div class="mobile-control" onclick="moveDown()">⬇️</div>
-                <div class="mobile-control" onclick="moveRight()">➡️</div>
-                <div class="mobile-control empty"></div>
-                <div class="mobile-control" onclick="newGame()">🆕</div>
-                <div class="mobile-control empty"></div>
+                <div class="mobile-control" onclick="rotateLeft()">↺</div>
+                <div class="mobile-control" onclick="thrust()">⬆️</div>
+                <div class="mobile-control" onclick="rotateRight()">↻</div>
+                <div class="mobile-control" onclick="shoot()">🔫</div>
+                <div class="mobile-control" onclick="togglePause()">⏸️</div>
+                <div class="mobile-control" onclick="hyperspace()">⚡</div>
             </div>
         </main>
 
@@ -447,13 +526,15 @@
             <div class="sidebar-section">
                 <h3 class="sidebar-title">🎯 How to Play</h3>
                 <div class="instructions">
-                    <p><strong>Classic arcade action with modern twists and power-ups!</strong></p>
+                    <p><strong>Navigate through space and destroy asteroids to survive!</strong></p>
                     <ul>
-                        <li>Use arrow keys or swipe to control</li>
-                        <li>Score points to advance levels</li>
-                        <li>Beat your high score!</li>
-                        <li>Share with friends</li>
+                        <li><strong>Arrow Keys:</strong> Rotate and thrust</li>
+                        <li><strong>Spacebar:</strong> Shoot</li>
+                        <li><strong>Shift:</strong> Hyperspace jump</li>
+                        <li><strong>P:</strong> Pause game</li>
+                        <li><strong>Mobile:</strong> Use touch controls</li>
                     </ul>
+                    <p>Destroy asteroids to earn points. Larger asteroids split into smaller ones. Avoid collisions!</p>
                 </div>
             </div>
 
@@ -465,13 +546,25 @@
         </aside>
     </div>
 
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">🎮 Game Over!</h2>
+            <div class="modal-score" id="finalScore">0</div>
+            <p id="scoreMessage">Great job!</p>
+            <div class="modal-buttons">
+                <button class="modal-button primary" onclick="startGame()">🎮 Play Again</button>
+                <button class="modal-button secondary" onclick="shareScore()">📤 Share Score</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Ad Container -->
     <div class="ad-container-bottom">
         <div class="ad-placeholder">728x90 Footer Advertisement</div>
     </div>
 
     <script>
-        
         // Game State
         const game = {
             canvas: null,
@@ -479,10 +572,201 @@
             score: 0,
             bestScore: localStorage.getItem("asteroids-reduxBest") || 0,
             level: 1,
+            lives: 3,
             gameRunning: false,
             gamePaused: false,
-            gameOver: false
+            gameOver: false,
+            ship: null,
+            asteroids: [],
+            bullets: [],
+            particles: [],
+            keys: {},
+            lastTime: 0
         };
+
+        // Game Objects
+        class Ship {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = 0;
+                this.vy = 0;
+                this.angle = 0;
+                this.thrust = false;
+                this.size = 8;
+                this.invulnerable = 0;
+            }
+
+            update() {
+                if (this.thrust) {
+                    this.vx += Math.cos(this.angle) * 0.3;
+                    this.vy += Math.sin(this.angle) * 0.3;
+                }
+
+                // Friction
+                this.vx *= 0.99;
+                this.vy *= 0.99;
+
+                // Update position
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Wrap around screen
+                if (this.x < 0) this.x = game.canvas.width;
+                if (this.x > game.canvas.width) this.x = 0;
+                if (this.y < 0) this.y = game.canvas.height;
+                if (this.y > game.canvas.height) this.y = 0;
+
+                if (this.invulnerable > 0) this.invulnerable--;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+
+                if (this.invulnerable % 10 < 5) {
+                    ctx.strokeStyle = '#00d4ff';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(this.size, 0);
+                    ctx.lineTo(-this.size, -this.size/2);
+                    ctx.lineTo(-this.size/2, 0);
+                    ctx.lineTo(-this.size, this.size/2);
+                    ctx.closePath();
+                    ctx.stroke();
+
+                    if (this.thrust) {
+                        ctx.strokeStyle = '#ff6600';
+                        ctx.beginPath();
+                        ctx.moveTo(-this.size, -2);
+                        ctx.lineTo(-this.size - 6, 0);
+                        ctx.lineTo(-this.size, 2);
+                        ctx.stroke();
+                    }
+                }
+
+                ctx.restore();
+            }
+        }
+
+        class Asteroid {
+            constructor(x, y, size) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.angle = Math.random() * Math.PI * 2;
+                this.rotation = (Math.random() - 0.5) * 0.1;
+                this.points = [];
+                this.generateShape();
+            }
+
+            generateShape() {
+                const numPoints = 8 + Math.floor(Math.random() * 4);
+                for (let i = 0; i < numPoints; i++) {
+                    const angle = (i / numPoints) * Math.PI * 2;
+                    const radius = this.size * (0.8 + Math.random() * 0.4);
+                    this.points.push({
+                        x: Math.cos(angle) * radius,
+                        y: Math.sin(angle) * radius
+                    });
+                }
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.angle += this.rotation;
+
+                // Wrap around screen
+                if (this.x < -this.size) this.x = game.canvas.width + this.size;
+                if (this.x > game.canvas.width + this.size) this.x = -this.size;
+                if (this.y < -this.size) this.y = game.canvas.height + this.size;
+                if (this.y > game.canvas.height + this.size) this.y = -this.size;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                
+                ctx.strokeStyle = '#888';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(this.points[0].x, this.points[0].y);
+                for (let i = 1; i < this.points.length; i++) {
+                    ctx.lineTo(this.points[i].x, this.points[i].y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        }
+
+        class Bullet {
+            constructor(x, y, angle) {
+                this.x = x;
+                this.y = y;
+                this.vx = Math.cos(angle) * 8;
+                this.vy = Math.sin(angle) * 8;
+                this.life = 60;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life--;
+
+                // Wrap around screen
+                if (this.x < 0) this.x = game.canvas.width;
+                if (this.x > game.canvas.width) this.x = 0;
+                if (this.y < 0) this.y = game.canvas.height;
+                if (this.y > game.canvas.height) this.y = 0;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 4;
+                this.vy = (Math.random() - 0.5) * 4;
+                this.color = color;
+                this.life = 30;
+                this.maxLife = 30;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vx *= 0.98;
+                this.vy *= 0.98;
+                this.life--;
+            }
+
+            draw(ctx) {
+                const alpha = this.life / this.maxLife;
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
 
         // Initialize game
         function initGame() {
@@ -493,13 +777,11 @@
             document.getElementById("bestScore").textContent = game.bestScore;
             
             // Event listeners
-            document.addEventListener("keydown", handleKeyPress);
+            document.addEventListener("keydown", handleKeyDown);
+            document.addEventListener("keyup", handleKeyUp);
             
             // Touch support
             setupTouchControls();
-            
-            // Start new game
-            newGame();
             
             // Animate elements
             setTimeout(() => {
@@ -507,280 +789,435 @@
                     el.style.opacity = "1";
                 });
             }, 100);
+
+            // Analytics
+            trackEvent("game_loaded");
         }
 
-        // New Game
-        function newGame() {
+        // Start Game
+        function startGame() {
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("gameOverModal").style.display = "none";
+            
             game.score = 0;
             game.level = 1;
+            game.lives = 3;
             game.gameRunning = true;
             game.gamePaused = false;
             game.gameOver = false;
+            game.asteroids = [];
+            game.bullets = [];
+            game.particles = [];
+
+            // Create ship
+            game.ship = new Ship(game.canvas.width / 2, game.canvas.height / 2);
+
+            // Create initial asteroids
+            createAsteroids(4);
             
             updateDisplay();
             gameLoop();
             
-            trackEvent("game_start");
+            trackEvent("game_started");
         }
 
         // Game Loop
-        function gameLoop() {
-            if (!game.gameRunning || game.gamePaused) {
-                if (game.gameRunning && !game.gameOver) {
-                    setTimeout(gameLoop, 50);
-                }
+        function gameLoop(currentTime) {
+            if (!game.gameRunning) return;
+
+            if (game.gamePaused) {
+                requestAnimationFrame(gameLoop);
                 return;
             }
-            
+
+            const deltaTime = currentTime - game.lastTime;
+            game.lastTime = currentTime;
+
             updateGame();
             render();
             
-            setTimeout(gameLoop, 100);
+            requestAnimationFrame(gameLoop);
         }
 
         // Update Game State
         function updateGame() {
             if (game.gameOver) return;
             
-            // Game logic here
-            game.score += 10;
+            // Handle input
+            handleInput();
             
-            // Level progression
-            const newLevel = Math.floor(game.score / 500) + 1;
-            if (newLevel > game.level) {
-                game.level = newLevel;
-                showLevelUp();
+            // Update ship
+            if (game.ship) {
+                game.ship.update();
             }
             
-            updateDisplay();
+            // Update asteroids
+            game.asteroids.forEach(asteroid => asteroid.update());
             
-            // Check game over condition
-            if (Math.random() < 0.001) {
-                endGame();
+            // Update bullets
+            game.bullets = game.bullets.filter(bullet => {
+                bullet.update();
+                return bullet.life > 0;
+            });
+            
+            // Update particles
+            game.particles = game.particles.filter(particle => {
+                particle.update();
+                return particle.life > 0;
+            });
+            
+            // Check collisions
+            checkCollisions();
+            
+            // Check if level complete
+            if (game.asteroids.length === 0) {
+                nextLevel();
+            }
+        }
+
+        // Handle Input
+        function handleInput() {
+            if (!game.ship) return;
+
+            if (game.keys['ArrowLeft'] || game.keys['KeyA']) {
+                game.ship.angle -= 0.15;
+            }
+            if (game.keys['ArrowRight'] || game.keys['KeyD']) {
+                game.ship.angle += 0.15;
+            }
+            if (game.keys['ArrowUp'] || game.keys['KeyW']) {
+                game.ship.thrust = true;
+            } else {
+                game.ship.thrust = false;
+            }
+            if (game.keys['Space']) {
+                shoot();
             }
         }
 
         // Render Game
         function render() {
             const ctx = game.ctx;
-            
-            // Clear canvas
-            ctx.fillStyle = "#1a1a2e";
-            ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
-            
-            // Draw game elements
-            ctx.fillStyle = "#00d4ff";
-            ctx.font = "24px Orbitron";
-            ctx.textAlign = "center";
-            ctx.fillText("Asteroids Redux", game.canvas.width / 2, game.canvas.height / 2);
-            
-            ctx.fillStyle = "#b8c1ec";
-            ctx.font = "16px Inter";
-            ctx.fillText("Score: " + game.score, game.canvas.width / 2, game.canvas.height / 2 + 40);
-        }
-
-        // Handle Key Press
-        function handleKeyPress(e) {
-            if (game.gameOver) return;
-            
-            const keyMap = {
-                "ArrowUp": "up",
-                "ArrowDown": "down", 
-                "ArrowLeft": "left",
-                "ArrowRight": "right",
-                "KeyW": "up",
-                "KeyS": "down",
-                "KeyA": "left",
-                "KeyD": "right"
-            };
-            
-            if (keyMap[e.code]) {
-                e.preventDefault();
-                handleMove(keyMap[e.code]);
-            } else if (e.code === "Space") {
-                e.preventDefault();
-                togglePause();
-            } else if (e.code === "KeyN") {
-                e.preventDefault();
-                newGame();
-            }
-        }
-
-        // Handle Movement
-        function handleMove(direction) {
-            if (!game.gameRunning || game.gamePaused) return;
-            
-            // Movement logic here
-            console.log("Moving:", direction);
-            trackEvent("move_made", { direction: direction });
-        }
-
-        // Mobile Control Functions
-        function moveUp() { handleMove("up"); }
-        function moveDown() { handleMove("down"); }
-        function moveLeft() { handleMove("left"); }
-        function moveRight() { handleMove("right"); }
-
-        // Setup Touch Controls
-        function setupTouchControls() {
-            let startX, startY;
-            
-            game.canvas.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-                e.preventDefault();
-            });
-            
-            game.canvas.addEventListener("touchend", (e) => {
-                if (!startX || !startY) return;
-                
-                const endX = e.changedTouches[0].clientX;
-                const endY = e.changedTouches[0].clientY;
-                
-                const deltaX = endX - startX;
-                const deltaY = endY - startY;
-                
-                const minSwipeDistance = 30;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (Math.abs(deltaX) > minSwipeDistance) {
-                        handleMove(deltaX > 0 ? "right" : "left");
-                    }
-                } else {
-                    if (Math.abs(deltaY) > minSwipeDistance) {
-                        handleMove(deltaY > 0 ? "down" : "up");
-                    }
-                }
-                
-                startX = null;
-                startY = null;
-                e.preventDefault();
-            });
-        }
-
-        // Toggle Pause
-        function togglePause() {
-            if (!game.gameRunning || game.gameOver) return;
-            
-            game.gamePaused = !game.gamePaused;
-            const pauseButton = document.getElementById("pauseButton");
-            
-            if (game.gamePaused) {
-                pauseButton.textContent = "▶️ Resume";
-                pauseButton.classList.add("pulse");
-            } else {
-                pauseButton.textContent = "⏸️ Pause";
-                pauseButton.classList.remove("pulse");
-                gameLoop();
-            }
-            
-            trackEvent("game_paused", { paused: game.gamePaused });
-        }
-
-        // End Game
-        function endGame() {
-            game.gameRunning = false;
-            game.gameOver = true;
-            
-            // Update best score
-            if (game.score > game.bestScore) {
-                game.bestScore = game.score;
-                localStorage.setItem("asteroids-reduxBest", game.bestScore);
-                document.getElementById("bestScore").textContent = game.bestScore;
-               showNewRecord();
+           
+           // Clear canvas
+           ctx.fillStyle = "#0a0a1a";
+           ctx.fillRect(0, 0, game.canvas.width, game.canvas.height);
+           
+           // Draw stars background
+           drawStars(ctx);
+           
+           // Draw particles
+           game.particles.forEach(particle => particle.draw(ctx));
+           
+           // Draw ship
+           if (game.ship) {
+               game.ship.draw(ctx);
            }
            
-           setTimeout(() => showGameOverModal(), 500);
+           // Draw asteroids
+           game.asteroids.forEach(asteroid => asteroid.draw(ctx));
+           
+           // Draw bullets
+           game.bullets.forEach(bullet => bullet.draw(ctx));
+           
+           // Draw HUD
+           drawHUD(ctx);
+       }
+
+       // Draw stars background
+       function drawStars(ctx) {
+           ctx.fillStyle = '#ffffff';
+           for (let i = 0; i < 50; i++) {
+               const x = (i * 71) % game.canvas.width;
+               const y = (i * 37) % game.canvas.height;
+               const size = Math.random() * 0.8;
+               ctx.globalAlpha = 0.3 + Math.random() * 0.4;
+               ctx.beginPath();
+               ctx.arc(x, y, size, 0, Math.PI * 2);
+               ctx.fill();
+           }
+           ctx.globalAlpha = 1;
+       }
+
+       // Draw HUD
+       function drawHUD(ctx) {
+           ctx.fillStyle = '#00d4ff';
+           ctx.font = '16px Inter';
+           ctx.textAlign = 'left';
+           
+           if (game.gamePaused) {
+               ctx.font = '32px Orbitron';
+               ctx.textAlign = 'center';
+               ctx.fillStyle = '#ffaa00';
+               ctx.fillText('PAUSED', game.canvas.width / 2, game.canvas.height / 2);
+               ctx.fillStyle = '#b8c1ec';
+               ctx.font = '16px Inter';
+               ctx.fillText('Press P to resume', game.canvas.width / 2, game.canvas.height / 2 + 40);
+           }
+       }
+
+       // Create asteroids
+       function createAsteroids(count) {
+           for (let i = 0; i < count; i++) {
+               let x, y;
+               do {
+                   x = Math.random() * game.canvas.width;
+                   y = Math.random() * game.canvas.height;
+               } while (game.ship && distance(x, y, game.ship.x, game.ship.y) < 100);
+               
+               game.asteroids.push(new Asteroid(x, y, 40 + Math.random() * 20));
+           }
+       }
+
+       // Shoot bullet
+       function shoot() {
+           if (!game.ship || game.bullets.length >= 4) return;
+           
+           game.bullets.push(new Bullet(
+               game.ship.x + Math.cos(game.ship.angle) * game.ship.size,
+               game.ship.y + Math.sin(game.ship.angle) * game.ship.size,
+               game.ship.angle
+           ));
+       }
+
+       // Check collisions
+       function checkCollisions() {
+           if (!game.ship || game.ship.invulnerable > 0) return;
+           
+           // Ship vs asteroids
+           game.asteroids.forEach((asteroid, asteroidIndex) => {
+               if (distance(game.ship.x, game.ship.y, asteroid.x, asteroid.y) < asteroid.size + game.ship.size) {
+                   // Ship hit
+                   destroyShip();
+                   return;
+               }
+           });
+           
+           // Bullets vs asteroids
+           game.bullets.forEach((bullet, bulletIndex) => {
+               game.asteroids.forEach((asteroid, asteroidIndex) => {
+                   if (distance(bullet.x, bullet.y, asteroid.x, asteroid.y) < asteroid.size) {
+                       // Hit asteroid
+                       destroyAsteroid(asteroidIndex, asteroid);
+                       game.bullets.splice(bulletIndex, 1);
+                   }
+               });
+           });
+       }
+
+       // Destroy asteroid
+       function destroyAsteroid(index, asteroid) {
+           // Add particles
+           for (let i = 0; i < 8; i++) {
+               game.particles.push(new Particle(asteroid.x, asteroid.y, '#888'));
+           }
+           
+           // Score points
+           let points = 0;
+           if (asteroid.size > 30) points = 20;
+           else if (asteroid.size > 15) points = 50;
+           else points = 100;
+           
+           game.score += points;
+           
+           // Split asteroid if large enough
+           if (asteroid.size > 15) {
+               const newSize = asteroid.size / 2;
+               for (let i = 0; i < 2; i++) {
+                   const newAsteroid = new Asteroid(asteroid.x, asteroid.y, newSize);
+                   newAsteroid.vx = (Math.random() - 0.5) * 4;
+                   newAsteroid.vy = (Math.random() - 0.5) * 4;
+                   game.asteroids.push(newAsteroid);
+               }
+           }
+           
+           game.asteroids.splice(index, 1);
+           updateDisplay();
+       }
+
+       // Destroy ship
+       function destroyShip() {
+           // Add particles
+           for (let i = 0; i < 12; i++) {
+               game.particles.push(new Particle(game.ship.x, game.ship.y, '#00d4ff'));
+           }
+           
+           game.lives--;
+           updateDisplay();
+           
+           if (game.lives <= 0) {
+               endGame();
+           } else {
+               // Respawn ship
+               game.ship = new Ship(game.canvas.width / 2, game.canvas.height / 2);
+               game.ship.invulnerable = 120;
+           }
+       }
+
+       // Next level
+       function nextLevel() {
+           game.level++;
+           createAsteroids(3 + game.level);
+           updateDisplay();
+           
+           // Bonus points
+           game.score += game.level * 100;
+           updateDisplay();
+       }
+
+       // End game
+       function endGame() {
+           game.gameRunning = false;
+           game.gameOver = true;
+           
+           // Update best score
+           if (game.score > game.bestScore) {
+               game.bestScore = game.score;
+               localStorage.setItem("asteroids-reduxBest", game.bestScore);
+               document.getElementById("bestScore").textContent = game.bestScore;
+               document.getElementById("scoreMessage").textContent = "🎉 New High Score! 🎉";
+           } else {
+               document.getElementById("scoreMessage").textContent = "Good job! Try to beat your best score!";
+           }
+           
+           document.getElementById("finalScore").textContent = game.score.toLocaleString();
+           document.getElementById("gameOverModal").style.display = "flex";
+           
            trackEvent("game_over", { score: game.score, level: game.level });
        }
 
-       // Update Display
-       function updateDisplay() {
-           document.getElementById("currentScore").textContent = game.score.toLocaleString();
-           document.getElementById("gameLevel").textContent = game.level;
-       }
-
-       // Show Level Up
-       function showLevelUp() {
-           showTemporaryMessage(`Level ${game.level}!`, "#FFD700");
-       }
-
-       // Show New Record
-       function showNewRecord() {
-           showTemporaryMessage("New Record!", "#00ff88");
-       }
-
-       // Show Temporary Message
-       function showTemporaryMessage(message, color) {
-           const messageEl = document.createElement("div");
-           messageEl.textContent = message;
-           messageEl.style.cssText = `
-               position: fixed;
-               top: 50%;
-               left: 50%;
-               transform: translate(-50%, -50%);
-               background: ${color};
-               color: white;
-               padding: 1rem 2rem;
-               border-radius: 10px;
-               font-weight: bold;
-               font-size: 1.2rem;
-               z-index: 10000;
-               animation: fadeInOut 2s ease;
-               pointer-events: none;
-           `;
+       // Handle Key Events
+       function handleKeyDown(e) {
+           game.keys[e.code] = true;
            
-           document.body.appendChild(messageEl);
-           
-           setTimeout(() => {
-               document.body.removeChild(messageEl);
-           }, 2000);
-       }
-
-       // Show Game Over Modal
-       function showGameOverModal() {
-           const modal = document.createElement("div");
-           modal.className = "modal";
-           modal.style.display = "flex";
-           modal.innerHTML = `
-               <div class="modal-content">
-                   <h2 class="modal-title">Game Over!</h2>
-                   <div class="modal-stats">
-                       <div class="modal-stat">
-                           <span>Final Score:</span>
-                           <span class="modal-stat-value">${game.score.toLocaleString()}</span>
-                       </div>
-                       <div class="modal-stat">
-                           <span>Level Reached:</span>
-                           <span class="modal-stat-value">${game.level}</span>
-                       </div>
-                   </div>
-                   <div class="modal-buttons">
-                       <button class="modal-button primary" onclick="newGame(); closeModal()">🆕 Play Again</button>
-                       <button class="modal-button" onclick="shareScore()">📤 Share Score</button>
-                       <button class="modal-button" onclick="closeModal()">✖️ Close</button>
-                   </div>
-               </div>
-           `;
-           
-           document.body.appendChild(modal);
-       }
-
-       // Close Modal
-       function closeModal() {
-           const modal = document.querySelector(".modal");
-           if (modal) {
-               document.body.removeChild(modal);
+           if (e.code === 'KeyP') {
+               e.preventDefault();
+               togglePause();
+           } else if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+               e.preventDefault();
+               hyperspace();
            }
        }
 
-       // Show Leaderboard
+       function handleKeyUp(e) {
+           game.keys[e.code] = false;
+       }
+
+       // Mobile Control Functions
+       function rotateLeft() { 
+           if (game.ship) game.ship.angle -= 0.3; 
+       }
+       
+       function rotateRight() { 
+           if (game.ship) game.ship.angle += 0.3; 
+       }
+       
+       function thrust() { 
+           if (game.ship) {
+               game.ship.vx += Math.cos(game.ship.angle) * 0.5;
+               game.ship.vy += Math.sin(game.ship.angle) * 0.5;
+           }
+       }
+
+       function hyperspace() {
+           if (!game.ship || game.ship.invulnerable > 0) return;
+           
+           game.ship.x = Math.random() * game.canvas.width;
+           game.ship.y = Math.random() * game.canvas.height;
+           game.ship.vx = 0;
+           game.ship.vy = 0;
+           game.ship.invulnerable = 60;
+           
+           // Add particles
+           for (let i = 0; i < 10; i++) {
+               game.particles.push(new Particle(game.ship.x, game.ship.y, '#00d4ff'));
+           }
+       }
+
+       // Setup Touch Controls
+       function setupTouchControls() {
+           let touchStartX, touchStartY;
+           
+           game.canvas.addEventListener("touchstart", (e) => {
+               touchStartX = e.touches[0].clientX;
+               touchStartY = e.touches[0].clientY;
+               e.preventDefault();
+           });
+           
+           game.canvas.addEventListener("touchend", (e) => {
+               if (!touchStartX || !touchStartY) return;
+               
+               const touchEndX = e.changedTouches[0].clientX;
+               const touchEndY = e.changedTouches[0].clientY;
+               
+               const deltaX = touchEndX - touchStartX;
+               const deltaY = touchEndY - touchStartY;
+               
+               const minSwipeDistance = 30;
+               
+               if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                   if (Math.abs(deltaX) > minSwipeDistance) {
+                       if (deltaX > 0) rotateRight();
+                       else rotateLeft();
+                   }
+               } else {
+                   if (Math.abs(deltaY) > minSwipeDistance) {
+                       if (deltaY < 0) thrust();
+                       else shoot();
+                   }
+               }
+               
+               e.preventDefault();
+           });
+       }
+
+       // Toggle pause
+       function togglePause() {
+           if (!game.gameRunning) return;
+           
+           game.gamePaused = !game.gamePaused;
+           const pauseButton = document.getElementById("pauseButton");
+           
+           if (game.gamePaused) {
+               pauseButton.textContent = "▶️ Resume";
+           } else {
+               pauseButton.textContent = "⏸️ Pause";
+               requestAnimationFrame(gameLoop);
+           }
+       }
+
+       // Update display
+       function updateDisplay() {
+           document.getElementById("currentScore").textContent = game.score.toLocaleString();
+           document.getElementById("gameLevel").textContent = game.level;
+           document.getElementById("gameLives").textContent = game.lives;
+       }
+
+       // Utility functions
+       function distance(x1, y1, x2, y2) {
+           return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+       }
+
+       // Analytics and tracking
+       function trackEvent(eventName, properties = {}) {
+           // Google Analytics 4 event tracking
+           if (typeof gtag !== 'undefined') {
+               gtag('event', eventName, {
+                   game_name: 'asteroids_redux',
+                   ...properties
+               });
+           }
+           
+           console.log('Event:', eventName, properties);
+       }
+
+       // Show leaderboard
        function showLeaderboard() {
-           const scores = JSON.parse(localStorage.getItem("asteroids-reduxLeaderboard") || "[]");
-           let message = "🏆 Top Scores:\n\n";
+           const scores = JSON.parse(localStorage.getItem("asteroids-reduxScores") || "[]");
+           let message = "🏆 Asteroids Redux Leaderboard 🏆\n\n";
            
            if (scores.length === 0) {
-               message += "No scores yet. Be the first!";
+               message += "No scores yet!\nBe the first!";
            } else {
                scores.slice(0, 5).forEach((score, index) => {
                    message += `#${index + 1}: ${score.toLocaleString()} pts\n`;
@@ -792,20 +1229,29 @@
 
        // Utility Functions
        function showInstructions() {
-           alert(`🎯 Asteroids Redux - How to Play
+           alert(`🚀 Asteroids Redux - How to Play
 
 🕹️ Controls:
-- Arrow Keys or WASD to move
-- Spacebar to pause/resume
-- Swipe on mobile devices
-- N for new game
+- Arrow Keys or WASD to rotate/thrust
+- Spacebar to shoot
+- Shift for hyperspace jump
+- P to pause/resume
+- Mobile: Use touch controls
 
 🎮 Gameplay:
-- Classic arcade action with modern twists and power-ups!
-- Score points to advance levels
-- Beat your high score!
+- Destroy asteroids to earn points
+- Large asteroids split into smaller ones
+- Avoid collisions with asteroids
+- Use hyperspace to escape danger
+- Survive as long as possible!
 
-Good luck! 🍀`);
+💎 Scoring:
+- Large asteroids: 20 points
+- Medium asteroids: 50 points  
+- Small asteroids: 100 points
+- Level bonus: 100 × level
+
+Good luck, space pilot! 🌟`);
        }
 
        function toggleFullscreen() {
@@ -819,7 +1265,7 @@ Good luck! 🍀`);
        }
 
        function shareScore() {
-           const text = `🎮 I just scored ${game.score.toLocaleString()} points in Asteroids Redux! Can you beat my score? 🏆`;
+           const text = `🚀 I just scored ${game.score.toLocaleString()} points in Asteroids Redux! Can you beat my score? 🏆`;
            
            if (navigator.share) {
                navigator.share({
@@ -829,142 +1275,65 @@ Good luck! 🍀`);
                });
            } else {
                navigator.clipboard.writeText(text + " " + window.location.href).then(() => {
-                   alert("Score copied to clipboard! Share it with your friends! 📋");
+                   alert("Score copied to clipboard! Share it with your friends!");
+               }).catch(() => {
+                   alert(text + "\n\n" + window.location.href);
                });
            }
+       }
+
+       // Save high scores
+       function saveScore(score) {
+           const scores = JSON.parse(localStorage.getItem("asteroids-reduxScores") || "[]");
+           scores.push(score);
+           scores.sort((a, b) => b - a);
+           scores.splice(10); // Keep only top 10
+           localStorage.setItem("asteroids-reduxScores", JSON.stringify(scores));
+       }
+
+       // Resize canvas for mobile
+       function resizeCanvas() {
+           const container = document.querySelector('.game-canvas-container');
+           const containerWidth = container.clientWidth - 32; // Account for padding
+           const aspectRatio = 600 / 400;
            
-           trackEvent("score_shared", { score: game.score });
+           if (containerWidth < 600) {
+               game.canvas.style.width = containerWidth + 'px';
+               game.canvas.style.height = (containerWidth / aspectRatio) + 'px';
+           } else {
+               game.canvas.style.width = '600px';
+               game.canvas.style.height = '400px';
+           }
        }
 
-       // Analytics tracking
-       function trackEvent(eventName, parameters = {}) {
-           if (typeof gtag !== "undefined") {
-               gtag("event", eventName, {
-                   custom_parameter_1: parameters,
-                   game_name: "asteroids-redux",
-                   ...parameters
-               });
-           }
-           console.log(`Event: ${eventName}`, parameters);
-       }
-
-       // Add CSS animation
-       const style = document.createElement("style");
-       style.textContent = `
-           @keyframes fadeInOut {
-               0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-               20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-               100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-           }
-           .modal {
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               height: 100%;
-               background: rgba(0, 0, 0, 0.8);
-               display: none;
-               align-items: center;
-               justify-content: center;
-               z-index: 1000;
-               backdrop-filter: blur(10px);
-           }
-           .modal-content {
-               background: var(--dark-gradient);
-               border: 2px solid var(--card-border);
-               border-radius: 15px;
-               padding: 2.5rem;
-               text-align: center;
-               max-width: 380px;
-               width: 90%;
-           }
-           .modal-title {
-               font-family: "Orbitron", monospace;
-               font-size: 1.8rem;
-               font-weight: 900;
-               margin-bottom: 1rem;
-               background: var(--primary-gradient);
-               -webkit-background-clip: text;
-               -webkit-text-fill-color: transparent;
-               background-clip: text;
-           }
-           .modal-stats {
-               margin-bottom: 1.5rem;
-           }
-           .modal-stat {
-               display: flex;
-               justify-content: space-between;
-               margin-bottom: 0.5rem;
-               font-size: 0.9rem;
-           }
-           .modal-stat-value {
-               font-family: "Orbitron", monospace;
-               font-weight: 700;
-               color: var(--accent-color);
-           }
-           .modal-buttons {
-               display: flex;
-               gap: 0.8rem;
-               justify-content: center;
-               flex-wrap: wrap;
-           }
-           .modal-button {
-               padding: 10px 20px;
-               background: var(--secondary-gradient);
-               border: none;
-               border-radius: 8px;
-               color: white;
-               font-weight: 600;
-               cursor: pointer;
-               transition: all 0.3s ease;
-               font-size: 0.9rem;
-           }
-           .modal-button:hover {
-               transform: translateY(-2px);
-               box-shadow: var(--shadow-card);
-           }
-           .modal-button.primary {
-               background: var(--accent-color);
-               color: #000;
-           }
-           .pulse {
-               animation: pulse 1s ease-in-out infinite;
-           }
-           @keyframes pulse {
-               0%, 100% { transform: scale(1); }
-               50% { transform: scale(1.05); }
-           }
-       `;
-       document.head.appendChild(style);
-
-       // Initialize game when page loads
-       document.addEventListener("DOMContentLoaded", () => {
+       // Initialize when page loads
+       window.addEventListener('load', () => {
            initGame();
+           resizeCanvas();
        });
 
-       // Prevent zoom on mobile
-       let lastTouchEnd = 0;
-       document.addEventListener("touchend", function (event) {
-           const now = (new Date()).getTime();
-           if (now - lastTouchEnd <= 300) {
-               event.preventDefault();
-           }
-           lastTouchEnd = now;
-       }, false);
+       window.addEventListener('resize', resizeCanvas);
 
-       // Prevent context menu
-       document.addEventListener("contextmenu", e => e.preventDefault());
+       // Prevent context menu on canvas
+       document.getElementById('gameCanvas').addEventListener('contextmenu', e => e.preventDefault());
 
-       // Handle page visibility
-       document.addEventListener("visibilitychange", () => {
-           if (document.hidden && game.gameRunning && !game.gamePaused) {
-               togglePause();
-           }
+       // Add loading animation
+       document.addEventListener('DOMContentLoaded', () => {
+           setTimeout(() => {
+               document.querySelectorAll('.loading').forEach(el => {
+                   el.classList.remove('loading');
+               });
+           }, 500);
        });
+   </script>
 
-       console.log("🎮 Asteroids Redux loaded successfully!");
-       
-    </script>
+   <!-- Google Analytics (replace with your tracking ID) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+   <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+       gtag('js', new Date());
+       gtag('config', 'GA_MEASUREMENT_ID');
+   </script>
 </body>
 </html>
